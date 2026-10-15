@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "thuy-luan-corporate-food-service",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-10-15",
+  "assets": {
+    "directory": "./out",
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page",
+  },
+}

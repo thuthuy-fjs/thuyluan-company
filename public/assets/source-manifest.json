@@ -1,0 +1,614 @@
+[
+  {
+    "id": "document-organization",
+    "src": "/assets/document-organization.png",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/sơ-đồ-scaled.png",
+    "width": 1774,
+    "height": 2560,
+    "sha256": "3221d258f0a8c845c39330eef65e77f78753bff861c987454800d2dfc1c9e068"
+  },
+  {
+    "id": "document-process",
+    "src": "/assets/document-process.png",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/quy-trinh1.png",
+    "width": 1774,
+    "height": 2560,
+    "sha256": "2f62371bdad49bd33116f9bacefdf17b01f49373df7100ec94847320d830e59c"
+  },
+  {
+    "id": "document-setup",
+    "src": "/assets/document-setup.png",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/setup-1.png",
+    "width": 1774,
+    "height": 2560,
+    "sha256": "5c0940f57865e48a135d22cc4b03cef59138f79671f1385e81440d895715f9dc"
+  },
+  {
+    "id": "document-values",
+    "src": "/assets/document-values.png",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/giá-trị-1.png",
+    "width": 1774,
+    "height": 2560,
+    "sha256": "6cdc6037b02054d900c3664c6b81e66e7093cf99c10da2202ae477143129d92b"
+  },
+  {
+    "id": "gallery-01",
+    "src": "/assets/gallery-01.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2024/03/1HOOSC4TA_4A4NAT.jpeg",
+    "width": 960,
+    "height": 1280,
+    "sha256": "c756055e0e4e5d5127325058481449bdf25e7035c8690bba50e15656b17ab016"
+  },
+  {
+    "id": "gallery-02",
+    "src": "/assets/gallery-02.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2024/03/1HOOSC4SF_4A4NAT.jpeg",
+    "width": 960,
+    "height": 1280,
+    "sha256": "fa3ba84ed898116c87bdcf404b56951f680dc7530acbcbf01a081f034c3fb980"
+  },
+  {
+    "id": "gallery-03",
+    "src": "/assets/gallery-03.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2024/03/1HOOPAHSR_4A4NAT.jpeg",
+    "width": 960,
+    "height": 1280,
+    "sha256": "e07be96351578653f61a5d2256b5a1abd0ed895cce7a839a41cfd78434f75b65"
+  },
+  {
+    "id": "gallery-04",
+    "src": "/assets/gallery-04.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2024/03/1HOOPAHU5_4A4NAT.jpeg",
+    "width": 956,
+    "height": 1276,
+    "sha256": "9a1fcb6650a4a9c77215009604f826fcc88253fdb0d6ee4d7266eebd2101b36d"
+  },
+  {
+    "id": "gallery-05",
+    "src": "/assets/gallery-05.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2024/03/1HOOPAHSG_4A4NAT.jpeg",
+    "width": 960,
+    "height": 1280,
+    "sha256": "8334877ccd88d0438dc181809d2096540cfdc1b6d1c3e4426516fd4d9ad9a267"
+  },
+  {
+    "id": "gallery-06",
+    "src": "/assets/gallery-06.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2024/03/1HOOPAHR5_4A4NAT.jpeg",
+    "width": 960,
+    "height": 1280,
+    "sha256": "dff1a30df7a0faf90ee7715f618e8a3645e2dc3cfb1e13c0c6a357885dca5c7b"
+  },
+  {
+    "id": "gallery-07",
+    "src": "/assets/gallery-07.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2024/03/1HOOPAHQC_4A4NAT.jpeg",
+    "width": 1276,
+    "height": 956,
+    "sha256": "dfd93810ea76beac30030ed5150c386f96b41eece4738797b677292ab2442647"
+  },
+  {
+    "id": "gallery-08",
+    "src": "/assets/gallery-08.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2024/03/1HOOPAHT6_4A4NAT.jpeg",
+    "width": 960,
+    "height": 1280,
+    "sha256": "0498845bfcb29521bdb14ccdcf9f10be0f013be2d078e3d5596a0b444a678975"
+  },
+  {
+    "id": "gallery-09",
+    "src": "/assets/gallery-09.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2024/03/1HOOPAHTH_4A4NAT.jpeg",
+    "width": 960,
+    "height": 1280,
+    "sha256": "0b26d4d7faeaacf1b6405d26c529286dff74b652248531c2c395f77808b43790"
+  },
+  {
+    "id": "gallery-10",
+    "src": "/assets/gallery-10.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2024/03/1HOOPAHTR_4A4NAT.jpeg",
+    "width": 960,
+    "height": 1280,
+    "sha256": "2836ad32cc1dfa6ae87fe9b413f999db0968dea2e7f61d6073b40f056254cdba"
+  },
+  {
+    "id": "gallery-11",
+    "src": "/assets/gallery-11.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2024/03/1HOOPAHS2_4A4NAT.jpeg",
+    "width": 960,
+    "height": 1280,
+    "sha256": "1c403934328d2a0733335ccc0b30a00ba611fd2ebb9224b9af2ccb9f6da6ae3b"
+  },
+  {
+    "id": "gallery-12",
+    "src": "/assets/gallery-12.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2024/03/1HOOPAHRK_4A4NAT.jpeg",
+    "width": 960,
+    "height": 1280,
+    "sha256": "4bcf388b3cbe728ccd69e0899b59ee70bf2ff0febae379a275a35bd961457cc9"
+  },
+  {
+    "id": "gallery-13",
+    "src": "/assets/gallery-13.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2024/03/1HOOP9C0C_4A4NAT.jpeg",
+    "width": 960,
+    "height": 1280,
+    "sha256": "da97c6f3cf48868f4ddae5c2ccb1ca99bffb9a105378622df4d2c71205f38481"
+  },
+  {
+    "id": "gallery-14",
+    "src": "/assets/gallery-14.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2024/03/1HOOP9BOG_4A4NAT.jpeg",
+    "width": 598,
+    "height": 1280,
+    "sha256": "4d42de96f24ddf963eb38f1ccbfa189d37f9bdddd9722ce2783548bdb2cf0668"
+  },
+  {
+    "id": "gallery-15",
+    "src": "/assets/gallery-15.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2024/03/1HOOP9BPG_4A4NAT.jpeg",
+    "width": 598,
+    "height": 1280,
+    "sha256": "f364207625b87a5bc24b70426622814b632dec2c002f4a709af5c42cd869f9b6"
+  },
+  {
+    "id": "gallery-16",
+    "src": "/assets/gallery-16.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2024/03/1HOOP9BQC_4A4NAT.jpeg",
+    "width": 1276,
+    "height": 956,
+    "sha256": "0847fed1cb305f9a559dbd82642238cfc4543f0d56eaf9e4b86cec543105c084"
+  },
+  {
+    "id": "gallery-17",
+    "src": "/assets/gallery-17.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2024/03/1HOOP9BQM_4A4NAT.jpeg",
+    "width": 1276,
+    "height": 956,
+    "sha256": "7557586cfbb12494a6f4e5b2fee03314711c451fcfe18cf6bffb0c329f4c5e25"
+  },
+  {
+    "id": "gallery-18",
+    "src": "/assets/gallery-18.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2024/03/1HOOP9BR0_4A4NAT.jpeg",
+    "width": 1276,
+    "height": 956,
+    "sha256": "c300199b0355c7a4ea83f68f672c7b90ce390ff98f4cd099133c1813dae3fbac"
+  },
+  {
+    "id": "gallery-19",
+    "src": "/assets/gallery-19.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2024/03/1HOOP9BRB_4A4NAT.jpeg",
+    "width": 1276,
+    "height": 956,
+    "sha256": "548505abaa83f9c95ad88a327d3323e10e1e0c9213df7bda4b15bdac2a336fd7"
+  },
+  {
+    "id": "gallery-20",
+    "src": "/assets/gallery-20.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2024/03/1HOOP9BRM_4A4NAT.jpeg",
+    "width": 1276,
+    "height": 956,
+    "sha256": "f0c75457cf2d2b7c93dbab2bc5ca272fee48ac3c4a9166f796c1b82c4ff820e5"
+  },
+  {
+    "id": "gallery-21",
+    "src": "/assets/gallery-21.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2024/03/1HOOP9BS0_4A4NAT.jpeg",
+    "width": 960,
+    "height": 1280,
+    "sha256": "2fcb1ecd3e32e3542c5577cf1f074a6187d7ec199680ab6945a747c7568c5d30"
+  },
+  {
+    "id": "gallery-22",
+    "src": "/assets/gallery-22.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2024/03/1HOOP9BSK_4A4NAT.jpeg",
+    "width": 960,
+    "height": 1280,
+    "sha256": "41a6c111a89d9c16b7587cb26cb3f98a6ee2db3a4fa661711dcbdcb40605c6f9"
+  },
+  {
+    "id": "gallery-23",
+    "src": "/assets/gallery-23.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2024/03/1HOOP9BT5_4A4NAT.jpeg",
+    "width": 1276,
+    "height": 956,
+    "sha256": "a809ed49cb2fbc08ac84839fc82d5b498072d3c976e2056bb3b692abfd7f8dd7"
+  },
+  {
+    "id": "gallery-24",
+    "src": "/assets/gallery-24.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2024/03/1HOOP9BTD_4A4NAT.jpeg",
+    "width": 1276,
+    "height": 956,
+    "sha256": "50681a66c7d5a459077dc9d92c9aaa8fa3f5b125a0728d0c06d6e153c411f597"
+  },
+  {
+    "id": "logo",
+    "src": "/assets/logo.png",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/Untitled-1-removebg-preview-3-e1671501585904.png",
+    "width": 150,
+    "height": 123,
+    "sha256": "3620d589663de7dba3e3811779c317351d3cf7c47c621bf1074f3fec772d5790"
+  },
+  {
+    "id": "meal-01",
+    "src": "/assets/meal-01.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/44539de9a18a79d4209b35-e1671505436498.jpg",
+    "width": 960,
+    "height": 724,
+    "sha256": "fb8a62a2d8bc6170817d8195d6ef9640d2eb623a74723cf0efb2135872e0e7b1"
+  },
+  {
+    "id": "meal-02",
+    "src": "/assets/meal-02.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/5.png",
+    "width": 960,
+    "height": 720,
+    "sha256": "bdecb17ca8d34021fff8ed7de9a708314845840eb2ebae93c2acdc8268afc4c4"
+  },
+  {
+    "id": "meal-03",
+    "src": "/assets/meal-03.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/eebd3fe80a8bd2d58b9a53.jpg",
+    "width": 960,
+    "height": 727,
+    "sha256": "b21e071380585868885eb09aa8cbc52714dbd456d40c09036f17de986141a477"
+  },
+  {
+    "id": "meal-04",
+    "src": "/assets/meal-04.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/89c55a906ff3b7adeee251-e1671506108232.jpg",
+    "width": 960,
+    "height": 720,
+    "sha256": "550c0b0651df2a500af471db5a1fac2d8f9a31e204e85a03f63eada3a3d95178"
+  },
+  {
+    "id": "meal-05",
+    "src": "/assets/meal-05.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/90fdb8a88dcb55950cda55-e1671506041927.jpg",
+    "width": 960,
+    "height": 720,
+    "sha256": "ca4e140a6ace3586664673e28272fdfbf7b4aa9979ab8b4ecc2a38f03604f5ca"
+  },
+  {
+    "id": "meal-06",
+    "src": "/assets/meal-06.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/1f17db42ee21367f6f3056-e1671505983720.jpg",
+    "width": 960,
+    "height": 720,
+    "sha256": "b235f2183bc7cc76c7cf5cfb83999cd39b7a496212413d710c763fda722f7bf0"
+  },
+  {
+    "id": "meal-07",
+    "src": "/assets/meal-07.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/db6139d505b6dde884a739-e1671505870807.jpg",
+    "width": 960,
+    "height": 720,
+    "sha256": "2a39895fdfddb76104f4febbb1ccf238a73c431fede12ceb0ca7578dc72e36e1"
+  },
+  {
+    "id": "meal-08",
+    "src": "/assets/meal-08.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/6.png",
+    "width": 960,
+    "height": 720,
+    "sha256": "8e65963eb1f42889678e313ba10a8c190c06407675be025aa9ea6ac83593686b"
+  },
+  {
+    "id": "meal-09",
+    "src": "/assets/meal-09.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/aad47e69420a9a54c31b21-e1671505534425.jpg",
+    "width": 960,
+    "height": 724,
+    "sha256": "a0f5878c0b90b3d0ddf1b56228043de5c2eed6e2b16f84af11adc874b20e9670"
+  },
+  {
+    "id": "meal-10",
+    "src": "/assets/meal-10.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/07515ded618eb9d0e09f18.jpg",
+    "width": 961,
+    "height": 720,
+    "sha256": "fdb5f76fd4dffbe79765c183a2e73b283c68b4c97274853230d56560e75393f7"
+  },
+  {
+    "id": "meal-11",
+    "src": "/assets/meal-11.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/4.png",
+    "width": 960,
+    "height": 720,
+    "sha256": "42382abd077f3916abb4c2d87826864589399c1108917983b5a6be8be29066b8"
+  },
+  {
+    "id": "meal-12",
+    "src": "/assets/meal-12.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/3.png",
+    "width": 960,
+    "height": 720,
+    "sha256": "176ebc3d3038145a6f79372ab435074f195130eede8b83e9c66ada185bfaec5c"
+  },
+  {
+    "id": "meal-13",
+    "src": "/assets/meal-13.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/853c7e8642e59abbc3f437-e1671505091334.jpg",
+    "width": 960,
+    "height": 720,
+    "sha256": "ea1ca1cdcdea5d45b739b817671aeed55628b0228d3667aacbf2436f1ddcf90f"
+  },
+  {
+    "id": "meal-14",
+    "src": "/assets/meal-14.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/69dbcb66f7052f5b761424.jpg",
+    "width": 961,
+    "height": 720,
+    "sha256": "f94b11d23636c140948b7f024f8d982ca4d5387a938ba640b02598ca6f72b464"
+  },
+  {
+    "id": "meal-15",
+    "src": "/assets/meal-15.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/2.png",
+    "width": 960,
+    "height": 720,
+    "sha256": "fa8ec4adc25bfd323b96b111832d5901cdba849488c7b7ab859c329581c0f0f7"
+  },
+  {
+    "id": "meal-16",
+    "src": "/assets/meal-16.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/11bde800d4630c3d557225-e1671504702373.jpg",
+    "width": 960,
+    "height": 724,
+    "sha256": "6264b171784bf60d2b12d51aee65cd4948f75aad37a9449b0c67d024c090d0db"
+  },
+  {
+    "id": "meal-17",
+    "src": "/assets/meal-17.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/8f83343e085dd003894c22-e1671504623220.jpg",
+    "width": 960,
+    "height": 720,
+    "sha256": "83b946263abca187d909fa4f4966e65a1b46ed9a13b82f0c2749dfa4e1cef3bb"
+  },
+  {
+    "id": "meal-18",
+    "src": "/assets/meal-18.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/08cef573c910114e480119.jpg",
+    "width": 960,
+    "height": 762,
+    "sha256": "8cd7919643ae2f95095b0c246eed235e30945aee6f379397be5d428c9be96a7c"
+  },
+  {
+    "id": "meal-19",
+    "src": "/assets/meal-19.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/5e2e53956ff6b7a8eee740-e1671504331190.jpg",
+    "width": 960,
+    "height": 720,
+    "sha256": "dc1bff2c13cee0a63af5087d17e416ec13d066b1d2611f162625fdf580ef0bfd"
+  },
+  {
+    "id": "meal-20",
+    "src": "/assets/meal-20.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/2d0918b024d3fc8da5c234-e1671504294618.jpg",
+    "width": 960,
+    "height": 720,
+    "sha256": "ee748d19353fb2d80f75e05c97093c304d1838f01d652562c7ba7f4deaadfbaa"
+  },
+  {
+    "id": "news-nutrition",
+    "src": "/assets/news-nutrition.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/thap-dinh-duong-1_0004094_710-500x480.jpeg",
+    "width": 500,
+    "height": 480,
+    "sha256": "59e957987444fdb630ed7165b9759d4a811259c4c00b98af706962cfbeea7ab2"
+  },
+  {
+    "id": "news-quality",
+    "src": "/assets/news-quality.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/dia-chi-cung-cap-suat-an-cong-nghiep-chat-luong-4-500x480.jpg",
+    "width": 500,
+    "height": 480,
+    "sha256": "5158cfd76ae0eec716a7aac9e3efc0a3d99e93f05b500593ab63438478563ae2"
+  },
+  {
+    "id": "news-storage",
+    "src": "/assets/news-storage.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/cach-bao-quan-thuc-pham-dung-cach-500x480.jpg",
+    "width": 500,
+    "height": 480,
+    "sha256": "fd035f014c5da11d3373c950f17f6c027d97fdb8f47433dfb539741a4bed02fd"
+  },
+  {
+    "id": "hero-food",
+    "src": "/assets/hero-food.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/dia-chi-cung-cap-suat-an-cong-nghiep-chat-luong-4.jpg",
+    "width": 660,
+    "height": 439
+  },
+  {
+    "id": "meal-21",
+    "src": "/assets/meal-21.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/0f85bb38875b5f05064a23.jpg",
+    "width": 961,
+    "height": 720
+  },
+  {
+    "id": "meal-22",
+    "src": "/assets/meal-22.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/1ff88245be2666783f3720.jpg",
+    "width": 960,
+    "height": 723
+  },
+  {
+    "id": "partner-catering-room",
+    "src": "/assets/partner-catering-room.jpeg",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2024/03/1HOOP7FJL_4A4NAT-2-767x1024.jpeg",
+    "width": 767,
+    "height": 1024,
+    "sha256": "51fd833e59e1058a6fe7ae25a6ae036a6d6b5efa0fe1809898571b3a2817975e"
+  },
+  {
+    "id": "certificate-01",
+    "src": "/assets/certificate-01.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/CN-ATTP-1.png",
+    "width": 1566,
+    "height": 2163,
+    "sha256": "7342bf382a2feb28223640fbb884c52ef2a41dbea091988ec87fa0cf47a35f40",
+    "format": "full-resolution-webp"
+  },
+  {
+    "id": "certificate-01-preview",
+    "src": "/assets/certificate-01-preview.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/CN-ATTP-1.png",
+    "derived_from": "/assets/certificate-01.webp",
+    "width": 440,
+    "height": 608,
+    "sha256": "4b09e3214c3b0f40bee80c8bb41b4d9aaaa32f63e9712dd53ad00dcb40e04868"
+  },
+  {
+    "id": "certificate-02",
+    "src": "/assets/certificate-02.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2023/07/ATTP1.png",
+    "width": 826,
+    "height": 1176,
+    "sha256": "7c35b6053755887e57238d92f3a43966c43fa71a1eb81266f7f105d17d703279",
+    "format": "full-resolution-webp"
+  },
+  {
+    "id": "certificate-02-preview",
+    "src": "/assets/certificate-02-preview.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2023/07/ATTP1.png",
+    "derived_from": "/assets/certificate-02.webp",
+    "width": 436,
+    "height": 620,
+    "sha256": "437ad10c6bfab5427b0839ae0f891394f32626f39e73cd5466b47d9348d2dbec"
+  },
+  {
+    "id": "certificate-03",
+    "src": "/assets/certificate-03.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2023/07/ATTP4.png",
+    "width": 840,
+    "height": 1186,
+    "sha256": "8841ee5d60f814e0d1a91c4ba8290032b6fbef32b33aaaa4d3b0eb76363421e9",
+    "format": "full-resolution-webp"
+  },
+  {
+    "id": "certificate-03-preview",
+    "src": "/assets/certificate-03-preview.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2023/07/ATTP4.png",
+    "derived_from": "/assets/certificate-03.webp",
+    "width": 439,
+    "height": 620,
+    "sha256": "79ffe44df66be2884b987c9df7a58762469a98650a046f307b683f4498952833"
+  },
+  {
+    "id": "certificate-04",
+    "src": "/assets/certificate-04.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/10.png",
+    "width": 1566,
+    "height": 2163,
+    "sha256": "1c8f4afaa148439bd7a45ab00c69a79376ca263840f916006d5627eb85d3a5c9",
+    "format": "full-resolution-webp"
+  },
+  {
+    "id": "certificate-04-preview",
+    "src": "/assets/certificate-04-preview.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/10.png",
+    "derived_from": "/assets/certificate-04.webp",
+    "width": 440,
+    "height": 608,
+    "sha256": "d6c329e95a0e2f66d2987fc0c9bd662c346dd453b2f77297c25d780f2e9f7560"
+  },
+  {
+    "id": "certificate-05",
+    "src": "/assets/certificate-05.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/9.png",
+    "width": 1566,
+    "height": 2163,
+    "sha256": "ae29dcae9a43191d87d54b294adcd95c9884cb8b8311cfc76678e401e369345d",
+    "format": "full-resolution-webp"
+  },
+  {
+    "id": "certificate-05-preview",
+    "src": "/assets/certificate-05-preview.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/9.png",
+    "derived_from": "/assets/certificate-05.webp",
+    "width": 440,
+    "height": 608,
+    "sha256": "04ee6a4c3dec91c2f998d99f2dadcc44c0f667ffc73487b261ec807fa990a970"
+  },
+  {
+    "id": "certificate-06",
+    "src": "/assets/certificate-06.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/8.png",
+    "width": 1566,
+    "height": 2163,
+    "sha256": "dc54467e5f0f24ad71339bed190a94626211a6a93d3f2ffac9c0b47c5cae763f",
+    "format": "full-resolution-webp"
+  },
+  {
+    "id": "certificate-06-preview",
+    "src": "/assets/certificate-06-preview.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/8.png",
+    "derived_from": "/assets/certificate-06.webp",
+    "width": 440,
+    "height": 608,
+    "sha256": "1d16e31c948d006f18191b00fc3976d7c76e3c95863db3b933a49b0dc73b44ef"
+  },
+  {
+    "id": "certificate-07",
+    "src": "/assets/certificate-07.jpeg",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2024/03/IMG_0301.jpeg",
+    "width": 960,
+    "height": 1280,
+    "sha256": "3163060bc5ab34cf541d63fb6b2d31d45876981f85abf710b55b81a5971451b0"
+  },
+  {
+    "id": "certificate-07-preview",
+    "src": "/assets/certificate-07-preview.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2024/03/IMG_0301.jpeg",
+    "derived_from": "/assets/certificate-07.jpeg",
+    "width": 440,
+    "height": 587,
+    "sha256": "c0a02fde6922f8f495dd7689cd06190669aeec52f4384fc6c52f52f78c3ab962"
+  },
+  {
+    "id": "certificate-08",
+    "src": "/assets/certificate-08.jpeg",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2024/03/IMG_0302.jpeg",
+    "width": 960,
+    "height": 1280,
+    "sha256": "efc2d1af73b988d294c666ecff7d3265d1c135abc61ade7bcdc9b898dc198aa6"
+  },
+  {
+    "id": "certificate-08-preview",
+    "src": "/assets/certificate-08-preview.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2024/03/IMG_0302.jpeg",
+    "derived_from": "/assets/certificate-08.jpeg",
+    "width": 440,
+    "height": 587,
+    "sha256": "42bc3c0220742249fc5deb3421309bd8143e1a0538fe44465fea606c9a89b55f"
+  },
+  {
+    "id": "certificate-09",
+    "src": "/assets/certificate-09.jpeg",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2024/03/IMG_0303.jpeg",
+    "width": 960,
+    "height": 1280,
+    "sha256": "a983507691033571d9b95a83c908d11854b5a13e4cfd8a89a204ad925f41c71e"
+  },
+  {
+    "id": "certificate-09-preview",
+    "src": "/assets/certificate-09-preview.webp",
+    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2024/03/IMG_0303.jpeg",
+    "derived_from": "/assets/certificate-09.jpeg",
+    "width": 440,
+    "height": 587,
+    "sha256": "8b380e0d9ae7e296e2481ba4c6c9be9c6c99a128cbf5c98e9e94df8a3cacd38c"
+  },
+  {
+    "id": "zalo",
+    "src": "/assets/zalo.png",
+    "source": "https://lh3.googleusercontent.com/X7JUHmDCeT845_MgAttYi_F8RsiHQr9ufnRqk2SiyiJZ1KBZgZek9wFOMuOwDuy4leA=w300",
+    "width": 300,
+    "height": 300,
+    "sha256": "cff80f4e38ff4473fd5310a84e2bc3339fe5364ec19854c1d6405be338fe6364"
+  }
+]
