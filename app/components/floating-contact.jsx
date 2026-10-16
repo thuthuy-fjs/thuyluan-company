@@ -24,15 +24,6 @@ export default function FloatingContact() {
       aria-label="Liên hệ nhanh"
     >
       <a
-        className="floating-phone"
-        href={`tel:${company.phone}`}
-        aria-label={`Gọi ${company.phoneDisplay}`}
-      >
-        <span className="floating-phone-icon">
-          <Phone size={20} fill="currentColor" />
-        </span>
-      </a>
-      <a
         className="floating-zalo"
         href={company.zalo}
         target="_blank"
@@ -42,6 +33,15 @@ export default function FloatingContact() {
       >
         <img src="/assets/zalo.png" alt="Zalo" width="300" height="300" />
         <span className="floating-zalo-label">Chat Zalo</span>
+      </a>
+      <a
+        className="floating-phone"
+        href={`tel:${company.phone}`}
+        aria-label={`Gọi ${company.phoneDisplay}`}
+      >
+        <span className="floating-phone-icon">
+          <Phone size={20} fill="currentColor" />
+        </span>
       </a>
     </nav>
   );
