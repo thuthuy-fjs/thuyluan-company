@@ -10,10 +10,10 @@ test("home has real assets, accessible navigation, and no horizontal overflow", 
     "Thực đơn lành mạnh",
   );
   await page.evaluate(() => document.fonts.ready);
-  await expect(page.locator(".hero-image")).toBeVisible();
+  await expect(page.locator(".hero-slide.is-active .hero-image")).toBeVisible();
   expect(
     await page
-      .locator(".hero-image")
+      .locator(".hero-slide.is-active .hero-image")
       .evaluate((i) => i.complete && i.naturalWidth > 0),
   ).toBe(true);
   expect(
@@ -65,12 +65,22 @@ test("catalog uses ascending menu numbers and supports search, saved menus and p
   await page.goto("/thuc-don/");
   await expect(page.locator(".meal-card")).toHaveCount(9);
   await expect(page.locator(".filter-toolbar .filter-tabs")).toHaveCount(0);
-  await expect(page.getByRole("combobox", { name: "Sắp xếp thực đơn" })).toHaveCount(0);
-  for (const [pageNumber, start, end] of [[1, 1, 9], [2, 10, 18], [3, 19, 22]]) {
-    await page.getByRole("button", { name: `Trang ${pageNumber}`, exact: true }).click();
+  await expect(
+    page.getByRole("combobox", { name: "Sắp xếp thực đơn" }),
+  ).toHaveCount(0);
+  for (const [pageNumber, start, end] of [
+    [1, 1, 9],
+    [2, 10, 18],
+    [3, 19, 22],
+  ]) {
+    await page
+      .getByRole("button", { name: `Trang ${pageNumber}`, exact: true })
+      .click();
     await expect(page.locator(".meal-card h3")).toHaveText(
-      Array.from({ length: end - start + 1 }, (_, index) =>
-        `Suất ăn công nghiệp ${String(start + index).padStart(2, "0")}`,
+      Array.from(
+        { length: end - start + 1 },
+        (_, index) =>
+          `Suất ăn công nghiệp ${String(start + index).padStart(2, "0")}`,
       ),
     );
   }
@@ -103,7 +113,7 @@ test("gallery filters photos and supports keyboard lightbox controls", async ({
   page,
 }) => {
   await page.goto("/hinh-anh/");
-  await expect(page.locator(".photo-tile")).toHaveCount(24);
+  await expect(page.locator(".photo-tile")).toHaveCount(25);
   await page
     .getByRole("button", { name: "Không gian bếp", exact: true })
     .click();
@@ -116,6 +126,227 @@ test("gallery filters photos and supports keyboard lightbox controls", async ({
   await expect(page.getByRole("dialog")).not.toBeVisible();
 });
 
+test("home menu cycles through sorted groups of six or three every five seconds", async ({
+  page,
+}) => {
+  await page.clock.install();
+  await page.goto("/");
+  await expect(
+    page.locator(".gallery-section .photo-tile").first().locator("img"),
+  ).toHaveAttribute("src", "/assets/home-served-meal.jpg");
+  const grid = page.locator(
+    ".menu-section .featured-meals[aria-hidden='false']",
+  );
+  const names = (numbers) =>
+    numbers.map(
+      (number) => `Suất ăn công nghiệp ${String(number).padStart(2, "0")}`,
+    );
+  await expect(grid.locator(".meal-card")).toHaveCount(6);
+  await expect(grid.locator(".meal-card h3")).toHaveText(
+    names([1, 2, 3, 4, 5, 6]),
+  );
+  await expect(grid).toHaveCSS("grid-template-columns", /px .*px .*px/);
+  await page.clock.runFor(4000);
+  await expect(grid.locator(".meal-card h3")).toHaveText(
+    names([1, 2, 3, 4, 5, 6]),
+  );
+  await page.clock.runFor(1000);
+  await expect(grid.locator(".meal-card h3")).toHaveText(
+    names([7, 8, 9, 10, 11, 12]),
+  );
+  await page.clock.runFor(12000);
+  await expect(grid.locator(".meal-card h3")).toHaveText(
+    names([19, 20, 21, 22, 1, 2]),
+  );
+
+  await page.setViewportSize({ width: 768, height: 1024 });
+  await expect(grid.locator(".meal-card")).toHaveCount(6);
+  await expect(grid).toHaveCSS("grid-template-columns", /px .*px .*px/);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(grid.locator(".meal-card")).toHaveCount(3);
+  await expect(grid.locator(".meal-card h3")).toHaveText(names([10, 11, 12]));
+  await expect(grid).toHaveCSS("grid-template-columns", /^[\d.]+px$/);
+  await page.clock.runFor(5000);
+  await expect(grid.locator(".meal-card h3")).toHaveText(names([13, 14, 15]));
+});
+
+test("hero cycles through the three supplied posters every three seconds", async ({
+  page,
+}) => {
+  await page.clock.install();
+  await page.goto("/");
+  const activeImage = page.locator(".hero-slide.is-active img");
+  await expect(activeImage).toHaveAttribute(
+    "src",
+    "/assets/home-menu-30-days.jpg",
+  );
+  await page.clock.runFor(2000);
+  await expect(activeImage).toHaveAttribute(
+    "src",
+    "/assets/home-menu-30-days.jpg",
+  );
+  await page.clock.runFor(1000);
+  await expect(activeImage).toHaveAttribute(
+    "src",
+    "/assets/home-services-poster.jpg",
+  );
+  await page.clock.runFor(3000);
+  await expect(activeImage).toHaveAttribute(
+    "src",
+    "/assets/home-food-menu-poster.jpg",
+  );
+  await page.clock.runFor(3000);
+  await expect(activeImage).toHaveAttribute(
+    "src",
+    "/assets/home-menu-30-days.jpg",
+  );
+  await page.getByRole("button", { name: /^Ảnh 3:/ }).click();
+  await expect(activeImage).toHaveAttribute(
+    "src",
+    "/assets/home-food-menu-poster.jpg",
+  );
+});
+
+test("each solution card rotates five supplied photos every five seconds", async ({
+  page,
+}) => {
+  await page.clock.install();
+  await page.goto("/");
+  const cards = page.locator(".solution-card");
+  await expect(cards).toHaveCount(3);
+  await cards.first().scrollIntoViewIfNeeded();
+  for (const [index, group] of ["factory", "office", "contract"].entries()) {
+    await expect(cards.nth(index).locator(".solution-slide")).toHaveCount(5);
+    await expect(
+      cards.nth(index).locator(".solution-slide.is-active img"),
+    ).toHaveAttribute("src", `/assets/solution-${group}-01.jpg`);
+  }
+  await page.clock.runFor(4000);
+  await expect(
+    cards.first().locator(".solution-slide.is-active img"),
+  ).toHaveAttribute("src", "/assets/solution-factory-01.jpg");
+  await page.clock.runFor(1000);
+  for (const [index, group] of ["factory", "office", "contract"].entries()) {
+    await expect(
+      cards.nth(index).locator(".solution-slide.is-active img"),
+    ).toHaveAttribute("src", `/assets/solution-${group}-02.jpg`);
+  }
+  await page.clock.runFor(15000);
+  await expect(
+    cards.first().locator(".solution-slide.is-active img"),
+  ).toHaveAttribute("src", "/assets/solution-factory-05.jpg");
+  await page.clock.runFor(5000);
+  await expect(
+    cards.first().locator(".solution-slide.is-active img"),
+  ).toHaveAttribute("src", "/assets/solution-factory-01.jpg");
+  await expect(cards.first()).toHaveAttribute("href", "/giai-phap/#nha-may");
+});
+
+test("solution detail page reuses the five-photo sliders and keeps their five-second timing", async ({
+  page,
+}) => {
+  await page.clock.install();
+  await page.goto("/giai-phap/");
+  const sections = page.locator(".service-detail");
+  await expect(sections).toHaveCount(3);
+  await sections.first().scrollIntoViewIfNeeded();
+  for (const [index, group] of ["factory", "office", "contract"].entries()) {
+    await expect(sections.nth(index).locator(".solution-slide")).toHaveCount(5);
+    await expect(
+      sections.nth(index).locator(".solution-slide.is-active img"),
+    ).toHaveAttribute("src", `/assets/solution-${group}-01.jpg`);
+  }
+  await page.clock.runFor(4000);
+  await expect(
+    sections.first().locator(".solution-slide.is-active img"),
+  ).toHaveAttribute("src", "/assets/solution-factory-01.jpg");
+  await page.clock.runFor(1000);
+  for (const [index, group] of ["factory", "office", "contract"].entries()) {
+    await expect(
+      sections.nth(index).locator(".solution-slide.is-active img"),
+    ).toHaveAttribute("src", `/assets/solution-${group}-02.jpg`);
+  }
+  await page.setViewportSize({ width: 390, height: 844 });
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth,
+    ),
+  ).toBe(true);
+  await expect(sections.first().locator(".service-detail-image")).toBeVisible();
+});
+
+test("ISO certificates show one cover per document and all three pages when opened", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const grid = page.locator(".certificate-grid");
+  const cards = grid.locator(".certificate-card");
+  await expect(cards).toHaveCount(10);
+  await expect(cards.first()).toContainText(
+    "Giấy chứng nhận đăng ký doanh nghiệp",
+  );
+  await expect(cards.nth(2)).toContainText("bếp Đồng Văn");
+  await expect(cards.last()).toContainText("Đăng ký địa điểm kinh doanh số 01");
+  const expectAlignedCaptions = async (columns) => {
+    const tops = await cards.evaluateAll((items) =>
+      items.map(
+        (item) =>
+          item.querySelector(".certificate-caption").getBoundingClientRect()
+            .top,
+      ),
+    );
+    for (let start = 0; start < tops.length; start += columns) {
+      const row = tops.slice(start, start + columns);
+      expect(Math.max(...row) - Math.min(...row)).toBeLessThanOrEqual(1);
+    }
+  };
+  expect(
+    (
+      await grid.evaluate(
+        (element) => getComputedStyle(element).gridTemplateColumns,
+      )
+    ).split(" ").length,
+  ).toBe(5);
+  await expectAlignedCaptions(5);
+  for (const [index, id] of [
+    [1, "head-office"],
+    [2, "dong-van"],
+    [3, "chau-son"],
+  ]) {
+    await cards.nth(index).click();
+    const dialog = page.getByRole("dialog");
+    await expect(dialog).toContainText(`${index + 1} / 10`);
+    await expect(dialog.locator(".certificate-page")).toHaveCount(3);
+    await expect(dialog.locator(".certificate-full").first()).toHaveAttribute(
+      "src",
+      `/assets/iso22000-${id}-vi.webp`,
+    );
+    await expect(dialog.locator(".certificate-full").nth(2)).toHaveAttribute(
+      "src",
+      `/assets/iso22000-${id}-decision.webp`,
+    );
+    await expect(dialog.getByRole("link", { name: /Tải trang/ })).toHaveCount(
+      3,
+    );
+    await dialog.locator(".certificate-page").last().scrollIntoViewIfNeeded();
+    expect(
+      await dialog.evaluate((element) => element.scrollTop),
+    ).toBeGreaterThan(0);
+    await page.keyboard.press("Escape");
+  }
+  await page.setViewportSize({ width: 1024, height: 900 });
+  await expectAlignedCaptions(3);
+  await page.setViewportSize({ width: 390, height: 844 });
+  expect(
+    (
+      await grid.evaluate(
+        (element) => getComputedStyle(element).gridTemplateColumns,
+      )
+    ).split(" ").length,
+  ).toBe(2);
+  await expectAlignedCaptions(2);
+});
+
 test("quote validates fields and prepares a real email without claiming delivery", async ({
   page,
 }) => {
@@ -123,7 +354,7 @@ test("quote validates fields and prepares a real email without claiming delivery
   await page.locator("input[name=company]").fill("Doanh nghiệp thử nghiệm");
   await page.locator("input[name=name]").fill("Nguyễn An");
   await page.locator("input[name=phone]").fill("123");
-  await page.locator("input[name=location]").fill("Hà Nam");
+  await page.locator("input[name=location]").fill("Ninh Bình");
   await page.locator("input[name=quantity]").fill("500");
   await page.locator(".consent input").check();
   await page.getByRole("button", { name: "Nhận phương án & báo giá" }).click();
@@ -150,7 +381,7 @@ test("mobile menu, routes, images and layout work at 390 pixels", async ({
   await page.goto("/");
   await page.evaluate(() => document.fonts.ready);
   await expect(page.locator(".hero-copy-bottom")).toHaveCSS("opacity", "1");
-  await expect(page.locator(".hero-image")).toHaveCSS("opacity", "1");
+  await expect(page.locator(".hero-slide.is-active")).toHaveCSS("opacity", "1");
   await expect(page.locator(".floating-phone")).toBeVisible();
   await expect(page.locator(".floating-phone")).toHaveAttribute(
     "href",

@@ -36,7 +36,7 @@ export default async function MealPage({ params }) {
             Nhiều khả năng điều chỉnh.
           </h2>
           <p>
-            Hình ảnh suất ăn được giữ lại từ thư viện thực đơn của Thúy Luân.
+            Hình ảnh suất ăn do Thúy Luân cung cấp.
             Thành phần, định lượng và lịch luân phiên được trao đổi khi xây dựng
             phương án phục vụ.
           </p>

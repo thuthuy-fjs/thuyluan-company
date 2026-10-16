@@ -14,7 +14,7 @@ export const metadata = {
     template: "%s | Thúy Luân",
   },
   description:
-    "Giải pháp suất ăn công nghiệp cho nhà máy và doanh nghiệp tại Hà Nam và miền Bắc. Khám phá thực đơn thực tế, quy trình và trao đổi phương án hợp tác cùng Thúy Luân.",
+    "Giải pháp suất ăn công nghiệp cho nhà máy và doanh nghiệp tại Ninh Bình và miền Bắc. Khám phá thực đơn thực tế, quy trình và trao đổi phương án hợp tác cùng Thúy Luân.",
   icons: { icon: "/assets/logo.png" },
   openGraph: {
     title: "Thúy Luân — Corporate Food Service",

@@ -445,6 +445,150 @@
     "sha256": "51fd833e59e1058a6fe7ae25a6ae036a6d6b5efa0fe1809898571b3a2817975e"
   },
   {
+    "id": "business-registration-2026",
+    "src": "/assets/business-registration-2026.webp",
+    "source": "User-provided DKKD-Thuy Luan-L3.pdf, page 1",
+    "width": 1860,
+    "height": 2632,
+    "sha256": "62348e0e035e315ca5fa8f2b714009e15efe493f17c752d043e4e961d0fdad7e",
+    "format": "full-resolution-webp"
+  },
+  {
+    "id": "business-registration-2026-preview",
+    "src": "/assets/business-registration-2026-preview.webp",
+    "source": "User-provided DKKD-Thuy Luan-L3.pdf, page 1",
+    "derived_from": "/assets/business-registration-2026.webp",
+    "width": 438,
+    "height": 620,
+    "sha256": "92dedc898b446bf2bd6d3d650e1b627c005e16ef46ca0bf15f06400005bc6b8b"
+  },
+  {
+    "id": "iso22000-head-office-vi",
+    "src": "/assets/iso22000-head-office-vi.webp",
+    "source": "GCN DỊCH VỤ THÚY LUÂN 22000_0001.pdf, page 1",
+    "width": 1689,
+    "height": 2404,
+    "sha256": "89252e87923de816b3762cc6de38790cf62445626f7fa3a1bd8520116d1e74b3",
+    "format": "full-resolution-webp"
+  },
+  {
+    "id": "iso22000-head-office-vi-preview",
+    "src": "/assets/iso22000-head-office-vi-preview.webp",
+    "source": "GCN DỊCH VỤ THÚY LUÂN 22000_0001.pdf, page 1",
+    "width": 436,
+    "height": 620,
+    "sha256": "d727fb97b95252a8a1c631a8f59f2250aa02ab8ea4ff2d4e824ed72afdabe385",
+    "derived_from": "/assets/iso22000-head-office-vi.webp"
+  },
+  {
+    "id": "iso22000-head-office-en",
+    "src": "/assets/iso22000-head-office-en.webp",
+    "source": "GCN DỊCH VỤ THÚY LUÂN 22000_0001.pdf, page 2",
+    "width": 1689,
+    "height": 2409,
+    "sha256": "55a1d8cd8c8039b4250eb2fa18830aa368cac3146eb63fa80e80894ef06c5621",
+    "format": "full-resolution-webp"
+  },
+  {
+    "id": "iso22000-head-office-decision",
+    "src": "/assets/iso22000-head-office-decision.webp",
+    "source": "GCN DỊCH VỤ THÚY LUÂN 22000_0001.pdf, page 3",
+    "width": 1692,
+    "height": 2412,
+    "sha256": "85ad49d214d410bcaf1392939879321273c7171df30a73f2abf2848b3310bbcc",
+    "format": "full-resolution-webp"
+  },
+  {
+    "id": "iso22000-dong-van-vi",
+    "src": "/assets/iso22000-dong-van-vi.webp",
+    "source": "GCN Hệ thống quản lý ATTP Bếp Đồng Văn.pdf, page 1",
+    "width": 1695,
+    "height": 2398,
+    "sha256": "d39048601e6e6e3980712b9da65899ef538e198237e21d7ede1701b751f94f71",
+    "format": "full-resolution-webp"
+  },
+  {
+    "id": "iso22000-dong-van-vi-preview",
+    "src": "/assets/iso22000-dong-van-vi-preview.webp",
+    "source": "GCN Hệ thống quản lý ATTP Bếp Đồng Văn.pdf, page 1",
+    "width": 438,
+    "height": 620,
+    "sha256": "cdfde1ffaa82a1d90f381d3b7b6ad02b6d5ccc1239c815bea2b55ce45ddabe7c",
+    "derived_from": "/assets/iso22000-dong-van-vi.webp"
+  },
+  {
+    "id": "iso22000-dong-van-en",
+    "src": "/assets/iso22000-dong-van-en.webp",
+    "source": "GCN Hệ thống quản lý ATTP Bếp Đồng Văn.pdf, page 2",
+    "width": 1695,
+    "height": 2398,
+    "sha256": "540438666797ee8eca7ca9e08630b40cff5f6f451d1e9366742f8efd88b0ee6a",
+    "format": "full-resolution-webp"
+  },
+  {
+    "id": "iso22000-dong-van-decision",
+    "src": "/assets/iso22000-dong-van-decision.webp",
+    "source": "GCN Hệ thống quản lý ATTP ISO 22000.pdf, page 3",
+    "width": 1695,
+    "height": 2398,
+    "sha256": "d51ee3d5afb3800c0fed3c84b8f7591efd4b59cd5654b701d355bdf65e8686b7",
+    "format": "full-resolution-webp"
+  },
+  {
+    "id": "iso22000-chau-son-vi",
+    "src": "/assets/iso22000-chau-son-vi.webp",
+    "source": "GCN Hệ thống quản lý ATTP ISO 22000.pdf, page 1",
+    "width": 1695,
+    "height": 2398,
+    "sha256": "f34059b259727c25d15cec2fd9e2b6b92c7a29730ca317dcd7251733bb6cb147",
+    "format": "full-resolution-webp"
+  },
+  {
+    "id": "iso22000-chau-son-vi-preview",
+    "src": "/assets/iso22000-chau-son-vi-preview.webp",
+    "source": "GCN Hệ thống quản lý ATTP ISO 22000.pdf, page 1",
+    "width": 438,
+    "height": 620,
+    "sha256": "bc1dc63f124c565861820b14ce16e3878f5a4f6d0e224142f8504099ca3d3c47",
+    "derived_from": "/assets/iso22000-chau-son-vi.webp"
+  },
+  {
+    "id": "iso22000-chau-son-en",
+    "src": "/assets/iso22000-chau-son-en.webp",
+    "source": "GCN Hệ thống quản lý ATTP ISO 22000.pdf, page 2",
+    "width": 1695,
+    "height": 2398,
+    "sha256": "da535e376a94cb93984a6d0da39906b78d1a2d8930313aa446c04100dc84fdc7",
+    "format": "full-resolution-webp"
+  },
+  {
+    "id": "iso22000-chau-son-decision",
+    "src": "/assets/iso22000-chau-son-decision.webp",
+    "source": "GCN Hệ thống quản lý ATTP Bếp Đồng Văn.pdf, page 3",
+    "width": 1695,
+    "height": 2398,
+    "sha256": "415658ee12bba7045b1751c95aeecfc725d883165949a168d3d8b616b45d86d9",
+    "format": "full-resolution-webp"
+  },
+  {
+    "id": "food-safety-site-04-2026",
+    "src": "/assets/food-safety-site-04-2026.webp",
+    "source": "GCN số 89.26 CT THÚY LUÂN ĐĐKD 04-KQ_signed-signed(1)_signed-signed(1).pdf, page 1",
+    "width": 1696,
+    "height": 2398,
+    "sha256": "6b0d7c0e35712a0f8daa4f8e3f9178a39bd78c12f710e86213b78294b3fdf466",
+    "format": "full-resolution-webp"
+  },
+  {
+    "id": "food-safety-site-04-2026-preview",
+    "src": "/assets/food-safety-site-04-2026-preview.webp",
+    "source": "GCN số 89.26 CT THÚY LUÂN ĐĐKD 04-KQ_signed-signed(1)_signed-signed(1).pdf, page 1",
+    "width": 438,
+    "height": 620,
+    "sha256": "68bd775837b3214b8fb10dd2c9d34fc50ba5da96cbb7b6d9bfeb52595d01b823",
+    "derived_from": "/assets/food-safety-site-04-2026.webp"
+  },
+  {
     "id": "certificate-01",
     "src": "/assets/certificate-01.webp",
     "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/CN-ATTP-1.png",
@@ -517,76 +661,6 @@
     "sha256": "d6c329e95a0e2f66d2987fc0c9bd662c346dd453b2f77297c25d780f2e9f7560"
   },
   {
-    "id": "certificate-05",
-    "src": "/assets/certificate-05.webp",
-    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/9.png",
-    "width": 1566,
-    "height": 2163,
-    "sha256": "ae29dcae9a43191d87d54b294adcd95c9884cb8b8311cfc76678e401e369345d",
-    "format": "full-resolution-webp"
-  },
-  {
-    "id": "certificate-05-preview",
-    "src": "/assets/certificate-05-preview.webp",
-    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/9.png",
-    "derived_from": "/assets/certificate-05.webp",
-    "width": 440,
-    "height": 608,
-    "sha256": "04ee6a4c3dec91c2f998d99f2dadcc44c0f667ffc73487b261ec807fa990a970"
-  },
-  {
-    "id": "certificate-06",
-    "src": "/assets/certificate-06.webp",
-    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/8.png",
-    "width": 1566,
-    "height": 2163,
-    "sha256": "dc54467e5f0f24ad71339bed190a94626211a6a93d3f2ffac9c0b47c5cae763f",
-    "format": "full-resolution-webp"
-  },
-  {
-    "id": "certificate-06-preview",
-    "src": "/assets/certificate-06-preview.webp",
-    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2022/12/8.png",
-    "derived_from": "/assets/certificate-06.webp",
-    "width": 440,
-    "height": 608,
-    "sha256": "1d16e31c948d006f18191b00fc3976d7c76e3c95863db3b933a49b0dc73b44ef"
-  },
-  {
-    "id": "certificate-07",
-    "src": "/assets/certificate-07.jpeg",
-    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2024/03/IMG_0301.jpeg",
-    "width": 960,
-    "height": 1280,
-    "sha256": "3163060bc5ab34cf541d63fb6b2d31d45876981f85abf710b55b81a5971451b0"
-  },
-  {
-    "id": "certificate-07-preview",
-    "src": "/assets/certificate-07-preview.webp",
-    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2024/03/IMG_0301.jpeg",
-    "derived_from": "/assets/certificate-07.jpeg",
-    "width": 440,
-    "height": 587,
-    "sha256": "c0a02fde6922f8f495dd7689cd06190669aeec52f4384fc6c52f52f78c3ab962"
-  },
-  {
-    "id": "certificate-08",
-    "src": "/assets/certificate-08.jpeg",
-    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2024/03/IMG_0302.jpeg",
-    "width": 960,
-    "height": 1280,
-    "sha256": "efc2d1af73b988d294c666ecff7d3265d1c135abc61ade7bcdc9b898dc198aa6"
-  },
-  {
-    "id": "certificate-08-preview",
-    "src": "/assets/certificate-08-preview.webp",
-    "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2024/03/IMG_0302.jpeg",
-    "derived_from": "/assets/certificate-08.jpeg",
-    "width": 440,
-    "height": 587,
-    "sha256": "42bc3c0220742249fc5deb3421309bd8143e1a0538fe44465fea606c9a89b55f"
-  },
-  {
     "id": "certificate-09",
     "src": "/assets/certificate-09.jpeg",
     "source": "https://suatancongnghiepthuyluan.com/wp-content/uploads/2024/03/IMG_0303.jpeg",
@@ -610,5 +684,341 @@
     "width": 300,
     "height": 300,
     "sha256": "cff80f4e38ff4473fd5310a84e2bc3339fe5364ec19854c1d6405be338fe6364"
+  },
+  {
+    "id": "home-services-poster",
+    "src": "/assets/home-services-poster.jpg",
+    "source": "User-provided image: 2aobor5geumg6q9jlhpdih0zmze5lb8qydarzhue134.jpg",
+    "width": 1280,
+    "height": 1280,
+    "sha256": "7370ad32baaf02e30590f95944ef37987f5fb5f92d5d68c18d4277511926e034"
+  },
+  {
+    "id": "home-menu-30-days",
+    "src": "/assets/home-menu-30-days.jpg",
+    "source": "User-provided image: 2aobor5gev1uifqzbyzrxbdqdlgkgsxjnwopqkx6135.jpg",
+    "width": 1280,
+    "height": 1280,
+    "sha256": "9e38f614217547d696f4c62602658db3593d2b2941df322c3c75eb6887f068e3"
+  },
+  {
+    "id": "home-catering-poster",
+    "src": "/assets/home-catering-poster.jpg",
+    "source": "User-provided image: 2aobor5gevjndsrgaxwsbae8r5ysd2wrvltw6yf6136.jpg",
+    "width": 1280,
+    "height": 640,
+    "sha256": "5dd456f6fd1d8f8f088540128b49a75337ca9d3671771c7da8d34e85ecdc82e4"
+  },
+  {
+    "id": "home-core-values",
+    "src": "/assets/home-core-values.jpg",
+    "source": "User-provided image: 2aobor5gevdmb8unuw1n8ry5uv1dq4lchwxp4yje137.jpg",
+    "width": 1280,
+    "height": 720,
+    "sha256": "9e8bb2af9e1e98d9a512a3a41a0ee9a4b108d61ab538bb6bbf56db20e2a63e52"
+  },
+  {
+    "id": "home-food-service-banner",
+    "src": "/assets/home-food-service-banner.jpg",
+    "source": "User-provided image: 2aobor5gevs652badj3wftiqjobqztacz4li6zga138.jpg",
+    "width": 1280,
+    "height": 404,
+    "sha256": "1ffbeb1be95618959769103f37cf04a340679e303b49def0a860bfd55740a383"
+  },
+  {
+    "id": "home-food-menu-poster",
+    "src": "/assets/home-food-menu-poster.jpg",
+    "source": "User-provided image: 2aobor5gewdirl02z8emnc9y4vtj8bhouetmmids139.jpg",
+    "width": 1280,
+    "height": 1280,
+    "sha256": "4c6a118770a1f4953c4aef793db121e2aac4e1f0ed88becf2b1761484f506852"
+  },
+  {
+    "id": "home-served-meal",
+    "src": "/assets/home-served-meal.jpg",
+    "source": "User-provided image: 2aobor5gewnkr3gvj0nabm1c3atot0puywe7lnha140.jpg",
+    "width": 768,
+    "height": 513,
+    "sha256": "429775b6a5546cac4a86f14b53077b935fe2204457f1cd84bf83608b083d5dc5"
+  },
+  {
+    "id": "home-nutrition-guide",
+    "src": "/assets/home-nutrition-guide.jpg",
+    "source": "User-provided image: 2aobor5gewowzuznfc84t4cwayqyvji3u45bl63c141.jpg",
+    "width": 905,
+    "height": 1280,
+    "sha256": "c385a8159765b12dd978e03ad95e31828bcef1be3c3d7d51507866345213d54c"
+  },
+  {
+    "id": "solution-factory-01",
+    "src": "/assets/solution-factory-01.jpg",
+    "source": "User-provided image: 2aobor5g7dmvnyl8ap61g24qg4ufzdt1mws9cexs1.jpg",
+    "width": 1280,
+    "height": 576,
+    "sha256": "2b283dcd7acd1322cb87fd049878acf3446b85095778dc64dd786914b6c1dc60"
+  },
+  {
+    "id": "solution-factory-02",
+    "src": "/assets/solution-factory-02.jpg",
+    "source": "User-provided image: 2aobor5g7emb6yatjxudybh95gzjiurxhsej6sgm3.jpg",
+    "width": 1280,
+    "height": 576,
+    "sha256": "11cefea3ecc2a36e655eea76eb35c2df36be7c3f6a92cb7639206efb11f21fee"
+  },
+  {
+    "id": "solution-factory-03",
+    "src": "/assets/solution-factory-03.jpg",
+    "source": "User-provided image: 2aobor5g7fdgqe9nlu4h6ezsxzbrs2scokjk5lp64.jpg",
+    "width": 1280,
+    "height": 576,
+    "sha256": "159bb14010a23d173e91cbca715ed76948f1b622bc044bcc4f573187bcde9473"
+  },
+  {
+    "id": "solution-factory-04",
+    "src": "/assets/solution-factory-04.jpg",
+    "source": "User-provided image: 2aobor5g7hnun3meiqcdvkkamidbogbvtcz6op165.jpg",
+    "width": 1280,
+    "height": 576,
+    "sha256": "75afe28b86bcdb6879a1e2a6fe1810034b4154825b080cdc32dc6f3c89f612ce"
+  },
+  {
+    "id": "solution-factory-05",
+    "src": "/assets/solution-factory-05.jpg",
+    "source": "User-provided image: 2aobor5g7ikdz2w8ogecbuumozocfoncpy7lxwhm7.jpg",
+    "width": 1280,
+    "height": 576,
+    "sha256": "7d56c421369db7648ff5a429cef1660975ddcd1615948999815f3affa4b5a30b"
+  },
+  {
+    "id": "solution-office-01",
+    "src": "/assets/solution-office-01.jpg",
+    "source": "User-provided image: 2aobor5g9k0zq4b1mcnt2dvn6pu4k1br4tluav7i35.jpg",
+    "width": 1280,
+    "height": 960,
+    "sha256": "d01a314561792e4a6b45cf268a4ce3869362ce0eba2ff352fecff6047d13db48"
+  },
+  {
+    "id": "solution-office-02",
+    "src": "/assets/solution-office-02.jpg",
+    "source": "User-provided image: 2aobor5g9klaxqw32dgbdasb40pzw586fpq2hxlc36.jpg",
+    "width": 1280,
+    "height": 960,
+    "sha256": "8631caf5eefa2f75542803889d6fb58457f0c693436c2db62940a91eeb949e80"
+  },
+  {
+    "id": "solution-office-03",
+    "src": "/assets/solution-office-03.jpg",
+    "source": "User-provided image: 2aobor5g9kbfuiztplcvjn3niwzvgfqkj6gnb5mw37.jpg",
+    "width": 1280,
+    "height": 960,
+    "sha256": "a0214b60873be0e426b21576e10182ddfdf04e48e3afcdd5d8a987ea4a1e87dc"
+  },
+  {
+    "id": "solution-office-04",
+    "src": "/assets/solution-office-04.jpg",
+    "source": "User-provided image: 2aobor5g9krszds2iwbowzsbp3lqjszowi6veaso38.jpg",
+    "width": 1280,
+    "height": 1172,
+    "sha256": "1c95e8e74eee345e8f9c415eafafdfeb2f3afe4472e0f16664000c0b02158cd2"
+  },
+  {
+    "id": "solution-office-05",
+    "src": "/assets/solution-office-05.jpg",
+    "source": "User-provided image: 2aobor5g9ldybvucrozva6r2f0gmhjgsdsen88fe41.jpg",
+    "width": 1280,
+    "height": 960,
+    "sha256": "c61e855788bef8b476a69002dd61365b92cdf4cd9280c3cdd7687578fd28727b"
+  },
+  {
+    "id": "solution-contract-01",
+    "src": "/assets/solution-contract-01.jpg",
+    "source": "User-provided image: 2aobor5g7ofidyfxqkkrm08opazcurw49z9qdwxg9.jpg",
+    "width": 1276,
+    "height": 956,
+    "sha256": "867790d3cea6a75111fac35ce91890fbd906fd7b3f09da96281f6da6bab18eb2"
+  },
+  {
+    "id": "solution-contract-02",
+    "src": "/assets/solution-contract-02.jpg",
+    "source": "User-provided image: 2aobor5g7olrhvmbd6dqplpqa6ecvxhrfi3hcygk11.jpg",
+    "width": 1276,
+    "height": 956,
+    "sha256": "4da692a73bc06795bf6becb7a63e1eb12c7f6fa81bbdb0ffd548148a324dee72"
+  },
+  {
+    "id": "solution-contract-03",
+    "src": "/assets/solution-contract-03.jpg",
+    "source": "User-provided image: 2aobor5g7tyvmstzmr8p78kyrhrcbwrbga2v7qfm13.jpg",
+    "width": 1276,
+    "height": 956,
+    "sha256": "2c228009cdc2811b5bbecf5bb87635fecb090f9308aaf8db0f45ec9b729daf1e"
+  },
+  {
+    "id": "solution-contract-04",
+    "src": "/assets/solution-contract-04.jpg",
+    "source": "User-provided image: 2aobor5g8pebqjrikvbozrzk4539fiiu4saktsia15.jpg",
+    "width": 1276,
+    "height": 956,
+    "sha256": "c575bee82ed4875bf8d1afe5fc4304fcb2ae5b1523b16c64fc6dea9ad9690ef3"
+  },
+  {
+    "id": "solution-contract-05",
+    "src": "/assets/solution-contract-05.jpg",
+    "source": "User-provided image: 2aobor5g8pxq9xbdvxv6ujmvj3uy7tld9wp3pjkm16.jpg",
+    "width": 1276,
+    "height": 956,
+    "sha256": "6f1fef1d4d8d12a57d94c6f62a2499dcffb90ee52b46d430393ccfaa9ce974a5"
+  },
+  {
+    "id": "kitchen-process-thuy-luan",
+    "src": "/assets/kitchen-process-thuy-luan.png",
+    "source": "User-provided image: Quy trình bếp ăn Thúy Luân.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "0f8be6b01ab36438652831fab8be24a9fd4720bf40cf331a45dda09fd0f15113"
+  },
+  {
+    "id": "menu-photo-2026-01",
+    "src": "/assets/menu-photo-2026-01.webp",
+    "source": "User-provided image: 2aobor5g9jyoo86qnwoiwcvoet6sqeospcquughi33.jpg (rotated 90 degrees counterclockwise)",
+    "width": 1280,
+    "height": 960,
+    "sha256": "217bda78913bf98346409e686aa7f2c1ed2fae1d4ec8125b7178e5bac38ce33f"
+  },
+  {
+    "id": "menu-photo-2026-02",
+    "src": "/assets/menu-photo-2026-02.webp",
+    "source": "User-provided image: 2aobor5g9jooyjvlcxoz41fpso9qfwnrpcpogqko34.jpg (rotated 90 degrees counterclockwise)",
+    "width": 1280,
+    "height": 960,
+    "sha256": "b7e5f213b29c0c621849257deae75803c68d73a7c4f4b11cd78350bf983f1bb0"
+  },
+  {
+    "id": "menu-photo-2026-03",
+    "src": "/assets/menu-photo-2026-03.webp",
+    "source": "User-provided image: 2aobor5g9k0zq4b1mcnt2dvn6pu4k1br4tluav7i35.jpg",
+    "width": 1280,
+    "height": 960,
+    "sha256": "107610c471cbac2008eccd15c0f6afea2378a84b2d7ea93cf97ee67c7902928e"
+  },
+  {
+    "id": "menu-photo-2026-04",
+    "src": "/assets/menu-photo-2026-04.webp",
+    "source": "User-provided image: 2aobor5g9klaxqw32dgbdasb40pzw586fpq2hxlc36.jpg",
+    "width": 1280,
+    "height": 960,
+    "sha256": "3fa6c21a187550125f061ceab31e3203c2d9ab70e3fc9f32136cd96d6533eb55"
+  },
+  {
+    "id": "menu-photo-2026-05",
+    "src": "/assets/menu-photo-2026-05.webp",
+    "source": "User-provided image: 2aobor5g9kbfuiztplcvjn3niwzvgfqkj6gnb5mw37.jpg",
+    "width": 1280,
+    "height": 960,
+    "sha256": "97c04c4bca5ceb9f9deb78002b85365e716b0a6a25736a10b73c72f79cb1f711"
+  },
+  {
+    "id": "menu-photo-2026-06",
+    "src": "/assets/menu-photo-2026-06.webp",
+    "source": "User-provided image: 2aobor5g9krszds2iwbowzsbp3lqjszowi6veaso38.jpg",
+    "width": 1280,
+    "height": 1172,
+    "sha256": "ba6e515cc6c39794f40ae754cfb2d458e34a4c83e6ce09094a1d3bcdfa2abd49"
+  },
+  {
+    "id": "menu-photo-2026-07",
+    "src": "/assets/menu-photo-2026-07.webp",
+    "source": "User-provided image: 2aobor5g9l9gyew8onq8bbrwmtv9oawue84ek35k39.jpg",
+    "width": 1280,
+    "height": 960,
+    "sha256": "a044c36b7cb8f9ba9829da9b3bfa6d44c930feb4892da3d104a2ab6598496052"
+  },
+  {
+    "id": "menu-photo-2026-08",
+    "src": "/assets/menu-photo-2026-08.webp",
+    "source": "User-provided image: 2aobor5g9lm5gitvspcuw7goycqt67f1tjezj1e440.jpg",
+    "width": 1280,
+    "height": 960,
+    "sha256": "f4b03c0f377f941b033ebdbadc926baaa83fed3a68a31b3bc1b29e5c6f208537"
+  },
+  {
+    "id": "menu-photo-2026-09",
+    "src": "/assets/menu-photo-2026-09.webp",
+    "source": "User-provided image: 2aobor5g9ldybvucrozva6r2f0gmhjgsdsen88fe41.jpg",
+    "width": 1280,
+    "height": 960,
+    "sha256": "96d4f148fa66387a9ebb868d9a0a964528a30b8de65d1d3691601c7140833585"
+  },
+  {
+    "id": "menu-photo-2026-10",
+    "src": "/assets/menu-photo-2026-10.webp",
+    "source": "User-provided image: 2aobor5g9lsvm0bebdcouel7lusncmv2ha8vzo8e42.jpg",
+    "width": 1280,
+    "height": 960,
+    "sha256": "31376998101bb7493756713efa1c1565767cb1fcede960a3b99f9d9ee5267d92"
+  },
+  {
+    "id": "menu-photo-2026-11",
+    "src": "/assets/menu-photo-2026-11.webp",
+    "source": "User-provided image: 2aobor5g9m1ig3w8vizbzjxhv06ock5s8dnrgsk043.jpg",
+    "width": 1280,
+    "height": 960,
+    "sha256": "b1b4cbdbc199409a659828ce7e09257d083fef4baef4cffca153224dde52dcff"
+  },
+  {
+    "id": "menu-photo-2026-12",
+    "src": "/assets/menu-photo-2026-12.webp",
+    "source": "User-provided image: 2aobor5g9mgycdrrcdnof9pyd827lixkry13rhvu44.jpg",
+    "width": 1280,
+    "height": 960,
+    "sha256": "d9dd202b3d475f2ac50e495487cb468862d9342ce8baa692a83189505b01bd76"
+  },
+  {
+    "id": "menu-photo-2026-13",
+    "src": "/assets/menu-photo-2026-13.webp",
+    "source": "User-provided image: 2aobor5g9nnkyy3yzdahs1oldqofh0d7f8lzcyos45.jpg",
+    "width": 1280,
+    "height": 960,
+    "sha256": "e7de9ddf616fa46e0c534b19f3692d1aceea541eff47bf8faae39ad27c48ac7d"
+  },
+  {
+    "id": "menu-photo-2026-14",
+    "src": "/assets/menu-photo-2026-14.webp",
+    "source": "User-provided image: 2aobor5g9oocpymbexiyrt80wsarqsw7g3t3vyjk46.jpg",
+    "width": 1280,
+    "height": 960,
+    "sha256": "c7c081033ec575d538964ee9190dfa01127858e9113a76c8ede43d6bddd5827d"
+  },
+  {
+    "id": "menu-photo-2026-15",
+    "src": "/assets/menu-photo-2026-15.webp",
+    "source": "User-provided image: 2aobor5g9p6hqkrmhgf2ar3jkwu0kqy8jbhksb3q47.jpg",
+    "width": 1280,
+    "height": 960,
+    "sha256": "efaa632eff1d4e2b7d384cb7d6ac64f61b7a76c6f57d55dd0aab409a95647203"
+  },
+  {
+    "id": "menu-photo-2026-16",
+    "src": "/assets/menu-photo-2026-16.webp",
+    "source": "User-provided image: 2aobor5g9pvptdq9nrfp8hdum7vpv0xza9rxs7fc48.jpg (cropped to landscape to keep the meal upright)",
+    "width": 1102,
+    "height": 827,
+    "sha256": "fe6dbdd940fb353d7178458fd9f95cdf7ab578f416b24f43b5deaba138ad4f90"
+  },
+  {
+    "id": "menu-photo-2026-17",
+    "src": "/assets/menu-photo-2026-17.webp",
+    "source": "User-provided image: 2aobor5g9plyx7qadhk0drglr4hugsopv5ihshts49.jpg",
+    "width": 1280,
+    "height": 960,
+    "sha256": "230dad3a33904da620aea54d4ec7cf468b28a61df4cc21cda351722ba410e8f8"
+  },
+  {
+    "id": "menu-photo-2026-18",
+    "src": "/assets/menu-photo-2026-18.webp",
+    "source": "User-provided image: 2aobor5g9orrzcupwu9ufgexoat6iptvjqtevb3250.jpg",
+    "width": 1280,
+    "height": 960,
+    "sha256": "24cbd6fbb6e23a5a6452ca8a0f761fc8ce7cd6cdae7121370ac96784583e097a"
   }
 ]

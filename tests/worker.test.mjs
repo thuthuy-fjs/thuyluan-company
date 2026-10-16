@@ -5,7 +5,7 @@ const valid = {
   company: "Công ty thử nghiệm",
   name: "Nguyễn An",
   phone: "0965600481",
-  location: "Hà Nam",
+  location: "Ninh Bình",
   quantity: "500",
   email: "buyer@example.com",
 };

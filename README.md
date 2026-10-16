@@ -38,7 +38,7 @@ Với Workers Builds kết nối GitHub: **Build command** là `npm run build`, 
 - 22 mẫu suất ăn, tìm kiếm, lọc, sắp xếp, phân trang và trang chi tiết riêng.
 - Lưu/so sánh thực đơn trên trình duyệt; đưa các mẫu đã chọn sang yêu cầu báo giá.
 - Lọc ảnh, xem phóng lớn, điều khiển bằng phím mũi tên và Escape.
-- 9 bản scan chứng chỉ/chứng nhận từ website cũ, xem ảnh gốc và tải tài liệu.
+- 10 thẻ hồ sơ chứa 16 trang ảnh: đăng ký doanh nghiệp năm 2026, ba bộ ISO 22000 (mỗi bộ mở đủ 3 trang), chứng nhận ATTP và hồ sơ khác; xem ảnh rõ và tải từng trang.
 - Nút nổi hotline 0965 600 481 và Zalo trên máy tính, điện thoại.
 - Xem/tải tài liệu quy trình; hồ sơ giới thiệu có chức năng in thành PDF.
 - Gọi điện, Zalo, email, Google Maps; menu điện thoại và FAQ.
@@ -62,7 +62,7 @@ API kiểm tra nguồn gửi, loại nội dung, kích thước và dữ liệu 
 
 ## Ảnh và thông tin gốc
 
-Logo, thực đơn, ảnh vận hành và tài liệu được chuyển từ `suatancongnghiepthuyluan.com` theo yêu cầu. Ảnh WebP lưu tại `public/assets/`; nguồn từng ảnh ở `public/assets/source-manifest.json`. Không sao chép PHP hoặc plugin WordPress.
+Logo, thực đơn, ảnh vận hành và tài liệu ban đầu được chuyển từ `suatancongnghiepthuyluan.com`. Tám ảnh bổ sung và các giấy chứng nhận mới do người dùng cung cấp. Ảnh lưu tại `public/assets/`; nguồn từng ảnh ở `public/assets/source-manifest.json`. Không sao chép PHP hoặc plugin WordPress.
 
 Thông tin công ty, hotline, email, mã số thuế và địa chỉ được giữ theo website gốc. Nội dung hướng tới khách hàng doanh nghiệp, không thêm khách hàng, chứng nhận hoặc số liệu năng lực chưa xác nhận. Tài liệu quy trình không được gắn nhãn chứng nhận.
 

@@ -159,7 +159,7 @@ export default function Catalog() {
             Bỏ chọn
           </button>
           <a
-            className="button lime"
+            className="button gold"
             href={`/lien-he/?thuc-don=${encodeURIComponent(saved.map((x) => `Mẫu ${String(x).padStart(2, "0")}`).join(", "))}`}
           >
             Nhận đề xuất

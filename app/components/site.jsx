@@ -163,7 +163,7 @@ export function Footer() {
             Hợp tác bền lâu hơn.
           </h2>
         </div>
-        <ButtonLink href="/lien-he/" className="lime">
+        <ButtonLink href="/lien-he/" className="gold">
           Trao đổi nhu cầu của bạn
         </ButtonLink>
       </div>
@@ -179,7 +179,7 @@ export function Footer() {
           </p>
           <span className="footer-location">
             <span />
-            Hà Nam · Miền Bắc
+            Ninh Bình · Miền Bắc
           </span>
         </div>
         <div>
@@ -288,7 +288,7 @@ export function PhotoGallery({ preview = false }) {
   const [filter, setFilter] = useState("Tất cả");
   const [active, setActive] = useState(null);
   const chosen = preview
-    ? [gallery[13], gallery[16], gallery[6], gallery[11]]
+    ? [gallery[24], gallery[13], gallery[16], gallery[6]]
     : gallery;
   const filtered = chosen.filter(
     (x) => filter === "Tất cả" || x.category === filter,
@@ -454,7 +454,7 @@ export function Accordion({ items }) {
   );
 }
 
-export function MealCard({ meal, saved = false, onSave }) {
+export function MealCard({ meal, saved = false, onSave, loading = "lazy" }) {
   return (
     <article className="meal-card">
       <div className="meal-image">
@@ -462,7 +462,7 @@ export function MealCard({ meal, saved = false, onSave }) {
           <img
             src={meal.image}
             alt={`${meal.name} — hình ảnh thực tế Thúy Luân`}
-            loading="lazy"
+            loading={loading}
             width="960"
             height="720"
           />

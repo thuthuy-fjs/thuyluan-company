@@ -1,13 +1,14 @@
 import { Check } from "lucide-react";
 import { PageIntro, Eyebrow, ButtonLink } from "../components/site";
 import { process } from "../data";
+import ServiceDetailSlider from "../components/service-detail-slider";
 export const metadata = { title: "Giải pháp cung ứng suất ăn doanh nghiệp" };
 const services = [
   {
     id: "nha-may",
     n: "01",
     title: "Suất ăn nhà máy",
-    image: "/assets/gallery-17.webp",
+    group: "factory",
     description:
       "Một phương án suất ăn cần phù hợp với nhịp sản xuất. Thúy Luân trao đổi cùng doanh nghiệp về số lượng lao động, thời gian nghỉ giữa ca và điều kiện phục vụ để đề xuất cách phối hợp.",
     items: [
@@ -21,7 +22,7 @@ const services = [
     id: "van-phong",
     n: "02",
     title: "Suất ăn văn phòng",
-    image: "/assets/meal-16.webp",
+    group: "office",
     description:
       "Giờ nghỉ trưa là khoảng thời gian nạp lại năng lượng. Cùng Thúy Luân xây dựng thực đơn đa dạng, thuận tiện và phù hợp khẩu vị tập thể tại doanh nghiệp.",
     items: [
@@ -35,7 +36,7 @@ const services = [
     id: "hop-dong",
     n: "03",
     title: "Hợp tác cung ứng dài hạn",
-    image: "/assets/gallery-07.webp",
+    group: "contract",
     description:
       "Một mối quan hệ hợp tác tốt bắt đầu từ sự rõ ràng. Chúng tôi cùng doanh nghiệp làm rõ phạm vi phục vụ, quy trình giao nhận và tiêu chí đánh giá trước khi triển khai.",
     items: [
@@ -65,13 +66,7 @@ export default function ServicesPage() {
       <div className="wrap">
         {services.map((s) => (
           <section id={s.id} key={s.id} className="service-detail">
-            <img
-              className="service-detail-image"
-              src={s.image}
-              alt={s.title}
-              width="960"
-              height="720"
-            />
+            <ServiceDetailSlider group={s.group} title={s.title} />
             <div>
               <Eyebrow>GIẢI PHÁP {s.n}</Eyebrow>
               <h2>{s.title}</h2>

@@ -24,18 +24,19 @@ export default function Certifications() {
     document.addEventListener("keydown", navigate);
     return () => document.removeEventListener("keydown", navigate);
   }, [active]);
+  useEffect(() => {
+    if (active !== null)
+      document.querySelector(".certificate-modal")?.scrollTo(0, 0);
+  }, [active]);
   const selected = active !== null ? certificates[active] : null;
   return (
     <section id="certificates" className="certificates-section section wrap">
       <div className="section-heading">
         <div>
-          <Eyebrow>HỒ SƠ TỪ THÚY LUÂN</Eyebrow>
+          <Eyebrow>HỒ SƠ</Eyebrow>
           <h2>Chứng chỉ – Chứng nhận</h2>
         </div>
-        <p>
-          Hồ sơ doanh nghiệp, an toàn thực phẩm và đào tạo. Chọn tài liệu để xem
-          bản đầy đủ.
-        </p>
+        <p>Hồ sơ doanh nghiệp, ISO 22000, an toàn thực phẩm và đào tạo.</p>
       </div>
       <div className="certificate-grid">
         {certificates.map((certificate, index) => (
@@ -85,11 +86,35 @@ export default function Certifications() {
               CHỨNG CHỈ – CHỨNG NHẬN · {active + 1} / {certificates.length}
             </p>
             <h2>{selected.title}</h2>
-            <img
-              className="certificate-full"
-              src={selected.image}
-              alt={selected.title}
-            />
+            {selected.pages ? (
+              <div className="certificate-pages">
+                {selected.pages.map((page, pageIndex) => (
+                  <figure className="certificate-page" key={page.image}>
+                    <figcaption>
+                      <span>
+                        Trang {pageIndex + 1} / {selected.pages.length} ·{" "}
+                        {page.title}
+                      </span>
+                      <a href={page.image} download className="text-link">
+                        Tải trang {pageIndex + 1}
+                        <Download size={15} />
+                      </a>
+                    </figcaption>
+                    <img
+                      className="certificate-full"
+                      src={page.image}
+                      alt={`${selected.title} · trang ${pageIndex + 1}: ${page.title}`}
+                    />
+                  </figure>
+                ))}
+              </div>
+            ) : (
+              <img
+                className="certificate-full"
+                src={selected.image}
+                alt={selected.title}
+              />
+            )}
             <div className="certificate-modal-actions">
               <button
                 className="circle-button"
@@ -102,10 +127,16 @@ export default function Certifications() {
               >
                 <ChevronLeft size={20} />
               </button>
-              <a href={selected.image} download className="text-link">
-                Tải bản đầy đủ
-                <Download size={16} />
-              </a>
+              {selected.pages ? (
+                <span className="certificate-page-count">
+                  {selected.pages.length} trang tài liệu
+                </span>
+              ) : (
+                <a href={selected.image} download className="text-link">
+                  Tải bản đầy đủ
+                  <Download size={16} />
+                </a>
+              )}
               <button
                 className="circle-button"
                 aria-label="Chứng nhận tiếp theo"

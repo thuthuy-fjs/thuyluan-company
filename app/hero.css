@@ -1,9 +1,9 @@
-/* A contained introduction keeps the original 660 × 439 image sharp. */
+/* Give the square posters enough room for their text to remain legible. */
 .hero.hero-contained {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   align-items: center;
-  gap: 64px;
+  gap: 48px;
   width: 100%;
   max-width: 1280px;
   height: auto;
@@ -21,7 +21,7 @@
   width: fit-content;
   margin-bottom: 28px;
   padding: 8px 14px;
-  border: 1px solid #cad6c6;
+  border: 1px solid #d8c1a4;
   border-radius: 40px;
   font-size: 9px;
   letter-spacing: 0.12em;
@@ -36,7 +36,7 @@
   white-space: nowrap;
 }
 .hero-contained h1 > span {
-  color: #b28b4c;
+  color: #a76122;
 }
 .hero-contained .hero-copy-bottom {
   max-width: 560px;
@@ -63,47 +63,99 @@
 .hero-contained .hero-origin {
   display: block;
   margin-top: 27px;
-  color: #8b9587;
+  color: #78634f;
   font-size: 9px;
   letter-spacing: 0;
   white-space: normal;
 }
 .hero-contained .hero-visual {
   width: 100%;
-  max-width: 560px;
+  max-width: 620px;
   height: auto;
-  aspect-ratio: 660 / 439;
   overflow: visible;
   justify-self: end;
-  border-radius: 26px;
   margin: 0;
-  box-shadow: 0 20px 48px #203d3214;
+}
+.hero-slide-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 26px;
+  background: #fffaf3;
+  box-shadow: 0 20px 48px #34271914;
+}
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 420ms ease;
+}
+.hero-slide.is-active {
+  opacity: 1;
 }
 .hero-contained .hero-image {
-  position: relative;
+  position: absolute;
   display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
   object-position: center;
-  border-radius: inherit;
+  animation: none;
+}
+.hero-visual-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 14px;
 }
 .hero-quality-card {
-  position: absolute;
-  left: -28px;
-  bottom: -30px;
   width: 296px;
   padding: 20px 21px;
   background: #fff;
-  border: 1px solid #f2f3ed;
+  border: 1px solid #f3e6d5;
   border-radius: 17px;
-  box-shadow: 0 13px 25px #203d3224;
+  box-shadow: 0 13px 25px #34271924;
+}
+.hero-slide-dots {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.hero-slide-dots button {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.hero-slide-dots button::after {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #c9b9a5;
+  content: "";
+}
+.hero-slide-dots button.is-active::after {
+  background: #a76122;
+  box-shadow: 0 0 0 3px #a7612226;
+}
+.hero-slide-dots button:focus-visible {
+  outline: 2px solid #4a3120;
+  outline-offset: 4px;
 }
 .hero-quality-card > div {
   display: flex;
   align-items: center;
   gap: 11px;
-  color: #174b37;
+  color: #4a3120;
 }
 .hero-quality-card strong {
   font-size: 12px;
@@ -119,6 +171,7 @@
 }
 @media (max-width: 1100px) {
   .hero.hero-contained {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 40px;
     padding: 70px 32px 85px;
   }
@@ -132,7 +185,6 @@
     gap: 11px;
   }
   .hero-quality-card {
-    left: -16px;
     width: 270px;
     padding: 17px 18px;
   }
@@ -187,11 +239,12 @@
     margin-top: 23px;
   }
   .hero-contained .hero-visual {
+    margin: 0;
+  }
+  .hero-slide-frame {
     border-radius: 19px;
   }
   .hero-quality-card {
-    left: 14px;
-    bottom: -32px;
     width: min(280px, calc(100% - 28px));
     padding: 15px 17px;
     border-radius: 14px;

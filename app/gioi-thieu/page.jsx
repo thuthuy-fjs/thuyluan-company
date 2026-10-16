@@ -5,7 +5,7 @@ import {
   DocumentLibrary,
   PhotoGallery,
 } from "../components/site";
-import { company } from "../data";
+import { company, coreValues } from "../data";
 import Certifications from "../components/certifications";
 export const metadata = { title: "Về Thúy Luân" };
 export default function AboutPage() {
@@ -22,7 +22,7 @@ export default function AboutPage() {
         }
       >
         Từ năm 2021, Thúy Luân hoạt động trong lĩnh vực cung ứng thực phẩm và
-        suất ăn công nghiệp tại Hà Nam và khu vực miền Bắc.
+        suất ăn công nghiệp tại Ninh Bình và khu vực miền Bắc.
       </PageIntro>
       <section className="about-intro wrap">
         <img
@@ -63,6 +63,61 @@ export default function AboutPage() {
             </div>
           </div>
         </div>
+      </section>
+      <section className="core-values wrap" aria-labelledby="core-values-title">
+        <div className="core-values-heading">
+          <Eyebrow>GIÁ TRỊ CỐT LÕI</Eyebrow>
+          <h2 id="core-values-title">
+            Bốn giá trị
+            <br />
+            dẫn dắt Thúy Luân.
+          </h2>
+          <p>
+            Những nguyên tắc chúng tôi giữ trong từng bữa ăn, từng giao dịch và
+            từng mối quan hệ hợp tác.
+          </p>
+        </div>
+        <div className="core-values-board">
+          <ol className="core-values-grid">
+            {coreValues.map((value, index) => (
+              <li key={value.title} className="core-value">
+                <span className="core-value-number" aria-hidden="true">
+                  {index + 1}
+                </span>
+                <h3>{value.title}</h3>
+                <p>{value.text}</p>
+              </li>
+            ))}
+          </ol>
+          <div className="core-values-badge" aria-hidden="true">
+            <span>Giá trị</span>
+            <strong>Cốt lõi</strong>
+            <small>của Thúy Luân</small>
+          </div>
+        </div>
+      </section>
+      <section className="org-chart wrap" aria-labelledby="org-chart-title">
+        <div className="core-values-heading">
+          <Eyebrow>SƠ ĐỒ TỔ CHỨC</Eyebrow>
+          <h2 id="org-chart-title">
+            Bộ máy rõ ràng.
+            <br />
+            Phối hợp nhịp nhàng.
+          </h2>
+          <p>
+            Từ Tổng giám đốc đến các tổ nấu, sơ chế và phục vụ, mỗi bộ phận có
+            vai trò riêng để bữa ăn được chuẩn bị đúng quy trình.
+          </p>
+        </div>
+        <figure className="org-chart-figure">
+          <img
+            src="/assets/document-organization.png"
+            alt="Sơ đồ bộ máy công ty Thúy Luân"
+            width="1774"
+            height="2560"
+            loading="lazy"
+          />
+        </figure>
       </section>
       <Certifications />
       <section className="document-section wrap">

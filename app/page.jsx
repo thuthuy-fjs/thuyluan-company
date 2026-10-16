@@ -1,7 +1,10 @@
 import {
   ArrowUpRight,
   Check,
+  Handshake,
+  HeartHandshake,
   Leaf,
+  Scale,
   ShieldCheck,
   Truck,
   UtensilsCrossed,
@@ -9,13 +12,17 @@ import {
 import {
   Eyebrow,
   ButtonLink,
-  MealCard,
   PhotoGallery,
   Accordion,
   DocumentLibrary,
 } from "./components/site";
-import { meals, articles, process } from "./data";
+import { articles, coreValues, process } from "./data";
 import Certifications from "./components/certifications";
+import FeaturedMealsSlider from "./components/featured-meals-slider";
+import HeroSlider from "./components/hero-slider";
+import SolutionCards from "./components/solution-cards";
+
+const coreValueIcons = [HeartHandshake, ShieldCheck, Handshake, Scale];
 
 export default function Home() {
   return (
@@ -49,25 +56,7 @@ export default function Home() {
             </p>
           </div>
         </div>
-        <div className="hero-visual">
-          <img
-            className="hero-image"
-            src="/assets/hero-food.webp"
-            alt="Thực đơn đa dạng với cơm, rau và các món ăn được trình bày trên khay"
-            width="660"
-            height="439"
-            fetchPriority="high"
-          />
-          <div className="hero-quality-card">
-            <div>
-              <ShieldCheck size={23} />
-              <strong>Chất lượng là ưu tiên</strong>
-            </div>
-            <p>
-              Giải pháp được xây dựng theo nhu cầu thực tế của từng đối tác.
-            </p>
-          </div>
-        </div>
+        <HeroSlider />
       </section>
 
       <section id="intro" className="intro-strip wrap">
@@ -111,69 +100,26 @@ export default function Home() {
             phương án cung ứng phù hợp.
           </p>
         </div>
-        <div className="solution-grid">
-          {[
-            [
-              "01",
-              "Suất ăn nhà máy",
-              "Phối hợp theo ca sản xuất, số lượng lao động và điều kiện phục vụ thực tế.",
-              "/assets/gallery-17.webp",
-              "nha-may",
-            ],
-            [
-              "02",
-              "Suất ăn văn phòng",
-              "Thực đơn đa dạng cho giờ nghỉ trưa, phù hợp với khẩu vị và ngân sách tập thể.",
-              "/assets/meal-16.webp",
-              "van-phong",
-            ],
-            [
-              "03",
-              "Cung ứng theo hợp đồng",
-              "Làm rõ phương án, quy trình phối hợp và tiêu chí chất lượng để đồng hành dài hạn.",
-              "/assets/gallery-07.webp",
-              "hop-dong",
-            ],
-          ].map(([n, t, d, img, id]) => (
-            <a href={`/giai-phap/#${id}`} className="solution-card" key={n}>
-              <div className="solution-image">
-                <img
-                  src={img}
-                  alt={t}
-                  loading="lazy"
-                  width="960"
-                  height="720"
-                />
-                <span>{n} / GIẢI PHÁP</span>
-                <span className="solution-arrow">
-                  <ArrowUpRight size={24} />
-                </span>
-              </div>
-              <h3>{t}</h3>
-              <p>{d}</p>
-            </a>
-          ))}
-        </div>
+        <SolutionCards />
       </section>
 
       <section className="promise-section">
         <div className="promise-photo">
-          <img
-            src="/assets/partner-catering-room.jpeg"
-            alt="Không gian nhà ăn và các khay suất ăn được chuẩn bị tại Thúy Luân"
-            width="767"
-            height="1024"
-            loading="lazy"
-          />
-          <span>HÌNH ẢNH VẬN HÀNH THỰC TẾ · THÚY LUÂN</span>
-          <div className="promise-seal">
-            <Leaf size={25} />
-            <span>
-              TỪ TÂM
-              <br />
-              ĐẾN TỪNG SUẤT ĂN
-            </span>
-          </div>
+          <a
+            className="promise-infographic"
+            href="/assets/kitchen-process-thuy-luan.png"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Mở ảnh quy trình bếp ăn Thúy Luân ở kích thước đầy đủ"
+          >
+            <img
+              src="/assets/kitchen-process-thuy-luan.png"
+              alt="Quy trình bếp ăn Thúy Luân gồm tám bước, từ tiếp nhận nguyên liệu đến phục vụ khách hàng"
+              width="1536"
+              height="1024"
+              loading="lazy"
+            />
+          </a>
         </div>
         <div className="promise-copy">
           <Eyebrow light>GIÁ TRỊ CỦA MỘT ĐỐI TÁC</Eyebrow>
@@ -186,7 +132,7 @@ export default function Home() {
           </h2>
           <p>
             Được thành lập năm 2021, Thúy Luân hoạt động trong lĩnh vực cung ứng
-            thực phẩm và suất ăn công nghiệp tại Hà Nam và miền Bắc.
+            thực phẩm và suất ăn công nghiệp tại Ninh Bình và miền Bắc.
           </p>
           <div className="promise-points">
             {[
@@ -243,11 +189,7 @@ export default function Home() {
             </a>
           </div>
         </div>
-        <div className="featured-meals">
-          {[meals[3], meals[6], meals[14]].map((m) => (
-            <MealCard key={m.id} meal={m} />
-          ))}
-        </div>
+        <FeaturedMealsSlider />
         <div className="menu-note">
           <Leaf size={19} />
           <p>
@@ -265,7 +207,7 @@ export default function Home() {
         <div className="wrap">
           <div className="section-heading">
             <div>
-              <Eyebrow>HÀNH TRÌNH HỢP TÁC</Eyebrow>
+              <Eyebrow>GIÁ TRỊ & HÀNH TRÌNH HỢP TÁC</Eyebrow>
               <h2>
                 Rõ ràng từ bước đầu.
                 <br />
@@ -275,6 +217,28 @@ export default function Home() {
             <ButtonLink className="outline" href="/lien-he/">
               Bắt đầu trao đổi
             </ButtonLink>
+          </div>
+          <div className="values-band">
+            <div className="values-band-intro">
+              <span className="values-band-label">Giá trị cốt lõi</span>
+              <p>Nền tảng cho mọi bữa ăn và mọi mối hợp tác của Thúy Luân.</p>
+            </div>
+            <ul className="values-band-list">
+              {coreValues.map((value, index) => {
+                const Icon = coreValueIcons[index];
+                return (
+                  <li key={value.title}>
+                    <Icon size={22} strokeWidth={1.6} aria-hidden="true" />
+                    <h3>{value.title}</h3>
+                    <p>{value.text}</p>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+          <div className="process-subhead">
+            <span>Hành trình hợp tác</span>
+            <small>4 bước</small>
           </div>
           <div className="process-grid">
             {process.map(([n, t, d]) => (
@@ -394,7 +358,7 @@ export default function Home() {
           items={[
             [
               "Thúy Luân phục vụ ở khu vực nào?",
-              "Thúy Luân hoạt động tại Hà Nam và khu vực miền Bắc. Vui lòng cung cấp địa điểm, số lượng suất và ca làm việc để đội ngũ đánh giá phương án phục vụ cụ thể.",
+              "Thúy Luân hoạt động tại Ninh Bình và khu vực miền Bắc. Vui lòng cung cấp địa điểm, số lượng suất và ca làm việc để đội ngũ đánh giá phương án phục vụ cụ thể.",
             ],
             [
               "Có thể xây dựng thực đơn theo ngân sách không?",

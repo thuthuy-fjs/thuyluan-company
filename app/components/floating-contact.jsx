@@ -1,9 +1,28 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { Phone } from "lucide-react";
 import { company } from "../data";
 
 export default function FloatingContact() {
+  const [footerVisible, setFooterVisible] = useState(false);
+
+  useEffect(() => {
+    const footer = document.querySelector(".site-footer");
+    if (!footer) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setFooterVisible(entry.isIntersecting),
+    );
+    observer.observe(footer);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <nav className="floating-contact" aria-label="Liên hệ nhanh">
+    <nav
+      className={`floating-contact${footerVisible ? " is-hidden" : ""}`}
+      aria-label="Liên hệ nhanh"
+    >
       <a
         className="floating-phone"
         href={`tel:${company.phone}`}
@@ -12,7 +31,6 @@ export default function FloatingContact() {
         <span className="floating-phone-icon">
           <Phone size={20} fill="currentColor" />
         </span>
-        <span>{company.phoneDisplay}</span>
       </a>
       <a
         className="floating-zalo"

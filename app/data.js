@@ -4,12 +4,12 @@ export const company = {
   phone: "0965600481",
   phoneDisplay: "0965 600 481",
   email: "thuyluancompany@gmail.com",
-  address: "139 Tô Vĩnh Diện, Phường Thanh Châu, Thành phố Phủ Lý, Hà Nam",
+  address: "139 Tô Vĩnh Diện, TDP 12, Phường Phủ Lý, Tỉnh Ninh Bình, Việt Nam",
   taxId: "0700854039",
   zalo: "https://zalo.me/0965600481",
 };
 
-// Original names and photographs, preserved from the source website.
+// Preserve the existing menu names and use supplied photos where available.
 const originalNumbers = [
   21, 22, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 1, 2,
 ];
@@ -17,88 +17,193 @@ export const meals = originalNumbers.map((number, index) => ({
   id: number,
   slug: `suat-an-cong-nghiep-${String(number).padStart(2, "0")}`,
   name: `Suất ăn công nghiệp ${String(number).padStart(2, "0")}`,
-  image: `/assets/meal-${String(index + 1).padStart(2, "0")}.webp`,
+  image:
+    number <= 18
+      ? `/assets/menu-photo-2026-${String(number).padStart(2, "0")}.webp`
+      : `/assets/meal-${String(index + 1).padStart(2, "0")}.webp`,
   category: [5, 8, 15].includes(number) ? "Đổi vị" : "Khay cơm",
   description: [5, 8, 15].includes(number)
     ? "Một lựa chọn đổi vị cho thực đơn luân phiên của doanh nghiệp."
     : "Gợi ý khay cơm đa dạng cho bữa ăn hằng ngày tại doanh nghiệp.",
 }));
 
-export const gallery = Array.from({ length: 24 }, (_, i) => ({
-  image: `/assets/gallery-${String(i + 1).padStart(2, "0")}.webp`,
-  category:
-    i < 7 ? "Giao nhận" : i < 15 || i === 21 ? "Không gian bếp" : "Phục vụ",
-  title:
-    i < 7
-      ? "Phương tiện và hoạt động giao nhận"
-      : i < 15 || i === 21
-        ? "Khu vực bếp và chuẩn bị suất ăn"
-        : "Bữa ăn tại doanh nghiệp",
-}));
+export const gallery = [
+  ...Array.from({ length: 24 }, (_, i) => ({
+    image: `/assets/gallery-${String(i + 1).padStart(2, "0")}.webp`,
+    category:
+      i < 7 ? "Giao nhận" : i < 15 || i === 21 ? "Không gian bếp" : "Phục vụ",
+    title:
+      i < 7
+        ? "Phương tiện và hoạt động giao nhận"
+        : i < 15 || i === 21
+          ? "Khu vực bếp và chuẩn bị suất ăn"
+          : "Bữa ăn tại doanh nghiệp",
+  })),
+  {
+    image: "/assets/home-served-meal.jpg",
+    category: "Phục vụ",
+    title: "Bữa ăn được phục vụ tại bàn",
+  },
+];
 
-export const certificates = [
+export const homePosters = [
   {
-    title: "Giấy chứng nhận an toàn thực phẩm",
-    category: "An toàn thực phẩm",
+    id: "home-food-service-banner",
+    title: "Giới thiệu dịch vụ Thúy Luân",
+    category: "Giới thiệu",
+    width: 1280,
+    height: 404,
+    featured: true,
+  },
+  {
+    id: "home-services-poster",
+    title: "Suất ăn cho văn phòng, nhà máy và trường học",
+    category: "Dịch vụ",
+    width: 1280,
+    height: 1280,
+  },
+  {
+    id: "home-catering-poster",
+    title: "Ấn phẩm suất ăn công nghiệp",
+    category: "Dịch vụ",
+    width: 1280,
+    height: 640,
+  },
+  {
+    id: "home-menu-30-days",
+    title: "Ấn phẩm thực đơn 30 ngày",
+    category: "Thực đơn",
+    width: 1280,
+    height: 1280,
+  },
+  {
+    id: "home-food-menu-poster",
+    title: "Ấn phẩm thực đơn Thúy Luân",
+    category: "Thực đơn",
+    width: 1280,
+    height: 1280,
+  },
+  {
+    id: "home-core-values",
+    title: "Giá trị cốt lõi của Thúy Luân",
+    category: "Giá trị",
+    width: 1280,
+    height: 720,
+  },
+  {
+    id: "home-nutrition-guide",
+    title: "Thông tin dinh dưỡng và định lượng",
+    category: "Dinh dưỡng",
+    width: 905,
+    height: 1280,
+  },
+].map((poster) => ({ ...poster, image: `/assets/${poster.id}.jpg` }));
+
+const existingCertificates = [
+  {
+    id: "certificate-02",
+    title: "Giấy chứng nhận ATTP · địa điểm Phủ Lý (2023)",
+    category: "Hồ sơ lưu trữ",
     extension: "webp",
   },
   {
-    title: "Giấy chứng nhận an toàn thực phẩm",
-    category: "An toàn thực phẩm",
-    extension: "webp",
+    id: "certificate-09",
+    title: "Giấy chứng nhận ATTP · địa điểm Đồng Văn (2023)",
+    category: "Hồ sơ lưu trữ",
+    extension: "jpeg",
   },
   {
-    title: "Xác nhận tập huấn kiến thức ATTP",
+    id: "certificate-03",
+    title: "Xác nhận tập huấn kiến thức ATTP (2023)",
     category: "Đào tạo",
     extension: "webp",
   },
   {
-    title: "Đăng ký địa điểm kinh doanh",
-    category: "Hồ sơ doanh nghiệp",
+    id: "certificate-01",
+    title: "Giấy chứng nhận ATTP · địa điểm Phủ Lý (2021)",
+    category: "Hồ sơ lưu trữ",
     extension: "webp",
   },
   {
+    id: "certificate-04",
+    title: "Đăng ký địa điểm kinh doanh số 01 (2021)",
+    category: "Hồ sơ doanh nghiệp",
+    extension: "webp",
+  },
+].map((item) => ({
+  ...item,
+  image: `/assets/${item.id}.${item.extension}`,
+  thumbnail: `/assets/${item.id}-preview.webp`,
+}));
+
+const isoPage = (id, title) => ({
+  title,
+  image: `/assets/${id}.webp`,
+});
+
+const isoCertificates = [
+  {
+    id: "iso22000-head-office",
+    title: "ISO 22000:2018 · trụ sở chính",
+    pages: [
+      isoPage("iso22000-head-office-vi", "Giấy chứng nhận (tiếng Việt)"),
+      isoPage("iso22000-head-office-en", "Giấy chứng nhận (tiếng Anh)"),
+      isoPage("iso22000-head-office-decision", "Quyết định chứng nhận"),
+    ],
+  },
+  {
+    id: "iso22000-dong-van",
+    title: "ISO 22000:2018 · bếp Đồng Văn",
+    pages: [
+      isoPage("iso22000-dong-van-vi", "Giấy chứng nhận (tiếng Việt)"),
+      isoPage("iso22000-dong-van-en", "Giấy chứng nhận (tiếng Anh)"),
+      isoPage("iso22000-dong-van-decision", "Quyết định chứng nhận"),
+    ],
+  },
+  {
+    id: "iso22000-chau-son",
+    title: "ISO 22000:2018 · các điểm Châu Sơn",
+    pages: [
+      isoPage("iso22000-chau-son-vi", "Giấy chứng nhận (tiếng Việt)"),
+      isoPage("iso22000-chau-son-en", "Giấy chứng nhận (tiếng Anh)"),
+      isoPage("iso22000-chau-son-decision", "Quyết định chứng nhận"),
+    ],
+  },
+].map((certificate) => ({
+  ...certificate,
+  category: "ISO 22000 · 3 trang",
+  image: certificate.pages[0].image,
+  thumbnail: certificate.pages[0].image.replace(".webp", "-preview.webp"),
+}));
+
+const newCertificates = [
+  ...isoCertificates,
+  {
+    id: "food-safety-site-04-2026",
+    title: "Giấy chứng nhận ATTP · địa điểm Phủ Lý (2026)",
+    category: "An toàn thực phẩm",
+    image: "/assets/food-safety-site-04-2026.webp",
+    thumbnail: "/assets/food-safety-site-04-2026-preview.webp",
+  },
+];
+
+export const certificates = [
+  {
+    id: "business-registration-2026",
     title: "Giấy chứng nhận đăng ký doanh nghiệp",
     category: "Hồ sơ doanh nghiệp",
-    extension: "webp",
+    image: "/assets/business-registration-2026.webp",
+    thumbnail: "/assets/business-registration-2026-preview.webp",
   },
-  {
-    title: "Thông tin đăng ký doanh nghiệp",
-    category: "Hồ sơ doanh nghiệp",
-    extension: "webp",
-  },
-  {
-    title: "Đăng ký doanh nghiệp",
-    category: "Hồ sơ doanh nghiệp",
-    extension: "jpeg",
-  },
-  {
-    title: "Thông tin doanh nghiệp",
-    category: "Hồ sơ doanh nghiệp",
-    extension: "jpeg",
-  },
-  {
-    title: "An toàn thực phẩm",
-    category: "An toàn thực phẩm",
-    extension: "jpeg",
-  },
-].map((item, index) => ({
-  ...item,
-  id: `certificate-${String(index + 1).padStart(2, "0")}`,
-  image: `/assets/certificate-${String(index + 1).padStart(2, "0")}.${item.extension}`,
-  thumbnail: `/assets/certificate-${String(index + 1).padStart(2, "0")}-preview.webp`,
-}));
+  ...newCertificates,
+  ...existingCertificates,
+];
 
 export const documents = [
   {
     title: "Sơ đồ tổ chức",
     image: "/assets/document-organization.png",
     description: "Cơ cấu tổ chức và phối hợp vận hành.",
-  },
-  {
-    title: "Giá trị phục vụ",
-    image: "/assets/document-values.png",
-    description: "Định hướng chất lượng và giá trị cốt lõi.",
   },
   {
     title: "Quy trình chế biến",
@@ -182,6 +287,25 @@ export const articles = [
         "Thống nhất ngân sách và cấu phần của suất ăn giúp nhà cung cấp xây dựng đề xuất rõ ràng. Phản hồi định kỳ là cơ sở điều chỉnh món ăn và cải thiện trải nghiệm phục vụ.",
       ],
     ],
+  },
+];
+
+export const coreValues = [
+  {
+    title: "Tận tâm",
+    text: "Làm việc bằng sự tận tụy, nhiệt tình và tâm huyết.",
+  },
+  {
+    title: "Đạo đức",
+    text: "Liêm chính, trung thực trong ứng xử và trong tất cả các giao dịch.",
+  },
+  {
+    title: "Tôn trọng",
+    text: "Tôn trọng khách hàng, tôn trọng đối tác, tôn trọng người lao động.",
+  },
+  {
+    title: "Tuân thủ",
+    text: "Tuân thủ luật pháp, bộ quy tắc ứng xử, các quy chế, chính sách của Nhà nước.",
   },
 ];
 
