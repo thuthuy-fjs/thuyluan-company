@@ -650,6 +650,50 @@ p {
 .featured-meals-slider {
   display: grid;
 }
+.featured-meals-carousel {
+  position: relative;
+}
+.featured-meals-nav {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 64px;
+  color: #b7631a;
+  transform: translateY(-50%);
+  transition: color 0.2s;
+}
+.featured-meals-nav:hover {
+  color: #914b14;
+}
+.featured-meals-nav.is-prev {
+  left: -58px;
+}
+.featured-meals-nav.is-next {
+  right: -58px;
+}
+/* Not enough side gutter: sit the arrows on the card edges instead. */
+@media (max-width: 1160px) {
+  .featured-meals-nav {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #fff9f1ec;
+    box-shadow: 0 4px 16px #3427192b;
+  }
+  .featured-meals-nav svg {
+    width: 26px;
+    height: 26px;
+  }
+  .featured-meals-nav.is-prev {
+    left: -10px;
+  }
+  .featured-meals-nav.is-next {
+    right: -10px;
+  }
+}
 .featured-meals-slider > .featured-meals {
   grid-area: 1 / 1;
   transition: opacity 600ms ease;
