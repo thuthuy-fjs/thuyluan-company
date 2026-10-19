@@ -41,9 +41,10 @@ test("home has real assets, accessible navigation, and no horizontal overflow", 
   ).toHaveAttribute("href", "/giai-phap/");
   await expect(page.locator(".header-quote")).toHaveText("Nhận báo giá");
   await navigation
-    .getByRole("link", { name: "Quy trình", exact: true })
+    .getByRole("link", { name: "Hình ảnh thực tế", exact: true })
     .click();
-  await expect(page).toHaveURL(/#process$/);
+  await expect(page).toHaveURL(/\/hinh-anh\/$/);
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Nhìn thấy cách làm");
   await navigation.getByRole("link", { name: "FAQ", exact: true }).click();
   await expect(page).toHaveURL(/#faq$/);
   await page

@@ -51,7 +51,7 @@ export function Header() {
     ["Dịch vụ", "/giai-phap/"],
     ["Về chúng tôi", "/gioi-thieu/"],
     ["Thực đơn", "/thuc-don/"],
-    ["Quy trình", "/#process"],
+    ["Hình ảnh thực tế", "/hinh-anh/"],
     ["FAQ", "/#faq"],
   ];
   useEffect(() => {
@@ -127,10 +127,9 @@ export function Header() {
             ["Dịch vụ", "/giai-phap/"],
             ["Về chúng tôi", "/gioi-thieu/"],
             ["Thực đơn tham khảo", "/thuc-don/"],
-            ["Quy trình", "/#process"],
+            ["Hình ảnh thực tế", "/hinh-anh/"],
             ["FAQ", "/#faq"],
             ["Chứng chỉ – Chứng nhận", "/#certificates"],
-            ["Hình ảnh thực tế", "/hinh-anh/"],
             ["Góc chia sẻ", "/tin-tuc/"],
             ["Liên hệ & báo giá", "/lien-he/"],
           ].map(([title, href], i) => (
