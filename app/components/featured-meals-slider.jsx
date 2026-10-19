@@ -115,7 +115,7 @@ export default function FeaturedMealsSlider() {
         aria-label="Xem nhóm thực đơn trước"
         onClick={() => go(-1)}
       >
-        <ChevronLeft size={40} strokeWidth={1.25} />
+        <ChevronLeft size={23} strokeWidth={1.9} />
       </button>
       <button
         type="button"
@@ -123,7 +123,7 @@ export default function FeaturedMealsSlider() {
         aria-label="Xem nhóm thực đơn tiếp theo"
         onClick={() => go(1)}
       >
-        <ChevronRight size={40} strokeWidth={1.25} />
+        <ChevronRight size={23} strokeWidth={1.9} />
       </button>
     </div>
   );

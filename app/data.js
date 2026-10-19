@@ -1,3 +1,5 @@
+import uploadedGallery from "./gallery-uploaded.json";
+
 export const company = {
   name: "Thúy Luân",
   legalName: "Công ty TNHH Thương mại Dịch vụ Thúy Luân",
@@ -27,7 +29,7 @@ export const meals = originalNumbers.map((number, index) => ({
     : "Gợi ý khay cơm đa dạng cho bữa ăn hằng ngày tại doanh nghiệp.",
 }));
 
-export const gallery = [
+const originalGallery = [
   ...Array.from({ length: 24 }, (_, i) => ({
     image: `/assets/gallery-${String(i + 1).padStart(2, "0")}.webp`,
     category:
@@ -39,11 +41,31 @@ export const gallery = [
           ? "Khu vực bếp và chuẩn bị suất ăn"
           : "Bữa ăn tại doanh nghiệp",
   })),
-  {
-    image: "/assets/home-served-meal.jpg",
-    category: "Phục vụ",
-    title: "Bữa ăn được phục vụ tại bàn",
-  },
+];
+
+export const gallery = [...uploadedGallery, ...originalGallery];
+export const galleryCategories = [
+  { label: "Không gian bếp", slug: "khong-gian-bep" },
+  { label: "Giao nhận", slug: "giao-nhan" },
+  { label: "Phục vụ", slug: "phuc-vu" },
+  { label: "Hoạt động", slug: "hoat-dong" },
+];
+const galleryShowcaseOrder = ["phuc-vu", "khong-gian-bep", "hoat-dong", "giao-nhan"];
+export const galleryShowcase = galleryShowcaseOrder.map((slug) => {
+  const category = galleryCategories.find((item) => item.slug === slug);
+  const photos = gallery.filter((photo) => photo.category === category.label);
+  return {
+    ...category,
+    photos: Array.from({ length: 5 }, (_, index) =>
+      photos[Math.round((index * (photos.length - 1)) / 4)],
+    ),
+  };
+});
+export const galleryPreview = [
+  originalGallery[24],
+  originalGallery[13],
+  originalGallery[16],
+  originalGallery[6],
 ];
 
 export const homePosters = [
@@ -208,11 +230,12 @@ export const documents = [
   {
     title: "Quy trình chế biến",
     image: "/assets/document-process.png",
-    description: "Các bước tổ chức chế biến và phục vụ.",
+    description: "Xem 5 bước chế biến và cách thực hiện từng bước.",
+    href: "/gioi-thieu/#quy-trinh-che-bien",
   },
   {
     title: "Thiết lập bếp ăn",
-    image: "/assets/document-setup.png",
+    image: "/assets/kitchen-layout-process.png",
     description: "Phương án tổ chức không gian bếp.",
   },
 ];

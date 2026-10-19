@@ -5,7 +5,6 @@ import {
   ArrowUpRight,
   ChevronLeft,
   ChevronRight,
-  Download,
   Plus,
 } from "lucide-react";
 import { certificates } from "../data";
@@ -68,7 +67,7 @@ export default function Certifications() {
         ))}
       </div>
       <div className="certificates-footnote">
-        <span>Nhấn vào ảnh để xem rõ nội dung và tải tài liệu.</span>
+        <span>Nhấn vào ảnh để xem rõ nội dung.</span>
         <a className="text-link" href="/lien-he/">
           Trao đổi hồ sơ hợp tác
           <ArrowUpRight size={16} />
@@ -95,10 +94,6 @@ export default function Certifications() {
                         Trang {pageIndex + 1} / {selected.pages.length} ·{" "}
                         {page.title}
                       </span>
-                      <a href={page.image} download className="text-link">
-                        Tải trang {pageIndex + 1}
-                        <Download size={15} />
-                      </a>
                     </figcaption>
                     <img
                       className="certificate-full"
@@ -127,16 +122,9 @@ export default function Certifications() {
               >
                 <ChevronLeft size={20} />
               </button>
-              {selected.pages ? (
-                <span className="certificate-page-count">
-                  {selected.pages.length} trang tài liệu
-                </span>
-              ) : (
-                <a href={selected.image} download className="text-link">
-                  Tải bản đầy đủ
-                  <Download size={16} />
-                </a>
-              )}
+              <span className="certificate-page-count">
+                {selected.pages?.length ?? 1} trang tài liệu
+              </span>
               <button
                 className="circle-button"
                 aria-label="Chứng nhận tiếp theo"

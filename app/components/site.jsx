@@ -14,7 +14,6 @@ import {
   Plus,
   Minus,
   Check,
-  Download,
   ChevronLeft,
   ChevronRight,
   Copy,
@@ -24,7 +23,7 @@ import {
   Utensils,
   Truck,
 } from "lucide-react";
-import { company, meals, gallery, documents } from "../data";
+import { company, meals, gallery, galleryCategories, galleryPreview, documents } from "../data";
 
 export function Eyebrow({ children, light = false }) {
   return (
@@ -287,9 +286,13 @@ export function Modal({ open, onClose, children, label, className = "" }) {
 export function PhotoGallery({ preview = false }) {
   const [filter, setFilter] = useState("Tất cả");
   const [active, setActive] = useState(null);
-  const chosen = preview
-    ? [gallery[24], gallery[13], gallery[16], gallery[6]]
-    : gallery;
+  useEffect(() => {
+    if (preview) return;
+    const slug = new URLSearchParams(window.location.search).get("loai");
+    const category = galleryCategories.find((item) => item.slug === slug);
+    if (category) setFilter(category.label);
+  }, [preview]);
+  const chosen = preview ? galleryPreview : gallery;
   const filtered = chosen.filter(
     (x) => filter === "Tất cả" || x.category === filter,
   );
@@ -307,10 +310,11 @@ export function PhotoGallery({ preview = false }) {
     <>
       {!preview && (
         <div className="filter-tabs">
-          {["Tất cả", "Không gian bếp", "Giao nhận", "Phục vụ"].map((x) => (
+          {["Tất cả", ...galleryCategories.map((item) => item.label)].map((x) => (
             <button
               key={x}
               className={filter === x ? "active" : ""}
+              aria-pressed={filter === x}
               onClick={() => {
                 setFilter(x);
                 setActive(null);
@@ -332,8 +336,8 @@ export function PhotoGallery({ preview = false }) {
             <img
               src={p.image}
               alt={p.title}
-              width="960"
-              height="720"
+              width={p.width ?? 960}
+              height={p.height ?? 720}
               loading="lazy"
             />
             <span>
@@ -395,14 +399,7 @@ export function DocumentLibrary() {
     <>
       <div className="document-list">
         {documents.map((d, i) => (
-          <button key={d.image} onClick={() => setActive(i)}>
-            <span className="document-number">0{i + 1}</span>
-            <span>
-              <strong>{d.title}</strong>
-              <small>{d.description}</small>
-            </span>
-            <ArrowUpRight size={21} />
-          </button>
+          <DocumentItem key={d.image} document={d} number={i + 1} onOpen={() => setActive(i)} />
         ))}
       </div>
       <Modal
@@ -415,14 +412,28 @@ export function DocumentLibrary() {
           <>
             <h2>{documents[active].title}</h2>
             <img src={documents[active].image} alt={documents[active].title} />
-            <a href={documents[active].image} download className="text-link">
-              Tải tài liệu
-              <Download size={16} />
-            </a>
           </>
         )}
       </Modal>
     </>
+  );
+}
+
+function DocumentItem({ document, number, onOpen }) {
+  const Tag = document.href ? "a" : "button";
+  return (
+    <Tag
+      href={document.href}
+      type={document.href ? undefined : "button"}
+      onClick={document.href ? undefined : onOpen}
+    >
+      <span className="document-number">0{number}</span>
+      <span>
+        <strong>{document.title}</strong>
+        <small>{document.description}</small>
+      </span>
+      <ArrowUpRight size={21} />
+    </Tag>
   );
 }
 

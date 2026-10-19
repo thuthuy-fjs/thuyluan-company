@@ -12,10 +12,10 @@ import {
 import {
   Eyebrow,
   ButtonLink,
-  PhotoGallery,
   Accordion,
   DocumentLibrary,
 } from "./components/site";
+import GalleryCategoryShowcase from "./components/gallery-category-showcase";
 import { articles, coreValues, process } from "./data";
 import Certifications from "./components/certifications";
 import FeaturedMealsSlider from "./components/featured-meals-slider";
@@ -270,7 +270,7 @@ export default function Home() {
             <ArrowUpRight size={18} />
           </a>
         </div>
-        <PhotoGallery preview />
+        <GalleryCategoryShowcase />
       </section>
 
       <Certifications />

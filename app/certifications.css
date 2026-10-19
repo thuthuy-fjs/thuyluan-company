@@ -116,10 +116,6 @@
   color: var(--muted);
   font-size: 12px;
 }
-.certificate-page figcaption .text-link {
-  white-space: nowrap;
-  font-size: 12px;
-}
 .certificate-page .certificate-full {
   display: block;
   height: auto;

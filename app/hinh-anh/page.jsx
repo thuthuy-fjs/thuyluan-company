@@ -13,8 +13,8 @@ export default function GalleryPage() {
           </>
         }
       >
-        Từ không gian bếp đến hoạt động giao nhận và phục vụ. Những hình ảnh
-        được chuyển từ thư viện của Thúy Luân.
+        Từ không gian bếp, hoạt động giao nhận và phục vụ đến những sự kiện của
+        công ty. Khám phá hình ảnh thực tế từ Thúy Luân.
       </PageIntro>
       <section className="wrap gallery-page">
         <PhotoGallery />

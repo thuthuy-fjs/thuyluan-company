@@ -659,33 +659,37 @@ p {
   z-index: 2;
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 64px;
-  color: #b7631a;
+  width: 52px;
+  height: 52px;
+  border: 1px solid #d7bc9b;
+  border-radius: 50%;
+  background: var(--paper);
+  box-shadow: 0 5px 18px rgb(52 39 25 / 13%);
+  color: #914b14;
   transform: translateY(-50%);
-  transition: color 0.2s;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 .featured-meals-nav:hover {
-  color: #914b14;
+  background: #914b14;
+  box-shadow: 0 8px 22px rgb(52 39 25 / 20%);
+  color: var(--paper);
+  transform: translateY(-50%) scale(1.05);
+}
+.featured-meals-nav:focus-visible {
+  outline: 2px solid #914b14;
+  outline-offset: 3px;
 }
 .featured-meals-nav.is-prev {
-  left: -58px;
+  left: -64px;
 }
 .featured-meals-nav.is-next {
-  right: -58px;
+  right: -64px;
 }
-/* Not enough side gutter: sit the arrows on the card edges instead. */
+/* On narrow layouts, keep the controls inside the section width. */
 @media (max-width: 1160px) {
   .featured-meals-nav {
     width: 44px;
     height: 44px;
-    border-radius: 50%;
-    background: #fff9f1ec;
-    box-shadow: 0 4px 16px #3427192b;
-  }
-  .featured-meals-nav svg {
-    width: 26px;
-    height: 26px;
   }
   .featured-meals-nav.is-prev {
     left: -10px;
@@ -1080,6 +1084,18 @@ p {
 .photo-grid.preview .photo-tile {
   aspect-ratio: auto;
 }
+.gallery-category-showcase .photo-tile > .gallery-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease, transform 0.5s ease;
+}
+.gallery-category-showcase .photo-tile > .gallery-slide.is-active {
+  opacity: 1;
+}
+.gallery-category-showcase .photo-tile:hover > .gallery-slide:not(.is-active) {
+  transform: none;
+}
 .photo-tile > img {
   width: 100%;
   height: 100%;
@@ -1133,7 +1149,7 @@ p {
 .document-list {
   border-top: 1px solid var(--line);
 }
-.document-list > button {
+.document-list > :is(button, a) {
   display: flex;
   width: 100%;
   align-items: center;
@@ -1142,7 +1158,7 @@ p {
   border-bottom: 1px solid var(--line);
   text-align: left;
 }
-.document-list > button:hover {
+.document-list > :is(button, a):hover {
   color: #985019;
 }
 .document-list strong {
@@ -1161,7 +1177,7 @@ p {
   font-size: 9px;
   color: #78634f;
 }
-.document-list > button > svg {
+.document-list > :is(button, a) > svg {
   margin-left: auto;
   flex-shrink: 0;
 }
@@ -1584,11 +1600,24 @@ p {
   margin-bottom: 85px;
   align-items: center;
 }
-.about-intro > img {
+.about-intro-visual {
+  position: relative;
   width: 100%;
   height: 500px;
-  object-fit: cover;
+  overflow: hidden;
   border-radius: 16px;
+}
+.about-intro-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.about-intro-slide.is-active {
+  opacity: 1;
 }
 .about-intro h2 {
   font-size: 36px;
@@ -1631,7 +1660,7 @@ p {
   align-items: center;
   margin-bottom: 85px;
 }
-/* The chart PNG is transparent and drawn for a white page. */
+/* Keep the organization chart on a clear, readable surface. */
 .org-chart-figure {
   margin: 0;
   justify-self: center;
@@ -1645,6 +1674,266 @@ p {
 }
 .org-chart-figure img {
   width: 100%;
+}
+.kitchen-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 60px;
+  align-items: center;
+  margin-bottom: 85px;
+}
+.kitchen-layout-figure {
+  order: -1;
+  width: 100%;
+  max-width: 600px;
+  justify-self: center;
+  margin: 0;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: #fff;
+}
+.kitchen-layout-figure img {
+  width: 100%;
+}
+.processing-section {
+  margin-bottom: 100px;
+  scroll-margin-top: 110px;
+}
+.processing-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 44px;
+}
+.processing-heading .eyebrow {
+  margin-bottom: 16px;
+}
+.processing-heading p {
+  max-width: 360px;
+  font-size: 13px;
+  line-height: 1.9;
+}
+.processing-group + .processing-group {
+  margin-top: 30px;
+}
+.processing-zone {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 15px;
+  color: #88400e;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.processing-zone::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #dfb888;
+}
+.processing-zone span {
+  display: inline-block;
+  padding: 7px 22px;
+  background: #f3d8b7;
+  border-radius: 100px;
+}
+.processing-list {
+  display: grid;
+  gap: 16px;
+}
+.processing-step {
+  overflow: hidden;
+  border: 1px solid #e8caa8;
+  border-radius: 20px;
+  background: var(--paper);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.processing-step[open] {
+  border-color: #d5945c;
+  box-shadow: 0 12px 36px rgb(91 45 18 / 8%);
+}
+.processing-step summary {
+  display: grid;
+  grid-template-columns: minmax(250px, 38%) 1fr;
+  min-height: 218px;
+  list-style: none;
+  cursor: pointer;
+}
+.processing-step summary::-webkit-details-marker {
+  display: none;
+}
+.processing-step summary:focus-visible {
+  outline: 3px solid #b7631a;
+  outline-offset: -5px;
+}
+.processing-step-photo {
+  position: relative;
+  display: block;
+  min-height: 218px;
+  overflow: hidden;
+}
+.processing-step-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+.processing-step summary:hover .processing-step-photo img {
+  transform: scale(1.035);
+}
+.processing-step-number {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border: 3px solid var(--paper);
+  border-radius: 50%;
+  background: #a44b16;
+  color: white;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+  box-shadow: 0 2px 12px rgb(0 0 0 / 16%);
+}
+.processing-step-overview {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 25px 36px;
+}
+.processing-step-title {
+  color: #5a2810;
+  font-size: clamp(22px, 2.2vw, 30px);
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+}
+.processing-step-highlights {
+  display: grid;
+  gap: 5px;
+  margin: 13px 0 17px;
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.55;
+}
+.processing-step-highlights span::before {
+  content: "•";
+  margin-right: 9px;
+  color: #b55d21;
+}
+.processing-step-prompt {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #9a4813;
+  font-size: 12px;
+  font-weight: 700;
+}
+.processing-prompt-close,
+.processing-step[open] .processing-prompt-open {
+  display: none;
+}
+.processing-step[open] .processing-prompt-close {
+  display: inline;
+}
+.processing-step[open] .processing-step-prompt svg {
+  transform: rotate(180deg);
+}
+.processing-step-detail {
+  padding: 28px 36px 34px;
+  border-top: 1px solid #ecd7bd;
+  background: #fffaf4;
+}
+.processing-step-detail h4 {
+  margin: 0 0 12px;
+  color: #7a390f;
+  font-size: 14px;
+  font-weight: 700;
+}
+.processing-step-detail ol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 50px;
+  row-gap: 10px;
+  margin: 0;
+  padding-left: 22px;
+  font-size: 13px;
+  line-height: 1.75;
+}
+.processing-step-detail li::marker {
+  color: #a44b16;
+  font-weight: 700;
+}
+.processing-reminder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px 0;
+  margin-top: 22px;
+  padding: 14px 24px;
+  border-radius: 100px;
+  background: #8f451a;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+}
+.processing-reminder span + span::before {
+  content: "✦";
+  margin: 0 22px;
+  color: #f4c391;
+}
+@media (max-width: 700px) {
+  .processing-section {
+    margin-bottom: 70px;
+  }
+  .processing-heading {
+    display: block;
+    margin-bottom: 34px;
+  }
+  .processing-heading p {
+    margin-top: 16px;
+  }
+  .processing-step summary {
+    grid-template-columns: 1fr;
+  }
+  .processing-step-photo {
+    min-height: 190px;
+  }
+  .processing-step-overview {
+    padding: 23px 24px;
+  }
+  .processing-step-title {
+    font-size: 23px;
+  }
+  .processing-step-highlights {
+    font-size: 13px;
+  }
+  .processing-step-detail {
+    padding: 23px 25px 28px;
+  }
+  .processing-step-detail ol {
+    grid-template-columns: 1fr;
+  }
+  .processing-reminder {
+    border-radius: 18px;
+    font-size: 11px;
+  }
+  .processing-reminder span + span::before {
+    margin: 0 10px;
+  }
 }
 .core-values-heading h2 {
   font-size: 36px;
@@ -1950,6 +2239,7 @@ p {
 .form-grid select {
   display: block;
   width: 100%;
+  margin-top: 8px;
   border: 0;
   border-bottom: 1px solid #cebdA9;
   background: transparent;
@@ -1957,7 +2247,7 @@ p {
   border-radius: 0;
   padding: 11px 0;
   font-size: 10px;
-  outline-offset: 5px;
+  outline-offset: 2px;
   outline-color: #a65e22;
   resize: vertical;
 }
@@ -2221,9 +2511,6 @@ p {
   object-fit: contain;
   width: 100%;
 }
-.document-modal .text-link {
-  margin-top: 25px;
-}
 .quote-modal h2 {
   font-size: 32px;
   margin-bottom: 17px;
@@ -2377,10 +2664,12 @@ p {
 }
 @media (max-width: 980px) {
   .core-values,
-  .org-chart {
+  .org-chart,
+  .kitchen-layout {
     grid-template-columns: 1fr;
   }
-  .org-chart-figure {
+  .org-chart-figure,
+  .kitchen-layout-figure {
     order: 0;
   }
   .values-band {
@@ -2532,7 +2821,7 @@ p {
   .document-section {
     gap: 40px;
   }
-  .document-list > button {
+  .document-list > :is(button, a) {
     gap: 15px;
   }
   .document-list strong {
@@ -2589,7 +2878,7 @@ p {
   .about-intro {
     gap: 35px;
   }
-  .about-intro > img {
+  .about-intro-visual {
     height: 450px;
   }
   .about-intro h2 {
@@ -3252,7 +3541,7 @@ p {
     gap: 30px;
     margin-bottom: 55px;
   }
-  .about-intro > img {
+  .about-intro-visual {
     height: 350px;
   }
   .about-intro h2 {
@@ -3271,11 +3560,13 @@ p {
     gap: 15px;
   }
   .core-values,
-  .org-chart {
+  .org-chart,
+  .kitchen-layout {
     gap: 30px;
     margin-bottom: 55px;
   }
-  .org-chart-figure {
+  .org-chart-figure,
+  .kitchen-layout-figure {
     padding: 10px;
     border-radius: 15px;
   }

@@ -113,17 +113,151 @@ test("gallery filters photos and supports keyboard lightbox controls", async ({
   page,
 }) => {
   await page.goto("/hinh-anh/");
-  await expect(page.locator(".photo-tile")).toHaveCount(25);
+  await expect(page.locator(".photo-tile")).toHaveCount(87);
+  await expect(page.locator('.photo-tile img[src="/assets/home-served-meal.jpg"]')).toHaveCount(0);
+  await page.getByRole("button", { name: "Hoạt động", exact: true }).click();
+  await expect(page.locator(".photo-tile")).toHaveCount(12);
+  await expect(page.locator(".photo-tile").first()).toHaveAttribute(
+    "aria-label",
+    /Gala Dinner Thúy Luân 2026/,
+  );
   await page
     .getByRole("button", { name: "Không gian bếp", exact: true })
     .click();
-  await expect(page.locator(".photo-tile")).toHaveCount(9);
+  await expect(page.locator(".photo-tile")).toHaveCount(42);
   await page.locator(".photo-tile").first().click();
   await expect(page.getByRole("dialog")).toBeVisible();
   await page.keyboard.press("ArrowRight");
-  await expect(page.locator(".lightbox-controls small")).toHaveText("2 / 9");
+  await expect(page.locator(".lightbox-controls small")).toHaveText("2 / 42");
   await page.keyboard.press("Escape");
   await expect(page.getByRole("dialog")).not.toBeVisible();
+});
+
+test("home gallery folders rotate five photos every three seconds and open their categories", async ({
+  page,
+}) => {
+  await page.clock.install();
+  await page.goto("/");
+  const folders = page.locator(".gallery-category-showcase .photo-tile");
+  await expect(folders).toHaveCount(4);
+  const folderList = await folders.all();
+  const categorySlugs = ["phuc-vu", "khong-gian-bep", "hoat-dong", "giao-nhan"];
+  for (const [index, folder] of folderList.entries()) {
+    await expect(folder.locator("img")).toHaveCount(5);
+    await expect(folder).toHaveAttribute("href", `/hinh-anh/?loai=${categorySlugs[index]}`);
+  }
+  const firstImages = await Promise.all(
+    folderList.map((folder) => folder.locator("img.is-active").getAttribute("src")),
+  );
+  await page.clock.runFor(3000);
+  for (const [index, folder] of folderList.entries()) {
+    await expect(folder.locator("img.is-active")).not.toHaveAttribute("src", firstImages[index]);
+  }
+
+  await page.getByRole("link", { name: "Xem thư viện Hoạt động" }).click();
+  await expect(page).toHaveURL(/\/hinh-anh\/\?loai=hoat-dong$/);
+  await expect(page.getByRole("button", { name: "Hoạt động", exact: true })).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+  await expect(page.locator(".gallery-page .photo-tile")).toHaveCount(12);
+});
+
+test("about introduction rotates five company photos every three seconds", async ({
+  page,
+}) => {
+  await page.clock.install();
+  await page.goto("/gioi-thieu/");
+  const slider = page.locator(".about-intro-visual");
+  await expect(slider.locator("img")).toHaveCount(5);
+  const active = slider.locator("img.is-active");
+  await expect(active).toHaveAttribute("src", "/assets/gallery-17.webp");
+  await page.clock.runFor(3000);
+  await expect(active).toHaveAttribute("src", "/assets/gallery-bep-07.webp");
+});
+
+test("about activities use the same rotating photo folders as home", async ({
+  page,
+}) => {
+  await page.clock.install();
+  await page.goto("/gioi-thieu/");
+  await expect(page.locator(".document-section")).toHaveCount(0);
+  const folders = page.locator(".related-section .gallery-category-showcase .photo-tile");
+  await expect(folders).toHaveCount(4);
+  const slugs = ["phuc-vu", "khong-gian-bep", "hoat-dong", "giao-nhan"];
+  for (const [index, folder] of (await folders.all()).entries()) {
+    await expect(folder.locator("img")).toHaveCount(5);
+    await expect(folder).toHaveAttribute("href", `/hinh-anh/?loai=${slugs[index]}`);
+  }
+  const firstImage = await folders.first().locator("img.is-active").getAttribute("src");
+  await page.clock.runFor(3000);
+  await expect(folders.first().locator("img.is-active")).not.toHaveAttribute("src", firstImage);
+  await page.getByRole("link", { name: "Xem thư viện Hoạt động" }).click();
+  await expect(page).toHaveURL(/\/hinh-anh\/\?loai=hoat-dong$/);
+});
+
+test("about page shows five processing steps with expandable instructions", async ({
+  page,
+}) => {
+  await page.goto("/gioi-thieu/");
+  const kitchenLayout = page.locator(".org-chart + .core-values + .kitchen-layout");
+  await expect(kitchenLayout).toHaveCount(1);
+  await expect(kitchenLayout.getByRole("heading", { name: "Phương án tổ chức không gian bếp." })).toBeVisible();
+  await expect(kitchenLayout.getByRole("link", { name: /Xem ảnh đầy đủ/ })).toHaveCount(0);
+  const layoutImage = kitchenLayout.locator("img");
+  await layoutImage.scrollIntoViewIfNeeded();
+  await layoutImage.evaluate((image) => image.decode());
+  expect(await layoutImage.evaluate((image) => [image.naturalWidth, image.naturalHeight])).toEqual([1024, 1536]);
+  const imageBox = await kitchenLayout.locator(".kitchen-layout-figure").boundingBox();
+  const headingBox = await kitchenLayout.locator(".core-values-heading").boundingBox();
+  expect(imageBox.x + imageBox.width).toBeLessThan(headingBox.x);
+  const section = page.locator(".kitchen-layout + .processing-section");
+  await expect(section).toHaveCount(1);
+  const organizationImage = page.locator(".org-chart-figure img");
+  await expect(organizationImage).toHaveAttribute("src", "/assets/document-organization.png");
+  await organizationImage.evaluate((image) => image.decode());
+  expect(await organizationImage.evaluate((image) => [image.naturalWidth, image.naturalHeight])).toEqual([1122, 1402]);
+  await expect(section.getByRole("heading", { name: "Từ nguyên liệu đến món ăn." })).toBeVisible();
+  await expect(section.locator(".processing-zone")).toHaveText(["Khu sống", "Khu chín"]);
+  const steps = section.locator(".processing-step");
+  await expect(steps).toHaveCount(5);
+  for (const [index, title] of [
+    "Nhận nguyên liệu",
+    "Rã đông an toàn",
+    "Sơ chế riêng từng loại",
+    "Nấu và chiên",
+    "Kiểm soát ra đồ chín",
+  ].entries()) {
+    const step = steps.nth(index);
+    await expect(step.locator("summary")).toContainText(title);
+    await step.locator("summary").click();
+    await expect(step).toHaveAttribute("open", "");
+    await expect(step.getByRole("heading", { name: "Cách thực hiện" })).toBeVisible();
+    await expect(step.locator(".processing-step-detail li")).toHaveCount(4);
+  }
+  await steps.first().locator("summary").click();
+  await expect(steps.first()).not.toHaveAttribute("open", "");
+});
+
+test("home processing document opens the interactive five-step section", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page.locator(".document-section .document-list").getByRole("button", {
+    name: /Sơ đồ tổ chức/,
+  }).click();
+  await expect(page.getByRole("dialog").locator("a[download]")).toHaveCount(0);
+  await page.keyboard.press("Escape");
+  const link = page.locator(".document-section .document-list").getByRole("link", {
+    name: /Quy trình chế biến/,
+  });
+  await expect(link).toHaveAttribute("href", "/gioi-thieu/#quy-trinh-che-bien");
+  await link.click();
+  await expect(page).toHaveURL(/\/gioi-thieu\/#quy-trinh-che-bien$/);
+  const section = page.locator("#quy-trinh-che-bien");
+  await expect(section).toBeInViewport();
+  await section.locator(".processing-step summary").first().click();
+  await expect(section.locator(".processing-step").first()).toHaveAttribute("open", "");
 });
 
 test("home menu cycles through sorted groups of six or three every five seconds", async ({
@@ -131,9 +265,6 @@ test("home menu cycles through sorted groups of six or three every five seconds"
 }) => {
   await page.clock.install();
   await page.goto("/");
-  await expect(
-    page.locator(".gallery-section .photo-tile").first().locator("img"),
-  ).toHaveAttribute("src", "/assets/home-served-meal.jpg");
   const grid = page.locator(
     ".menu-section .featured-meals[aria-hidden='false']",
   );
@@ -154,7 +285,11 @@ test("home menu cycles through sorted groups of six or three every five seconds"
   await expect(grid.locator(".meal-card h3")).toHaveText(
     names([7, 8, 9, 10, 11, 12]),
   );
-  await page.clock.runFor(12000);
+  await page.clock.runFor(6000);
+  await expect(grid.locator(".meal-card h3")).toHaveText(
+    names([13, 14, 15, 16, 17, 18]),
+  );
+  await page.clock.runFor(6000);
   await expect(grid.locator(".meal-card h3")).toHaveText(
     names([19, 20, 21, 22, 1, 2]),
   );
@@ -308,6 +443,9 @@ test("ISO certificates show one cover per document and all three pages when open
     ).split(" ").length,
   ).toBe(5);
   await expectAlignedCaptions(5);
+  await cards.first().click();
+  await expect(page.getByRole("dialog").locator("a[download]")).toHaveCount(0);
+  await page.keyboard.press("Escape");
   for (const [index, id] of [
     [1, "head-office"],
     [2, "dong-van"],
@@ -325,9 +463,7 @@ test("ISO certificates show one cover per document and all three pages when open
       "src",
       `/assets/iso22000-${id}-decision.webp`,
     );
-    await expect(dialog.getByRole("link", { name: /Tải trang/ })).toHaveCount(
-      3,
-    );
+    await expect(dialog.locator("a[download]")).toHaveCount(0);
     await dialog.locator(".certificate-page").last().scrollIntoViewIfNeeded();
     expect(
       await dialog.evaluate((element) => element.scrollTop),
