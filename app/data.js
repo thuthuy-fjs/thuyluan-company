@@ -23,10 +23,7 @@ export const meals = originalNumbers.map((number, index) => ({
     number <= 18
       ? `/assets/menu-photo-2026-${String(number).padStart(2, "0")}.webp`
       : `/assets/meal-${String(index + 1).padStart(2, "0")}.webp`,
-  category: [5, 8, 15].includes(number) ? "Đổi vị" : "Khay cơm",
-  description: [5, 8, 15].includes(number)
-    ? "Một lựa chọn đổi vị cho thực đơn luân phiên của doanh nghiệp."
-    : "Gợi ý khay cơm đa dạng cho bữa ăn hằng ngày tại doanh nghiệp.",
+  description: "Gợi ý suất ăn cho thực đơn luân phiên của doanh nghiệp.",
 }));
 
 const originalGallery = [

@@ -894,16 +894,6 @@ p {
 .meal-card:hover .meal-image img {
   transform: scale(1.04);
 }
-.meal-badge {
-  position: absolute;
-  bottom: 13px;
-  left: 13px;
-  border-radius: 50px;
-  font-size: 8px;
-  background: #fff9f1e6;
-  padding: 5px 12px;
-  pointer-events: none;
-}
 .meal-card-bottom {
   display: flex;
   align-items: center;
@@ -3457,12 +3447,6 @@ p {
   .catalog-grid .meal-image {
     aspect-ratio: 1.1;
     border-radius: 10px;
-  }
-  .catalog-grid .meal-badge {
-    font-size: 6px;
-    left: 8px;
-    bottom: 8px;
-    padding: 4px 8px;
   }
   .catalog-grid .save-button {
     width: 28px;

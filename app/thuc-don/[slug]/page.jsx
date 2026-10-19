@@ -42,10 +42,6 @@ export default async function MealPage({ params }) {
           </p>
           <dl className="meal-detail-meta">
             <div>
-              <dt>Nhóm thực đơn</dt>
-              <dd>{meal.category}</dd>
-            </div>
-            <div>
               <dt>Đối tượng</dt>
               <dd>Nhà máy, doanh nghiệp</dd>
             </div>

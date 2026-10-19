@@ -44,7 +44,7 @@ export default function Catalog() {
     return meals.filter(
       (m) =>
         (!showSaved || saved.includes(m.id)) &&
-        `${m.name} ${m.category} ${m.id}`
+        `${m.name} ${m.id}`
           .toLocaleLowerCase("vi")
           .includes(search.trim().toLocaleLowerCase("vi")),
     ).sort((a, b) => a.id - b.id);
@@ -176,7 +176,7 @@ export default function Catalog() {
         <Eyebrow>THỰC ĐƠN ĐANG QUAN TÂM</Eyebrow>
         <h2>Cùng xem các lựa chọn.</h2>
         <p>
-          So sánh hình ảnh và nhóm thực đơn. Thành phần, định lượng và ngân sách
+          So sánh hình ảnh các thực đơn. Thành phần, định lượng và ngân sách
           được trao đổi khi tư vấn.
         </p>
         <div className="compare-grid">
@@ -186,7 +186,6 @@ export default function Catalog() {
             .map((m) => (
               <article key={m.id}>
                 <img src={m.image} alt={m.name} width="960" height="720" />
-                <span className="mini-label">{m.category}</span>
                 <h3>{m.name}</h3>
                 <p>{m.description}</p>
                 <a className="text-link" href={`/thuc-don/${m.slug}/`}>

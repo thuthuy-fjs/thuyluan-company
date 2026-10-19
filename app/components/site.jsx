@@ -477,7 +477,6 @@ export function MealCard({ meal, saved = false, onSave, loading = "lazy" }) {
             height="720"
           />
         </a>
-        <span className="meal-badge">{meal.category}</span>
         {onSave && (
           <button
             className={`save-button ${saved ? "saved" : ""}`}
