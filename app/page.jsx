@@ -270,7 +270,7 @@ export default function Home() {
             <ArrowUpRight size={18} />
           </a>
         </div>
-        <GalleryCategoryShowcase />
+        <GalleryCategoryShowcase homePage />
       </section>
 
       <Certifications />

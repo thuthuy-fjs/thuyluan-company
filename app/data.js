@@ -45,9 +45,16 @@ export const galleryCategories = [
   { label: "Không gian bếp", slug: "khong-gian-bep" },
   { label: "Giao nhận", slug: "giao-nhan" },
   { label: "Phục vụ", slug: "phuc-vu" },
-  { label: "Hoạt động", slug: "hoat-dong" },
+  { label: "Hoạt động tập thể", slug: "hoat-dong" },
 ];
 const galleryShowcaseOrder = ["phuc-vu", "khong-gian-bep", "hoat-dong", "giao-nhan"];
+export const collectiveShowcasePhotos = [
+  "/assets/gallery-tap-the-01.webp",
+  "/assets/gallery-tap-the-02.webp",
+  "/assets/gallery-tap-the-03.webp",
+  "/assets/gallery-tap-the-09.webp",
+  "/assets/gallery-tap-the-18.webp",
+].map((image) => gallery.find((photo) => photo.image === image));
 export const galleryShowcase = galleryShowcaseOrder.map((slug) => {
   const category = galleryCategories.find((item) => item.slug === slug);
   const photos = gallery.filter((photo) => photo.category === category.label);

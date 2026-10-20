@@ -114,13 +114,13 @@ test("gallery filters photos and supports keyboard lightbox controls", async ({
   page,
 }) => {
   await page.goto("/hinh-anh/");
-  await expect(page.locator(".photo-tile")).toHaveCount(87);
+  await expect(page.locator(".photo-tile")).toHaveCount(107);
   await expect(page.locator('.photo-tile img[src="/assets/home-served-meal.jpg"]')).toHaveCount(0);
-  await page.getByRole("button", { name: "Hoạt động", exact: true }).click();
-  await expect(page.locator(".photo-tile")).toHaveCount(12);
+  await page.getByRole("button", { name: "Hoạt động tập thể", exact: true }).click();
+  await expect(page.locator(".photo-tile")).toHaveCount(33);
   await expect(page.locator(".photo-tile").first()).toHaveAttribute(
     "aria-label",
-    /Gala Dinner Thúy Luân 2026/,
+    /Tập thể Thúy Luân tại chương trình tổng kết cuối năm/,
   );
   await page
     .getByRole("button", { name: "Không gian bếp", exact: true })
@@ -134,7 +134,7 @@ test("gallery filters photos and supports keyboard lightbox controls", async ({
   await expect(page.getByRole("dialog")).not.toBeVisible();
 });
 
-test("home gallery folders rotate five photos every three seconds and open their categories", async ({
+test("home gallery keeps all four folders and shows the video separately", async ({
   page,
 }) => {
   await page.clock.install();
@@ -147,6 +147,20 @@ test("home gallery folders rotate five photos every three seconds and open their
     await expect(folder.locator("img")).toHaveCount(5);
     await expect(folder).toHaveAttribute("href", `/hinh-anh/?loai=${categorySlugs[index]}`);
   }
+  for (const [index, photo] of ["01", "02", "03", "09", "18"].entries()) {
+    await expect(folderList[2].locator("img").nth(index)).toHaveAttribute(
+      "src",
+      `/assets/gallery-tap-the-${photo}.webp`,
+    );
+  }
+  await expect(folderList[1]).toHaveAttribute("aria-label", "Xem thư viện Không gian bếp");
+  const videoFeature = page.locator(".gallery-section > .gallery-video-feature");
+  await expect(videoFeature).toHaveAttribute("aria-label", "Phát video giới thiệu Thúy Luân");
+  await expect(videoFeature.locator("img")).toHaveAttribute(
+    "src",
+    "/assets/video-gioi-thieu-thuy-luan-poster.webp",
+  );
+  await expect(page.locator(".gallery-video-modal video")).toHaveCount(0);
   const firstImages = await Promise.all(
     folderList.map((folder) => folder.locator("img.is-active").getAttribute("src")),
   );
@@ -154,14 +168,37 @@ test("home gallery folders rotate five photos every three seconds and open their
   for (const [index, folder] of folderList.entries()) {
     await expect(folder.locator("img.is-active")).not.toHaveAttribute("src", firstImages[index]);
   }
+  await page.clock.runFor(6000);
+  await expect(folderList[2].locator("img.is-active")).toHaveAttribute(
+    "src",
+    "/assets/gallery-tap-the-09.webp",
+  );
+  await page.clock.runFor(6000);
+  await expect(folderList[2].locator("img.is-active")).toHaveAttribute(
+    "src",
+    "/assets/gallery-tap-the-01.webp",
+  );
+  await videoFeature.click();
+  await expect(page.getByRole("dialog", { name: "Video giới thiệu Thúy Luân" })).toBeVisible();
+  await expect(page.locator(".gallery-video-modal video source")).toHaveAttribute(
+    "src",
+    "/assets/video-gioi-thieu-thuy-luan.mp4",
+  );
+  await expect
+    .poll(() => page.locator(".gallery-video-modal video").evaluate((video) => video.videoWidth))
+    .toBe(854);
+  await page.getByRole("dialog", { name: "Video giới thiệu Thúy Luân" })
+    .getByRole("button", { name: "Đóng" })
+    .click();
+  await expect(page.locator(".gallery-video-modal video")).toHaveCount(0);
 
-  await page.getByRole("link", { name: "Xem thư viện Hoạt động" }).click();
+  await page.getByRole("link", { name: "Xem thư viện Hoạt động tập thể" }).click();
   await expect(page).toHaveURL(/\/hinh-anh\/\?loai=hoat-dong$/);
-  await expect(page.getByRole("button", { name: "Hoạt động", exact: true })).toHaveAttribute(
+  await expect(page.getByRole("button", { name: "Hoạt động tập thể", exact: true })).toHaveAttribute(
     "aria-pressed",
     "true",
   );
-  await expect(page.locator(".gallery-page .photo-tile")).toHaveCount(12);
+  await expect(page.locator(".gallery-page .photo-tile")).toHaveCount(33);
 });
 
 test("about introduction rotates five company photos every three seconds", async ({
@@ -193,7 +230,7 @@ test("about activities use the same rotating photo folders as home", async ({
   const firstImage = await folders.first().locator("img.is-active").getAttribute("src");
   await page.clock.runFor(3000);
   await expect(folders.first().locator("img.is-active")).not.toHaveAttribute("src", firstImage);
-  await page.getByRole("link", { name: "Xem thư viện Hoạt động" }).click();
+  await page.getByRole("link", { name: "Xem thư viện Hoạt động tập thể" }).click();
   await expect(page).toHaveURL(/\/hinh-anh\/\?loai=hoat-dong$/);
 });
 

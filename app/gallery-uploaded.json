@@ -1,7 +1,183 @@
 [
   {
+    "image": "/assets/gallery-tap-the-01.webp",
+    "category": "Hoạt động tập thể",
+    "title": "Tập thể Thúy Luân tại chương trình tổng kết cuối năm",
+    "width": 1276,
+    "height": 956,
+    "sourceFile": "2aOboR6eENJPpnCGrLs33nAZjCD5R2eHLuuolOlM.jpg"
+  },
+  {
+    "image": "/assets/gallery-tap-the-02.webp",
+    "category": "Hoạt động tập thể",
+    "title": "Gặp mặt đầu năm của tập thể Thúy Luân",
+    "width": 1276,
+    "height": 956,
+    "sourceFile": "2aOboR6eDoobYcnWI9iMxoPbhzUSsXc6FrnYHXgO.jpg"
+  },
+  {
+    "image": "/assets/gallery-tap-the-03.webp",
+    "category": "Hoạt động tập thể",
+    "title": "Không khí tiệc tất niên tại nhà máy — ảnh 1",
+    "width": 1276,
+    "height": 956,
+    "sourceFile": "2aOboR6eDX7LGg3zd83tZVZd7NlHdXxCxOXJiKtk.jpg"
+  },
+  {
+    "image": "/assets/gallery-tap-the-04.webp",
+    "category": "Hoạt động tập thể",
+    "title": "Không khí tiệc tất niên tại nhà máy — ảnh 2",
+    "width": 1276,
+    "height": 956,
+    "sourceFile": "2aOboR6eDWa4PvaWn2rtjg4NunXnno1bRp3Cruk4.jpg"
+  },
+  {
+    "image": "/assets/gallery-tap-the-05.webp",
+    "category": "Hoạt động tập thể",
+    "title": "Không khí tiệc tất niên tại nhà máy — ảnh 3",
+    "width": 960,
+    "height": 1280,
+    "sourceFile": "c6b232e3-2fee-4f28-b730-19146e14ef16.jpeg"
+  },
+  {
+    "image": "/assets/gallery-tap-the-06.webp",
+    "category": "Hoạt động tập thể",
+    "title": "Không khí tiệc tất niên tại nhà máy — ảnh 4",
+    "width": 960,
+    "height": 1280,
+    "sourceFile": "adb84fe3-ba3a-47ee-aad7-303d0289f6a1.jpeg"
+  },
+  {
+    "image": "/assets/gallery-tap-the-07.webp",
+    "category": "Hoạt động tập thể",
+    "title": "Tập thể Thúy Luân tại Gala Dinner — ảnh 1",
+    "width": 1276,
+    "height": 956,
+    "sourceFile": "2aOboR6eC1DsUVGCiHfhumuarEs5JNFSVUSkt4U4.jpg"
+  },
+  {
+    "image": "/assets/gallery-tap-the-08.webp",
+    "category": "Hoạt động tập thể",
+    "title": "Tập thể Thúy Luân tại Gala Dinner — ảnh 2",
+    "width": 1276,
+    "height": 956,
+    "sourceFile": "2aOboR6eC0vdKRPvejEsO3NdNTcY7YAzP4OEZpzc.jpg"
+  },
+  {
+    "image": "/assets/gallery-tap-the-09.webp",
+    "category": "Hoạt động tập thể",
+    "title": "Đội thi nấu ăn của công đoàn Thúy Luân",
+    "width": 1280,
+    "height": 960,
+    "sourceFile": "2aobor64ngzz5mgem9syde5qkuigr9epyb9odtyi156.jpg"
+  },
+  {
+    "image": "/assets/gallery-tap-the-10.webp",
+    "category": "Hoạt động tập thể",
+    "title": "Trao thưởng tại Gala Dinner Thúy Luân",
+    "width": 1280,
+    "height": 960,
+    "sourceFile": "2aobor6eas3ffsrvsfslgkw0qyq971d9bcdicofy110.jpg"
+  },
+  {
+    "image": "/assets/gallery-tap-the-11.webp",
+    "category": "Hoạt động tập thể",
+    "title": "Giao lưu trong chương trình Gala Dinner",
+    "width": 1280,
+    "height": 960,
+    "sourceFile": "2aobor6eazt1mamyq73xdw0yaklvxezk7y4emarw130.jpg"
+  },
+  {
+    "image": "/assets/gallery-tap-the-12.webp",
+    "category": "Hoạt động tập thể",
+    "title": "Tiệc liên hoan của tập thể Thúy Luân",
+    "width": 1280,
+    "height": 960,
+    "sourceFile": "2aobor6eayeotvqcna2s1eibjls3hxuqt3xoapr2128.jpg"
+  },
+  {
+    "image": "/assets/gallery-tap-the-13.webp",
+    "category": "Hoạt động tập thể",
+    "title": "Hình ảnh tại chương trình tổng kết cuối năm — ảnh 1",
+    "width": 960,
+    "height": 1280,
+    "sourceFile": "2aobor6eagbpmro0uw4u0ynhylzpq4szjajsaywi151.jpg"
+  },
+  {
+    "image": "/assets/gallery-tap-the-14.webp",
+    "category": "Hoạt động tập thể",
+    "title": "Gặp mặt đầu năm và nâng ly chúc mừng",
+    "width": 1280,
+    "height": 960,
+    "sourceFile": "2aobor6eabxq223vuoyhyvlfvamun1xnefhrv3gy138.jpg"
+  },
+  {
+    "image": "/assets/gallery-tap-the-15.webp",
+    "category": "Hoạt động tập thể",
+    "title": "Hình ảnh tại chương trình tổng kết cuối năm — ảnh 2",
+    "width": 1280,
+    "height": 960,
+    "sourceFile": "2aobor6eau2fykkhylttpgqbqm6g229ashvyas1w62.jpg"
+  },
+  {
+    "image": "/assets/gallery-tap-the-16.webp",
+    "category": "Hoạt động tập thể",
+    "title": "Hình ảnh tại chương trình tổng kết cuối năm — ảnh 3",
+    "width": 960,
+    "height": 1280,
+    "sourceFile": "2aobor6eaqpkf2qjzatlam1ylivczw49sorroyxo55.jpg"
+  },
+  {
+    "image": "/assets/gallery-tap-the-17.webp",
+    "category": "Hoạt động tập thể",
+    "title": "Sinh nhật quý 3 tại chi nhánh Đồng Văn — ảnh 1",
+    "width": 1280,
+    "height": 576,
+    "sourceFile": "2aobor6enz4yh22xc3r0z7p77dpdh4tim2elyiio5.jpg"
+  },
+  {
+    "image": "/assets/gallery-tap-the-18.webp",
+    "category": "Hoạt động tập thể",
+    "title": "Sinh nhật quý 3 tại chi nhánh Đồng Văn — ảnh 2",
+    "width": 1280,
+    "height": 960,
+    "sourceFile": "2aobor6enz6g3ot0nh3k9jxb02ovryhwmkccavgy12.jpg"
+  },
+  {
+    "image": "/assets/gallery-tap-the-19.webp",
+    "category": "Hoạt động tập thể",
+    "title": "Sinh nhật quý 3 tại chi nhánh Đồng Văn — ảnh 3",
+    "width": 1280,
+    "height": 576,
+    "sourceFile": "2aobor6enz2mt1jj0qujif5qeffvyuzucva08tbm9.jpg"
+  },
+  {
+    "image": "/assets/gallery-tap-the-20.webp",
+    "category": "Hoạt động tập thể",
+    "title": "Khoảnh khắc gặp gỡ của đồng nghiệp Thúy Luân",
+    "width": 960,
+    "height": 1280,
+    "sourceFile": "2aobor5gec7r7e4kbtmkuits5o9eioxkmkhkutky129.jpg"
+  },
+  {
+    "image": "/assets/gallery-gala-06.webp",
+    "category": "Hoạt động tập thể",
+    "title": "Không gian Gala Dinner Thúy Luân",
+    "width": 1276,
+    "height": 956,
+    "sourceFile": "2aobor5ge2dkhyxsigmmcisnswikmhnyjgbmhoom118.jpg"
+  },
+  {
+    "image": "/assets/gallery-tap-the-23.webp",
+    "category": "Hoạt động tập thể",
+    "title": "Tập thể Thúy Luân tại Gala Dinner — ảnh 3",
+    "width": 1280,
+    "height": 960,
+    "sourceFile": "2aobor5ge56ax0lkz8hwf3xfjmi27wmieyup7xku111.jpg"
+  },
+  {
     "image": "/assets/gallery-gala-01.webp",
-    "category": "Hoạt động",
+    "category": "Hoạt động tập thể",
     "title": "Gala Dinner Thúy Luân 2026 — ảnh 1",
     "width": 1276,
     "height": 956,
@@ -9,7 +185,7 @@
   },
   {
     "image": "/assets/gallery-gala-02.webp",
-    "category": "Hoạt động",
+    "category": "Hoạt động tập thể",
     "title": "Gala Dinner Thúy Luân 2026 — ảnh 2",
     "width": 1276,
     "height": 956,
@@ -17,7 +193,7 @@
   },
   {
     "image": "/assets/gallery-gala-03.webp",
-    "category": "Hoạt động",
+    "category": "Hoạt động tập thể",
     "title": "Gala Dinner Thúy Luân 2026 — ảnh 3",
     "width": 1276,
     "height": 956,
@@ -25,7 +201,7 @@
   },
   {
     "image": "/assets/gallery-gala-04.webp",
-    "category": "Hoạt động",
+    "category": "Hoạt động tập thể",
     "title": "Gala Dinner Thúy Luân 2026 — ảnh 4",
     "width": 1276,
     "height": 956,
@@ -33,23 +209,15 @@
   },
   {
     "image": "/assets/gallery-gala-05.webp",
-    "category": "Hoạt động",
+    "category": "Hoạt động tập thể",
     "title": "Gala Dinner Thúy Luân 2026 — ảnh 5",
     "width": 1276,
     "height": 956,
     "sourceFile": "2aobor5ge226dwsse0m2ucbv5wbnprnxv7ssyapo117.jpg"
   },
   {
-    "image": "/assets/gallery-gala-06.webp",
-    "category": "Hoạt động",
-    "title": "Gala Dinner Thúy Luân 2026 — ảnh 6",
-    "width": 1276,
-    "height": 956,
-    "sourceFile": "2aobor5ge2dkhyxsigmmcisnswikmhnyjgbmhoom118.jpg"
-  },
-  {
     "image": "/assets/gallery-gala-07.webp",
-    "category": "Hoạt động",
+    "category": "Hoạt động tập thể",
     "title": "Gala Dinner Thúy Luân 2026 — ảnh 7",
     "width": 1276,
     "height": 956,
@@ -57,7 +225,7 @@
   },
   {
     "image": "/assets/gallery-gala-08.webp",
-    "category": "Hoạt động",
+    "category": "Hoạt động tập thể",
     "title": "Gala Dinner Thúy Luân 2026 — ảnh 8",
     "width": 1280,
     "height": 960,
@@ -65,7 +233,7 @@
   },
   {
     "image": "/assets/gallery-dao-tao-01.webp",
-    "category": "Hoạt động",
+    "category": "Hoạt động tập thể",
     "title": "Hoạt động đào tạo tại Thúy Luân — ảnh 1",
     "width": 1280,
     "height": 576,
@@ -73,7 +241,7 @@
   },
   {
     "image": "/assets/gallery-dao-tao-02.webp",
-    "category": "Hoạt động",
+    "category": "Hoạt động tập thể",
     "title": "Hoạt động đào tạo tại Thúy Luân — ảnh 2",
     "width": 1280,
     "height": 576,
@@ -81,7 +249,7 @@
   },
   {
     "image": "/assets/gallery-dao-tao-03.webp",
-    "category": "Hoạt động",
+    "category": "Hoạt động tập thể",
     "title": "Hoạt động đào tạo tại Thúy Luân — ảnh 3",
     "width": 1276,
     "height": 956,
@@ -89,7 +257,7 @@
   },
   {
     "image": "/assets/gallery-dao-tao-04.webp",
-    "category": "Hoạt động",
+    "category": "Hoạt động tập thể",
     "title": "Hoạt động đào tạo tại Thúy Luân — ảnh 4",
     "width": 1276,
     "height": 956,
@@ -446,14 +614,6 @@
     "width": 1276,
     "height": 956,
     "sourceFile": "2aobor5g7tngu6xezw30jyn3ttegac26qu12cfmu12.jpg"
-  },
-  {
-    "image": "/assets/gallery-phuc-vu-08.webp",
-    "category": "Phục vụ",
-    "title": "Tổ chức phục vụ bữa ăn — ảnh 8",
-    "width": 1276,
-    "height": 956,
-    "sourceFile": "2aobor5g7tyvmstzmr8p78kyrhrcbwrbga2v7qfm13.jpg"
   },
   {
     "image": "/assets/gallery-thuc-don-01.webp",

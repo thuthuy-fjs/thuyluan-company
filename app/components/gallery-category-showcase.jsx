@@ -1,49 +1,108 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowUpRight } from "lucide-react";
-import { galleryShowcase } from "../data";
+import { ArrowUpRight, Play } from "lucide-react";
+import { collectiveShowcasePhotos, galleryShowcase } from "../data";
+import { Modal } from "./site";
 
-export default function GalleryCategoryShowcase() {
+const video = {
+  src: "/assets/video-gioi-thieu-thuy-luan.mp4",
+  poster: "/assets/video-gioi-thieu-thuy-luan-poster.webp",
+};
+
+export default function GalleryCategoryShowcase({ homePage = false }) {
   const [activeImage, setActiveImage] = useState(0);
+  const [videoOpen, setVideoOpen] = useState(false);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const timer = window.setInterval(() => {
-      setActiveImage((index) => (index + 1) % 5);
+      setActiveImage((index) => index + 1);
     }, 3000);
     return () => window.clearInterval(timer);
   }, []);
 
   return (
-    <div className="photo-grid preview gallery-category-showcase">
-      {galleryShowcase.map((category) => (
-        <a
-          className="photo-tile"
-          href={`/hinh-anh/?loai=${category.slug}`}
-          aria-label={`Xem thư viện ${category.label}`}
-          key={category.slug}
-        >
-          {category.photos.map((photo, index) => (
-            <img
-              className={`gallery-slide${index === activeImage ? " is-active" : ""}`}
-              src={photo.image}
-              alt=""
-              width={photo.width ?? 960}
-              height={photo.height ?? 720}
-              loading={index === 0 ? "eager" : "lazy"}
-              aria-hidden="true"
-              key={photo.image}
-            />
-          ))}
-          <span>
-            {category.label}
-            <span className="photo-expand" aria-hidden="true">
-              <ArrowUpRight size={18} />
+    <>
+      <div className="photo-grid preview gallery-category-showcase">
+        {galleryShowcase.map((category) => {
+          const photos =
+            homePage && category.slug === "hoat-dong"
+              ? collectiveShowcasePhotos
+              : category.photos;
+          return (
+            <a
+              className="photo-tile"
+              href={`/hinh-anh/?loai=${category.slug}`}
+              aria-label={`Xem thư viện ${category.label}`}
+              key={category.slug}
+            >
+              {photos.map((photo, index) => (
+                <img
+                  className={`gallery-slide${index === activeImage % photos.length ? " is-active" : ""}`}
+                  src={photo.image}
+                  alt=""
+                  width={photo.width ?? 960}
+                  height={photo.height ?? 720}
+                  loading={index === 0 ? "eager" : "lazy"}
+                  aria-hidden="true"
+                  key={photo.image}
+                />
+              ))}
+              <span>
+                {category.label}
+                <span className="photo-expand" aria-hidden="true">
+                  <ArrowUpRight size={18} />
+                </span>
+              </span>
+            </a>
+          );
+        })}
+      </div>
+      {homePage && (
+        <>
+          <button
+            className="gallery-video-feature"
+            type="button"
+            onClick={() => setVideoOpen(true)}
+            aria-label="Phát video giới thiệu Thúy Luân"
+          >
+            <span className="gallery-video-feature-visual">
+              <img src={video.poster} alt="" width="854" height="480" loading="lazy" />
+              <span className="gallery-video-play" aria-hidden="true">
+                <Play size={28} fill="currentColor" />
+              </span>
             </span>
-          </span>
-        </a>
-      ))}
-    </div>
+            <span className="gallery-video-feature-copy">
+              <span className="mini-label">VIDEO THÚY LUÂN</span>
+              <strong>Những khoảnh khắc của Thúy Luân</strong>
+              <span>Hoạt động phục vụ, gặp gỡ và những dấu mốc của tập thể.</span>
+              <span className="gallery-video-feature-action">
+                Xem video <Play size={17} aria-hidden="true" />
+              </span>
+            </span>
+          </button>
+          <Modal
+            open={videoOpen}
+            onClose={() => setVideoOpen(false)}
+            label="Video giới thiệu Thúy Luân"
+            className="gallery-video-modal"
+          >
+            {videoOpen && (
+              <video
+                controls
+                autoPlay
+                playsInline
+                preload="metadata"
+                poster={video.poster}
+              >
+                <source src={video.src} type="video/mp4" />
+                Trình duyệt của bạn không hỗ trợ phát video.
+              </video>
+            )}
+          </Modal>
+        </>
+      )}
+    </>
   );
 }
