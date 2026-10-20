@@ -60,6 +60,57 @@ test("home has real assets, accessible navigation, and no horizontal overflow", 
   expect(errors).toEqual([]);
 });
 
+test("home presents mission, vision and core values together", async ({ page }) => {
+  await page.goto("/");
+  const section = page.locator(".promise-section");
+  await expect(section.getByRole("heading", { name: "Sứ mệnh & Tầm nhìn" })).toBeVisible();
+  await expect(section.getByRole("heading", { name: "Sứ mệnh", exact: true })).toBeVisible();
+  await expect(section.getByRole("heading", { name: "Tầm nhìn", exact: true })).toBeVisible();
+  const values = section.locator(".promise-values");
+  await expect(values).toHaveAttribute("aria-label", "Giá trị cốt lõi của Thúy Luân");
+  await expect(values.locator(".core-value h3")).toHaveText([
+    "Tận tâm", "Đạo đức", "Tôn trọng", "Tuân thủ",
+  ]);
+  await expect(values.locator(".core-value-number")).toHaveText(["1", "2", "3", "4"]);
+  await expect(values.locator(".core-values-badge")).toBeVisible();
+  await expect(section).not.toContainText("GIÁ TRỊ CỦA MỘT ĐỐI TÁC");
+  await expect(page.locator(".process-section .core-values-board")).toHaveCount(0);
+  const photoBox = await section.locator(".promise-photo").boundingBox();
+  const copyBox = await section.locator(".promise-copy").boundingBox();
+  const valuesBox = await values.boundingBox();
+  const boardBox = await values.locator(".core-values-board").boundingBox();
+  const aboutLink = values.getByRole("link", { name: "Hiểu thêm về Thúy Luân" });
+  const linkBox = await aboutLink.boundingBox();
+  await expect(aboutLink).toHaveAttribute("href", "/gioi-thieu/");
+  expect(photoBox.x).toBeGreaterThan(valuesBox.x + valuesBox.width - 1);
+  expect(Math.abs(valuesBox.x - copyBox.x)).toBeLessThan(2);
+  expect(valuesBox.y).toBeGreaterThan(copyBox.y + copyBox.height - 1);
+  expect(Math.abs(photoBox.y - copyBox.y)).toBeLessThan(2);
+  expect(Math.abs(photoBox.y + photoBox.height - valuesBox.y - valuesBox.height)).toBeLessThan(2);
+  const photoImage = section.locator(".promise-photo img");
+  await expect(photoImage).toHaveAttribute("src", "/assets/kitchen-process-thuy-luan.png");
+  const imageBox = await photoImage.boundingBox();
+  expect(Math.abs(imageBox.y - copyBox.y)).toBeLessThan(2);
+  expect(Math.abs(imageBox.y + imageBox.height - valuesBox.y - valuesBox.height)).toBeLessThan(2);
+  await expect(section.locator(".promise-photo a")).toHaveCount(0);
+  expect(Math.abs(boardBox.x + boardBox.width / 2 - valuesBox.x - valuesBox.width / 2)).toBeLessThan(2);
+  expect(linkBox.y).toBeGreaterThan(boardBox.y + boardBox.height);
+
+  await page.setViewportSize({ width: 1896, height: 1000 });
+  const wideCopyBox = await section.locator(".promise-copy").boundingBox();
+  const wideValuesBox = await values.boundingBox();
+  const wideImageBox = await photoImage.boundingBox();
+  expect(Math.abs(wideImageBox.y - wideCopyBox.y)).toBeLessThan(2);
+  expect(Math.abs(wideImageBox.y + wideImageBox.height - wideValuesBox.y - wideValuesBox.height)).toBeLessThan(2);
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  const mobileCopyBox = await section.locator(".promise-copy").boundingBox();
+  const mobileValuesBox = await values.boundingBox();
+  const mobilePhotoBox = await section.locator(".promise-photo").boundingBox();
+  expect(mobileValuesBox.y).toBeGreaterThanOrEqual(mobileCopyBox.y + mobileCopyBox.height - 1);
+  expect(mobilePhotoBox.y).toBeGreaterThanOrEqual(mobileValuesBox.y + mobileValuesBox.height - 1);
+});
+
 test("catalog uses ascending menu numbers and supports search, saved menus and prefilled quotation", async ({
   page,
 }) => {
@@ -214,19 +265,30 @@ test("about introduction rotates five company photos every three seconds", async
   await expect(active).toHaveAttribute("src", "/assets/gallery-bep-07.webp");
 });
 
-test("about activities use the same rotating photo folders as home", async ({
+test("about gallery matches the home gallery", async ({
   page,
 }) => {
   await page.clock.install();
   await page.goto("/gioi-thieu/");
   await expect(page.locator(".document-section")).toHaveCount(0);
-  const folders = page.locator(".related-section .gallery-category-showcase .photo-tile");
+  const gallery = page.locator(".gallery-section");
+  await expect(gallery).toContainText("TỪ NHỮNG ĐIỀU THỰC TẾ");
+  await expect(gallery.getByRole("heading", { name: /Nhìn gần hơn.*Tin tưởng nhiều hơn/ })).toBeVisible();
+  const folders = gallery.locator(".gallery-category-showcase .photo-tile");
   await expect(folders).toHaveCount(4);
   const slugs = ["phuc-vu", "khong-gian-bep", "hoat-dong", "giao-nhan"];
   for (const [index, folder] of (await folders.all()).entries()) {
     await expect(folder.locator("img")).toHaveCount(5);
     await expect(folder).toHaveAttribute("href", `/hinh-anh/?loai=${slugs[index]}`);
   }
+  await expect(folders.nth(2).locator("img").first()).toHaveAttribute(
+    "src",
+    "/assets/gallery-tap-the-01.webp",
+  );
+  await expect(gallery.locator(".gallery-video-feature")).toHaveAttribute(
+    "aria-label",
+    "Phát video giới thiệu Thúy Luân",
+  );
   const firstImage = await folders.first().locator("img.is-active").getAttribute("src");
   await page.clock.runFor(3000);
   await expect(folders.first().locator("img.is-active")).not.toHaveAttribute("src", firstImage);
@@ -238,23 +300,43 @@ test("about page shows five processing steps with expandable instructions", asyn
   page,
 }) => {
   await page.goto("/gioi-thieu/");
-  const kitchenLayout = page.locator(".org-chart + .core-values + .kitchen-layout");
+  const missionVision = page.locator(".org-chart + .mission-vision");
+  await expect(missionVision.getByRole("heading", { name: "Sứ mệnh & Tầm nhìn" })).toBeVisible();
+  await expect(missionVision.getByRole("heading", { name: "Sứ mệnh", exact: true })).toBeVisible();
+  await expect(missionVision.getByRole("heading", { name: "Tầm nhìn", exact: true })).toBeVisible();
+  await expect(missionVision).not.toContainText(/Mission|Vision|Clean|Delicious|Safe|Quality/);
+  const coreValues = page.locator(".mission-vision + .core-values");
+  const valuesSectionBox = await coreValues.boundingBox();
+  const valuesHeadingBox = await coreValues.locator(".core-values-heading").boundingBox();
+  const valuesBoardBox = await coreValues.locator(".core-values-board").boundingBox();
+  expect(valuesBoardBox.y).toBeGreaterThan(valuesHeadingBox.y + valuesHeadingBox.height);
+  expect(Math.abs(valuesBoardBox.x + valuesBoardBox.width / 2 - valuesSectionBox.x - valuesSectionBox.width / 2)).toBeLessThan(2);
+  const kitchenLayout = page.locator(".core-values + .kitchen-layout");
   await expect(kitchenLayout).toHaveCount(1);
   await expect(kitchenLayout.getByRole("heading", { name: "Phương án tổ chức không gian bếp." })).toBeVisible();
-  await expect(kitchenLayout.getByRole("link", { name: /Xem ảnh đầy đủ/ })).toHaveCount(0);
-  const layoutImage = kitchenLayout.locator("img");
-  await layoutImage.scrollIntoViewIfNeeded();
-  await layoutImage.evaluate((image) => image.decode());
-  expect(await layoutImage.evaluate((image) => [image.naturalWidth, image.naturalHeight])).toEqual([1024, 1536]);
-  const imageBox = await kitchenLayout.locator(".kitchen-layout-figure").boundingBox();
+  await expect(kitchenLayout.locator("img")).toHaveCount(0);
+  const setupSteps = kitchenLayout.locator(".kitchen-layout-steps > li");
+  await expect(setupSteps.locator("h3")).toHaveText([
+    "Khảo sát mặt bằng",
+    "Thiết kế bản vẽ 2D",
+    "Duyệt 2D & thiết kế 3D",
+    "Lắp đặt hệ thống bếp",
+    "Vận hành thử & bàn giao",
+  ]);
+  const stepsBox = await kitchenLayout.locator(".kitchen-layout-steps").boundingBox();
   const headingBox = await kitchenLayout.locator(".core-values-heading").boundingBox();
-  expect(imageBox.x + imageBox.width).toBeLessThan(headingBox.x);
+  expect(stepsBox.x).toBeGreaterThan(headingBox.x + headingBox.width);
   const section = page.locator(".kitchen-layout + .processing-section");
   await expect(section).toHaveCount(1);
   const organizationImage = page.locator(".org-chart-figure img");
+  const orgFigureBox = await page.locator(".org-chart-figure").boundingBox();
+  const orgHeadingBox = await page.locator(".org-chart .core-values-heading").boundingBox();
+  expect(orgFigureBox.x).toBeGreaterThan(orgHeadingBox.x + orgHeadingBox.width);
+  expect(orgFigureBox.width).toBeLessThanOrEqual(760);
   await expect(organizationImage).toHaveAttribute("src", "/assets/document-organization.png");
+  await expect(page.locator(".org-chart-figure a")).toHaveAttribute("href", "/assets/document-organization.png");
   await organizationImage.evaluate((image) => image.decode());
-  expect(await organizationImage.evaluate((image) => [image.naturalWidth, image.naturalHeight])).toEqual([1122, 1402]);
+  expect(await organizationImage.evaluate((image) => [image.naturalWidth, image.naturalHeight])).toEqual([1536, 1024]);
   await expect(section.getByRole("heading", { name: "Từ nguyên liệu đến món ăn." })).toBeVisible();
   await expect(section.locator(".processing-zone")).toHaveText(["Khu sống", "Khu chín"]);
   const steps = section.locator(".processing-step");
@@ -286,6 +368,9 @@ test("home processing document opens the interactive five-step section", async (
   }).click();
   await expect(page.getByRole("dialog").locator("a[download]")).toHaveCount(0);
   await page.keyboard.press("Escape");
+  await expect(page.locator(".document-section .document-list").getByRole("link", {
+    name: /Thiết lập bếp ăn/,
+  })).toHaveAttribute("href", "/gioi-thieu/#quy-trinh-thiet-lap-bep");
   const link = page.locator(".document-section .document-list").getByRole("link", {
     name: /Quy trình chế biến/,
   });

@@ -1,10 +1,11 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Eye, Target } from "lucide-react";
 import { PageIntro, Eyebrow } from "../components/site";
-import { company, coreValues } from "../data";
+import { company } from "../data";
 import Certifications from "../components/certifications";
 import AboutIntroSlider from "../components/about-intro-slider";
 import GalleryCategoryShowcase from "../components/gallery-category-showcase";
 import ProcessingSteps from "../components/processing-steps";
+import CoreValuesBoard from "../components/core-values-board";
 export const metadata = { title: "Về Thúy Luân" };
 export default function AboutPage() {
   return (
@@ -71,48 +72,65 @@ export default function AboutPage() {
           </p>
         </div>
         <figure className="org-chart-figure">
-          <img
-            src="/assets/document-organization.png"
-            alt="Sơ đồ tổ chức công ty Thúy Luân từ Tổng giám đốc đến các phòng và tổ vận hành"
-            width="1122"
-            height="1402"
-            loading="lazy"
-          />
+          <a href="/assets/document-organization.png" target="_blank" rel="noopener noreferrer">
+            <img
+              src="/assets/document-organization.png"
+              alt="Sơ đồ tổ chức công ty Thúy Luân từ Tổng giám đốc đến các phòng và tổ vận hành"
+              width="1536"
+              height="1024"
+              loading="lazy"
+            />
+          </a>
+          <figcaption>Mở ảnh để xem sơ đồ kích thước đầy đủ</figcaption>
         </figure>
+      </section>
+      <section className="mission-vision wrap" aria-labelledby="mission-vision-title">
+        <div className="mission-vision-heading">
+          <h2 id="mission-vision-title">Sứ mệnh &amp; Tầm nhìn</h2>
+        </div>
+        <div className="mission-vision-grid">
+          <article className="mission-vision-card">
+            <div className="mission-vision-card-heading">
+              <span className="mission-vision-icon" aria-hidden="true">
+                <Target size={24} strokeWidth={2} />
+              </span>
+              <h3>Sứ mệnh</h3>
+            </div>
+            <p>
+              Mang đến những bữa ăn Sạch – Ngon – An toàn – Chất lượng, trao tận
+              tay từng khách hàng.
+            </p>
+          </article>
+          <article className="mission-vision-card">
+            <div className="mission-vision-card-heading">
+              <span className="mission-vision-icon" aria-hidden="true">
+                <Eye size={24} strokeWidth={2} />
+              </span>
+              <h3>Tầm nhìn</h3>
+            </div>
+            <p>
+              Trở thành đơn vị cung ứng suất ăn công nghiệp uy tín, đối tác tin
+              cậy đồng hành lâu dài cùng doanh nghiệp.
+            </p>
+          </article>
+        </div>
       </section>
       <section className="core-values wrap" aria-labelledby="core-values-title">
         <div className="core-values-heading">
           <Eyebrow>GIÁ TRỊ CỐT LÕI</Eyebrow>
-          <h2 id="core-values-title">
-            Bốn giá trị
-            <br />
-            dẫn dắt Thúy Luân.
-          </h2>
+          <h2 id="core-values-title">Bốn giá trị dẫn dắt Thúy Luân.</h2>
           <p>
             Những nguyên tắc chúng tôi giữ trong từng bữa ăn, từng giao dịch và
             từng mối quan hệ hợp tác.
           </p>
         </div>
-        <div className="core-values-board">
-          <ol className="core-values-grid">
-            {coreValues.map((value, index) => (
-              <li key={value.title} className="core-value">
-                <span className="core-value-number" aria-hidden="true">
-                  {index + 1}
-                </span>
-                <h3>{value.title}</h3>
-                <p>{value.text}</p>
-              </li>
-            ))}
-          </ol>
-          <div className="core-values-badge" aria-hidden="true">
-            <span>Giá trị</span>
-            <strong>Cốt lõi</strong>
-            <small>của Thúy Luân</small>
-          </div>
-        </div>
+        <CoreValuesBoard />
       </section>
-      <section className="kitchen-layout wrap" aria-labelledby="kitchen-layout-title">
+      <section
+        id="quy-trinh-thiet-lap-bep"
+        className="kitchen-layout wrap"
+        aria-labelledby="kitchen-layout-title"
+      >
         <div className="core-values-heading">
           <Eyebrow>QUY TRÌNH THIẾT LẬP BẾP</Eyebrow>
           <h2 id="kitchen-layout-title">
@@ -125,26 +143,54 @@ export default function AboutPage() {
             3D, lắp đặt hệ thống bếp và vận hành thử trước khi bàn giao.
           </p>
         </div>
-        <figure className="kitchen-layout-figure">
-          <img
-            src="/assets/kitchen-layout-process.png"
-            alt="Quy trình thiết lập bếp công nghiệp gồm khảo sát mặt bằng, thiết kế 2D và 3D, lắp đặt, vận hành thử và bàn giao"
-            width="1024"
-            height="1536"
-            loading="lazy"
-          />
-        </figure>
+        <ol className="kitchen-layout-steps" aria-label="Năm bước thiết lập bếp">
+          <li>
+            <span className="kitchen-layout-step-number" aria-hidden="true">01</span>
+            <div>
+              <h3>Khảo sát mặt bằng</h3>
+              <p>Khảo sát thực tế tại địa điểm triển khai.</p>
+            </div>
+          </li>
+          <li>
+            <span className="kitchen-layout-step-number" aria-hidden="true">02</span>
+            <div>
+              <h3>Thiết kế bản vẽ 2D</h3>
+              <p>Lên phương án bố trí mặt bằng bếp.</p>
+            </div>
+          </li>
+          <li>
+            <span className="kitchen-layout-step-number" aria-hidden="true">03</span>
+            <div>
+              <h3>Duyệt 2D &amp; thiết kế 3D</h3>
+              <p>Chốt bản vẽ 2D, lên phối cảnh 3D.</p>
+            </div>
+          </li>
+          <li>
+            <span className="kitchen-layout-step-number" aria-hidden="true">04</span>
+            <div>
+              <h3>Lắp đặt hệ thống bếp</h3>
+              <p>Triển khai lắp đặt bếp theo thiết kế.</p>
+            </div>
+          </li>
+          <li>
+            <span className="kitchen-layout-step-number" aria-hidden="true">05</span>
+            <div>
+              <h3>Vận hành thử &amp; bàn giao</h3>
+              <p>Vận hành thử, đưa bếp vào hoạt động.</p>
+            </div>
+          </li>
+        </ol>
       </section>
       <ProcessingSteps />
       <Certifications />
-      <section className="section wrap related-section">
+      <section className="section wrap gallery-section">
         <div className="section-heading">
           <div>
-            <Eyebrow>HOẠT ĐỘNG THỰC TẾ</Eyebrow>
+            <Eyebrow>TỪ NHỮNG ĐIỀU THỰC TẾ</Eyebrow>
             <h2>
-              Mỗi ngày phục vụ.
+              Nhìn gần hơn.
               <br />
-              Mỗi ngày hoàn thiện.
+              Tin tưởng nhiều hơn.
             </h2>
           </div>
           <a href="/hinh-anh/" className="text-link">
@@ -152,7 +198,7 @@ export default function AboutPage() {
             <ArrowUpRight size={18} />
           </a>
         </div>
-        <GalleryCategoryShowcase />
+        <GalleryCategoryShowcase homePage />
       </section>
     </main>
   );

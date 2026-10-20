@@ -239,8 +239,8 @@ export const documents = [
   },
   {
     title: "Thiết lập bếp ăn",
-    image: "/assets/kitchen-layout-process.png",
     description: "Phương án tổ chức không gian bếp.",
+    href: "/gioi-thieu/#quy-trinh-thiet-lap-bep",
   },
 ];
 

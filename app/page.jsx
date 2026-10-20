@@ -1,13 +1,8 @@
 import {
   ArrowUpRight,
-  Check,
-  Handshake,
-  HeartHandshake,
+  Eye,
   Leaf,
-  Scale,
-  ShieldCheck,
-  Truck,
-  UtensilsCrossed,
+  Target,
 } from "lucide-react";
 import {
   Eyebrow,
@@ -16,13 +11,12 @@ import {
   DocumentLibrary,
 } from "./components/site";
 import GalleryCategoryShowcase from "./components/gallery-category-showcase";
-import { articles, coreValues, process } from "./data";
+import { articles, process } from "./data";
 import Certifications from "./components/certifications";
 import FeaturedMealsSlider from "./components/featured-meals-slider";
 import HeroSlider from "./components/hero-slider";
 import SolutionCards from "./components/solution-cards";
-
-const coreValueIcons = [HeartHandshake, ShieldCheck, Handshake, Scale];
+import CoreValuesBoard from "./components/core-values-board";
 
 export default function Home() {
   return (
@@ -104,67 +98,47 @@ export default function Home() {
       </section>
 
       <section className="promise-section">
-        <div className="promise-photo">
-          <a
-            className="promise-infographic"
-            href="/assets/kitchen-process-thuy-luan.png"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Mở ảnh quy trình bếp ăn Thúy Luân ở kích thước đầy đủ"
-          >
-            <img
-              src="/assets/kitchen-process-thuy-luan.png"
-              alt="Quy trình bếp ăn Thúy Luân gồm tám bước, từ tiếp nhận nguyên liệu đến phục vụ khách hàng"
-              width="1536"
-              height="1024"
-              loading="lazy"
-            />
-          </a>
-        </div>
         <div className="promise-copy">
-          <Eyebrow light>GIÁ TRỊ CỦA MỘT ĐỐI TÁC</Eyebrow>
-          <h2>
-            An tâm từng bữa ăn.
-            <br />
-            Vững vàng mỗi
-            <br />
-            <em>ngày làm việc.</em>
-          </h2>
-          <p>
-            Được thành lập năm 2021, Thúy Luân hoạt động trong lĩnh vực cung ứng
-            thực phẩm và suất ăn công nghiệp tại Ninh Bình và miền Bắc.
-          </p>
-          <div className="promise-points">
-            {[
-              [
-                ShieldCheck,
-                "Chú trọng an toàn",
-                "Quan tâm đến nguyên liệu, khâu chế biến và điều kiện phục vụ.",
-              ],
-              [
-                UtensilsCrossed,
-                "Thực đơn linh hoạt",
-                "Trao đổi phương án phù hợp ngân sách và khẩu vị người lao động.",
-              ],
-              [
-                Truck,
-                "Phối hợp xuyên suốt",
-                "Thống nhất lịch phục vụ và tiếp nhận phản hồi từ doanh nghiệp.",
-              ],
-            ].map(([Icon, t, d]) => (
-              <div key={t}>
-                <Icon size={24} />
-                <div>
-                  <h3>{t}</h3>
-                  <p>{d}</p>
-                </div>
+          <h2>Sứ mệnh &amp; Tầm nhìn</h2>
+          <div className="promise-direction">
+            <article>
+              <Target size={25} strokeWidth={1.7} aria-hidden="true" />
+              <div>
+                <h3>Sứ mệnh</h3>
+                <p>
+                  Mang đến những bữa ăn sạch, ngon, an toàn và chất lượng, trao
+                  tận tay từng khách hàng.
+                </p>
               </div>
-            ))}
+            </article>
+            <article>
+              <Eye size={25} strokeWidth={1.7} aria-hidden="true" />
+              <div>
+                <h3>Tầm nhìn</h3>
+                <p>
+                  Trở thành đơn vị cung ứng suất ăn công nghiệp uy tín, đối tác
+                  tin cậy đồng hành lâu dài cùng doanh nghiệp.
+                </p>
+              </div>
+            </article>
           </div>
-          <a className="text-link light" href="/gioi-thieu/">
+        </div>
+        <section className="promise-values" aria-label="Giá trị cốt lõi của Thúy Luân">
+          <h2 className="promise-values-title">Giá trị cốt lõi</h2>
+          <CoreValuesBoard />
+          <a className="promise-values-link" href="/gioi-thieu/">
             Hiểu thêm về Thúy Luân
-            <ArrowUpRight size={19} />
+            <ArrowUpRight size={19} aria-hidden="true" />
           </a>
+        </section>
+        <div className="promise-photo">
+          <img
+            src="/assets/kitchen-process-thuy-luan.png"
+            alt="Quy trình bếp ăn Thúy Luân gồm tám bước, từ tiếp nhận nguyên liệu đến phục vụ khách hàng"
+            width="1536"
+            height="1024"
+            loading="lazy"
+          />
         </div>
       </section>
 
@@ -207,7 +181,7 @@ export default function Home() {
         <div className="wrap">
           <div className="section-heading">
             <div>
-              <Eyebrow>GIÁ TRỊ & HÀNH TRÌNH HỢP TÁC</Eyebrow>
+              <Eyebrow>CÁCH CHÚNG TÔI PHỐI HỢP</Eyebrow>
               <h2>
                 Rõ ràng từ bước đầu.
                 <br />
@@ -217,24 +191,6 @@ export default function Home() {
             <ButtonLink className="outline" href="/lien-he/">
               Bắt đầu trao đổi
             </ButtonLink>
-          </div>
-          <div className="values-band">
-            <div className="values-band-intro">
-              <span className="values-band-label">Giá trị cốt lõi</span>
-              <p>Nền tảng cho mọi bữa ăn và mọi mối hợp tác của Thúy Luân.</p>
-            </div>
-            <ul className="values-band-list">
-              {coreValues.map((value, index) => {
-                const Icon = coreValueIcons[index];
-                return (
-                  <li key={value.title}>
-                    <Icon size={22} strokeWidth={1.6} aria-hidden="true" />
-                    <h3>{value.title}</h3>
-                    <p>{value.text}</p>
-                  </li>
-                );
-              })}
-            </ul>
           </div>
           <div className="process-subhead">
             <span>Hành trình hợp tác</span>

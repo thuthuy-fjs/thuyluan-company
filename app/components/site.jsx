@@ -398,7 +398,7 @@ export function DocumentLibrary() {
     <>
       <div className="document-list">
         {documents.map((d, i) => (
-          <DocumentItem key={d.image} document={d} number={i + 1} onOpen={() => setActive(i)} />
+          <DocumentItem key={d.href || d.image} document={d} number={i + 1} onOpen={() => setActive(i)} />
         ))}
       </div>
       <Modal
