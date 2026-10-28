@@ -68,9 +68,12 @@ http
     try {
       const body = [];
       let size = 0;
+      const maxSize = req.url?.startsWith("/api/admin/publish")
+        ? 24 * 1024 * 1024
+        : 17000;
       for await (const chunk of req) {
         size += chunk.length;
-        if (size > 17000) {
+        if (size > maxSize) {
           res.writeHead(413);
           res.end();
           return;

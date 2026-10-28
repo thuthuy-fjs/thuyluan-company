@@ -20,6 +20,29 @@ npm run preview
 
 `out/` chứa HTML, CSS, JS và ảnh; `worker/index.js` phục vụ tài nguyên, chuyển hướng URL cũ và cung cấp API báo giá tùy chọn. `wrangler.jsonc` đã khai báo binding `ASSETS`. Local workerd cần GLIBC 2.35 trở lên trên Linux; nếu máy cũ hơn, dùng `npm run preview:static` để xem đúng bản build bằng Node.js tại `http://localhost:4173`.
 
+### Chạy trang quản trị trên máy local
+
+`npm run dev` chỉ chạy Next.js nên không có API đăng nhập của Worker. Để thử `/admin/`, tạo file `.env.local` (đã được Git bỏ qua):
+
+```dotenv
+ADMIN_PIN=1234567890123456
+ADMIN_SESSION_SECRET=thay-bang-chuoi-ngau-nhien-dai-it-nhat-32-byte
+GITHUB_TOKEN=thay-bang-fine-grained-token-cua-ban
+GITHUB_OWNER=thuthuy-fjs
+GITHUB_REPO=thuyluan-company
+GITHUB_BRANCH=feature/pin-admin-editor
+```
+
+Đổi PIN thành mã riêng 10–16 chữ số; tạo session secret bằng `openssl rand -hex 32`. Token GitHub cần quyền **Contents: Read and write** chỉ trên repo này. Dùng nhánh `feature/pin-admin-editor` để thử xuất bản mà không thay đổi `main`; nút Xuất bản vẫn tạo commit thật trên nhánh đó.
+
+```bash
+npm ci
+npm run build
+node --env-file=.env.local scripts/preview.mjs
+```
+
+Mở `http://localhost:4173/admin/`. Sau khi xuất bản, dữ liệu quản trị đọc phiên bản mới từ GitHub, còn trang tĩnh local chỉ cập nhật sau khi dừng preview, chạy `git pull --ff-only`, `npm run build` và mở preview lại. Không cần tài khoản Cloudflare để chạy theo cách này.
+
 ## Triển khai Cloudflare Workers
 
 ```bash
