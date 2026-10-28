@@ -85,7 +85,7 @@ export default function Certifications() {
               CHỨNG CHỈ – CHỨNG NHẬN · {active + 1} / {certificates.length}
             </p>
             <h2>{selected.title}</h2>
-            {selected.pages ? (
+            {selected.pages.length > 1 ? (
               <div className="certificate-pages">
                 {selected.pages.map((page, pageIndex) => (
                   <figure className="certificate-page" key={page.image}>

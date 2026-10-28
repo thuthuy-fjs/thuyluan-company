@@ -212,6 +212,7 @@ test("publishing a gallery image and replacement logo keeps one logo", async () 
   const encoded = (value) => Buffer.from(JSON.stringify(value)).toString("base64");
   const id = "upload-00000000-0000-4000-8000-000000000000.png";
   const documentId = "upload-00000000-0000-4000-8000-000000000001.png";
+  const certificatePageId = "upload-00000000-0000-4000-8000-000000000002.png";
   const oldDocumentId = "logo.png";
   const png = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Y9HMV4AAAAASUVORK5CYII=";
   let tree;
@@ -236,10 +237,19 @@ test("publishing a gallery image and replacement logo keeps one logo", async () 
     }, cookie), env);
     assert.equal(removeLogo.status, 400);
     assert.match((await removeLogo.json()).error, /Logo/);
+    const emptyCertificate = await handleAdmin(adminRequest("draft", {
+      baseHead: "head", basePublishedHead: "head", text: {}, deletes: [], replacements: {}, uploads: [],
+      certificates: [{ id: "certificate-new", title: "Chứng nhận lỗi", category: "ISO 22000", pages: [] }],
+    }, cookie), env);
+    assert.equal(emptyCertificate.status, 400);
+    assert.match((await emptyCertificate.json()).error, /1 đến 12 trang/);
     const response = await handleAdmin(adminRequest("draft", {
-      baseHead: "head", basePublishedHead: "head", text: {}, deletes: [oldDocumentId], replacements: { [oldDocumentId]: documentId }, sliderImages: { "home.solutions.office.2": `/assets/${id}` }, uploads: [
+      baseHead: "head", basePublishedHead: "head", text: {}, deletes: [oldDocumentId], replacements: { [oldDocumentId]: documentId }, sliderImages: { "home.solutions.office.2": `/assets/${id}` },
+      certificates: [{ id: "certificate-new", title: "Chứng nhận mới", category: "ISO 22000", pages: [{ title: "Trang 1", image: `/assets/${certificatePageId}` }] }],
+      uploads: [
         { id, base64: png, width: 1, height: 1, category: "Phục vụ", title: "Ảnh mới" },
         { id: documentId, base64: png, width: 1, height: 1, category: "Logo", title: "Logo mới" },
+        { id: certificatePageId, base64: png, width: 1, height: 1, category: "Chứng chỉ – Chứng nhận", title: "Trang 1" },
       ],
     }, cookie), env);
     assert.equal(response.status, 200, await response.text());
@@ -250,6 +260,7 @@ test("publishing a gallery image and replacement logo keeps one logo", async () 
     assert.equal(nextContent.galleryAdditions[0].image, `/assets/${id}`);
     assert.equal(nextContent.galleryAdditions[0].category, "Phục vụ");
     assert.equal(nextContent.sliderImages["home.solutions.office.2"], `/assets/${id}`);
+    assert.equal(nextContent.certificates[0].pages[0].image, `/assets/${certificatePageId}`);
     const nextMedia = JSON.parse(tree.find((item) => item.path === "app/media-catalog.json").content);
     assert.equal(nextMedia[0].width, 1);
     assert.equal(nextMedia.find((item) => item.id === documentId).protected, true);

@@ -22,7 +22,7 @@ test("admin edits the live page, saves a draft, then publishes", async ({ page }
   await page.route("**/api/admin/draft", async (route) => {
     saved = route.request().postDataJSON();
     draftHead = "draft123456";
-    currentContent = { ...content, text: saved.text, sliderImages: saved.sliderImages };
+    currentContent = { ...content, text: saved.text, sliderImages: saved.sliderImages, certificates: saved.certificates };
     await route.fulfill({ json: { ok: true, draftCommit: draftHead } });
   });
   await page.route("**/api/admin/publish", async (route) => {
@@ -119,24 +119,13 @@ test("admin edits the live page, saves a draft, then publishes", async ({ page }
   await expect(page.getByLabel("Lọc nhóm ảnh")).toHaveValue("Không gian bếp");
   await expect(page.locator(".admin-media-card").first().getByLabel("Tên ảnh")).toHaveValue("new-photo");
   await page.getByLabel("Lọc nhóm ảnh").selectOption("Chứng chỉ – Chứng nhận");
-  await page.getByPlaceholder("Tìm nội dung hoặc ảnh…").fill("business-registration-2026-preview.webp");
-  await page.getByRole("button", { name: "Thay tệp ảnh" }).click();
-  const replaceDialog = page.getByRole("dialog", { name: "Thay tệp ảnh" });
-  await expect(replaceDialog.getByRole("img", { name: "Ảnh hiện tại" })).toBeVisible();
-  await replaceDialog.locator("input[type=file]").setInputFiles({
-    name: "wrong-ratio.png", mimeType: "image/png",
-    buffer: await readFile(new URL("../../public/assets/zalo.png", import.meta.url)),
-  });
-  await replaceDialog.getByRole("button", { name: "Thay trong bản nháp" }).click();
-  await expect(replaceDialog.getByRole("alert")).toContainText("tỷ lệ gần với ảnh cũ");
-  await replaceDialog.locator("input[type=file]").setInputFiles({
+  await expect(page.locator(".admin-certificate-item")).toHaveCount(10);
+  await page.locator(".admin-certificate-item").first().locator("summary").click();
+  await page.locator(".admin-certificate-item").first().locator(".admin-certificate-page input[type=file]").setInputFiles({
     name: "registration-updated.webp", mimeType: "image/webp",
     buffer: await readFile(new URL("../../public/assets/business-registration-2026-preview.webp", import.meta.url)),
   });
-  await replaceDialog.getByRole("button", { name: "Thay trong bản nháp" }).click();
-  await expect(replaceDialog).toHaveCount(0);
-  await expect(page.locator(".admin-media-card.is-deleted")).toHaveCount(1);
-  await expect(page.getByText("Đang thay bằng ảnh mới trong bản nháp.")).toBeVisible();
+  await expect(page.locator(".admin-certificate-item").first().locator("summary img")).toHaveAttribute("src", /^blob:/);
   await page.getByRole("button", { name: /Xem trước/ }).click();
   await expect(page.getByText("Bữa ăn mới mỗi ngày")).toBeVisible();
   await expect(page.frameLocator('iframe[title^="Bản xem trực tiếp"]').locator('[data-editor-slider-slot="home.solutions.factory.2"]')).toHaveAttribute("src", /^blob:/);
@@ -153,8 +142,9 @@ test("admin edits the live page, saves a draft, then publishes", async ({ page }
   expect(saved).not.toHaveProperty("theme");
   expect(saved.buttons["home.hero.consult"].label).toBe("Tư vấn ngay");
   expect(saved.deletes).toContain("gallery-phuc-vu-01.webp");
-  expect(saved.deletes).toContain("business-registration-2026-preview.webp");
-  expect(saved.replacements["business-registration-2026-preview.webp"]).toMatch(/^upload-.*\.webp$/);
+  expect(saved.deletes).toContain("business-registration-2026.webp");
+  expect(saved.replacements["business-registration-2026.webp"]).toMatch(/^upload-.*\.webp$/);
+  expect(saved.certificates[0].pages[0].image).toBe(`/assets/${saved.replacements["business-registration-2026.webp"]}`);
   expect(saved.replacements["gallery-phuc-vu-01.webp"]).toBeTruthy();
   expect(saved.uploads).toHaveLength(4);
   expect(saved.uploads[0].category).toBe("Khác");
@@ -199,6 +189,47 @@ test("uploading a logo replaces the existing logo in one draft", async ({ page }
   expect(saved.uploads).toHaveLength(1);
   expect(saved.uploads[0].category).toBe("Logo");
   expect(saved.replacements["logo.png"]).toBe(saved.uploads[0].id);
+});
+
+test("adding a certificate stores its ordered pages as one item", async ({ page }) => {
+  let saved;
+  await page.route("**/api/admin/session", (route) => route.fulfill({ json: { authenticated: true } }));
+  await page.route("**/api/admin/state", (route) => route.fulfill({ json: {
+    head: "head123", publishedHead: "head123", draftHead: null, hasUnpublishedDraft: false,
+    content, publishedContent: content, media, publishedMedia: media,
+  } }));
+  await page.route("**/api/admin/draft", (route) => {
+    saved = route.request().postDataJSON();
+    return route.fulfill({ json: { draftCommit: "draft123456" } });
+  });
+  await page.goto("/admin/");
+  await page.getByRole("button", { name: "Hình ảnh" }).click();
+  await page.getByLabel("Lọc nhóm ảnh").selectOption("Chứng chỉ – Chứng nhận");
+  await expect(page.locator(".admin-certificate-item")).toHaveCount(10);
+  await page.getByRole("button", { name: "+ Thêm chứng nhận" }).click();
+  const form = page.locator(".admin-certificate-create");
+  await form.getByLabel("Tên chứng nhận").fill("Chứng nhận mới");
+  await form.getByLabel("Loại chứng nhận").fill("ISO 22000");
+  const buffer = await readFile(new URL("../../public/assets/zalo.png", import.meta.url));
+  await form.locator("input[type=file]").setInputFiles([
+    { name: "trang-1.png", mimeType: "image/png", buffer },
+    { name: "trang-2.png", mimeType: "image/png", buffer },
+    { name: "trang-3.png", mimeType: "image/png", buffer },
+  ]);
+  await form.getByRole("button", { name: "Tạo chứng nhận" }).click();
+  await expect(page.locator(".admin-certificate-item")).toHaveCount(11);
+  const added = page.locator(".admin-certificate-item").last();
+  await expect(added).toContainText("Chứng nhận mới");
+  await expect(added.locator("summary img")).toHaveAttribute("src", /^blob:/);
+  await added.locator("summary").click();
+  await expect(added.locator(".admin-certificate-page")).toHaveCount(3);
+  await added.locator(".admin-certificate-page").last().getByRole("button", { name: "↑ Lên" }).click();
+  await page.getByRole("button", { name: "Lưu nháp" }).click();
+  await expect(page.getByText(/Đã lưu bản nháp/)).toBeVisible();
+  expect(saved.uploads).toHaveLength(3);
+  expect(saved.uploads.every((item) => item.category === "Chứng chỉ – Chứng nhận")).toBe(true);
+  expect(saved.certificates).toHaveLength(11);
+  expect(saved.certificates.at(-1).pages.map((item) => item.image)).toEqual([saved.uploads[0], saved.uploads[2], saved.uploads[1]].map((item) => `/assets/${item.id}`));
 });
 
 test("publishing with unsaved edits saves the draft first", async ({ page }) => {

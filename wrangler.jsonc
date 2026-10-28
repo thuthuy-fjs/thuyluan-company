@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "thuy-luan-corporate-food-service",
+  "name": "congnghiepthuyluan",
   "main": "worker/index.js",
   "compatibility_date": "2026-10-15",
   "vars": {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import "../data";
+import { baseCertificates } from "../data";
 import "../editor-fields";
 import "../services-data";
 import { getEditableFields } from "../editor-content";
@@ -9,6 +9,7 @@ import { sliderSlotLabel } from "../slider-slots";
 import bundledMedia from "../media-catalog.json";
 import { imageCategories, normalizedCategory } from "../media-groups";
 import VisualEditor from "./visual-editor";
+import CertificateManager from "./certificate-manager";
 
 const fields = getEditableFields();
 const bundledMediaIds = new Set(bundledMedia.map((item) => item.id));
@@ -56,6 +57,7 @@ export default function AdminPage() {
   const [textDraft, setTextDraft] = useState({});
   const [buttonsDraft, setButtonsDraft] = useState(withButtons());
   const [sliderDraft, setSliderDraft] = useState({});
+  const [certificateDraft, setCertificateDraft] = useState(baseCertificates);
   const [mediaDraft, setMediaDraft] = useState({});
   const [replacements, setReplacements] = useState({});
   const [autoReplacements, setAutoReplacements] = useState([]);
@@ -84,6 +86,7 @@ export default function AdminPage() {
       setTextDraft(next.content.text || {});
       setButtonsDraft(withButtons(next.content.buttons));
       setSliderDraft(next.content.sliderImages || {});
+      setCertificateDraft(next.content.certificates || baseCertificates);
       setPhase("ready");
     } catch (error) { setMessage(error.message); setPhase(signedIn ? "error" : "login"); }
   };
@@ -135,7 +138,7 @@ export default function AdminPage() {
         const bitmap = await createImageBitmap(file);
         const width = bitmap.width, height = bitmap.height;
         bitmap.close();
-        if (removeOriginal && !isLogo) {
+        if (removeOriginal && !isLogo && targetCategory !== "Chứng chỉ – Chứng nhận") {
           const ratio = (width / height) / (replaced.width / replaced.height);
           if (ratio < 0.7 || ratio > 1.4) throw new Error("Ảnh thay thế cần có tỷ lệ gần với ảnh cũ. Hãy chọn ảnh khác.");
         }
@@ -157,7 +160,7 @@ export default function AdminPage() {
         }
       }
       else { setFilterCategory(targetCategory); setSearch(""); setTab("media"); }
-      return true;
+      return next;
     } catch (error) { next.forEach((item) => URL.revokeObjectURL(item.preview)); setMessage(error.message); setUploadError(error.message); return false; }
   };
   const removeUpload = (id) => {
@@ -180,6 +183,53 @@ export default function AdminPage() {
   const updateUpload = (id, patch) => {
     setUploads((items) => items.map((item) => item.id === id ? { ...item, ...patch } : item));
     if (patch.category) setFilterCategory(patch.category);
+  };
+  const addCertificate = async ({ title, category, files }) => {
+    if (!title || !category || !files.length) { setMessage("Điền tên, loại chứng nhận và chọn ít nhất một trang."); return false; }
+    const added = await addFiles(files, "", "", "Chứng chỉ – Chứng nhận");
+    if (!added) return false;
+    setCertificateDraft((items) => [...items, {
+      id: `certificate-${crypto.randomUUID()}`, title, category,
+      pages: added.map((item, index) => ({ title: files[index].name.replace(/\.[^.]+$/, "").slice(0, 120) || `Trang ${index + 1}`, image: `/assets/${item.id}` })),
+    }]);
+    return true;
+  };
+  const addCertificatePages = async (certificateId, files) => {
+    const certificate = certificateDraft.find((item) => item.id === certificateId);
+    if (!certificate || certificate.pages.length + files.length > 12) { setMessage("Mỗi chứng nhận có tối đa 12 trang."); return; }
+    const added = await addFiles(files, "", "", "Chứng chỉ – Chứng nhận");
+    if (!added) return;
+    setCertificateDraft((items) => items.map((item) => item.id === certificateId ? { ...item, pages: [...item.pages, ...added.map((image, index) => ({ title: files[index].name.replace(/\.[^.]+$/, "").slice(0, 120) || `Trang ${item.pages.length + index + 1}`, image: `/assets/${image.id}` }))] } : item));
+  };
+  const replaceCertificatePage = async (certificateId, pageIndex, file) => {
+    const certificate = certificateDraft.find((item) => item.id === certificateId);
+    const oldId = certificate?.pages[pageIndex]?.image.slice(8);
+    if (!oldId) return;
+    let nextId;
+    const pending = uploads.find((item) => item.id === oldId);
+    if (pending) {
+      try {
+        if (!/^image\/(?:png|jpeg|webp)$/.test(file.type) || file.size > 4_000_000) throw new Error("Chỉ nhận PNG, JPG hoặc WebP tối đa 4 MB mỗi ảnh.");
+        const bitmap = await createImageBitmap(file);
+        const width = bitmap.width, height = bitmap.height;
+        bitmap.close();
+        const preview = URL.createObjectURL(file);
+        setUploads((items) => items.map((item) => item.id === oldId ? { ...item, file, preview, width, height, title: file.name.replace(/\.[^.]+$/, "") } : item));
+        URL.revokeObjectURL(pending.preview);
+        nextId = oldId;
+      } catch (error) { setMessage(error.message); return; }
+    } else {
+      const added = await addFiles([file], oldId, "", "Chứng chỉ – Chứng nhận", true);
+      if (!added) return;
+      nextId = added[0].id;
+    }
+    setCertificateDraft((items) => items.map((item) => item.id === certificateId ? { ...item, pages: item.pages.map((page, index) => index === pageIndex ? { ...page, image: `/assets/${nextId}` } : page) } : item));
+  };
+  const removeNewCertificate = (certificateId) => {
+    const certificate = certificateDraft.find((item) => item.id === certificateId);
+    if (!certificate || baseCertificates.some((item) => item.id === certificateId) || state?.content.certificates?.some((item) => item.id === certificateId)) return;
+    for (const page of certificate.pages) if (uploads.some((item) => item.id === page.image.slice(8))) removeUpload(page.image.slice(8));
+    setCertificateDraft((items) => items.filter((item) => item.id !== certificateId));
   };
   const updateText = (id, value) => setTextDraft((old) => {
     const next = { ...old };
@@ -223,7 +273,7 @@ export default function AdminPage() {
     setDeletes((items) => [...items, id]);
     setMessage("");
   };
-  const mediaMatches = media.filter((item) => !(item.category === "Logo" && deletes.includes(item.id) && replacements[item.id]) && (filterCategory === "Tất cả" || (mediaDraft[item.id]?.category ?? item.category) === filterCategory) && `${item.id} ${item.title || ""} ${item.category}`.toLocaleLowerCase("vi").includes(search.toLocaleLowerCase("vi")));
+  const mediaMatches = media.filter((item) => item.category !== "Chứng chỉ – Chứng nhận" && !(item.category === "Logo" && deletes.includes(item.id) && replacements[item.id]) && (filterCategory === "Tất cả" || (mediaDraft[item.id]?.category ?? item.category) === filterCategory) && `${item.id} ${item.title || ""} ${item.category}`.toLocaleLowerCase("vi").includes(search.toLocaleLowerCase("vi")));
   const changedText = fields.filter((field) => (textDraft[field.id] ?? field.defaultValue) !== (state?.content.text?.[field.id] ?? field.defaultValue));
   const changedButtons = Object.keys(defaultButtons).filter((id) => JSON.stringify(buttonsDraft[id]) !== JSON.stringify(withButtons(state?.content.buttons)[id]));
   const changedSlides = [...new Set([...Object.keys(sliderDraft), ...Object.keys(state?.content.sliderImages || {})])].filter((slot) => sliderDraft[slot] !== state?.content.sliderImages?.[slot]);
@@ -234,7 +284,8 @@ export default function AdminPage() {
   const savedNewImages = (state?.media || []).filter((item) => !publishedIds.has(item.id));
   const savedDeletedIds = new Set((state?.publishedMedia || []).filter((item) => !(state?.media || []).some((draft) => draft.id === item.id)).map((item) => item.id));
   const previewImageIds = [...new Set([...savedDeletedIds, ...deletes, ...Object.keys(previewReplacements)])];
-  const changes = changedText.length + changedButtons.length + changedSlides.length + uploads.length + deletes.length + Object.keys(replacements).length + Object.keys(mediaDraft).length;
+  const changedCertificates = JSON.stringify(certificateDraft) !== JSON.stringify(state?.content.certificates || baseCertificates);
+  const changes = changedText.length + changedButtons.length + changedSlides.length + Number(changedCertificates) + uploads.length + deletes.length + Object.keys(replacements).length + Object.keys(mediaDraft).length;
 
   const writeDraft = async () => {
     const fileData = await Promise.all(uploads.map(async (item) => ({
@@ -243,12 +294,12 @@ export default function AdminPage() {
     })));
     const result = await api("draft", {
       method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ baseHead: state.head, basePublishedHead: state.publishedHead, text: textDraft, buttons: buttonsDraft, sliderImages: sliderDraft, mediaUpdates: mediaDraft, replacements, deletes, uploads: fileData }),
+      body: JSON.stringify({ baseHead: state.head, basePublishedHead: state.publishedHead, text: textDraft, buttons: buttonsDraft, sliderImages: sliderDraft, certificates: certificateDraft, mediaUpdates: mediaDraft, replacements, deletes, uploads: fileData }),
     });
     uploads.forEach((item) => URL.revokeObjectURL(item.preview));
     setUploads([]); setDeletes([]); setReplacements({}); setAutoReplacements([]); setMediaDraft({});
     const next = await api("state");
-    setState(availableState(next)); setTextDraft(next.content.text || {}); setButtonsDraft(withButtons(next.content.buttons)); setSliderDraft(next.content.sliderImages || {});
+    setState(availableState(next)); setTextDraft(next.content.text || {}); setButtonsDraft(withButtons(next.content.buttons)); setSliderDraft(next.content.sliderImages || {}); setCertificateDraft(next.content.certificates || baseCertificates);
     return { result, next };
   };
   const saveDraft = async () => {
@@ -269,7 +320,7 @@ export default function AdminPage() {
         body: JSON.stringify({ draftHead: heads.draftHead, publishedHead: heads.publishedHead }),
       });
       const next = await api("state");
-      setState(availableState(next)); setTextDraft(next.content.text || {}); setButtonsDraft(withButtons(next.content.buttons)); setSliderDraft(next.content.sliderImages || {});
+      setState(availableState(next)); setTextDraft(next.content.text || {}); setButtonsDraft(withButtons(next.content.buttons)); setSliderDraft(next.content.sliderImages || {}); setCertificateDraft(next.content.certificates || baseCertificates);
       setMessage(`Đã xuất bản ${result.commit.slice(0, 8)}. Website sẽ cập nhật sau khi build và triển khai xong.${result.draftReset ? "" : " Cần đồng bộ lại nhánh nháp."}`);
     } catch (error) { setMessage(error.message); }
     finally { setBusy(false); }
@@ -309,10 +360,11 @@ export default function AdminPage() {
       {tab === "text" && <VisualEditor fields={fields} savedText={state.content.text || {}} publishedText={state.publishedContent?.text || {}} draftText={textDraft} onChange={updateText} buttons={buttonsDraft} onButtonChange={(id, patch) => setButtonsDraft((old) => ({ ...old, [id]: { ...old[id], ...patch } }))} onImageUpload={(id, files) => addFiles(files, id, "", "Khác", false, true)} onSliderUpload={(slot, id, files) => addFiles(files, id, slot, "Khác", false, true)} onSliderChange={(slot, id) => setSliderDraft((old) => { const next = { ...old }; if (id) next[slot] = `/assets/${id}`; else delete next[slot]; return next; })} sliderImages={sliderDraft} replacements={previewReplacements} media={media} deletedIds={deletes} />}
       {tab === "media" && <div className="admin-media-panel">
         <div className="admin-media-toolbar">
-          <button ref={uploadButtonRef} className="admin-upload" type="button" onClick={() => { setReplaceImageId(""); setUploadCategory("Khác"); setPendingFiles([]); setUploadError(""); setMessage(""); setUploadOpen(true); }}>+ Thêm ảnh</button>
+          {filterCategory !== "Chứng chỉ – Chứng nhận" && <button ref={uploadButtonRef} className="admin-upload" type="button" onClick={() => { setReplaceImageId(""); setUploadCategory("Khác"); setPendingFiles([]); setUploadError(""); setMessage(""); setUploadOpen(true); }}>+ Thêm ảnh</button>}
           <label>Lọc nhóm ảnh<select value={filterCategory} onChange={(event) => setFilterCategory(event.target.value)}><option>Tất cả</option>{imageCategories.map((category) => <option key={category}>{category}</option>)}</select></label>
         </div>
         <p className="admin-help">Ảnh trong bốn nhóm thư viện sẽ xuất hiện ở trang Hình ảnh thực tế sau khi xuất bản. Logo luôn có một ảnh; tải logo mới sẽ thay và xóa tệp cũ.</p>
+        {(filterCategory === "Chứng chỉ – Chứng nhận" || filterCategory === "Tất cả") && <CertificateManager certificates={certificateDraft} media={media} search={search} onChange={setCertificateDraft} onAdd={addCertificate} onReplacePage={replaceCertificatePage} onAddPages={addCertificatePages} onRemove={removeNewCertificate} canRemove={(id) => !baseCertificates.some((item) => item.id === id) && !state?.content.certificates?.some((item) => item.id === id)} />}
         <div className="admin-media-grid">{mediaMatches.map((item) => {
           const uploaded = uploads.some((entry) => entry.id === item.id);
           const draft = mediaDraft[item.id] || {};
@@ -322,7 +374,7 @@ export default function AdminPage() {
               <small>{item.width} × {item.height}</small>
               <label>Tên ảnh<input value={uploaded ? item.title : draft.title ?? item.title ?? item.id} onChange={(event) => uploaded ? updateUpload(item.id, { title: event.target.value }) : setMediaDraft((old) => ({ ...old, [item.id]: { ...old[item.id], title: event.target.value } }))} /></label>
               <label>Nhóm ảnh<select value={uploaded ? item.category : draft.category ?? item.category} disabled={item.category === "Logo"} onChange={(event) => { if (uploaded) updateUpload(item.id, { category: event.target.value }); else { setMediaDraft((old) => ({ ...old, [item.id]: { ...old[item.id], category: event.target.value } })); setFilterCategory(event.target.value); } }}>
-                {imageCategories.filter((value) => value !== "Logo" || item.category === "Logo").map((value) => <option key={value}>{value}</option>)}
+                {imageCategories.filter((value) => value !== "Chứng chỉ – Chứng nhận" && (value !== "Logo" || item.category === "Logo")).map((value) => <option key={value}>{value}</option>)}
               </select></label>
               {uploaded ? <button type="button" onClick={() => removeUpload(item.id)}>Bỏ ảnh mới</button> : <>
                 {replacements[item.id]?.startsWith("upload-") && deletes.includes(item.id) && <p className="admin-replacement-note">Đang thay bằng ảnh mới trong bản nháp.</p>}
@@ -332,7 +384,7 @@ export default function AdminPage() {
             </div>
           </article>;
         })}</div>
-        {!mediaMatches.length && <p>Không tìm thấy ảnh.</p>}
+        {!mediaMatches.length && filterCategory !== "Chứng chỉ – Chứng nhận" && <p>Không tìm thấy ảnh.</p>}
       </div>}
       {uploadOpen && <div className="admin-upload-overlay" onMouseDown={(event) => { if (event.target === event.currentTarget && !uploading) closeUploadDialog(); }}>
         <section className="admin-upload-dialog" role="dialog" aria-modal="true" aria-labelledby="admin-upload-title">
@@ -343,7 +395,7 @@ export default function AdminPage() {
           <button ref={uploadPickerRef} className="admin-upload-picker" type="button" onClick={() => uploadFileRef.current?.click()}>Chọn ảnh để tải lên</button>
           <input ref={uploadFileRef} className="admin-upload-file-input" type="file" accept="image/png,image/jpeg,image/webp" multiple={!replaceImageId && uploadCategory !== "Logo"} onChange={(event) => { setPendingFiles([...event.target.files]); setUploadError(""); }} />
           {pendingFiles.length > 0 && <div className="admin-upload-files"><strong>Đã chọn {pendingFiles.length} ảnh</strong><ul>{pendingFiles.map((file, index) => <li key={`${file.name}-${index}`}>{file.name}</li>)}</ul></div>}
-          {!replaceImageId && <label className="admin-upload-category">Nhóm ảnh<select value={uploadCategory} onChange={(event) => setUploadCategory(event.target.value)}>{imageCategories.map((category) => <option key={category}>{category}</option>)}</select></label>}
+          {!replaceImageId && <label className="admin-upload-category">Nhóm ảnh<select value={uploadCategory} onChange={(event) => setUploadCategory(event.target.value)}>{imageCategories.filter((category) => category !== "Chứng chỉ – Chứng nhận").map((category) => <option key={category}>{category}</option>)}</select></label>}
           {uploadError && <p className="admin-error" role="alert">{uploadError}</p>}
           <div className="admin-upload-actions"><button type="button" onClick={closeUploadDialog} disabled={uploading}>Hủy</button><button type="button" disabled={!pendingFiles.length || uploading} onClick={async () => { setUploading(true); const added = await addFiles(pendingFiles, replaceImageId, "", uploadCategory, Boolean(replaceImageId)); setUploading(false); if (added) closeUploadDialog(); }}>{uploading ? "Đang tải…" : replaceImageId || uploadCategory === "Logo" ? "Thay trong bản nháp" : "Thêm vào bản nháp"}</button></div>
         </section>
@@ -358,6 +410,8 @@ export default function AdminPage() {
         {previewText.map((field) => <div className="admin-preview-row" key={field.id}><small>{field.section}</small><p>{textDraft[field.id] ?? field.defaultValue}</p></div>)}
         <h3>Ảnh trong slider ({previewSlides.length})</h3>
         {previewSlides.map((slot) => { const item = media.find((entry) => entry.id === sliderDraft[slot]?.slice(8)); return <div className="admin-preview-row" key={slot}><small>{sliderSlotLabel(slot)}</small><p>{item?.title || "Ảnh gốc"}</p>{item && <div className="admin-preview-images"><img src={mediaSrc(item)} alt={item.title || "Ảnh trong slider"} /></div>}</div>; })}
+        <h3>Chứng chỉ – Chứng nhận {changedCertificates ? "(đã chỉnh sửa)" : "(không đổi)"}</h3>
+        {changedCertificates && certificateDraft.map((certificate) => <div className="admin-preview-row" key={certificate.id}><small>{certificate.category}</small><p>{certificate.title} · {certificate.pages.length} trang</p></div>)}
         <h3>Ảnh mới ({savedNewImages.length + uploads.length})</h3>
         <div className="admin-preview-images">{[...savedNewImages, ...uploads].map((item) => <figure key={item.id}><img src={mediaSrc(item)} alt={item.title} /><figcaption>{item.title}</figcaption></figure>)}</div>
         <h3>Thay hoặc xóa ảnh ({previewImageIds.length})</h3>

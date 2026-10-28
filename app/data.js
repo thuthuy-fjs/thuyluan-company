@@ -171,7 +171,6 @@ const existingCertificates = [
 ].map((item) => ({
   ...item,
   image: `/assets/${item.id}.${item.extension}`,
-  thumbnail: `/assets/${item.id}-preview.webp`,
 }));
 
 const isoPage = (id, title) => ({
@@ -211,7 +210,6 @@ const isoCertificates = [
   ...certificate,
   category: "ISO 22000 · 3 trang",
   image: certificate.pages[0].image,
-  thumbnail: certificate.pages[0].image.replace(".webp", "-preview.webp"),
 }));
 
 const newCertificates = [
@@ -221,21 +219,29 @@ const newCertificates = [
     title: "Giấy chứng nhận ATTP · địa điểm Phủ Lý (2026)",
     category: "An toàn thực phẩm",
     image: "/assets/food-safety-site-04-2026.webp",
-    thumbnail: "/assets/food-safety-site-04-2026-preview.webp",
   },
 ];
 
-export const certificates = editableData("Chứng nhận", [
+export const baseCertificates = [
   {
     id: "business-registration-2026",
     title: "Giấy chứng nhận đăng ký doanh nghiệp",
     category: "Hồ sơ doanh nghiệp",
     image: "/assets/business-registration-2026.webp",
-    thumbnail: "/assets/business-registration-2026-preview.webp",
   },
   ...newCertificates,
   ...existingCertificates,
-], "certificates");
+].map((certificate) => ({
+  id: certificate.id,
+  title: certificate.title,
+  category: certificate.category,
+  pages: certificate.pages || [{ title: "Trang 1", image: certificate.image }],
+}));
+
+export const certificates = (editorContent.certificates || baseCertificates).map((certificate) => {
+  const pages = certificate.pages.map((page) => ({ ...page, image: editableImage(page.image) }));
+  return { ...certificate, pages, image: pages[0].image, thumbnail: pages[0].image };
+});
 
 export const documents = editableData("Tài liệu", [
   {

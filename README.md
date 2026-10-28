@@ -52,7 +52,7 @@ npm run build
 npm run deploy
 ```
 
-Với Workers Builds kết nối GitHub: **Build command** là `npm run build`, **Deploy command** là `npx wrangler deploy`. Tên Worker: `thuy-luan-corporate-food-service`. Gắn domain trong Cloudflare Dashboard. Đặt `NEXT_PUBLIC_SITE_URL` trước khi build để sitemap và Open Graph dùng đúng domain.
+Với Workers Builds kết nối GitHub: **Build command** là `npm run build`, **Deploy command** là `npx wrangler deploy`. Tên Worker: `congnghiepthuyluan`. Gắn domain trong Cloudflare Dashboard. Đặt `NEXT_PUBLIC_SITE_URL` trước khi build để sitemap và Open Graph dùng đúng domain.
 
 `npm run build:worker` build và kiểm tra gói Worker với `wrangler deploy --dry-run`, không phát hành website.
 

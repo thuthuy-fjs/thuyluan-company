@@ -30,7 +30,6 @@ export default function VisualEditor({ fields, savedText, publishedText = {}, dr
   const [selectedImageId, setSelectedImageId] = useState("");
   const [selectedSlider, setSelectedSlider] = useState("");
   const [sliderSlots, setSliderSlots] = useState([]);
-  const [matchedCount, setMatchedCount] = useState(0);
   const [frameReady, setFrameReady] = useState(false);
   const selectedField = fields.find((field) => field.id === selectedId);
 
@@ -147,7 +146,6 @@ export default function VisualEditor({ fields, savedText, publishedText = {}, dr
     frameRef.current.__adminCleanup?.();
     frameRef.current.__adminCleanup = () => { doc.removeEventListener("click", click, true); doc.removeEventListener("input", input, true); };
     nodesRef.current = nodes;
-    setMatchedCount(nodes.size);
     setFrameReady(true);
     for (const [id, entries] of nodes) {
       const field = fields.find((item) => item.id === id);
@@ -235,7 +233,6 @@ export default function VisualEditor({ fields, savedText, publishedText = {}, dr
           <button type="button" className={device === "desktop" ? "active" : ""} onClick={() => setDevice("desktop")}>Desktop</button>
           <button type="button" className={device === "mobile" ? "active" : ""} onClick={() => setDevice("mobile")}>Mobile</button>
         </div>
-        <span>{frameReady ? readOnly ? "Bản xem trực tiếp trước khi xuất bản" : `${matchedCount} trường có thể chọn trực tiếp · Bấm vào chữ trên trang để sửa` : "Đang tải bản xem…"}</span>
       </div>
       <div className={`admin-site-frame${device === "mobile" ? " is-mobile" : ""}`}>
         <iframe ref={frameRef} src={page} title={`Bản xem trực tiếp: ${pages.find((item) => item.path === page)?.label}`} onLoad={() => { annotateRef.current(); syncImagesRef.current(); window.setTimeout(() => { annotateRef.current(); syncImagesRef.current(); }, 350); }} />

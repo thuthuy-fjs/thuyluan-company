@@ -194,6 +194,23 @@ function validateButtons(buttons) {
   }
 }
 
+function validateCertificates(certificates, media) {
+  if (!Array.isArray(certificates) || certificates.length > 100) throw new Error("Danh sách chứng nhận không hợp lệ.");
+  const ids = new Set();
+  const usedImages = new Set();
+  const available = new Map(media.filter((item) => item.category === "Chứng chỉ – Chứng nhận").map((item) => [item.src, item]));
+  for (const certificate of certificates) {
+    if (!certificate || typeof certificate !== "object" || !/^[a-z0-9-]{1,100}$/.test(certificate.id || "") || ids.has(certificate.id)) throw new Error("Mã chứng nhận không hợp lệ.");
+    ids.add(certificate.id);
+    if (typeof certificate.title !== "string" || !certificate.title.trim() || certificate.title.length > 200 || typeof certificate.category !== "string" || !certificate.category.trim() || certificate.category.length > 120) throw new Error("Thông tin chứng nhận không hợp lệ.");
+    if (!Array.isArray(certificate.pages) || certificate.pages.length < 1 || certificate.pages.length > 12) throw new Error("Chứng nhận phải có từ 1 đến 12 trang.");
+    for (const page of certificate.pages) {
+      if (!page || typeof page.title !== "string" || !page.title.trim() || page.title.length > 120 || !available.has(page.image) || usedImages.has(page.image)) throw new Error("Trang chứng nhận không hợp lệ hoặc bị trùng.");
+      usedImages.add(page.image);
+    }
+  }
+}
+
 async function saveDraft(request, env) {
   if (!sameOrigin(request)) return json({ error: "Nguồn yêu cầu không hợp lệ." }, 403);
   let body;
@@ -280,6 +297,17 @@ async function saveDraft(request, env) {
     content.galleryAdditions = content.galleryAdditions
       .filter((entry) => galleryCategories.has(nextMediaBySrc.get(entry.image)?.category))
       .map((entry) => ({ ...entry, category: nextMediaBySrc.get(entry.image).category }));
+    if (body.certificates !== undefined) {
+      validateCertificates(body.certificates, nextMedia);
+      content.certificates = body.certificates.map((certificate) => ({
+        id: certificate.id,
+        title: certificate.title.trim(),
+        category: certificate.category.trim(),
+        pages: certificate.pages.map((page) => ({ title: page.title.trim(), image: page.image })),
+      }));
+      const referenced = new Set(content.certificates.flatMap((certificate) => certificate.pages.map((page) => page.image)));
+      for (const upload of body.uploads) if (upload.category === "Chứng chỉ – Chứng nhận" && !referenced.has(`/assets/${upload.id}`)) throw new Error("Ảnh chứng nhận mới chưa thuộc chứng nhận nào.");
+    }
     for (const [path, data] of [
       ["app/editor-content.json", content],
       ["app/media-catalog.json", nextMedia],
