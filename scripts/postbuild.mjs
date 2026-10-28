@@ -1,16 +1,11 @@
 import { writeFile, readFile } from "node:fs/promises";
-import { legacyRedirects } from "../worker/redirects.js";
+import { legacyPrefixes, legacyRedirects } from "../worker/redirects.js";
 import content from "../app/editor-content.json" with { type: "json" };
-const source = JSON.parse(
-  await readFile(
-    new URL("../public/assets/source-manifest.json", import.meta.url),
-    "utf8",
-  ),
-);
-for (const asset of source) {
+import media from "../app/media-catalog.json" with { type: "json" };
+for (const asset of media) {
   await readFile(new URL(`../public${asset.src}`, import.meta.url));
 }
-const profile = new URL("../out/ho-so-nang-luc.html", import.meta.url);
+const profile = new URL("../out/company-profile.html", import.meta.url);
 let profileHtml = await readFile(profile, "utf8");
 for (const target of Object.values(content.images || {}))
   await readFile(new URL(`../public${target}`, import.meta.url));
@@ -27,9 +22,14 @@ await writeFile(profile, profileHtml);
 await writeFile(
   "out/_redirects",
   Object.entries(legacyRedirects)
-    .map(([from, to]) => `${from}/ ${to} 301`)
+    .map(([from, to]) => `${from.endsWith(".html") ? from : `${from}/`} ${to} 301`)
+    .concat(
+      Object.entries(legacyPrefixes).map(
+        ([from, to]) => `${from}/* ${to}/:splat 301`,
+      ),
+    )
     .join("\n") + "\n",
 );
 console.log(
-  `Validated ${source.length} local image assets and generated legacy redirects.`,
+  `Validated ${media.length} local image assets and generated legacy redirects.`,
 );

@@ -21,6 +21,10 @@ export function editableImage(src) {
   return src;
 }
 
+export function editableSliderImage(slot, fallback) {
+  return editableImage(content.sliderImages?.[slot] || fallback);
+}
+
 function segment(value, index) {
   const identity = value && typeof value === "object" && !Array.isArray(value)
     ? value.id ?? value.slug ?? value.image

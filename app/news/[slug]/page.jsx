@@ -39,13 +39,13 @@ export default async function ArticlePage({ params }) {
           <p>
             Chúng tôi sẵn sàng lắng nghe và cùng bạn xem xét phương án phù hợp.
           </p>
-          <ButtonLink href="/lien-he/" className="dark">
+          <ButtonLink href="/contacts/" className="dark">
             Bắt đầu hợp tác
           </ButtonLink>
           {articles
             .filter((a) => a.slug !== article.slug)
             .map((a) => (
-              <a key={a.slug} href={`/tin-tuc/${a.slug}/`}>
+              <a key={a.slug} href={`/news/${a.slug}/`}>
                 {a.title} ↗
               </a>
             ))}

@@ -4,7 +4,7 @@ import "./hero.css";
 import "./certifications.css";
 import { Header, Footer } from "./components/site";
 import FloatingContact from "./components/floating-contact";
-import { editableImage } from "./editor-content";
+import { editableImage, editorContent } from "./editor-content";
 
 export const metadata = {
   metadataBase: new URL(
@@ -29,7 +29,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="vi">
-      <body>
+      <body style={{ "--brand-button": editorContent.theme?.button || "#342719", "--brand-accent": editorContent.theme?.accent || "#b7742a" }}>
         <a className="skip-link" href="#main">
           Đến nội dung chính
         </a>

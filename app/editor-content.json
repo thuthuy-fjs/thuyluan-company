@@ -2,5 +2,8 @@
   "version": 1,
   "text": {},
   "images": {},
-  "galleryAdditions": []
+  "sliderImages": {},
+  "galleryAdditions": [],
+  "theme": {},
+  "buttons": {}
 }

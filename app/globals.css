@@ -168,7 +168,7 @@ p {
   transform: translateY(-2px);
 }
 .button.dark {
-  background: var(--ink);
+  background: var(--brand-button, var(--ink));
   color: white;
 }
 .button.dark:hover {
@@ -407,8 +407,8 @@ p {
   line-height: 1.22;
   letter-spacing: -0.067em;
 }
-.hero h1 > span {
-  color: #b7742a;
+.hero h1 > span:not(.hero-line) {
+  color: var(--brand-accent, #b7742a);
 }
 .hero-copy-bottom {
   margin-top: auto;
@@ -686,7 +686,7 @@ p {
   right: -64px;
 }
 /* On narrow layouts, keep the controls inside the section width. */
-@media (max-width: 1160px) {
+@media (max-width: 1280px) {
   .featured-meals-nav {
     width: 44px;
     height: 44px;
@@ -1861,6 +1861,11 @@ p {
 }
 .gallery-page .photo-grid {
   gap: 20px;
+}
+.gallery-load-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
 }
 .about-intro {
   display: grid;

@@ -1,4 +1,6 @@
 import uploadedGallery from "./gallery-uploaded.json";
+import mediaCatalog from "./media-catalog.json";
+import { galleryCategories as galleryGroupNames } from "./media-groups";
 import { editableData, editableImage, editorContent } from "./editor-content";
 
 export const company = editableData("Công ty", {
@@ -13,17 +15,17 @@ export const company = editableData("Công ty", {
 }, "company");
 
 // Preserve the existing menu names and use supplied photos where available.
-const originalNumbers = [
-  21, 22, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 1, 2,
-];
-export const meals = editableData("Thực đơn", originalNumbers.map((number, index) => ({
+const originalNumbers = Array.from({ length: 22 }, (_, i) => i + 1);
+// Meals 19-22 use the supplied photos meal-01..04 in their original order.
+const supplyPhotoNumbers = { 21: 1, 22: 2, 20: 3, 19: 4 };
+export const meals = editableData("Thực đơn", originalNumbers.map((number) => ({
   id: number,
-  slug: `suat-an-cong-nghiep-${String(number).padStart(2, "0")}`,
+  slug: `industrial-meal-${String(number).padStart(2, "0")}`,
   name: `Suất ăn công nghiệp ${String(number).padStart(2, "0")}`,
   image:
     number <= 18
       ? `/assets/menu-photo-2026-${String(number).padStart(2, "0")}.webp`
-      : `/assets/meal-${String(index + 1).padStart(2, "0")}.webp`,
+      : `/assets/meal-${String(supplyPhotoNumbers[number]).padStart(2, "0")}.webp`,
   description: "Gợi ý suất ăn cho thực đơn luân phiên của doanh nghiệp.",
 })), "meals");
 
@@ -41,21 +43,35 @@ const originalGallery = [
   })),
 ];
 
-export const gallery = editableData("Thư viện ảnh", [...uploadedGallery, ...originalGallery, ...(editorContent.galleryAdditions || [])], "gallery");
+const galleryDetails = [...uploadedGallery, ...originalGallery, ...(editorContent.galleryAdditions || [])];
+const galleryDetailsByImage = new Map(galleryDetails.map((photo) => [photo.image, photo]));
+const galleryMediaByImage = new Map(mediaCatalog.filter((item) => galleryGroupNames.includes(item.category)).map((item) => [item.src, item]));
+const galleryImages = [...new Set([...galleryDetails.map((photo) => photo.image), ...galleryMediaByImage.keys()])];
+export const gallery = editableData("Thư viện ảnh", galleryImages
+  .map((image) => galleryMediaByImage.get(image))
+  .filter(Boolean)
+  .map((item) => ({
+    ...galleryDetailsByImage.get(item.src),
+    image: item.src,
+    category: item.category,
+    title: item.title || galleryDetailsByImage.get(item.src)?.title || item.id,
+    width: item.width,
+    height: item.height,
+  })), "gallery");
 export const galleryCategories = [
-  { label: "Không gian bếp", slug: "khong-gian-bep" },
-  { label: "Giao nhận", slug: "giao-nhan" },
-  { label: "Phục vụ", slug: "phuc-vu" },
-  { label: "Hoạt động tập thể", slug: "hoat-dong" },
+  { label: "Không gian bếp", slug: "kitchen" },
+  { label: "Giao nhận", slug: "delivery" },
+  { label: "Phục vụ", slug: "service" },
+  { label: "Hoạt động tập thể", slug: "team-activities" },
 ];
-const galleryShowcaseOrder = ["phuc-vu", "khong-gian-bep", "hoat-dong", "giao-nhan"];
+const galleryShowcaseOrder = ["service", "kitchen", "team-activities", "delivery"];
 export const collectiveShowcasePhotos = [
   "/assets/gallery-tap-the-01.webp",
   "/assets/gallery-tap-the-02.webp",
   "/assets/gallery-tap-the-03.webp",
   "/assets/gallery-tap-the-09.webp",
   "/assets/gallery-tap-the-18.webp",
-].map((image) => gallery[uploadedGallery.findIndex((photo) => photo.image === image)]);
+].map((image) => gallery.find((photo) => photo.image === image)).filter(Boolean);
 export const galleryShowcase = galleryShowcaseOrder.map((slug) => {
   const category = galleryCategories.find((item) => item.slug === slug);
   const photos = gallery.filter((photo) => photo.category === category.label);
@@ -66,7 +82,7 @@ export const galleryShowcase = galleryShowcaseOrder.map((slug) => {
     ),
   };
 });
-export const galleryPreview = [23, 13, 16, 6].map((index) => gallery[uploadedGallery.length + index]);
+export const galleryPreview = [24, 14, 17, 7].map((number) => gallery.find((photo) => photo.image === `/assets/gallery-${String(number).padStart(2, "0")}.webp`)).filter(Boolean);
 
 export const homePosters = editableData("Ấn phẩm", [
   {
@@ -229,20 +245,19 @@ export const documents = editableData("Tài liệu", [
   },
   {
     title: "Quy trình chế biến",
-    image: "/assets/document-process.png",
     description: "Xem 5 bước chế biến và cách thực hiện từng bước.",
-    href: "/gioi-thieu/#quy-trinh-che-bien",
+    href: "/about/#quy-trinh-che-bien",
   },
   {
     title: "Thiết lập bếp ăn",
     description: "Phương án tổ chức không gian bếp.",
-    href: "/gioi-thieu/#quy-trinh-thiet-lap-bep",
+    href: "/about/#quy-trinh-thiet-lap-bep",
   },
 ], "documents");
 
 export const articles = editableData("Bài viết", [
   {
-    slug: "cac-tieu-chi-cung-cap-suat-an-cong-nghiep-dat-chuan",
+    slug: "standard-industrial-meal-supply-criteria",
     title: "Doanh nghiệp nên đánh giá nhà cung cấp suất ăn như thế nào?",
     category: "Lựa chọn đối tác",
     image: "/assets/news-quality.webp",
@@ -268,7 +283,7 @@ export const articles = editableData("Bài viết", [
     ],
   },
   {
-    slug: "chon-lua-va-bao-quan-dung-cach",
+    slug: "proper-food-selection-and-storage",
     title: "Từ nguyên liệu đến bữa ăn: những điểm cần quan tâm",
     category: "Chất lượng bữa ăn",
     image: "/assets/news-storage.webp",
@@ -290,7 +305,7 @@ export const articles = editableData("Bài viết", [
     ],
   },
   {
-    slug: "suat-an-can-doi-ve-dinh-duong-va-hai-hoa-ve-khau-vi-la-nhu-the-nao",
+    slug: "balanced-nutritious-and-tasty-meals",
     title: "Thực đơn đa dạng để mỗi giờ nghỉ trưa thêm trọn vẹn",
     category: "Thực đơn doanh nghiệp",
     image: "/assets/news-nutrition.webp",

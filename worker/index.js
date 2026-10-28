@@ -1,4 +1,4 @@
-import { legacyRedirects } from "./redirects.js";
+import { findLegacyRedirect } from "./redirects.js";
 import { handleAdmin } from "./admin.js";
 
 const json = (data, status = 200) =>
@@ -141,9 +141,9 @@ export default {
       return json({ ok: true, service: "thuy-luan-corporate-food-service" });
     if (url.pathname.startsWith("/api/"))
       return json({ error: "Không tìm thấy API." }, 404);
-    const canonical = url.pathname.replace(/\/$/, "") || "/";
-    const redirect = legacyRedirects[canonical];
-    if (redirect) return Response.redirect(new URL(redirect, url.origin), 301);
+    const redirect = findLegacyRedirect(url.pathname);
+    if (redirect)
+      return Response.redirect(new URL(redirect + url.search, url.origin), 301);
     const response = await env.ASSETS.fetch(request);
     const secured = new Response(response.body, response);
     if (url.pathname === "/admin" || url.pathname.startsWith("/admin/"))

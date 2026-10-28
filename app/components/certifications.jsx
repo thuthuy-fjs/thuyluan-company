@@ -68,7 +68,7 @@ export default function Certifications() {
       </div>
       <div className="certificates-footnote">
         <span>Nhấn vào ảnh để xem rõ nội dung.</span>
-        <a className="text-link" href="/lien-he/">
+        <a className="text-link" href="/contacts/">
           Trao đổi hồ sơ hợp tác
           <ArrowUpRight size={16} />
         </a>

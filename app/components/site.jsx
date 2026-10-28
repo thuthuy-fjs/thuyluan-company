@@ -49,10 +49,10 @@ export function Header() {
   const ref = useRef(null);
   const trigger = useRef(null);
   const links = [
-    ["Dịch vụ", "/giai-phap/"],
-    ["Về chúng tôi", "/gioi-thieu/"],
-    ["Thực đơn", "/thuc-don/"],
-    ["Hình ảnh thực tế", "/hinh-anh/"],
+    ["Về chúng tôi", "/about/"],
+    ["Dịch vụ", "/services/"],
+    ["Thực đơn", "/menus/"],
+    ["Hình ảnh thực tế", "/galleries/"],
     ["FAQ", "/#faq"],
   ];
   useEffect(() => {
@@ -106,7 +106,7 @@ export function Header() {
           ))}
         </nav>
         <div className="header-actions">
-          <ButtonLink href="/lien-he/" className="dark header-quote">
+          <ButtonLink href="/contacts/" className="dark header-quote">
             Nhận báo giá
           </ButtonLink>
           <button
@@ -125,14 +125,14 @@ export function Header() {
         <nav id="site-menu" className="expanded-menu" aria-label="Menu mở rộng">
           {[
             ["Trang chủ", "/"],
-            ["Dịch vụ", "/giai-phap/"],
-            ["Về chúng tôi", "/gioi-thieu/"],
-            ["Thực đơn tham khảo", "/thuc-don/"],
-            ["Hình ảnh thực tế", "/hinh-anh/"],
+            ["Về chúng tôi", "/about/"],
+            ["Dịch vụ", "/services/"],
+            ["Thực đơn tham khảo", "/menus/"],
+            ["Hình ảnh thực tế", "/galleries/"],
             ["FAQ", "/#faq"],
             ["Chứng chỉ – Chứng nhận", "/#certificates"],
-            ["Góc chia sẻ", "/tin-tuc/"],
-            ["Liên hệ & báo giá", "/lien-he/"],
+            ["Góc chia sẻ", "/news/"],
+            ["Liên hệ & báo giá", "/contacts/"],
           ].map(([title, href], i) => (
             <a key={href} href={href} onClick={() => setOpen(false)}>
               <small>{String(i + 1).padStart(2, "0")}</small>
@@ -162,7 +162,7 @@ export function Footer() {
             Hợp tác bền lâu hơn.
           </h2>
         </div>
-        <ButtonLink href="/lien-he/" className="gold">
+        <ButtonLink href="/contacts/" className="gold">
           Trao đổi nhu cầu của bạn
         </ButtonLink>
       </div>
@@ -183,11 +183,11 @@ export function Footer() {
         </div>
         <div>
           <p className="footer-label">KHÁM PHÁ</p>
-          <a href="/giai-phap/">Giải pháp cung ứng</a>
-          <a href="/thuc-don/">Thực đơn tham khảo</a>
-          <a href="/hinh-anh/">Hình ảnh thực tế</a>
+          <a href="/services/">Giải pháp cung ứng</a>
+          <a href="/menus/">Thực đơn tham khảo</a>
+          <a href="/galleries/">Hình ảnh thực tế</a>
           <a href="/#certificates">Chứng chỉ – Chứng nhận</a>
-          <a href="/gioi-thieu/">Về Thúy Luân</a>
+          <a href="/about/">Về Thúy Luân</a>
         </div>
         <div>
           <p className="footer-label">KẾT NỐI</p>
@@ -200,7 +200,7 @@ export function Footer() {
             Trao đổi qua Zalo
             <ArrowUpRight size={14} />
           </a>
-          <a href="/tin-tuc/">Góc chia sẻ</a>
+          <a href="/news/">Góc chia sẻ</a>
         </div>
         <div>
           <p className="footer-label">THÔNG TIN DOANH NGHIỆP</p>
@@ -214,7 +214,7 @@ export function Footer() {
           © {new Date().getFullYear()} Thúy Luân. Chất lượng tạo nên thương
           hiệu.
         </span>
-        <a href="/chinh-sach-bao-mat/">Chính sách bảo mật</a>
+        <a href="/privacy-policies/">Chính sách bảo mật</a>
         <a href="#top" aria-label="Trở về đầu trang">
           Lên đầu trang <ArrowUpRight size={15} />
         </a>
@@ -283,12 +283,15 @@ export function Modal({ open, onClose, children, label, className = "" }) {
   );
 }
 
+const GALLERY_PAGE_SIZE = 48;
+
 export function PhotoGallery({ preview = false }) {
   const [filter, setFilter] = useState("Tất cả");
   const [active, setActive] = useState(null);
+  const [visibleCount, setVisibleCount] = useState(GALLERY_PAGE_SIZE);
   useEffect(() => {
     if (preview) return;
-    const slug = new URLSearchParams(window.location.search).get("loai");
+    const slug = new URLSearchParams(window.location.search).get("category");
     const category = galleryCategories.find((item) => item.slug === slug);
     if (category) setFilter(category.label);
   }, [preview]);
@@ -296,6 +299,7 @@ export function PhotoGallery({ preview = false }) {
   const filtered = chosen.filter(
     (x) => filter === "Tất cả" || x.category === filter,
   );
+  const visible = preview ? filtered : filtered.slice(0, visibleCount);
   useEffect(() => {
     if (active === null) return;
     const listener = (e) => {
@@ -318,6 +322,7 @@ export function PhotoGallery({ preview = false }) {
               onClick={() => {
                 setFilter(x);
                 setActive(null);
+                setVisibleCount(GALLERY_PAGE_SIZE);
               }}
             >
               {x}
@@ -326,7 +331,7 @@ export function PhotoGallery({ preview = false }) {
         </div>
       )}
       <div className={`photo-grid ${preview ? "preview" : ""}`}>
-        {filtered.map((p, i) => (
+        {visible.map((p, i) => (
           <button
             className="photo-tile"
             key={p.image}
@@ -349,6 +354,17 @@ export function PhotoGallery({ preview = false }) {
           </button>
         ))}
       </div>
+      {visible.length < filtered.length && (
+        <div className="gallery-load-more">
+          <button
+            className="button outline"
+            type="button"
+            onClick={() => setVisibleCount((n) => n + GALLERY_PAGE_SIZE)}
+          >
+            Xem thêm ({filtered.length - visible.length} ảnh)
+          </button>
+        </div>
+      )}
       <Modal
         open={active !== null}
         onClose={() => setActive(null)}
@@ -469,7 +485,7 @@ export function MealCard({ meal, saved = false, onSave, loading = "lazy" }) {
   return (
     <article className="meal-card">
       <div className="meal-image">
-        <a href={`/thuc-don/${meal.slug}/`} aria-label={`Xem ${meal.name}`}>
+        <a href={`/menus/${meal.slug}/`} aria-label={`Xem ${meal.name}`}>
           <img
             src={meal.image}
             alt={`${meal.name} — hình ảnh thực tế Thúy Luân`}
@@ -493,12 +509,12 @@ export function MealCard({ meal, saved = false, onSave, loading = "lazy" }) {
         <div>
           <span className="mini-label">THỰC ĐƠN THAM KHẢO</span>
           <h3>
-            <a href={`/thuc-don/${meal.slug}/`}>{meal.name}</a>
+            <a href={`/menus/${meal.slug}/`}>{meal.name}</a>
           </h3>
         </div>
         <a
           className="circle-button"
-          href={`/thuc-don/${meal.slug}/`}
+          href={`/menus/${meal.slug}/`}
           aria-label={`Chi tiết ${meal.name}`}
         >
           <ArrowUpRight size={20} />
@@ -516,7 +532,7 @@ export function QuoteForm({ initialMeal = "" }) {
   const form = useRef(null);
   useEffect(() => {
     const search = new URLSearchParams(window.location.search);
-    const m = search.get("thuc-don") || initialMeal;
+    const m = search.get("menu") || initialMeal;
     if (m && form.current) form.current.elements.namedItem("menus").value = m;
   }, [initialMeal]);
   async function submit(e) {
@@ -674,7 +690,7 @@ export function QuoteForm({ initialMeal = "" }) {
             Tôi đồng ý để Thúy Luân sử dụng thông tin trên nhằm tư vấn nhu cầu
             và đã đọc{" "}
             <a
-              href="/chinh-sach-bao-mat/"
+              href="/privacy-policies/"
               target="_blank"
               rel="noopener noreferrer"
             >

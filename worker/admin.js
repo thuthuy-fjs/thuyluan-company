@@ -1,3 +1,6 @@
+import { sliderSlotIds } from "../app/slider-slots.js";
+import { galleryCategories as galleryGroupNames, imageCategories, normalizedCategory } from "../app/media-groups.js";
+
 const json = (value, status = 200, headers = {}) => Response.json(value, {
   status,
   headers: { "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff", ...headers },
@@ -6,7 +9,14 @@ const encoder = new TextEncoder();
 const cookieName = (request) => new URL(request.url).protocol === "https:" ? "__Host-thuyluan_admin" : "thuyluan_admin";
 const sessionSeconds = 12 * 60 * 60;
 const maxBody = 24 * 1024 * 1024;
-const galleryCategories = new Set(["Không gian bếp", "Giao nhận", "Phục vụ", "Hoạt động tập thể"]);
+const galleryCategories = new Set(galleryGroupNames);
+const validCategories = new Set(imageCategories);
+const normalizeMedia = (items, content) => items.map((item) => {
+  const galleryAddition = content.galleryAdditions?.find((entry) => entry.image === item.src);
+  const category = item.id.startsWith("upload-") && galleryCategories.has(galleryAddition?.category) && !galleryCategories.has(item.category)
+    ? galleryAddition.category : normalizedCategory(item);
+  return { ...item, category, protected: category === "Logo" || category === "Chứng chỉ – Chứng nhận" };
+});
 const assetId = (value) => typeof value === "string" && /^[a-zA-Z0-9][a-zA-Z0-9_.-]*\.(?:webp|png|jpe?g)$/i.test(value);
 const base64url = (bytes) => btoa(String.fromCharCode(...bytes)).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
 const fromBase64url = (value) => Uint8Array.from(atob(value.replace(/-/g, "+").replace(/_/g, "/")), (c) => c.charCodeAt(0));
@@ -85,7 +95,10 @@ async function login(request, env) {
 
 function githubConfig(env) {
   if (!env.GITHUB_TOKEN || !env.GITHUB_OWNER || !env.GITHUB_REPO) throw new Error("Chưa cấu hình kết nối GitHub.");
-  return { owner: env.GITHUB_OWNER, repo: env.GITHUB_REPO, branch: env.GITHUB_BRANCH || "main" };
+  const branch = env.GITHUB_BRANCH || "main";
+  const draftBranch = env.GITHUB_DRAFT_BRANCH || `${branch}-draft`;
+  if (draftBranch === branch) throw new Error("Nhánh nháp phải khác nhánh xuất bản.");
+  return { owner: env.GITHUB_OWNER, repo: env.GITHUB_REPO, branch, draftBranch };
 }
 
 async function github(env, route, options = {}) {
@@ -112,14 +125,41 @@ async function file(env, path, branch) {
 }
 
 async function repositoryState(env) {
-  const { branch } = githubConfig(env);
-  const ref = await github(env, `/git/ref/heads/${encodeURIComponent(branch)}`);
-  const [content, media, source] = await Promise.all([
-    file(env, "app/editor-content.json", branch),
-    file(env, "app/media-catalog.json", branch),
-    file(env, "public/assets/source-manifest.json", branch),
+  const { branch, draftBranch } = githubConfig(env);
+  const publishedRef = await github(env, `/git/ref/heads/${encodeURIComponent(branch)}`);
+  let draftRef;
+  try { draftRef = await github(env, `/git/ref/heads/${encodeURIComponent(draftBranch)}`); }
+  catch (error) { if (!error.message.startsWith("GitHub 404:")) throw error; }
+  const activeBranch = draftRef ? draftBranch : branch;
+  const [content, media, publishedContent, publishedMedia] = await Promise.all([
+    file(env, "app/editor-content.json", activeBranch),
+    file(env, "app/media-catalog.json", activeBranch),
+    draftRef ? file(env, "app/editor-content.json", branch) : Promise.resolve(null),
+    draftRef ? file(env, "app/media-catalog.json", branch) : Promise.resolve(null),
   ]);
-  return { head: ref.object.sha, content, media, source };
+  return {
+    head: draftRef?.object.sha || publishedRef.object.sha,
+    draftHead: draftRef?.object.sha || null,
+    publishedHead: publishedRef.object.sha,
+    hasUnpublishedDraft: Boolean(draftRef && draftRef.object.sha !== publishedRef.object.sha),
+    content, media: normalizeMedia(media, content), publishedContent: publishedContent || content, publishedMedia: normalizeMedia(publishedMedia || media, publishedContent || content),
+  };
+}
+
+async function draftAsset(request, env, id) {
+  if (!assetId(id)) return json({ error: "Ảnh không hợp lệ." }, 400);
+  try {
+    const state = await repositoryState(env);
+    const inDraft = state.media.some((item) => item.id === id);
+    const inPublished = state.publishedMedia.some((item) => item.id === id);
+    if (!inDraft && !inPublished) return json({ error: "Không tìm thấy ảnh." }, 404);
+    const { branch, draftBranch } = githubConfig(env);
+    const asset = await github(env, `/contents/public/assets/${id}?ref=${encodeURIComponent(inDraft && state.draftHead ? draftBranch : branch)}`);
+    const data = asset.content && asset.encoding === "base64" ? asset : await github(env, `/git/blobs/${asset.sha}`);
+    const bytes = Uint8Array.from(atob(data.content.replace(/\s/g, "")), (char) => char.charCodeAt(0));
+    const type = /\.png$/i.test(id) ? "image/png" : /\.webp$/i.test(id) ? "image/webp" : "image/jpeg";
+    return new Response(bytes, { headers: { "Content-Type": type, "Cache-Control": "private, no-store", "X-Content-Type-Options": "nosniff" } });
+  } catch (error) { return json({ error: error.message || "Không tải được ảnh." }, 503); }
 }
 
 function classify(file) {
@@ -147,41 +187,59 @@ function validateText(text) {
     if (!/^[\w.-]{1,160}$/.test(key) || typeof value !== "string" || value.length > 10000) throw new Error("Trường văn bản không hợp lệ.");
 }
 
-async function publish(request, env) {
+function validateButtons(buttons) {
+  if (!buttons || typeof buttons !== "object" || Array.isArray(buttons) || Object.keys(buttons).some((key) => !["home.hero.consult", "home.hero.services"].includes(key))) throw new Error("Thuộc tính nút không hợp lệ.");
+  for (const button of Object.values(buttons)) {
+    if (!button || typeof button !== "object" || Object.keys(button).some((key) => key !== "label") || typeof button.label !== "string" || !button.label.trim() || button.label.length > 120) throw new Error("Nội dung nút không hợp lệ.");
+  }
+}
+
+async function saveDraft(request, env) {
   if (!sameOrigin(request)) return json({ error: "Nguồn yêu cầu không hợp lệ." }, 403);
   let body;
   try { body = await readJsonLimited(request, maxBody); } catch { return json({ error: "Dữ liệu xuất bản không hợp lệ hoặc quá lớn." }, 413); }
   try {
     const state = await repositoryState(env);
-    if (body.baseHead !== state.head) return json({ error: "Nội dung đã thay đổi ở phiên khác. Tải lại trang trước khi xuất bản." }, 409);
+    if (body.baseHead !== state.head || body.basePublishedHead !== state.publishedHead) return json({ error: "Nội dung đã thay đổi ở phiên khác. Tải lại trang trước khi lưu nháp." }, 409);
     validateText(body.text);
+    if (Object.hasOwn(body, "theme")) throw new Error("Không hỗ trợ chỉnh màu sắc.");
+    const buttons = body.buttons ?? state.content.buttons ?? {};
+    validateButtons(buttons);
+    const sliderImages = body.sliderImages ?? state.content.sliderImages ?? {};
+    if (!sliderImages || typeof sliderImages !== "object" || Array.isArray(sliderImages) || Object.keys(sliderImages).some((key) => !sliderSlotIds.has(key))) throw new Error("Vị trí ảnh slider không hợp lệ.");
     if (!Array.isArray(body.uploads) || body.uploads.length > 4 || !Array.isArray(body.deletes) || body.deletes.length > 100) throw new Error("Danh sách ảnh không hợp lệ.");
     const media = [...state.media];
     const deleted = new Set(body.deletes);
     if (deleted.size !== body.deletes.length) throw new Error("Danh sách xóa ảnh bị trùng.");
     for (const id of deleted) if (!assetId(id) || !media.some((item) => item.id === id)) throw new Error("Ảnh cần xóa không hợp lệ.");
-    const content = { ...state.content, version: 1, text: body.text, images: { ...state.content.images }, galleryAdditions: [...(state.content.galleryAdditions || [])] };
+    const content = { ...state.content, version: 1, text: body.text, buttons, images: { ...state.content.images }, sliderImages: { ...sliderImages }, galleryAdditions: [...(state.content.galleryAdditions || [])] };
     const tree = [];
-    const source = [...state.source];
     for (const upload of body.uploads) {
       if (!assetId(upload.id) || !/^upload-[a-f0-9-]{36}\.(?:webp|png|jpe?g)$/i.test(upload.id) || media.some((item) => item.id === upload.id) || typeof upload.base64 !== "string" || upload.base64.length > 5_400_000 || !/^[A-Za-z0-9+/]+={0,2}$/.test(upload.base64)) throw new Error("Ảnh tải lên không hợp lệ.");
       const binary = atob(upload.base64);
       const kind = classify(binary);
       if (!kind || !(kind === "jpg" ? /\.(?:jpg|jpeg)$/i : new RegExp(`\\.${kind}$`, "i")).test(upload.id)) throw new Error("Định dạng ảnh không khớp.");
       if (!Number.isInteger(upload.width) || !Number.isInteger(upload.height) || upload.width < 1 || upload.height < 1 || upload.width > 10000 || upload.height > 10000) throw new Error("Kích thước ảnh không hợp lệ.");
-      const category = String(upload.category || "Khác").slice(0, 80);
+      const category = String(upload.category || "Khác");
+      if (!validCategories.has(category)) throw new Error("Nhóm ảnh không hợp lệ.");
       const title = String(upload.title || upload.id).slice(0, 200);
-      if (upload.addToGallery && !galleryCategories.has(upload.galleryCategory)) throw new Error("Nhóm thư viện ảnh không hợp lệ.");
       const blob = await github(env, "/git/blobs", { method: "POST", body: JSON.stringify({ content: upload.base64, encoding: "base64" }) });
       tree.push({ path: `public/assets/${upload.id}`, mode: "100644", type: "blob", sha: blob.sha });
-      media.push({ id: upload.id, src: `/assets/${upload.id}`, category, title, width: upload.width, height: upload.height, protected: category === "Tài liệu và nhận diện" });
-      const bytes = Uint8Array.from(binary, (c) => c.charCodeAt(0));
-      const hash = [...new Uint8Array(await crypto.subtle.digest("SHA-256", bytes))].map((b) => b.toString(16).padStart(2, "0")).join("");
-      source.push({ id: upload.id.replace(/\.[^.]+$/, ""), src: `/assets/${upload.id}`, source: "admin-upload", width: upload.width, height: upload.height, sha256: hash });
-      if (upload.addToGallery) content.galleryAdditions.push({ image: `/assets/${upload.id}`, category: upload.galleryCategory, title });
+      media.push({ id: upload.id, src: `/assets/${upload.id}`, category, title, width: upload.width, height: upload.height, protected: category === "Logo" || category === "Chứng chỉ – Chứng nhận" });
+      if (galleryCategories.has(category)) content.galleryAdditions.push({ image: `/assets/${upload.id}`, category, title });
     }
     const remaining = media.filter((item) => !deleted.has(item.id));
     const replacements = body.replacements && typeof body.replacements === "object" && !Array.isArray(body.replacements) ? body.replacements : {};
+    const nextCategory = (item) => body.mediaUpdates?.[item.id]?.category || item.category;
+    if (media.some((item) => item.category === "Logo") || remaining.some((item) => nextCategory(item) === "Logo")) {
+      if (remaining.filter((item) => nextCategory(item) === "Logo").length !== 1) throw new Error("Nhóm Logo phải có đúng một ảnh.");
+    }
+    for (const item of media.filter((entry) => entry.category === "Logo" && deleted.has(entry.id))) {
+      if (remaining.find((entry) => entry.id === replacements[item.id])?.category !== "Logo") throw new Error("Logo mới phải thay thế logo cũ.");
+    }
+    for (const item of media.filter((entry) => entry.category === "Logo" && !deleted.has(entry.id))) {
+      if (nextCategory(item) !== "Logo") throw new Error("Không thể chuyển logo sang nhóm khác.");
+    }
     for (const [oldId, targetId] of Object.entries(replacements)) {
       if (!assetId(oldId) || !assetId(targetId) || !media.some((item) => item.id === oldId) || !remaining.some((item) => item.id === targetId) || oldId === targetId) throw new Error("Ảnh thay thế không hợp lệ.");
       content.images[oldId] = `/assets/${targetId}`;
@@ -189,12 +247,13 @@ async function publish(request, env) {
     for (const id of deleted) {
       const old = media.find((item) => item.id === id);
       const requested = replacements[id] && remaining.find((item) => item.id === replacements[id]);
-      if ((old.protected || body.mediaUpdates?.[id]?.category === "Tài liệu và nhận diện") && !requested) throw new Error(`Ảnh ${id} cần chọn ảnh thay thế thủ công.`);
+      if ((old.protected || body.mediaUpdates?.[id]?.category === "Chứng chỉ – Chứng nhận") && !requested) throw new Error(`Ảnh ${id} cần chọn ảnh thay thế thủ công.`);
       const chosen = requested || replacementFor(old, remaining.filter((item) => !item.protected));
       if (!chosen) throw new Error(`Không có ảnh phù hợp để thay thế ${id}.`);
       for (const [key, value] of Object.entries(content.images)) if (value === `/assets/${id}`) content.images[key] = chosen.src;
       content.images[id] = chosen.src;
-      content.galleryAdditions = content.galleryAdditions.map((item) => item.image === `/assets/${id}` ? { ...item, image: chosen.src } : item);
+      for (const [slot, value] of Object.entries(content.sliderImages)) if (value === `/assets/${id}`) content.sliderImages[slot] = chosen.src;
+      content.galleryAdditions = content.galleryAdditions.filter((item) => item.image !== `/assets/${id}`);
       tree.push({ path: `public/assets/${id}`, mode: "100644", type: "blob", sha: null });
     }
     for (const [key, value] of Object.entries(content.images)) {
@@ -207,27 +266,72 @@ async function publish(request, env) {
         current = content.images[current].slice(8);
       }
     }
+    for (const [slot, value] of Object.entries(content.sliderImages)) {
+      if (!sliderSlotIds.has(slot) || typeof value !== "string" || !value.startsWith("/assets/") || !remaining.some((item) => item.src === value)) throw new Error("Ảnh trong slider không hợp lệ.");
+    }
     const nextMedia = remaining.map((item) => {
       const update = body.mediaUpdates?.[item.id];
       if (!update || typeof update !== "object") return item;
-      const category = String(update.category || item.category).slice(0, 80);
-      return { ...item, title: String(update.title || item.title || item.id).slice(0, 200), category, protected: item.protected || category === "Tài liệu và nhận diện" };
+      const category = String(update.category || item.category);
+      if (!validCategories.has(category)) throw new Error("Nhóm ảnh không hợp lệ.");
+      return { ...item, title: String(update.title || item.title || item.id).slice(0, 200), category, protected: category === "Logo" || category === "Chứng chỉ – Chứng nhận" };
     });
-    const nextSource = source.filter((item) => !deleted.has(item.src?.slice(8)));
+    const nextMediaBySrc = new Map(nextMedia.map((item) => [item.src, item]));
+    content.galleryAdditions = content.galleryAdditions
+      .filter((entry) => galleryCategories.has(nextMediaBySrc.get(entry.image)?.category))
+      .map((entry) => ({ ...entry, category: nextMediaBySrc.get(entry.image).category }));
     for (const [path, data] of [
       ["app/editor-content.json", content],
       ["app/media-catalog.json", nextMedia],
-      ["public/assets/source-manifest.json", nextSource],
     ]) tree.push({ path, mode: "100644", type: "blob", content: JSON.stringify(data, null, 2) + "\n" });
     const parent = await github(env, `/git/commits/${state.head}`);
     const nextTree = await github(env, "/git/trees", { method: "POST", body: JSON.stringify({ base_tree: parent.tree.sha, tree }) });
-    const commit = await github(env, "/git/commits", { method: "POST", body: JSON.stringify({ message: "Publish site content from admin", tree: nextTree.sha, parents: [state.head] }) });
-    const { branch } = githubConfig(env);
-    await github(env, `/git/refs/heads/${encodeURIComponent(branch)}`, { method: "PATCH", body: JSON.stringify({ sha: commit.sha, force: false }) });
-    return json({ ok: true, commit: commit.sha, replacements: content.images });
+    const commit = await github(env, "/git/commits", { method: "POST", body: JSON.stringify({ message: "Save admin draft", tree: nextTree.sha, parents: [state.head] }) });
+    const { draftBranch } = githubConfig(env);
+    if (state.draftHead) await github(env, `/git/refs/heads/${encodeURIComponent(draftBranch)}`, { method: "PATCH", body: JSON.stringify({ sha: commit.sha, force: false }) });
+    else await github(env, "/git/refs", { method: "POST", body: JSON.stringify({ ref: `refs/heads/${draftBranch}`, sha: commit.sha }) });
+    return json({ ok: true, draftCommit: commit.sha, replacements: content.images });
   } catch (error) {
-    return json({ error: error.message || "Không thể xuất bản." }, 400);
+    return json({ error: error.message || "Không thể lưu nháp." }, 400);
   }
+}
+
+async function publishDraft(request, env) {
+  if (!sameOrigin(request)) return json({ error: "Nguồn yêu cầu không hợp lệ." }, 403);
+  let body;
+  try { body = await readJsonLimited(request, 1024); } catch { return json({ error: "Yêu cầu không hợp lệ." }, 400); }
+  try {
+    const state = await repositoryState(env);
+    if (!state.draftHead || !state.hasUnpublishedDraft) throw new Error("Chưa có bản nháp để xuất bản.");
+    if (body.draftHead !== state.draftHead || body.publishedHead !== state.publishedHead) return json({ error: "Bản nháp hoặc trang đã thay đổi. Tải lại trước khi xuất bản." }, 409);
+    const { branch, draftBranch } = githubConfig(env);
+    const comparison = await github(env, `/compare/${encodeURIComponent(state.publishedHead)}...${encodeURIComponent(state.draftHead)}`);
+    if (comparison.status !== "ahead") return json({ error: "Nhánh xuất bản đã thay đổi sau khi tạo bản nháp. Cần xử lý xung đột trước khi xuất bản." }, 409);
+    const [publishedMedia, parent] = await Promise.all([
+      file(env, "app/media-catalog.json", branch),
+      github(env, `/git/commits/${state.publishedHead}`),
+    ]);
+    const oldIds = new Set(publishedMedia.map((item) => item.id));
+    const newIds = new Set(state.media.map((item) => item.id));
+    const tree = [];
+    for (const item of state.media) if (!oldIds.has(item.id)) {
+      if (!assetId(item.id)) throw new Error("Ảnh mới không hợp lệ.");
+      const asset = await github(env, `/contents/public/assets/${item.id}?ref=${encodeURIComponent(draftBranch)}`);
+      tree.push({ path: `public/assets/${item.id}`, mode: "100644", type: "blob", sha: asset.sha });
+    }
+    for (const item of publishedMedia) if (!newIds.has(item.id)) tree.push({ path: `public/assets/${item.id}`, mode: "100644", type: "blob", sha: null });
+    for (const [path, data] of [
+      ["app/editor-content.json", state.content],
+      ["app/media-catalog.json", state.media],
+    ]) tree.push({ path, mode: "100644", type: "blob", content: JSON.stringify(data, null, 2) + "\n" });
+    const nextTree = await github(env, "/git/trees", { method: "POST", body: JSON.stringify({ base_tree: parent.tree.sha, tree }) });
+    const commit = await github(env, "/git/commits", { method: "POST", body: JSON.stringify({ message: "Publish admin draft", tree: nextTree.sha, parents: [state.publishedHead] }) });
+    await github(env, `/git/refs/heads/${encodeURIComponent(branch)}`, { method: "PATCH", body: JSON.stringify({ sha: commit.sha, force: false }) });
+    let draftReset = true;
+    try { await github(env, `/git/refs/heads/${encodeURIComponent(draftBranch)}`, { method: "PATCH", body: JSON.stringify({ sha: commit.sha, force: true }) }); }
+    catch { draftReset = false; }
+    return json({ ok: true, commit: commit.sha, draftReset });
+  } catch (error) { return json({ error: error.message || "Không thể xuất bản." }, 400); }
 }
 
 export async function handleAdmin(request, env) {
@@ -239,10 +343,12 @@ export async function handleAdmin(request, env) {
     return json({ ok: true }, 200, { "Set-Cookie": cookie("", request, 0) });
   }
   if (!await session(request, env)) return json({ error: "Cần đăng nhập quản trị." }, 401);
+  if (path.startsWith("/api/admin/asset/") && request.method === "GET") return draftAsset(request, env, path.slice("/api/admin/asset/".length));
   if (path === "/api/admin/state" && request.method === "GET") {
     try { return json(await repositoryState(env)); }
     catch (error) { return json({ error: error.message || "Không tải được dữ liệu." }, 503); }
   }
-  if (path === "/api/admin/publish" && request.method === "POST") return publish(request, env);
+  if (path === "/api/admin/draft" && request.method === "POST") return saveDraft(request, env);
+  if (path === "/api/admin/publish" && request.method === "POST") return publishDraft(request, env);
   return json({ error: "Không tìm thấy API quản trị." }, 404);
 }

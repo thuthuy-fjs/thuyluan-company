@@ -26,17 +26,17 @@ export default function ServicesPage() {
             <ServiceDetailSlider group={s.group} title={s.title} />
             <div>
               <Eyebrow>GIẢI PHÁP {s.n}</Eyebrow>
-              <h2>{s.title}</h2>
-              <p>{s.description}</p>
+              <h2 data-editor-id={`services.${s.id}.title`}>{s.title}</h2>
+              <p data-editor-id={`services.${s.id}.description`}>{s.description}</p>
               <ul>
-                {s.items.map((x) => (
-                  <li key={x}>
+                {s.items.map((x, index) => (
+                  <li key={index} data-editor-id={`services.${s.id}.items.${index}`}>
                     <Check size={17} />
                     {x}
                   </li>
                 ))}
               </ul>
-              <ButtonLink href="/lien-he/" className="dark">
+              <ButtonLink href="/contacts/" className="dark">
                 Trao đổi phương án phù hợp
               </ButtonLink>
             </div>

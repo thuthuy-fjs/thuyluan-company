@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { ArrowUpRight, Play } from "lucide-react";
 import { collectiveShowcasePhotos, galleryShowcase } from "../data";
 import { Modal } from "./site";
-import { editableImage } from "../editor-content";
+import { editableImage, editableSliderImage } from "../editor-content";
 
 const video = {
   src: "/assets/video-gioi-thieu-thuy-luan.mp4",
@@ -18,7 +18,7 @@ export default function GalleryCategoryShowcase({ homePage = false }) {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const timer = window.setInterval(() => {
-      setActiveImage((index) => index + 1);
+      if (document.documentElement.dataset.adminPreview !== "true") setActiveImage((index) => index + 1);
     }, 3000);
     return () => window.clearInterval(timer);
   }, []);
@@ -28,20 +28,22 @@ export default function GalleryCategoryShowcase({ homePage = false }) {
       <div className="photo-grid preview gallery-category-showcase">
         {galleryShowcase.map((category) => {
           const photos =
-            homePage && category.slug === "hoat-dong"
+            homePage && category.slug === "team-activities"
               ? collectiveShowcasePhotos
               : category.photos;
           return (
             <a
               className="photo-tile"
-              href={`/hinh-anh/?loai=${category.slug}`}
+              href={`/galleries/?category=${category.slug}`}
               aria-label={`Xem thư viện ${category.label}`}
               key={category.slug}
             >
               {photos.map((photo, index) => (
                 <img
                   className={`gallery-slide${index === activeImage % photos.length ? " is-active" : ""}`}
-                  src={photo.image}
+                  src={homePage ? editableSliderImage(`home.gallery.${category.slug}.${index + 1}`, photo.image) : photo.image}
+                  data-editor-slider-slot={homePage ? `home.gallery.${category.slug}.${index + 1}` : undefined}
+                  data-editor-slider-default={homePage ? photo.image : undefined}
                   alt=""
                   width={photo.width ?? 960}
                   height={photo.height ?? 720}

@@ -193,7 +193,7 @@ export default function AboutPage() {
               Tin tưởng nhiều hơn.
             </h2>
           </div>
-          <a href="/hinh-anh/" className="text-link">
+          <a href="/galleries/" className="text-link">
             Khám phá thư viện hình ảnh
             <ArrowUpRight size={18} />
           </a>

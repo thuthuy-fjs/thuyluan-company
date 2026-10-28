@@ -21,7 +21,7 @@ export default function NewsPage() {
       <section className="wrap news-page">
         <div className="news-grid">
           {articles.map((a) => (
-            <a href={`/tin-tuc/${a.slug}/`} className="news-card" key={a.slug}>
+            <a href={`/news/${a.slug}/`} className="news-card" key={a.slug}>
               <div className="news-image">
                 <img src={a.image} alt={a.title} width="500" height="480" />
                 <span>

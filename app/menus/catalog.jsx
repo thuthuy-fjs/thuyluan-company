@@ -160,7 +160,7 @@ export default function Catalog() {
           </button>
           <a
             className="button gold"
-            href={`/lien-he/?thuc-don=${encodeURIComponent(saved.map((x) => `Mẫu ${String(x).padStart(2, "0")}`).join(", "))}`}
+            href={`/contacts/?menu=${encodeURIComponent(saved.map((x) => `Mẫu ${String(x).padStart(2, "0")}`).join(", "))}`}
           >
             Nhận đề xuất
             <ArrowUpRight size={16} />
@@ -188,7 +188,7 @@ export default function Catalog() {
                 <img src={m.image} alt={m.name} width="960" height="720" />
                 <h3>{m.name}</h3>
                 <p>{m.description}</p>
-                <a className="text-link" href={`/thuc-don/${m.slug}/`}>
+                <a className="text-link" href={`/menus/${m.slug}/`}>
                   Xem chi tiết
                   <ArrowUpRight size={15} />
                 </a>
@@ -197,7 +197,7 @@ export default function Catalog() {
         </div>
         <a
           className="button dark"
-          href={`/lien-he/?thuc-don=${encodeURIComponent(saved.map((x) => `Mẫu ${String(x).padStart(2, "0")}`).join(", "))}`}
+          href={`/contacts/?menu=${encodeURIComponent(saved.map((x) => `Mẫu ${String(x).padStart(2, "0")}`).join(", "))}`}
         >
           Nhận đề xuất từ các mẫu này
           <ArrowUpRight size={17} />

@@ -4,6 +4,7 @@ export const solutionSlideInterval = 5000;
 
 const photoSet = (group, descriptions, dimensions) =>
   descriptions.map((alt, index) => ({
+    defaultSrc: editableImage(`/assets/solution-${group}-${String(index + 1).padStart(2, "0")}.jpg`),
     src: editableImage(`/assets/solution-${group}-${String(index + 1).padStart(2, "0")}.jpg`),
     alt,
     width: dimensions[index][0],

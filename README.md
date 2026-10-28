@@ -31,9 +31,10 @@ GITHUB_TOKEN=thay-bang-fine-grained-token-cua-ban
 GITHUB_OWNER=thuthuy-fjs
 GITHUB_REPO=thuyluan-company
 GITHUB_BRANCH=feature/pin-admin-editor
+# GITHUB_DRAFT_BRANCH=feature/pin-admin-editor-draft
 ```
 
-Đổi PIN thành mã riêng 10–16 chữ số; tạo session secret bằng `openssl rand -hex 32`. Token GitHub cần quyền **Contents: Read and write** chỉ trên repo này. Dùng nhánh `feature/pin-admin-editor` để thử xuất bản mà không thay đổi `main`; nút Xuất bản vẫn tạo commit thật trên nhánh đó.
+Đổi PIN thành mã riêng 10–16 chữ số; tạo session secret bằng `openssl rand -hex 32`. Token GitHub cần quyền **Contents: Read and write** chỉ trên repo này. Với cấu hình trên, **Lưu nháp** tạo commit trên `feature/pin-admin-editor-draft`; **Xuất bản** mới tạo commit trên `feature/pin-admin-editor`. Cả hai thao tác đều ghi vào GitHub thật, chưa động đến `main`.
 
 ```bash
 npm ci
@@ -70,7 +71,14 @@ Với Workers Builds kết nối GitHub: **Build command** là `npm run build`, 
 
 ## Quản trị nội dung và hình ảnh
 
-Trang `/admin/` cho sửa các trường nội dung đã đăng ký, thêm ảnh PNG/JPG/WebP (tối đa 4 MB/ảnh, 4 ảnh/lần xuất bản), thay ảnh và xóa ảnh. Bản xem trước liệt kê các thay đổi trước khi xuất bản. Nút **Xuất bản** tạo một Git commit chứa nội dung, danh mục ảnh và các tệp ảnh; Workers Builds kết nối với nhánh `main` cần được bật để phiên bản mới tự build và lên website. Git lưu lịch sử để có thể quay lại phiên bản trước. Ảnh và chữ công khai chỉ thay đổi sau khi build/deploy thành công.
+Trang `/admin/` hiển thị trang thật trong khung desktop/mobile. Bấm chữ để sửa trực tiếp, bấm ảnh để tải tệp thay thế, bấm nút để chỉnh chữ hiển thị; liên kết của nút được giữ cố định trong mã nguồn. Danh sách trường vẫn có cho nội dung không chọn được trực tiếp. Ảnh PNG/JPG/WebP tối đa 4 MB/ảnh, 4 ảnh/lần lưu.
+
+Tab Hình ảnh lọc theo nhóm, mặc định là Suất ăn. Bấm Thêm ảnh để chọn tệp và nhóm trong popup; ảnh vừa thêm xuất hiện đầu danh sách để có thể đổi nhóm tiếp.
+Với ảnh đã có, bấm Thay tệp ảnh trên thẻ ảnh, chọn một ảnh mới có tỷ lệ phù hợp rồi lưu nháp. Mọi vị trí dùng ảnh cũ sẽ chuyển sang ảnh mới; tệp cũ được xóa khi xuất bản. Ảnh xem trước và ảnh tài liệu gốc là hai tệp riêng, cần thay từng tệp nếu muốn đổi cả hai.
+
+Với slider ở trang chủ, bấm ảnh để chọn từng vị trí trong dải ảnh thu nhỏ, rồi chọn ảnh cùng nhóm và tỷ lệ hoặc tải ảnh mới. Thay đổi chỉ áp dụng cho vị trí đã chọn; bản nháp giữ nguyên thứ tự và số lượng slide.
+
+**Draft** và **Published** là hai nhánh riêng. Nút **Lưu nháp** tạo commit chứa JSON và ảnh trên nhánh draft, không làm thay đổi trang công khai. **Xuất bản** lấy nội dung và ảnh đã lưu từ draft, tạo commit trên nhánh published rồi đồng bộ draft. Workers Builds chỉ nên theo dõi nhánh published (`main` khi triển khai thật) để tự build trang tĩnh. Không có giao diện lịch sử chỉnh sửa.
 
 Đăng nhập dùng PIN 10–16 chữ số, được kiểm tra trong Worker. Phiên đăng nhập có hiệu lực tối đa 12 giờ. Không gửi PIN hoặc GitHub token vào mã nguồn hay qua chat.
 
@@ -99,7 +107,7 @@ API kiểm tra nguồn gửi, loại nội dung, kích thước và dữ liệu 
 
 ## Ảnh và thông tin gốc
 
-Logo, thực đơn, ảnh vận hành và tài liệu ban đầu được chuyển từ `suatancongnghiepthuyluan.com`. Tám ảnh bổ sung và các giấy chứng nhận mới do người dùng cung cấp. Ảnh lưu tại `public/assets/`; nguồn từng ảnh ở `public/assets/source-manifest.json`. Không sao chép PHP hoặc plugin WordPress.
+Logo, thực đơn, ảnh vận hành và tài liệu ban đầu được chuyển từ `suatancongnghiepthuyluan.com`. Tám ảnh bổ sung và các giấy chứng nhận mới do người dùng cung cấp. Ảnh lưu tại `public/assets/` và được liệt kê trong `app/media-catalog.json`. Không sao chép PHP hoặc plugin WordPress.
 
 Thông tin công ty, hotline, email, mã số thuế và địa chỉ được giữ theo website gốc. Nội dung hướng tới khách hàng doanh nghiệp, không thêm khách hàng, chứng nhận hoặc số liệu năng lực chưa xác nhận. Tài liệu quy trình không được gắn nhãn chứng nhận.
 

@@ -38,12 +38,12 @@ test("home has real assets, accessible navigation, and no horizontal overflow", 
   await expect(navigation.getByRole("link")).toHaveCount(5);
   await expect(
     navigation.getByRole("link", { name: "Dịch vụ", exact: true }),
-  ).toHaveAttribute("href", "/giai-phap/");
+  ).toHaveAttribute("href", "/services/");
   await expect(page.locator(".header-quote")).toHaveText("Nhận báo giá");
   await navigation
     .getByRole("link", { name: "Hình ảnh thực tế", exact: true })
     .click();
-  await expect(page).toHaveURL(/\/hinh-anh\/$/);
+  await expect(page).toHaveURL(/\/galleries\/$/);
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Nhìn thấy cách làm");
   await navigation.getByRole("link", { name: "FAQ", exact: true }).click();
   await expect(page).toHaveURL(/#faq$/);
@@ -81,7 +81,7 @@ test("home presents mission, vision and core values together", async ({ page }) 
   const boardBox = await values.locator(".core-values-board").boundingBox();
   const aboutLink = values.getByRole("link", { name: "Hiểu thêm về Thúy Luân" });
   const linkBox = await aboutLink.boundingBox();
-  await expect(aboutLink).toHaveAttribute("href", "/gioi-thieu/");
+  await expect(aboutLink).toHaveAttribute("href", "/about/");
   expect(photoBox.x).toBeGreaterThan(valuesBox.x + valuesBox.width - 1);
   expect(Math.abs(valuesBox.x - copyBox.x)).toBeLessThan(2);
   expect(valuesBox.y).toBeGreaterThan(copyBox.y + copyBox.height - 1);
@@ -114,7 +114,7 @@ test("home presents mission, vision and core values together", async ({ page }) 
 test("catalog uses ascending menu numbers and supports search, saved menus and prefilled quotation", async ({
   page,
 }) => {
-  await page.goto("/thuc-don/");
+  await page.goto("/menus/");
   await expect(page.locator(".meal-card")).toHaveCount(9);
   await expect(page.locator(".filter-toolbar .filter-tabs")).toHaveCount(0);
   await expect(
@@ -164,9 +164,10 @@ test("catalog uses ascending menu numbers and supports search, saved menus and p
 test("gallery filters photos and supports keyboard lightbox controls", async ({
   page,
 }) => {
-  await page.goto("/hinh-anh/");
-  await expect(page.locator(".photo-tile")).toHaveCount(107);
-  await expect(page.locator('.photo-tile img[src="/assets/home-served-meal.jpg"]')).toHaveCount(0);
+  await page.goto("/galleries/");
+  await expect(page.locator(".photo-tile")).toHaveCount(48);
+  await page.getByRole("button", { name: /Xem thêm \(59 ảnh\)/ }).click();
+  await expect(page.locator(".photo-tile")).toHaveCount(96);
   await page.getByRole("button", { name: "Hoạt động tập thể", exact: true }).click();
   await expect(page.locator(".photo-tile")).toHaveCount(33);
   await expect(page.locator(".photo-tile").first()).toHaveAttribute(
@@ -193,10 +194,10 @@ test("home gallery keeps all four folders and shows the video separately", async
   const folders = page.locator(".gallery-category-showcase .photo-tile");
   await expect(folders).toHaveCount(4);
   const folderList = await folders.all();
-  const categorySlugs = ["phuc-vu", "khong-gian-bep", "hoat-dong", "giao-nhan"];
+  const categorySlugs = ["service", "kitchen", "team-activities", "delivery"];
   for (const [index, folder] of folderList.entries()) {
     await expect(folder.locator("img")).toHaveCount(5);
-    await expect(folder).toHaveAttribute("href", `/hinh-anh/?loai=${categorySlugs[index]}`);
+    await expect(folder).toHaveAttribute("href", `/galleries/?category=${categorySlugs[index]}`);
   }
   for (const [index, photo] of ["01", "02", "03", "09", "18"].entries()) {
     await expect(folderList[2].locator("img").nth(index)).toHaveAttribute(
@@ -244,7 +245,7 @@ test("home gallery keeps all four folders and shows the video separately", async
   await expect(page.locator(".gallery-video-modal video")).toHaveCount(0);
 
   await page.getByRole("link", { name: "Xem thư viện Hoạt động tập thể" }).click();
-  await expect(page).toHaveURL(/\/hinh-anh\/\?loai=hoat-dong$/);
+  await expect(page).toHaveURL(/\/galleries\/\?category=team-activities$/);
   await expect(page.getByRole("button", { name: "Hoạt động tập thể", exact: true })).toHaveAttribute(
     "aria-pressed",
     "true",
@@ -256,7 +257,7 @@ test("about introduction rotates five company photos every three seconds", async
   page,
 }) => {
   await page.clock.install();
-  await page.goto("/gioi-thieu/");
+  await page.goto("/about/");
   const slider = page.locator(".about-intro-visual");
   await expect(slider.locator("img")).toHaveCount(5);
   const active = slider.locator("img.is-active");
@@ -269,17 +270,17 @@ test("about gallery matches the home gallery", async ({
   page,
 }) => {
   await page.clock.install();
-  await page.goto("/gioi-thieu/");
+  await page.goto("/about/");
   await expect(page.locator(".document-section")).toHaveCount(0);
   const gallery = page.locator(".gallery-section");
   await expect(gallery).toContainText("TỪ NHỮNG ĐIỀU THỰC TẾ");
   await expect(gallery.getByRole("heading", { name: /Nhìn gần hơn.*Tin tưởng nhiều hơn/ })).toBeVisible();
   const folders = gallery.locator(".gallery-category-showcase .photo-tile");
   await expect(folders).toHaveCount(4);
-  const slugs = ["phuc-vu", "khong-gian-bep", "hoat-dong", "giao-nhan"];
+  const slugs = ["service", "kitchen", "team-activities", "delivery"];
   for (const [index, folder] of (await folders.all()).entries()) {
     await expect(folder.locator("img")).toHaveCount(5);
-    await expect(folder).toHaveAttribute("href", `/hinh-anh/?loai=${slugs[index]}`);
+    await expect(folder).toHaveAttribute("href", `/galleries/?category=${slugs[index]}`);
   }
   await expect(folders.nth(2).locator("img").first()).toHaveAttribute(
     "src",
@@ -293,13 +294,13 @@ test("about gallery matches the home gallery", async ({
   await page.clock.runFor(3000);
   await expect(folders.first().locator("img.is-active")).not.toHaveAttribute("src", firstImage);
   await page.getByRole("link", { name: "Xem thư viện Hoạt động tập thể" }).click();
-  await expect(page).toHaveURL(/\/hinh-anh\/\?loai=hoat-dong$/);
+  await expect(page).toHaveURL(/\/galleries\/\?category=team-activities$/);
 });
 
 test("about page shows five processing steps with expandable instructions", async ({
   page,
 }) => {
-  await page.goto("/gioi-thieu/");
+  await page.goto("/about/");
   const missionVision = page.locator(".org-chart + .mission-vision");
   await expect(missionVision.getByRole("heading", { name: "Sứ mệnh & Tầm nhìn" })).toBeVisible();
   await expect(missionVision.getByRole("heading", { name: "Sứ mệnh", exact: true })).toBeVisible();
@@ -370,13 +371,13 @@ test("home processing document opens the interactive five-step section", async (
   await page.keyboard.press("Escape");
   await expect(page.locator(".document-section .document-list").getByRole("link", {
     name: /Thiết lập bếp ăn/,
-  })).toHaveAttribute("href", "/gioi-thieu/#quy-trinh-thiet-lap-bep");
+  })).toHaveAttribute("href", "/about/#quy-trinh-thiet-lap-bep");
   const link = page.locator(".document-section .document-list").getByRole("link", {
     name: /Quy trình chế biến/,
   });
-  await expect(link).toHaveAttribute("href", "/gioi-thieu/#quy-trinh-che-bien");
+  await expect(link).toHaveAttribute("href", "/about/#quy-trinh-che-bien");
   await link.click();
-  await expect(page).toHaveURL(/\/gioi-thieu\/#quy-trinh-che-bien$/);
+  await expect(page).toHaveURL(/\/about\/#quy-trinh-che-bien$/);
   const section = page.locator("#quy-trinh-che-bien");
   await expect(section).toBeInViewport();
   await section.locator(".processing-step summary").first().click();
@@ -497,14 +498,14 @@ test("each solution card rotates five supplied photos every five seconds", async
   await expect(
     cards.first().locator(".solution-slide.is-active img"),
   ).toHaveAttribute("src", "/assets/solution-factory-01.jpg");
-  await expect(cards.first()).toHaveAttribute("href", "/giai-phap/#nha-may");
+  await expect(cards.first()).toHaveAttribute("href", "/services/#nha-may");
 });
 
 test("solution detail page reuses the five-photo sliders and keeps their five-second timing", async ({
   page,
 }) => {
   await page.clock.install();
-  await page.goto("/giai-phap/");
+  await page.goto("/services/");
   const sections = page.locator(".service-detail");
   await expect(sections).toHaveCount(3);
   await sections.first().scrollIntoViewIfNeeded();
@@ -609,7 +610,7 @@ test("ISO certificates show one cover per document and all three pages when open
 test("quote validates fields and prepares a real email without claiming delivery", async ({
   page,
 }) => {
-  await page.goto("/lien-he/");
+  await page.goto("/contacts/");
   await page.locator("input[name=company]").fill("Doanh nghiệp thử nghiệm");
   await page.locator("input[name=name]").fill("Nguyễn An");
   await page.locator("input[name=phone]").fill("123");
@@ -662,16 +663,16 @@ test("mobile menu, routes, images and layout work at 390 pixels", async ({
     .getByRole("navigation", { name: "Menu mở rộng" })
     .getByRole("link", { name: "Thực đơn tham khảo" })
     .click();
-  await expect(page).toHaveURL(/\/thuc-don\//);
+  await expect(page).toHaveURL(/\/menus\//);
   for (const path of [
     "/",
-    "/thuc-don/",
-    "/gioi-thieu/",
-    "/giai-phap/",
-    "/hinh-anh/",
-    "/lien-he/",
-    "/tin-tuc/",
-    "/thuc-don/suat-an-cong-nghiep-19/",
+    "/menus/",
+    "/about/",
+    "/services/",
+    "/galleries/",
+    "/contacts/",
+    "/news/",
+    "/menus/industrial-meal-19/",
   ]) {
     const r = await page.goto(path);
     expect(r.status()).toBe(200);

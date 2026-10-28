@@ -55,7 +55,7 @@ export default async function MealPage({ params }) {
             </div>
           </dl>
           <ButtonLink
-            href={`/lien-he/?thuc-don=${encodeURIComponent(meal.name)}`}
+            href={`/contacts/?menu=${encodeURIComponent(meal.name)}`}
             className="dark"
           >
             Nhận tư vấn thực đơn này
@@ -76,7 +76,7 @@ export default async function MealPage({ params }) {
             <Eyebrow>THÊM GỢI Ý CHO BẠN</Eyebrow>
             <h2>Khám phá thực đơn khác.</h2>
           </div>
-          <a className="text-link" href="/thuc-don/">
+          <a className="text-link" href="/menus/">
             Xem toàn bộ
             <ArrowUpRight size={17} />
           </a>
