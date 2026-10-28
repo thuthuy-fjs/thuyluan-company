@@ -1,8 +1,11 @@
+import { editableImage } from "./editor-content";
+
 export const solutionSlideInterval = 5000;
 
 const photoSet = (group, descriptions, dimensions) =>
   descriptions.map((alt, index) => ({
-    src: `/assets/solution-${group}-${String(index + 1).padStart(2, "0")}.jpg`,
+    defaultSrc: editableImage(`/assets/solution-${group}-${String(index + 1).padStart(2, "0")}.jpg`),
+    src: editableImage(`/assets/solution-${group}-${String(index + 1).padStart(2, "0")}.jpg`),
     alt,
     width: dimensions[index][0],
     height: dimensions[index][1],

@@ -68,9 +68,12 @@ http
     try {
       const body = [];
       let size = 0;
+      const maxSize = req.url?.startsWith("/api/admin/draft")
+        ? 24 * 1024 * 1024
+        : 17000;
       for await (const chunk of req) {
         size += chunk.length;
-        if (size > 17000) {
+        if (size > maxSize) {
           res.writeHead(413);
           res.end();
           return;
@@ -87,7 +90,16 @@ http
             : {}),
         },
       );
-      const result = await worker.fetch(request, { ASSETS });
+      const result = await worker.fetch(request, {
+        ASSETS,
+        ADMIN_PIN: process.env.ADMIN_PIN,
+        ADMIN_SESSION_SECRET: process.env.ADMIN_SESSION_SECRET,
+        GITHUB_TOKEN: process.env.GITHUB_TOKEN,
+        GITHUB_OWNER: process.env.GITHUB_OWNER,
+        GITHUB_REPO: process.env.GITHUB_REPO,
+        GITHUB_BRANCH: process.env.GITHUB_BRANCH,
+        GITHUB_DRAFT_BRANCH: process.env.GITHUB_DRAFT_BRANCH,
+      });
       res.writeHead(result.status, Object.fromEntries(result.headers));
       res.end(Buffer.from(await result.arrayBuffer()));
     } catch {

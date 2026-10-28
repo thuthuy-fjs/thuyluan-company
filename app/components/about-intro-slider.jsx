@@ -1,27 +1,29 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { editableImage } from "../editor-content";
+import { pageText } from "../editor-fields";
 
 const slides = [
   {
-    image: "/assets/gallery-17.webp",
-    alt: "Hoạt động phục vụ bữa ăn tại doanh nghiệp",
+    image: editableImage("/assets/gallery-17.webp"),
+    alt: pageText["about.slider.1.alt"],
   },
   {
-    image: "/assets/gallery-bep-07.webp",
-    alt: "Thiết bị bếp công nghiệp Thúy Luân",
+    image: editableImage("/assets/gallery-bep-07.webp"),
+    alt: pageText["about.slider.2.alt"],
   },
   {
-    image: "/assets/gallery-bua-an-04.webp",
-    alt: "Bữa ăn tại nhà ăn của doanh nghiệp",
+    image: editableImage("/assets/gallery-bua-an-04.webp"),
+    alt: pageText["about.slider.3.alt"],
   },
   {
-    image: "/assets/gallery-dao-tao-03.webp",
-    alt: "Nhân viên Thúy Luân tham gia buổi đào tạo",
+    image: editableImage("/assets/gallery-dao-tao-03.webp"),
+    alt: pageText["about.slider.4.alt"],
   },
   {
-    image: "/assets/gallery-gala-08.webp",
-    alt: "Hoạt động Gala Dinner Thúy Luân",
+    image: editableImage("/assets/gallery-gala-08.webp"),
+    alt: pageText["about.slider.5.alt"],
   },
 ];
 

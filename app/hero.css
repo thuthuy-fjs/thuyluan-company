@@ -35,8 +35,8 @@
   letter-spacing: -0.055em;
   white-space: nowrap;
 }
-.hero-contained h1 > span {
-  color: #a76122;
+.hero-contained h1 > span:not(.hero-line) {
+  color: var(--brand-accent, #a76122);
 }
 .hero-contained .hero-copy-bottom {
   max-width: 560px;

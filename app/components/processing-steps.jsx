@@ -1,5 +1,6 @@
 import { ChevronDown } from "lucide-react";
 import { Eyebrow } from "./site";
+import { editableImage } from "../editor-content";
 
 const groups = [
   {
@@ -8,7 +9,7 @@ const groups = [
       {
         number: "01",
         title: "Nhận nguyên liệu",
-        image: "/assets/gallery-07.webp",
+        image: editableImage("/assets/gallery-07.webp"),
         imageAlt: "Xe giao nguyên liệu tại cơ sở Thúy Luân",
         highlights: ["Kiểm tra cảm quan, test nhanh", "Cân, đếm; kiểm hạn dùng, chứng từ"],
         actions: [
@@ -21,7 +22,7 @@ const groups = [
       {
         number: "02",
         title: "Rã đông an toàn",
-        image: "/assets/gallery-co-so-19.webp",
+        image: editableImage("/assets/gallery-co-so-19.webp"),
         imageAlt: "Khu bảo quản lạnh tại cơ sở Thúy Luân",
         highlights: ["Tủ mát 0–5°C, thực phẩm bọc kín", "Không rã đông ở nhiệt độ thường hoặc cấp đông lại"],
         actions: [
@@ -34,7 +35,7 @@ const groups = [
       {
         number: "03",
         title: "Sơ chế riêng từng loại",
-        image: "/assets/gallery-so-che-02.webp",
+        image: editableImage("/assets/gallery-so-che-02.webp"),
         imageAlt: "Khu sơ chế và bồn rửa nguyên liệu tại bếp Thúy Luân",
         highlights: ["Rau rửa 3 lần nước sạch", "Thịt, cá dùng khu vực và dụng cụ riêng"],
         actions: [
@@ -52,7 +53,7 @@ const groups = [
       {
         number: "04",
         title: "Nấu và chiên",
-        image: "/assets/gallery-bep-08.webp",
+        image: editableImage("/assets/gallery-bep-08.webp"),
         imageAlt: "Thiết bị và khu nấu ăn tại bếp Thúy Luân",
         highlights: ["Nấu cơm, chế biến theo thực đơn", "Kiểm tra dầu chiên hằng ngày"],
         actions: [
@@ -65,7 +66,7 @@ const groups = [
       {
         number: "05",
         title: "Kiểm soát ra đồ chín",
-        image: "/assets/gallery-thuc-don-01.webp",
+        image: editableImage("/assets/gallery-thuc-don-01.webp"),
         imageAlt: "Suất ăn hoàn thiện trên khay phục vụ",
         highlights: ["Bếp trưởng kiểm tra cảm quan", "Sàng lọc dị vật; che đậy, giữ nóng phù hợp"],
         actions: [

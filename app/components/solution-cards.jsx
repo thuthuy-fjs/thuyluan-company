@@ -3,27 +3,32 @@
 import { useEffect, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { solutionPhotos, solutionSlideInterval } from "../solution-photos";
+import { pageText } from "../editor-fields";
+import { editableSliderImage } from "../editor-content";
 
 const solutions = [
   {
     number: "01",
     id: "nha-may",
-    title: "Suất ăn nhà máy",
-    description: "Phối hợp theo ca sản xuất, số lượng lao động và điều kiện phục vụ thực tế.",
+    field: "factory",
+    title: pageText["home.solutions.factory.title"],
+    description: pageText["home.solutions.factory.description"],
     photos: solutionPhotos.factory,
   },
   {
     number: "02",
     id: "van-phong",
-    title: "Suất ăn văn phòng",
-    description: "Thực đơn đa dạng cho giờ nghỉ trưa, phù hợp với khẩu vị và ngân sách tập thể.",
+    field: "office",
+    title: pageText["home.solutions.office.title"],
+    description: pageText["home.solutions.office.description"],
     photos: solutionPhotos.office,
   },
   {
     number: "03",
     id: "hop-dong",
-    title: "Cung ứng theo hợp đồng",
-    description: "Làm rõ phương án, quy trình phối hợp và tiêu chí chất lượng để đồng hành dài hạn.",
+    field: "contract",
+    title: pageText["home.solutions.contract.title"],
+    description: pageText["home.solutions.contract.description"],
     photos: solutionPhotos.contract,
   },
 ];
@@ -35,7 +40,7 @@ function SolutionCard({ solution }) {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const interval = window.setInterval(() => {
-      if (document.visibilityState === "visible") {
+      if (document.visibilityState === "visible" && document.documentElement.dataset.adminPreview !== "true") {
         setActive((index) => (index + 1) % solution.photos.length);
       }
     }, solutionSlideInterval);
@@ -45,7 +50,7 @@ function SolutionCard({ solution }) {
 
   return (
     <a
-      href={`/giai-phap/#${solution.id}`}
+      href={`/services/#${solution.id}`}
       className="solution-card"
       data-solution={solution.id}
     >
@@ -57,7 +62,9 @@ function SolutionCard({ solution }) {
             aria-hidden={index !== active}
           >
             <img
-              src={photo.src}
+              data-editor-slider-slot={`home.solutions.${solution.field}.${index + 1}`}
+              data-editor-slider-default={photo.defaultSrc}
+              src={editableSliderImage(`home.solutions.${solution.field}.${index + 1}`, photo.src)}
               alt={photo.alt}
               width={photo.width}
               height={photo.height}
@@ -76,8 +83,8 @@ function SolutionCard({ solution }) {
           <ArrowUpRight size={24} />
         </span>
       </div>
-      <h3>{solution.title}</h3>
-      <p>{solution.description}</p>
+      <h3 data-editor-id={`home.solutions.${solution.field}.title`}>{solution.title}</h3>
+      <p data-editor-id={`home.solutions.${solution.field}.description`}>{solution.description}</p>
     </a>
   );
 }

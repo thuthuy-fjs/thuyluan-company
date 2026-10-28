@@ -12,6 +12,8 @@ import {
 } from "./components/site";
 import GalleryCategoryShowcase from "./components/gallery-category-showcase";
 import { articles, process } from "./data";
+import { pageText } from "./editor-fields";
+import { editableImage, editorContent } from "./editor-content";
 import Certifications from "./components/certifications";
 import FeaturedMealsSlider from "./components/featured-meals-slider";
 import HeroSlider from "./components/hero-slider";
@@ -23,30 +25,28 @@ export default function Home() {
     <main id="top">
       <section id="main" className="hero hero-contained">
         <div className="hero-copy">
-          <Eyebrow>GIẢI PHÁP SUẤT ĂN CHO DOANH NGHIỆP</Eyebrow>
+          <Eyebrow>{pageText["home.hero.eyebrow"]}</Eyebrow>
           <h1>
-            Thực đơn lành mạnh
+            <span className="hero-line" data-editor-id="home.hero.line1">{pageText["home.hero.line1"]}</span>
             <br />
-            Đầy đủ dinh dưỡng
+            <span className="hero-line" data-editor-id="home.hero.line2">{pageText["home.hero.line2"]}</span>
             <br />
-            <span>Đa dạng món ăn</span>
+            <span data-editor-id="home.hero.line3">{pageText["home.hero.line3"]}</span>
           </h1>
           <div className="hero-copy-bottom">
-            <p>
-              Giải pháp suất ăn công nghiệp chú trọng chất lượng, sự linh hoạt
-              và trải nghiệm phục vụ, phù hợp với nhịp vận hành của doanh
-              nghiệp.
+            <p data-editor-id="home.hero.description">
+              {pageText["home.hero.description"]}
             </p>
             <div className="hero-buttons">
-              <ButtonLink href="/lien-he/" className="dark">
-                Yêu cầu tư vấn
+              <ButtonLink href="/contacts/" className="dark" data-editor-button="home.hero.consult">
+                {editorContent.buttons?.["home.hero.consult"]?.label || "Yêu cầu tư vấn"}
               </ButtonLink>
-              <ButtonLink href="/giai-phap/" className="outline">
-                Khám phá dịch vụ
+              <ButtonLink href="/services/" className="outline" data-editor-button="home.hero.services">
+                {editorContent.buttons?.["home.hero.services"]?.label || "Khám phá dịch vụ"}
               </ButtonLink>
             </div>
-            <p className="hero-origin">
-              Thực đơn linh hoạt · Hợp tác dài hạn · Tư vấn theo nhu cầu
+            <p className="hero-origin" data-editor-id="home.hero.origin">
+              {pageText["home.hero.origin"]}
             </p>
           </div>
         </div>
@@ -55,9 +55,7 @@ export default function Home() {
 
       <section id="intro" className="intro-strip wrap">
         <p>
-          Chúng tôi tin rằng bữa ăn được chăm chút
-          <br className="desktop-break" /> là một phần của doanh nghiệp phát
-          triển bền vững.
+          {pageText["home.intro"]}
         </p>
         <div className="intro-facts">
           <div>
@@ -84,14 +82,13 @@ export default function Home() {
           <div>
             <Eyebrow>GIẢI PHÁP CHO DOANH NGHIỆP</Eyebrow>
             <h2>
-              Mỗi doanh nghiệp một nhịp.
+              {pageText["home.solutions.heading1"]}
               <br />
-              Mỗi bữa ăn một giải pháp.
+              {pageText["home.solutions.heading2"]}
             </h2>
           </div>
           <p>
-            Hiểu đặc thù công việc, lắng nghe nhu cầu thực tế và cùng xây dựng
-            phương án cung ứng phù hợp.
+            {pageText["home.solutions.description"]}
           </p>
         </div>
         <SolutionCards />
@@ -106,8 +103,7 @@ export default function Home() {
               <div>
                 <h3>Sứ mệnh</h3>
                 <p>
-                  Mang đến những bữa ăn sạch, ngon, an toàn và chất lượng, trao
-                  tận tay từng khách hàng.
+                  {pageText["home.mission"]}
                 </p>
               </div>
             </article>
@@ -116,8 +112,7 @@ export default function Home() {
               <div>
                 <h3>Tầm nhìn</h3>
                 <p>
-                  Trở thành đơn vị cung ứng suất ăn công nghiệp uy tín, đối tác
-                  tin cậy đồng hành lâu dài cùng doanh nghiệp.
+                  {pageText["home.vision"]}
                 </p>
               </div>
             </article>
@@ -126,14 +121,14 @@ export default function Home() {
         <section className="promise-values" aria-label="Giá trị cốt lõi của Thúy Luân">
           <h2 className="promise-values-title">Giá trị cốt lõi</h2>
           <CoreValuesBoard />
-          <a className="promise-values-link" href="/gioi-thieu/">
+          <a className="promise-values-link" href="/about/">
             Hiểu thêm về Thúy Luân
             <ArrowUpRight size={19} aria-hidden="true" />
           </a>
         </section>
         <div className="promise-photo">
           <img
-            src="/assets/kitchen-process-thuy-luan.png"
+            src={editableImage("/assets/kitchen-process-thuy-luan.png")}
             alt="Quy trình bếp ăn Thúy Luân gồm tám bước, từ tiếp nhận nguyên liệu đến phục vụ khách hàng"
             width="1536"
             height="1024"
@@ -147,9 +142,9 @@ export default function Home() {
           <div>
             <Eyebrow>ĐA DẠNG MỖI NGÀY</Eyebrow>
             <h2>
-              Bữa ăn ngon.
+              {pageText["home.meals.heading1"]}
               <br />
-              Thêm năng lượng mới.
+              {pageText["home.meals.heading2"]}
             </h2>
           </div>
           <div>
@@ -157,7 +152,7 @@ export default function Home() {
               Khám phá hình ảnh suất ăn thực tế. Thực đơn và phương án phục vụ
               được trao đổi theo nhu cầu từng doanh nghiệp.
             </p>
-            <a className="text-link" href="/thuc-don/">
+            <a className="text-link" href="/menus/">
               Xem toàn bộ thực đơn
               <ArrowUpRight size={18} />
             </a>
@@ -170,7 +165,7 @@ export default function Home() {
             Khẩu vị, ngân sách và ca làm việc của bạn là điểm bắt đầu cho thực
             đơn của chúng tôi.
           </p>
-          <a href="/lien-he/">
+          <a href="/contacts/">
             Nhận thực đơn đề xuất
             <ArrowUpRight size={17} />
           </a>
@@ -188,7 +183,7 @@ export default function Home() {
                 Gắn kết trong dài hạn.
               </h2>
             </div>
-            <ButtonLink className="outline" href="/lien-he/">
+            <ButtonLink className="outline" href="/contacts/">
               Bắt đầu trao đổi
             </ButtonLink>
           </div>
@@ -221,7 +216,7 @@ export default function Home() {
               Tin tưởng nhiều hơn.
             </h2>
           </div>
-          <a href="/hinh-anh/" className="text-link">
+          <a href="/galleries/" className="text-link">
             Khám phá thư viện hình ảnh
             <ArrowUpRight size={18} />
           </a>
@@ -245,7 +240,7 @@ export default function Home() {
           </p>
           <a
             className="text-link"
-            href="/ho-so-nang-luc.html"
+            href="/company-profile.html"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -266,14 +261,14 @@ export default function Home() {
               về một bữa ăn tốt.
             </h2>
           </div>
-          <a className="text-link" href="/tin-tuc/">
+          <a className="text-link" href="/news/">
             Xem tất cả bài viết
             <ArrowUpRight size={18} />
           </a>
         </div>
         <div className="news-grid">
           {articles.map((a) => (
-            <a href={`/tin-tuc/${a.slug}/`} className="news-card" key={a.slug}>
+            <a href={`/news/${a.slug}/`} className="news-card" key={a.slug}>
               <div className="news-image">
                 <img
                   src={a.image}
@@ -305,7 +300,7 @@ export default function Home() {
           <p>
             Chúng tôi sẵn sàng trao đổi để làm rõ nhu cầu và khả năng phối hợp.
           </p>
-          <a className="text-link" href="/lien-he/">
+          <a className="text-link" href="/contacts/">
             Đặt câu hỏi cho Thúy Luân
             <ArrowUpRight size={17} />
           </a>
