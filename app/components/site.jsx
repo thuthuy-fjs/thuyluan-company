@@ -24,6 +24,7 @@ import {
   Truck,
 } from "lucide-react";
 import { company, meals, gallery, galleryCategories, galleryPreview, documents } from "../data";
+import { editableImage } from "../editor-content";
 
 export function Eyebrow({ children, light = false }) {
   return (
@@ -80,7 +81,7 @@ export function Header() {
       <div className="header-inner">
         <a href="/" className="brand" aria-label="Thúy Luân — Trang chủ">
           <img
-            src="/assets/logo.png"
+            src={editableImage("/assets/logo.png")}
             width="150"
             height="123"
             alt="Logo Thúy Luân"

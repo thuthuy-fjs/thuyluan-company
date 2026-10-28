@@ -87,7 +87,15 @@ http
             : {}),
         },
       );
-      const result = await worker.fetch(request, { ASSETS });
+      const result = await worker.fetch(request, {
+        ASSETS,
+        ADMIN_PIN: process.env.ADMIN_PIN,
+        ADMIN_SESSION_SECRET: process.env.ADMIN_SESSION_SECRET,
+        GITHUB_TOKEN: process.env.GITHUB_TOKEN,
+        GITHUB_OWNER: process.env.GITHUB_OWNER,
+        GITHUB_REPO: process.env.GITHUB_REPO,
+        GITHUB_BRANCH: process.env.GITHUB_BRANCH,
+      });
       res.writeHead(result.status, Object.fromEntries(result.headers));
       res.end(Buffer.from(await result.arrayBuffer()));
     } catch {

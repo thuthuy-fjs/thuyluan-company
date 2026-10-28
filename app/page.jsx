@@ -12,6 +12,8 @@ import {
 } from "./components/site";
 import GalleryCategoryShowcase from "./components/gallery-category-showcase";
 import { articles, process } from "./data";
+import { pageText } from "./editor-fields";
+import { editableImage } from "./editor-content";
 import Certifications from "./components/certifications";
 import FeaturedMealsSlider from "./components/featured-meals-slider";
 import HeroSlider from "./components/hero-slider";
@@ -23,19 +25,17 @@ export default function Home() {
     <main id="top">
       <section id="main" className="hero hero-contained">
         <div className="hero-copy">
-          <Eyebrow>GIẢI PHÁP SUẤT ĂN CHO DOANH NGHIỆP</Eyebrow>
+          <Eyebrow>{pageText["home.hero.eyebrow"]}</Eyebrow>
           <h1>
-            Thực đơn lành mạnh
+            {pageText["home.hero.line1"]}
             <br />
-            Đầy đủ dinh dưỡng
+            {pageText["home.hero.line2"]}
             <br />
-            <span>Đa dạng món ăn</span>
+            <span>{pageText["home.hero.line3"]}</span>
           </h1>
           <div className="hero-copy-bottom">
             <p>
-              Giải pháp suất ăn công nghiệp chú trọng chất lượng, sự linh hoạt
-              và trải nghiệm phục vụ, phù hợp với nhịp vận hành của doanh
-              nghiệp.
+              {pageText["home.hero.description"]}
             </p>
             <div className="hero-buttons">
               <ButtonLink href="/lien-he/" className="dark">
@@ -46,7 +46,7 @@ export default function Home() {
               </ButtonLink>
             </div>
             <p className="hero-origin">
-              Thực đơn linh hoạt · Hợp tác dài hạn · Tư vấn theo nhu cầu
+              {pageText["home.hero.origin"]}
             </p>
           </div>
         </div>
@@ -55,9 +55,7 @@ export default function Home() {
 
       <section id="intro" className="intro-strip wrap">
         <p>
-          Chúng tôi tin rằng bữa ăn được chăm chút
-          <br className="desktop-break" /> là một phần của doanh nghiệp phát
-          triển bền vững.
+          {pageText["home.intro"]}
         </p>
         <div className="intro-facts">
           <div>
@@ -84,14 +82,13 @@ export default function Home() {
           <div>
             <Eyebrow>GIẢI PHÁP CHO DOANH NGHIỆP</Eyebrow>
             <h2>
-              Mỗi doanh nghiệp một nhịp.
+              {pageText["home.solutions.heading1"]}
               <br />
-              Mỗi bữa ăn một giải pháp.
+              {pageText["home.solutions.heading2"]}
             </h2>
           </div>
           <p>
-            Hiểu đặc thù công việc, lắng nghe nhu cầu thực tế và cùng xây dựng
-            phương án cung ứng phù hợp.
+            {pageText["home.solutions.description"]}
           </p>
         </div>
         <SolutionCards />
@@ -106,8 +103,7 @@ export default function Home() {
               <div>
                 <h3>Sứ mệnh</h3>
                 <p>
-                  Mang đến những bữa ăn sạch, ngon, an toàn và chất lượng, trao
-                  tận tay từng khách hàng.
+                  {pageText["home.mission"]}
                 </p>
               </div>
             </article>
@@ -116,8 +112,7 @@ export default function Home() {
               <div>
                 <h3>Tầm nhìn</h3>
                 <p>
-                  Trở thành đơn vị cung ứng suất ăn công nghiệp uy tín, đối tác
-                  tin cậy đồng hành lâu dài cùng doanh nghiệp.
+                  {pageText["home.vision"]}
                 </p>
               </div>
             </article>
@@ -133,7 +128,7 @@ export default function Home() {
         </section>
         <div className="promise-photo">
           <img
-            src="/assets/kitchen-process-thuy-luan.png"
+            src={editableImage("/assets/kitchen-process-thuy-luan.png")}
             alt="Quy trình bếp ăn Thúy Luân gồm tám bước, từ tiếp nhận nguyên liệu đến phục vụ khách hàng"
             width="1536"
             height="1024"
@@ -147,9 +142,9 @@ export default function Home() {
           <div>
             <Eyebrow>ĐA DẠNG MỖI NGÀY</Eyebrow>
             <h2>
-              Bữa ăn ngon.
+              {pageText["home.meals.heading1"]}
               <br />
-              Thêm năng lượng mới.
+              {pageText["home.meals.heading2"]}
             </h2>
           </div>
           <div>

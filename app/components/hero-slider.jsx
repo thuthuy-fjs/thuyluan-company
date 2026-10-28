@@ -2,19 +2,21 @@
 
 import { useEffect, useState } from "react";
 import { ShieldCheck } from "lucide-react";
+import { editableImage } from "../editor-content";
+import { pageText } from "../editor-fields";
 
 const slides = [
   {
-    src: "/assets/home-menu-30-days.jpg",
-    alt: "Thực đơn 30 ngày không trùng lặp của Thúy Luân",
+    src: editableImage("/assets/home-menu-30-days.jpg"),
+    alt: pageText["home.hero.slide1.alt"],
   },
   {
-    src: "/assets/home-services-poster.jpg",
-    alt: "Suất ăn Thúy Luân cho văn phòng, nhà máy và trường học",
+    src: editableImage("/assets/home-services-poster.jpg"),
+    alt: pageText["home.hero.slide2.alt"],
   },
   {
-    src: "/assets/home-food-menu-poster.jpg",
-    alt: "Ấn phẩm thực đơn suất ăn công nghiệp Thúy Luân",
+    src: editableImage("/assets/home-food-menu-poster.jpg"),
+    alt: pageText["home.hero.slide3.alt"],
   },
 ];
 

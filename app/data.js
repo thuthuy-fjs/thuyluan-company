@@ -1,6 +1,7 @@
 import uploadedGallery from "./gallery-uploaded.json";
+import { editableData, editableImage, editorContent } from "./editor-content";
 
-export const company = {
+export const company = editableData("Công ty", {
   name: "Thúy Luân",
   legalName: "Công ty TNHH Thương mại Dịch vụ Thúy Luân",
   phone: "0965600481",
@@ -9,13 +10,13 @@ export const company = {
   address: "139 Tô Vĩnh Diện, TDP 12, Phường Phủ Lý, Tỉnh Ninh Bình, Việt Nam",
   taxId: "0700854039",
   zalo: "https://zalo.me/0965600481",
-};
+}, "company");
 
 // Preserve the existing menu names and use supplied photos where available.
 const originalNumbers = [
   21, 22, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 1, 2,
 ];
-export const meals = originalNumbers.map((number, index) => ({
+export const meals = editableData("Thực đơn", originalNumbers.map((number, index) => ({
   id: number,
   slug: `suat-an-cong-nghiep-${String(number).padStart(2, "0")}`,
   name: `Suất ăn công nghiệp ${String(number).padStart(2, "0")}`,
@@ -24,7 +25,7 @@ export const meals = originalNumbers.map((number, index) => ({
       ? `/assets/menu-photo-2026-${String(number).padStart(2, "0")}.webp`
       : `/assets/meal-${String(index + 1).padStart(2, "0")}.webp`,
   description: "Gợi ý suất ăn cho thực đơn luân phiên của doanh nghiệp.",
-}));
+})), "meals");
 
 const originalGallery = [
   ...Array.from({ length: 24 }, (_, i) => ({
@@ -40,7 +41,7 @@ const originalGallery = [
   })),
 ];
 
-export const gallery = [...uploadedGallery, ...originalGallery];
+export const gallery = editableData("Thư viện ảnh", [...uploadedGallery, ...originalGallery, ...(editorContent.galleryAdditions || [])], "gallery");
 export const galleryCategories = [
   { label: "Không gian bếp", slug: "khong-gian-bep" },
   { label: "Giao nhận", slug: "giao-nhan" },
@@ -54,7 +55,7 @@ export const collectiveShowcasePhotos = [
   "/assets/gallery-tap-the-03.webp",
   "/assets/gallery-tap-the-09.webp",
   "/assets/gallery-tap-the-18.webp",
-].map((image) => gallery.find((photo) => photo.image === image));
+].map((image) => gallery[uploadedGallery.findIndex((photo) => photo.image === image)]);
 export const galleryShowcase = galleryShowcaseOrder.map((slug) => {
   const category = galleryCategories.find((item) => item.slug === slug);
   const photos = gallery.filter((photo) => photo.category === category.label);
@@ -65,14 +66,9 @@ export const galleryShowcase = galleryShowcaseOrder.map((slug) => {
     ),
   };
 });
-export const galleryPreview = [
-  originalGallery[24],
-  originalGallery[13],
-  originalGallery[16],
-  originalGallery[6],
-];
+export const galleryPreview = [23, 13, 16, 6].map((index) => gallery[uploadedGallery.length + index]);
 
-export const homePosters = [
+export const homePosters = editableData("Ấn phẩm", [
   {
     id: "home-food-service-banner",
     title: "Giới thiệu dịch vụ Thúy Luân",
@@ -123,7 +119,7 @@ export const homePosters = [
     width: 905,
     height: 1280,
   },
-].map((poster) => ({ ...poster, image: `/assets/${poster.id}.jpg` }));
+].map((poster) => ({ ...poster, image: `/assets/${poster.id}.jpg` })), "homePosters");
 
 const existingCertificates = [
   {
@@ -213,7 +209,7 @@ const newCertificates = [
   },
 ];
 
-export const certificates = [
+export const certificates = editableData("Chứng nhận", [
   {
     id: "business-registration-2026",
     title: "Giấy chứng nhận đăng ký doanh nghiệp",
@@ -223,9 +219,9 @@ export const certificates = [
   },
   ...newCertificates,
   ...existingCertificates,
-];
+], "certificates");
 
-export const documents = [
+export const documents = editableData("Tài liệu", [
   {
     title: "Sơ đồ tổ chức",
     image: "/assets/document-organization.png",
@@ -242,9 +238,9 @@ export const documents = [
     description: "Phương án tổ chức không gian bếp.",
     href: "/gioi-thieu/#quy-trinh-thiet-lap-bep",
   },
-];
+], "documents");
 
-export const articles = [
+export const articles = editableData("Bài viết", [
   {
     slug: "cac-tieu-chi-cung-cap-suat-an-cong-nghiep-dat-chuan",
     title: "Doanh nghiệp nên đánh giá nhà cung cấp suất ăn như thế nào?",
@@ -315,9 +311,9 @@ export const articles = [
       ],
     ],
   },
-];
+], "articles");
 
-export const coreValues = [
+export const coreValues = editableData("Giá trị cốt lõi", [
   {
     title: "Tận tâm",
     text: "Làm việc bằng sự tận tụy, nhiệt tình và tâm huyết.",
@@ -334,9 +330,9 @@ export const coreValues = [
     title: "Tuân thủ",
     text: "Tuân thủ luật pháp, bộ quy tắc ứng xử, các quy chế, chính sách của Nhà nước.",
   },
-];
+], "coreValues");
 
-export const process = [
+export const process = editableData("Quy trình", [
   [
     "01",
     "Lắng nghe nhu cầu",
@@ -357,4 +353,4 @@ export const process = [
     "Đồng hành vận hành",
     "Phối hợp giao nhận, tiếp nhận phản hồi và điều chỉnh trong quá trình phục vụ.",
   ],
-];
+], "process");

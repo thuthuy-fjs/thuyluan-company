@@ -3,6 +3,11 @@
   "name": "thuy-luan-corporate-food-service",
   "main": "worker/index.js",
   "compatibility_date": "2026-10-15",
+  "vars": {
+    "GITHUB_OWNER": "thuthuy-fjs",
+    "GITHUB_REPO": "thuyluan-company",
+    "GITHUB_BRANCH": "main",
+  },
   "assets": {
     "directory": "./out",
     "binding": "ASSETS",

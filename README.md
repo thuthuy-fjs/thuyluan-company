@@ -45,6 +45,20 @@ Với Workers Builds kết nối GitHub: **Build command** là `npm run build`, 
 - Biểu mẫu kiểm tra đầu vào và cho xem lại nội dung trước khi gửi.
 - Metadata từng trang, sitemap, robots và chuyển hướng URL WordPress cũ.
 
+## Quản trị nội dung và hình ảnh
+
+Trang `/admin/` cho sửa các trường nội dung đã đăng ký, thêm ảnh PNG/JPG/WebP (tối đa 4 MB/ảnh, 4 ảnh/lần xuất bản), thay ảnh và xóa ảnh. Bản xem trước liệt kê các thay đổi trước khi xuất bản. Nút **Xuất bản** tạo một Git commit chứa nội dung, danh mục ảnh và các tệp ảnh; Workers Builds kết nối với nhánh `main` cần được bật để phiên bản mới tự build và lên website. Git lưu lịch sử để có thể quay lại phiên bản trước. Ảnh và chữ công khai chỉ thay đổi sau khi build/deploy thành công.
+
+Đăng nhập dùng PIN 10–16 chữ số, được kiểm tra trong Worker. Phiên đăng nhập có hiệu lực tối đa 12 giờ. Không gửi PIN hoặc GitHub token vào mã nguồn hay qua chat.
+
+**Thiết lập trên Cloudflare (một lần):**
+
+1. Đăng nhập bằng `npx wrangler login`.
+2. Đặt ba secret bằng `npx wrangler secret put ADMIN_PIN`, `npx wrangler secret put ADMIN_SESSION_SECRET`, `npx wrangler secret put GITHUB_TOKEN`. Dùng GitHub fine-grained token chỉ có quyền **Contents: Read and write** trên repo này. Giữ token chỉ trong Cloudflare Secret.
+3. Trong Cloudflare Dashboard, kết nối Worker với GitHub repo này bằng Workers Builds: nhánh `main`, build command `npm run build`, deploy command `npx wrangler deploy`.
+
+Nếu thiếu secret, trang công khai vẫn hoạt động, còn đăng nhập quản trị trả thông báo chưa cấu hình. Việc đổi text trong các component chưa được đăng ký cần thêm ID trường trong `app/editor-fields.js`; dữ liệu trong `app/data.js` được đăng ký tự động.
+
 ## Nhận yêu cầu báo giá
 
 **Mặc định:** form tạo nội dung email khi thông tin hợp lệ. Khách xem lại, mở email để gửi tới `thuyluancompany@gmail.com` hoặc sao chép để trao đổi qua Zalo. Website không báo đã gửi thành công khi chưa có dịch vụ nhận thực sự.

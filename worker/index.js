@@ -1,4 +1,5 @@
 import { legacyRedirects } from "./redirects.js";
+import { handleAdmin } from "./admin.js";
 
 const json = (data, status = 200) =>
   Response.json(data, {
@@ -134,6 +135,7 @@ export async function handleQuote(request, env, send = fetch) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    if (url.pathname.startsWith("/api/admin/")) return handleAdmin(request, env);
     if (url.pathname === "/api/quote") return handleQuote(request, env);
     if (url.pathname === "/api/health")
       return json({ ok: true, service: "thuy-luan-corporate-food-service" });
@@ -144,6 +146,8 @@ export default {
     if (redirect) return Response.redirect(new URL(redirect, url.origin), 301);
     const response = await env.ASSETS.fetch(request);
     const secured = new Response(response.body, response);
+    if (url.pathname === "/admin" || url.pathname.startsWith("/admin/"))
+      secured.headers.set("X-Robots-Tag", "noindex, nofollow");
     secured.headers.set("X-Content-Type-Options", "nosniff");
     secured.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
     secured.headers.set("X-Frame-Options", "SAMEORIGIN");

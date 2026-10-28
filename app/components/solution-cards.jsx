@@ -3,27 +3,28 @@
 import { useEffect, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { solutionPhotos, solutionSlideInterval } from "../solution-photos";
+import { pageText } from "../editor-fields";
 
 const solutions = [
   {
     number: "01",
     id: "nha-may",
-    title: "Suất ăn nhà máy",
-    description: "Phối hợp theo ca sản xuất, số lượng lao động và điều kiện phục vụ thực tế.",
+    title: pageText["home.solutions.factory.title"],
+    description: pageText["home.solutions.factory.description"],
     photos: solutionPhotos.factory,
   },
   {
     number: "02",
     id: "van-phong",
-    title: "Suất ăn văn phòng",
-    description: "Thực đơn đa dạng cho giờ nghỉ trưa, phù hợp với khẩu vị và ngân sách tập thể.",
+    title: pageText["home.solutions.office.title"],
+    description: pageText["home.solutions.office.description"],
     photos: solutionPhotos.office,
   },
   {
     number: "03",
     id: "hop-dong",
-    title: "Cung ứng theo hợp đồng",
-    description: "Làm rõ phương án, quy trình phối hợp và tiêu chí chất lượng để đồng hành dài hạn.",
+    title: pageText["home.solutions.contract.title"],
+    description: pageText["home.solutions.contract.description"],
     photos: solutionPhotos.contract,
   },
 ];

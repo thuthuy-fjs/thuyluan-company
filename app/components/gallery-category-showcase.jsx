@@ -4,10 +4,11 @@ import { useEffect, useState } from "react";
 import { ArrowUpRight, Play } from "lucide-react";
 import { collectiveShowcasePhotos, galleryShowcase } from "../data";
 import { Modal } from "./site";
+import { editableImage } from "../editor-content";
 
 const video = {
   src: "/assets/video-gioi-thieu-thuy-luan.mp4",
-  poster: "/assets/video-gioi-thieu-thuy-luan-poster.webp",
+  poster: editableImage("/assets/video-gioi-thieu-thuy-luan-poster.webp"),
 };
 
 export default function GalleryCategoryShowcase({ homePage = false }) {

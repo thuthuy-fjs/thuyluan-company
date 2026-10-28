@@ -1,6 +1,8 @@
 import { ArrowUpRight, Eye, Target } from "lucide-react";
 import { PageIntro, Eyebrow } from "../components/site";
 import { company } from "../data";
+import { editableImage } from "../editor-content";
+import { pageText } from "../editor-fields";
 import Certifications from "../components/certifications";
 import AboutIntroSlider from "../components/about-intro-slider";
 import GalleryCategoryShowcase from "../components/gallery-category-showcase";
@@ -20,17 +22,16 @@ export default function AboutPage() {
           </>
         }
       >
-        Từ năm 2021, Thúy Luân hoạt động trong lĩnh vực cung ứng thực phẩm và
-        suất ăn công nghiệp tại Ninh Bình và khu vực miền Bắc.
+        {pageText["about.intro.description"]}
       </PageIntro>
       <section className="about-intro wrap">
         <AboutIntroSlider />
         <div>
           <Eyebrow>CHẤT LƯỢNG TẠO NÊN THƯƠNG HIỆU</Eyebrow>
           <h2>
-            Hiểu giá trị của
+            {pageText["about.intro.heading1"]}
             <br />
-            một bữa ăn được chăm chút.
+            {pageText["about.intro.heading2"]}
           </h2>
           <p>
             {company.legalName} xây dựng dịch vụ từ nhu cầu thực tế của doanh
@@ -67,14 +68,13 @@ export default function AboutPage() {
             Phối hợp nhịp nhàng.
           </h2>
           <p>
-            Từ Tổng giám đốc đến các tổ nấu, sơ chế và phục vụ, mỗi bộ phận có
-            vai trò riêng để bữa ăn được chuẩn bị đúng quy trình.
+            {pageText["about.organization.description"]}
           </p>
         </div>
         <figure className="org-chart-figure">
-          <a href="/assets/document-organization.png" target="_blank" rel="noopener noreferrer">
+          <a href={editableImage("/assets/document-organization.png")} target="_blank" rel="noopener noreferrer">
             <img
-              src="/assets/document-organization.png"
+              src={editableImage("/assets/document-organization.png")}
               alt="Sơ đồ tổ chức công ty Thúy Luân từ Tổng giám đốc đến các phòng và tổ vận hành"
               width="1536"
               height="1024"

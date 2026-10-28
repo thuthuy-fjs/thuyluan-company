@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Phone } from "lucide-react";
 import { company } from "../data";
+import { editableImage } from "../editor-content";
 
 export default function FloatingContact() {
   const [footerVisible, setFooterVisible] = useState(false);
@@ -31,7 +32,7 @@ export default function FloatingContact() {
         aria-label="Chat Zalo với Thúy Luân"
         title="Chat Zalo với Thúy Luân"
       >
-        <img src="/assets/zalo.png" alt="Zalo" width="300" height="300" />
+        <img src={editableImage("/assets/zalo.png")} alt="Zalo" width="300" height="300" />
         <span className="floating-zalo-label">Chat Zalo</span>
       </a>
       <a

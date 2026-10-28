@@ -1,6 +1,7 @@
 import { Phone, Mail, MapPin, ArrowUpRight } from "lucide-react";
 import { PageIntro, Eyebrow, QuoteForm } from "../components/site";
 import { company } from "../data";
+import { pageText } from "../editor-fields";
 export const metadata = { title: "Kết nối hợp tác & nhận báo giá" };
 export default function ContactPage() {
   return (
@@ -15,8 +16,7 @@ export default function ContactPage() {
           </>
         }
       >
-        Chia sẻ nhu cầu để cùng Thúy Luân xây dựng phương án suất ăn phù hợp với
-        doanh nghiệp.
+        {pageText["contact.intro.description"]}
       </PageIntro>
       <div className="contact-layout wrap">
         <aside className="contact-sidebar">
@@ -27,8 +27,7 @@ export default function ContactPage() {
             điều bạn đang cần.
           </h2>
           <p>
-            Đội ngũ Thúy Luân sẽ cùng doanh nghiệp trao đổi về thực đơn, ngân
-            sách và cách phối hợp phục vụ.
+            {pageText["contact.sidebar.description"]}
           </p>
           <div className="contact-details">
             <a href={`tel:${company.phone}`}>
@@ -75,8 +74,7 @@ export default function ContactPage() {
           <div className="contact-tip">
             <h3>Chuẩn bị cho buổi trao đổi</h3>
             <p>
-              Địa điểm, số suất mỗi ngày, ca phục vụ và ngân sách dự kiến sẽ
-              giúp hai bên đi nhanh hơn tới một phương án phù hợp.
+              {pageText["contact.tip"]}
             </p>
           </div>
         </aside>

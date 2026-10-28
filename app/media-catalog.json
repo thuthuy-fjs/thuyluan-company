@@ -1,0 +1,1722 @@
+[
+  {
+    "id": "business-registration-2026-preview.webp",
+    "src": "/assets/business-registration-2026-preview.webp",
+    "category": "Tài liệu và nhận diện",
+    "width": 438,
+    "height": 620,
+    "protected": true
+  },
+  {
+    "id": "business-registration-2026.webp",
+    "src": "/assets/business-registration-2026.webp",
+    "category": "Tài liệu và nhận diện",
+    "width": 1860,
+    "height": 2632,
+    "protected": true
+  },
+  {
+    "id": "certificate-01-preview.webp",
+    "src": "/assets/certificate-01-preview.webp",
+    "category": "Tài liệu và nhận diện",
+    "width": 440,
+    "height": 608,
+    "protected": true
+  },
+  {
+    "id": "certificate-01.webp",
+    "src": "/assets/certificate-01.webp",
+    "category": "Tài liệu và nhận diện",
+    "width": 1566,
+    "height": 2163,
+    "protected": true
+  },
+  {
+    "id": "certificate-02-preview.webp",
+    "src": "/assets/certificate-02-preview.webp",
+    "category": "Tài liệu và nhận diện",
+    "width": 436,
+    "height": 620,
+    "protected": true
+  },
+  {
+    "id": "certificate-02.webp",
+    "src": "/assets/certificate-02.webp",
+    "category": "Tài liệu và nhận diện",
+    "width": 826,
+    "height": 1176,
+    "protected": true
+  },
+  {
+    "id": "certificate-03-preview.webp",
+    "src": "/assets/certificate-03-preview.webp",
+    "category": "Tài liệu và nhận diện",
+    "width": 439,
+    "height": 620,
+    "protected": true
+  },
+  {
+    "id": "certificate-03.webp",
+    "src": "/assets/certificate-03.webp",
+    "category": "Tài liệu và nhận diện",
+    "width": 840,
+    "height": 1186,
+    "protected": true
+  },
+  {
+    "id": "certificate-04-preview.webp",
+    "src": "/assets/certificate-04-preview.webp",
+    "category": "Tài liệu và nhận diện",
+    "width": 440,
+    "height": 608,
+    "protected": true
+  },
+  {
+    "id": "certificate-04.webp",
+    "src": "/assets/certificate-04.webp",
+    "category": "Tài liệu và nhận diện",
+    "width": 1566,
+    "height": 2163,
+    "protected": true
+  },
+  {
+    "id": "certificate-09-preview.webp",
+    "src": "/assets/certificate-09-preview.webp",
+    "category": "Tài liệu và nhận diện",
+    "width": 440,
+    "height": 587,
+    "protected": true
+  },
+  {
+    "id": "certificate-09.jpeg",
+    "src": "/assets/certificate-09.jpeg",
+    "category": "Tài liệu và nhận diện",
+    "width": 960,
+    "height": 1280,
+    "protected": true
+  },
+  {
+    "id": "document-organization.png",
+    "src": "/assets/document-organization.png",
+    "category": "Tài liệu và nhận diện",
+    "width": 1536,
+    "height": 1024,
+    "protected": true
+  },
+  {
+    "id": "document-organization.webp",
+    "src": "/assets/document-organization.webp",
+    "category": "Tài liệu và nhận diện",
+    "width": 1247,
+    "height": 1800,
+    "protected": true
+  },
+  {
+    "id": "document-process.png",
+    "src": "/assets/document-process.png",
+    "category": "Tài liệu và nhận diện",
+    "width": 1774,
+    "height": 2560,
+    "protected": true
+  },
+  {
+    "id": "document-process.webp",
+    "src": "/assets/document-process.webp",
+    "category": "Tài liệu và nhận diện",
+    "width": 1247,
+    "height": 1800,
+    "protected": true
+  },
+  {
+    "id": "document-setup.png",
+    "src": "/assets/document-setup.png",
+    "category": "Tài liệu và nhận diện",
+    "width": 1774,
+    "height": 2560,
+    "protected": true
+  },
+  {
+    "id": "document-setup.webp",
+    "src": "/assets/document-setup.webp",
+    "category": "Tài liệu và nhận diện",
+    "width": 1247,
+    "height": 1800,
+    "protected": true
+  },
+  {
+    "id": "document-values.png",
+    "src": "/assets/document-values.png",
+    "category": "Tài liệu và nhận diện",
+    "width": 1774,
+    "height": 2560,
+    "protected": true
+  },
+  {
+    "id": "document-values.webp",
+    "src": "/assets/document-values.webp",
+    "category": "Tài liệu và nhận diện",
+    "width": 1247,
+    "height": 1800,
+    "protected": true
+  },
+  {
+    "id": "food-safety-site-04-2026-preview.webp",
+    "src": "/assets/food-safety-site-04-2026-preview.webp",
+    "category": "Tài liệu và nhận diện",
+    "width": 438,
+    "height": 620,
+    "protected": true
+  },
+  {
+    "id": "food-safety-site-04-2026.webp",
+    "src": "/assets/food-safety-site-04-2026.webp",
+    "category": "Tài liệu và nhận diện",
+    "width": 1696,
+    "height": 2398,
+    "protected": true
+  },
+  {
+    "id": "gallery-01.webp",
+    "src": "/assets/gallery-01.webp",
+    "category": "Thư viện",
+    "width": 960,
+    "height": 1280,
+    "protected": false
+  },
+  {
+    "id": "gallery-02.webp",
+    "src": "/assets/gallery-02.webp",
+    "category": "Thư viện",
+    "width": 960,
+    "height": 1280,
+    "protected": false
+  },
+  {
+    "id": "gallery-03.webp",
+    "src": "/assets/gallery-03.webp",
+    "category": "Thư viện",
+    "width": 960,
+    "height": 1280,
+    "protected": false
+  },
+  {
+    "id": "gallery-04.webp",
+    "src": "/assets/gallery-04.webp",
+    "category": "Thư viện",
+    "width": 956,
+    "height": 1276,
+    "protected": false
+  },
+  {
+    "id": "gallery-05.webp",
+    "src": "/assets/gallery-05.webp",
+    "category": "Thư viện",
+    "width": 960,
+    "height": 1280,
+    "protected": false
+  },
+  {
+    "id": "gallery-06.webp",
+    "src": "/assets/gallery-06.webp",
+    "category": "Thư viện",
+    "width": 960,
+    "height": 1280,
+    "protected": false
+  },
+  {
+    "id": "gallery-07.webp",
+    "src": "/assets/gallery-07.webp",
+    "category": "Thư viện",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-08.webp",
+    "src": "/assets/gallery-08.webp",
+    "category": "Thư viện",
+    "width": 960,
+    "height": 1280,
+    "protected": false
+  },
+  {
+    "id": "gallery-09.webp",
+    "src": "/assets/gallery-09.webp",
+    "category": "Thư viện",
+    "width": 960,
+    "height": 1280,
+    "protected": false
+  },
+  {
+    "id": "gallery-10.webp",
+    "src": "/assets/gallery-10.webp",
+    "category": "Thư viện",
+    "width": 960,
+    "height": 1280,
+    "protected": false
+  },
+  {
+    "id": "gallery-11.webp",
+    "src": "/assets/gallery-11.webp",
+    "category": "Thư viện",
+    "width": 960,
+    "height": 1280,
+    "protected": false
+  },
+  {
+    "id": "gallery-12.webp",
+    "src": "/assets/gallery-12.webp",
+    "category": "Thư viện",
+    "width": 960,
+    "height": 1280,
+    "protected": false
+  },
+  {
+    "id": "gallery-13.webp",
+    "src": "/assets/gallery-13.webp",
+    "category": "Thư viện",
+    "width": 960,
+    "height": 1280,
+    "protected": false
+  },
+  {
+    "id": "gallery-14.webp",
+    "src": "/assets/gallery-14.webp",
+    "category": "Thư viện",
+    "width": 598,
+    "height": 1280,
+    "protected": false
+  },
+  {
+    "id": "gallery-15.webp",
+    "src": "/assets/gallery-15.webp",
+    "category": "Thư viện",
+    "width": 598,
+    "height": 1280,
+    "protected": false
+  },
+  {
+    "id": "gallery-16.webp",
+    "src": "/assets/gallery-16.webp",
+    "category": "Thư viện",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-17.webp",
+    "src": "/assets/gallery-17.webp",
+    "category": "Thư viện",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-18.webp",
+    "src": "/assets/gallery-18.webp",
+    "category": "Thư viện",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-19.webp",
+    "src": "/assets/gallery-19.webp",
+    "category": "Thư viện",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-20.webp",
+    "src": "/assets/gallery-20.webp",
+    "category": "Thư viện",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-21.webp",
+    "src": "/assets/gallery-21.webp",
+    "category": "Thư viện",
+    "width": 960,
+    "height": 1280,
+    "protected": false
+  },
+  {
+    "id": "gallery-22.webp",
+    "src": "/assets/gallery-22.webp",
+    "category": "Thư viện",
+    "width": 960,
+    "height": 1280,
+    "protected": false
+  },
+  {
+    "id": "gallery-23.webp",
+    "src": "/assets/gallery-23.webp",
+    "category": "Thư viện",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-24.webp",
+    "src": "/assets/gallery-24.webp",
+    "category": "Thư viện",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-bep-01.webp",
+    "src": "/assets/gallery-bep-01.webp",
+    "category": "Không gian bếp",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-bep-02.webp",
+    "src": "/assets/gallery-bep-02.webp",
+    "category": "Không gian bếp",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-bep-03.webp",
+    "src": "/assets/gallery-bep-03.webp",
+    "category": "Không gian bếp",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-bep-04.webp",
+    "src": "/assets/gallery-bep-04.webp",
+    "category": "Không gian bếp",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-bep-05.webp",
+    "src": "/assets/gallery-bep-05.webp",
+    "category": "Không gian bếp",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-bep-06.webp",
+    "src": "/assets/gallery-bep-06.webp",
+    "category": "Không gian bếp",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-bep-07.webp",
+    "src": "/assets/gallery-bep-07.webp",
+    "category": "Không gian bếp",
+    "width": 1280,
+    "height": 896,
+    "protected": false
+  },
+  {
+    "id": "gallery-bep-08.webp",
+    "src": "/assets/gallery-bep-08.webp",
+    "category": "Không gian bếp",
+    "width": 1280,
+    "height": 878,
+    "protected": false
+  },
+  {
+    "id": "gallery-bep-09.webp",
+    "src": "/assets/gallery-bep-09.webp",
+    "category": "Không gian bếp",
+    "width": 1280,
+    "height": 854,
+    "protected": false
+  },
+  {
+    "id": "gallery-bua-an-01.webp",
+    "src": "/assets/gallery-bua-an-01.webp",
+    "category": "Suất ăn",
+    "width": 1280,
+    "height": 960,
+    "protected": false
+  },
+  {
+    "id": "gallery-bua-an-02.webp",
+    "src": "/assets/gallery-bua-an-02.webp",
+    "category": "Suất ăn",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-bua-an-03.webp",
+    "src": "/assets/gallery-bua-an-03.webp",
+    "category": "Suất ăn",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-bua-an-04.webp",
+    "src": "/assets/gallery-bua-an-04.webp",
+    "category": "Suất ăn",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-co-so-01.webp",
+    "src": "/assets/gallery-co-so-01.webp",
+    "category": "Không gian bếp",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-co-so-02.webp",
+    "src": "/assets/gallery-co-so-02.webp",
+    "category": "Không gian bếp",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-co-so-03.webp",
+    "src": "/assets/gallery-co-so-03.webp",
+    "category": "Không gian bếp",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-co-so-04.webp",
+    "src": "/assets/gallery-co-so-04.webp",
+    "category": "Không gian bếp",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-co-so-05.webp",
+    "src": "/assets/gallery-co-so-05.webp",
+    "category": "Không gian bếp",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-co-so-06.webp",
+    "src": "/assets/gallery-co-so-06.webp",
+    "category": "Không gian bếp",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-co-so-07.webp",
+    "src": "/assets/gallery-co-so-07.webp",
+    "category": "Không gian bếp",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-co-so-08.webp",
+    "src": "/assets/gallery-co-so-08.webp",
+    "category": "Không gian bếp",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-co-so-09.webp",
+    "src": "/assets/gallery-co-so-09.webp",
+    "category": "Không gian bếp",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-co-so-10.webp",
+    "src": "/assets/gallery-co-so-10.webp",
+    "category": "Không gian bếp",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-co-so-11.webp",
+    "src": "/assets/gallery-co-so-11.webp",
+    "category": "Không gian bếp",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-co-so-12.webp",
+    "src": "/assets/gallery-co-so-12.webp",
+    "category": "Không gian bếp",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-co-so-13.webp",
+    "src": "/assets/gallery-co-so-13.webp",
+    "category": "Không gian bếp",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-co-so-14.webp",
+    "src": "/assets/gallery-co-so-14.webp",
+    "category": "Không gian bếp",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-co-so-15.webp",
+    "src": "/assets/gallery-co-so-15.webp",
+    "category": "Không gian bếp",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-co-so-16.webp",
+    "src": "/assets/gallery-co-so-16.webp",
+    "category": "Không gian bếp",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-co-so-17.webp",
+    "src": "/assets/gallery-co-so-17.webp",
+    "category": "Không gian bếp",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-co-so-18.webp",
+    "src": "/assets/gallery-co-so-18.webp",
+    "category": "Không gian bếp",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-co-so-19.webp",
+    "src": "/assets/gallery-co-so-19.webp",
+    "category": "Không gian bếp",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-dao-tao-01.webp",
+    "src": "/assets/gallery-dao-tao-01.webp",
+    "category": "Hoạt động",
+    "width": 1280,
+    "height": 576,
+    "protected": false
+  },
+  {
+    "id": "gallery-dao-tao-02.webp",
+    "src": "/assets/gallery-dao-tao-02.webp",
+    "category": "Hoạt động",
+    "width": 1280,
+    "height": 576,
+    "protected": false
+  },
+  {
+    "id": "gallery-dao-tao-03.webp",
+    "src": "/assets/gallery-dao-tao-03.webp",
+    "category": "Hoạt động",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-dao-tao-04.webp",
+    "src": "/assets/gallery-dao-tao-04.webp",
+    "category": "Hoạt động",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-gala-01.webp",
+    "src": "/assets/gallery-gala-01.webp",
+    "category": "Hoạt động",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-gala-02.webp",
+    "src": "/assets/gallery-gala-02.webp",
+    "category": "Hoạt động",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-gala-03.webp",
+    "src": "/assets/gallery-gala-03.webp",
+    "category": "Hoạt động",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-gala-04.webp",
+    "src": "/assets/gallery-gala-04.webp",
+    "category": "Hoạt động",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-gala-05.webp",
+    "src": "/assets/gallery-gala-05.webp",
+    "category": "Hoạt động",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-gala-06.webp",
+    "src": "/assets/gallery-gala-06.webp",
+    "category": "Hoạt động",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-gala-07.webp",
+    "src": "/assets/gallery-gala-07.webp",
+    "category": "Hoạt động",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-gala-08.webp",
+    "src": "/assets/gallery-gala-08.webp",
+    "category": "Hoạt động",
+    "width": 1280,
+    "height": 960,
+    "protected": false
+  },
+  {
+    "id": "gallery-phuc-vu-01.webp",
+    "src": "/assets/gallery-phuc-vu-01.webp",
+    "category": "Phục vụ",
+    "width": 1280,
+    "height": 576,
+    "protected": false
+  },
+  {
+    "id": "gallery-phuc-vu-02.webp",
+    "src": "/assets/gallery-phuc-vu-02.webp",
+    "category": "Phục vụ",
+    "width": 1280,
+    "height": 576,
+    "protected": false
+  },
+  {
+    "id": "gallery-phuc-vu-03.webp",
+    "src": "/assets/gallery-phuc-vu-03.webp",
+    "category": "Phục vụ",
+    "width": 1280,
+    "height": 576,
+    "protected": false
+  },
+  {
+    "id": "gallery-phuc-vu-04.webp",
+    "src": "/assets/gallery-phuc-vu-04.webp",
+    "category": "Phục vụ",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-phuc-vu-05.webp",
+    "src": "/assets/gallery-phuc-vu-05.webp",
+    "category": "Phục vụ",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-phuc-vu-06.webp",
+    "src": "/assets/gallery-phuc-vu-06.webp",
+    "category": "Phục vụ",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-phuc-vu-07.webp",
+    "src": "/assets/gallery-phuc-vu-07.webp",
+    "category": "Phục vụ",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-phuc-vu-08.webp",
+    "src": "/assets/gallery-phuc-vu-08.webp",
+    "category": "Phục vụ",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-so-che-01.webp",
+    "src": "/assets/gallery-so-che-01.webp",
+    "category": "Không gian bếp",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-so-che-02.webp",
+    "src": "/assets/gallery-so-che-02.webp",
+    "category": "Không gian bếp",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-so-che-03.webp",
+    "src": "/assets/gallery-so-che-03.webp",
+    "category": "Không gian bếp",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-so-che-04.webp",
+    "src": "/assets/gallery-so-che-04.webp",
+    "category": "Không gian bếp",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-so-che-05.webp",
+    "src": "/assets/gallery-so-che-05.webp",
+    "category": "Không gian bếp",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-tap-the-01.webp",
+    "src": "/assets/gallery-tap-the-01.webp",
+    "category": "Hoạt động",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-tap-the-02.webp",
+    "src": "/assets/gallery-tap-the-02.webp",
+    "category": "Hoạt động",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-tap-the-03.webp",
+    "src": "/assets/gallery-tap-the-03.webp",
+    "category": "Hoạt động",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-tap-the-04.webp",
+    "src": "/assets/gallery-tap-the-04.webp",
+    "category": "Hoạt động",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-tap-the-05.webp",
+    "src": "/assets/gallery-tap-the-05.webp",
+    "category": "Hoạt động",
+    "width": 960,
+    "height": 1280,
+    "protected": false
+  },
+  {
+    "id": "gallery-tap-the-06.webp",
+    "src": "/assets/gallery-tap-the-06.webp",
+    "category": "Hoạt động",
+    "width": 960,
+    "height": 1280,
+    "protected": false
+  },
+  {
+    "id": "gallery-tap-the-07.webp",
+    "src": "/assets/gallery-tap-the-07.webp",
+    "category": "Hoạt động",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-tap-the-08.webp",
+    "src": "/assets/gallery-tap-the-08.webp",
+    "category": "Hoạt động",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "gallery-tap-the-09.webp",
+    "src": "/assets/gallery-tap-the-09.webp",
+    "category": "Hoạt động",
+    "width": 1280,
+    "height": 960,
+    "protected": false
+  },
+  {
+    "id": "gallery-tap-the-10.webp",
+    "src": "/assets/gallery-tap-the-10.webp",
+    "category": "Hoạt động",
+    "width": 1280,
+    "height": 960,
+    "protected": false
+  },
+  {
+    "id": "gallery-tap-the-11.webp",
+    "src": "/assets/gallery-tap-the-11.webp",
+    "category": "Hoạt động",
+    "width": 1280,
+    "height": 960,
+    "protected": false
+  },
+  {
+    "id": "gallery-tap-the-12.webp",
+    "src": "/assets/gallery-tap-the-12.webp",
+    "category": "Hoạt động",
+    "width": 1280,
+    "height": 960,
+    "protected": false
+  },
+  {
+    "id": "gallery-tap-the-13.webp",
+    "src": "/assets/gallery-tap-the-13.webp",
+    "category": "Hoạt động",
+    "width": 960,
+    "height": 1280,
+    "protected": false
+  },
+  {
+    "id": "gallery-tap-the-14.webp",
+    "src": "/assets/gallery-tap-the-14.webp",
+    "category": "Hoạt động",
+    "width": 1280,
+    "height": 960,
+    "protected": false
+  },
+  {
+    "id": "gallery-tap-the-15.webp",
+    "src": "/assets/gallery-tap-the-15.webp",
+    "category": "Hoạt động",
+    "width": 1280,
+    "height": 960,
+    "protected": false
+  },
+  {
+    "id": "gallery-tap-the-16.webp",
+    "src": "/assets/gallery-tap-the-16.webp",
+    "category": "Hoạt động",
+    "width": 960,
+    "height": 1280,
+    "protected": false
+  },
+  {
+    "id": "gallery-tap-the-17.webp",
+    "src": "/assets/gallery-tap-the-17.webp",
+    "category": "Hoạt động",
+    "width": 1280,
+    "height": 576,
+    "protected": false
+  },
+  {
+    "id": "gallery-tap-the-18.webp",
+    "src": "/assets/gallery-tap-the-18.webp",
+    "category": "Hoạt động",
+    "width": 1280,
+    "height": 960,
+    "protected": false
+  },
+  {
+    "id": "gallery-tap-the-19.webp",
+    "src": "/assets/gallery-tap-the-19.webp",
+    "category": "Hoạt động",
+    "width": 1280,
+    "height": 576,
+    "protected": false
+  },
+  {
+    "id": "gallery-tap-the-20.webp",
+    "src": "/assets/gallery-tap-the-20.webp",
+    "category": "Hoạt động",
+    "width": 960,
+    "height": 1280,
+    "protected": false
+  },
+  {
+    "id": "gallery-tap-the-23.webp",
+    "src": "/assets/gallery-tap-the-23.webp",
+    "category": "Hoạt động",
+    "width": 1280,
+    "height": 960,
+    "protected": false
+  },
+  {
+    "id": "gallery-thuc-don-01.webp",
+    "src": "/assets/gallery-thuc-don-01.webp",
+    "category": "Suất ăn",
+    "width": 1280,
+    "height": 960,
+    "protected": false
+  },
+  {
+    "id": "gallery-thuc-don-02.webp",
+    "src": "/assets/gallery-thuc-don-02.webp",
+    "category": "Suất ăn",
+    "width": 1280,
+    "height": 1172,
+    "protected": false
+  },
+  {
+    "id": "gallery-thuc-don-03.webp",
+    "src": "/assets/gallery-thuc-don-03.webp",
+    "category": "Suất ăn",
+    "width": 1280,
+    "height": 960,
+    "protected": false
+  },
+  {
+    "id": "gallery-thuc-don-04.webp",
+    "src": "/assets/gallery-thuc-don-04.webp",
+    "category": "Suất ăn",
+    "width": 1280,
+    "height": 960,
+    "protected": false
+  },
+  {
+    "id": "gallery-thuc-don-05.webp",
+    "src": "/assets/gallery-thuc-don-05.webp",
+    "category": "Suất ăn",
+    "width": 1280,
+    "height": 960,
+    "protected": false
+  },
+  {
+    "id": "gallery-thuc-don-06.webp",
+    "src": "/assets/gallery-thuc-don-06.webp",
+    "category": "Suất ăn",
+    "width": 1102,
+    "height": 1280,
+    "protected": false
+  },
+  {
+    "id": "hero-food.webp",
+    "src": "/assets/hero-food.webp",
+    "category": "Khác",
+    "width": 660,
+    "height": 439,
+    "protected": false
+  },
+  {
+    "id": "home-catering-poster.jpg",
+    "src": "/assets/home-catering-poster.jpg",
+    "category": "Tài liệu và nhận diện",
+    "width": 1280,
+    "height": 640,
+    "protected": true
+  },
+  {
+    "id": "home-core-values.jpg",
+    "src": "/assets/home-core-values.jpg",
+    "category": "Tài liệu và nhận diện",
+    "width": 1280,
+    "height": 720,
+    "protected": true
+  },
+  {
+    "id": "home-food-menu-poster.jpg",
+    "src": "/assets/home-food-menu-poster.jpg",
+    "category": "Tài liệu và nhận diện",
+    "width": 1280,
+    "height": 1280,
+    "protected": true
+  },
+  {
+    "id": "home-food-service-banner.jpg",
+    "src": "/assets/home-food-service-banner.jpg",
+    "category": "Tài liệu và nhận diện",
+    "width": 1280,
+    "height": 404,
+    "protected": true
+  },
+  {
+    "id": "home-menu-30-days.jpg",
+    "src": "/assets/home-menu-30-days.jpg",
+    "category": "Tài liệu và nhận diện",
+    "width": 1280,
+    "height": 1280,
+    "protected": true
+  },
+  {
+    "id": "home-nutrition-guide.jpg",
+    "src": "/assets/home-nutrition-guide.jpg",
+    "category": "Tài liệu và nhận diện",
+    "width": 905,
+    "height": 1280,
+    "protected": true
+  },
+  {
+    "id": "home-served-meal.jpg",
+    "src": "/assets/home-served-meal.jpg",
+    "category": "Tài liệu và nhận diện",
+    "width": 1280,
+    "height": 960,
+    "protected": true
+  },
+  {
+    "id": "home-services-poster.jpg",
+    "src": "/assets/home-services-poster.jpg",
+    "category": "Tài liệu và nhận diện",
+    "width": 1280,
+    "height": 1280,
+    "protected": true
+  },
+  {
+    "id": "iso22000-chau-son-decision.webp",
+    "src": "/assets/iso22000-chau-son-decision.webp",
+    "category": "Tài liệu và nhận diện",
+    "width": 1695,
+    "height": 2398,
+    "protected": true
+  },
+  {
+    "id": "iso22000-chau-son-en.webp",
+    "src": "/assets/iso22000-chau-son-en.webp",
+    "category": "Tài liệu và nhận diện",
+    "width": 1695,
+    "height": 2398,
+    "protected": true
+  },
+  {
+    "id": "iso22000-chau-son-vi-preview.webp",
+    "src": "/assets/iso22000-chau-son-vi-preview.webp",
+    "category": "Tài liệu và nhận diện",
+    "width": 438,
+    "height": 620,
+    "protected": true
+  },
+  {
+    "id": "iso22000-chau-son-vi.webp",
+    "src": "/assets/iso22000-chau-son-vi.webp",
+    "category": "Tài liệu và nhận diện",
+    "width": 1695,
+    "height": 2398,
+    "protected": true
+  },
+  {
+    "id": "iso22000-dong-van-decision.webp",
+    "src": "/assets/iso22000-dong-van-decision.webp",
+    "category": "Tài liệu và nhận diện",
+    "width": 1695,
+    "height": 2398,
+    "protected": true
+  },
+  {
+    "id": "iso22000-dong-van-en.webp",
+    "src": "/assets/iso22000-dong-van-en.webp",
+    "category": "Tài liệu và nhận diện",
+    "width": 1695,
+    "height": 2398,
+    "protected": true
+  },
+  {
+    "id": "iso22000-dong-van-vi-preview.webp",
+    "src": "/assets/iso22000-dong-van-vi-preview.webp",
+    "category": "Tài liệu và nhận diện",
+    "width": 438,
+    "height": 620,
+    "protected": true
+  },
+  {
+    "id": "iso22000-dong-van-vi.webp",
+    "src": "/assets/iso22000-dong-van-vi.webp",
+    "category": "Tài liệu và nhận diện",
+    "width": 1695,
+    "height": 2398,
+    "protected": true
+  },
+  {
+    "id": "iso22000-head-office-decision.webp",
+    "src": "/assets/iso22000-head-office-decision.webp",
+    "category": "Tài liệu và nhận diện",
+    "width": 1692,
+    "height": 2412,
+    "protected": true
+  },
+  {
+    "id": "iso22000-head-office-en.webp",
+    "src": "/assets/iso22000-head-office-en.webp",
+    "category": "Tài liệu và nhận diện",
+    "width": 1689,
+    "height": 2409,
+    "protected": true
+  },
+  {
+    "id": "iso22000-head-office-vi-preview.webp",
+    "src": "/assets/iso22000-head-office-vi-preview.webp",
+    "category": "Tài liệu và nhận diện",
+    "width": 436,
+    "height": 620,
+    "protected": true
+  },
+  {
+    "id": "iso22000-head-office-vi.webp",
+    "src": "/assets/iso22000-head-office-vi.webp",
+    "category": "Tài liệu và nhận diện",
+    "width": 1689,
+    "height": 2404,
+    "protected": true
+  },
+  {
+    "id": "kitchen-layout-process.png",
+    "src": "/assets/kitchen-layout-process.png",
+    "category": "Tài liệu và nhận diện",
+    "width": 1024,
+    "height": 1536,
+    "protected": true
+  },
+  {
+    "id": "kitchen-process-thuy-luan.png",
+    "src": "/assets/kitchen-process-thuy-luan.png",
+    "category": "Tài liệu và nhận diện",
+    "width": 1536,
+    "height": 1024,
+    "protected": true
+  },
+  {
+    "id": "logo.png",
+    "src": "/assets/logo.png",
+    "category": "Tài liệu và nhận diện",
+    "width": 150,
+    "height": 123,
+    "protected": true
+  },
+  {
+    "id": "meal-01.webp",
+    "src": "/assets/meal-01.webp",
+    "category": "Suất ăn",
+    "width": 960,
+    "height": 724,
+    "protected": false
+  },
+  {
+    "id": "meal-02.webp",
+    "src": "/assets/meal-02.webp",
+    "category": "Suất ăn",
+    "width": 960,
+    "height": 720,
+    "protected": false
+  },
+  {
+    "id": "meal-03.webp",
+    "src": "/assets/meal-03.webp",
+    "category": "Suất ăn",
+    "width": 960,
+    "height": 727,
+    "protected": false
+  },
+  {
+    "id": "meal-04.webp",
+    "src": "/assets/meal-04.webp",
+    "category": "Suất ăn",
+    "width": 960,
+    "height": 720,
+    "protected": false
+  },
+  {
+    "id": "meal-05.webp",
+    "src": "/assets/meal-05.webp",
+    "category": "Suất ăn",
+    "width": 960,
+    "height": 720,
+    "protected": false
+  },
+  {
+    "id": "meal-06.webp",
+    "src": "/assets/meal-06.webp",
+    "category": "Suất ăn",
+    "width": 960,
+    "height": 720,
+    "protected": false
+  },
+  {
+    "id": "meal-07.webp",
+    "src": "/assets/meal-07.webp",
+    "category": "Suất ăn",
+    "width": 960,
+    "height": 720,
+    "protected": false
+  },
+  {
+    "id": "meal-08.webp",
+    "src": "/assets/meal-08.webp",
+    "category": "Suất ăn",
+    "width": 960,
+    "height": 720,
+    "protected": false
+  },
+  {
+    "id": "meal-09.webp",
+    "src": "/assets/meal-09.webp",
+    "category": "Suất ăn",
+    "width": 960,
+    "height": 724,
+    "protected": false
+  },
+  {
+    "id": "meal-10.webp",
+    "src": "/assets/meal-10.webp",
+    "category": "Suất ăn",
+    "width": 961,
+    "height": 720,
+    "protected": false
+  },
+  {
+    "id": "meal-11.webp",
+    "src": "/assets/meal-11.webp",
+    "category": "Suất ăn",
+    "width": 960,
+    "height": 720,
+    "protected": false
+  },
+  {
+    "id": "meal-12.webp",
+    "src": "/assets/meal-12.webp",
+    "category": "Suất ăn",
+    "width": 960,
+    "height": 720,
+    "protected": false
+  },
+  {
+    "id": "meal-13.webp",
+    "src": "/assets/meal-13.webp",
+    "category": "Suất ăn",
+    "width": 960,
+    "height": 720,
+    "protected": false
+  },
+  {
+    "id": "meal-14.webp",
+    "src": "/assets/meal-14.webp",
+    "category": "Suất ăn",
+    "width": 961,
+    "height": 720,
+    "protected": false
+  },
+  {
+    "id": "meal-15.webp",
+    "src": "/assets/meal-15.webp",
+    "category": "Suất ăn",
+    "width": 960,
+    "height": 720,
+    "protected": false
+  },
+  {
+    "id": "meal-16.webp",
+    "src": "/assets/meal-16.webp",
+    "category": "Suất ăn",
+    "width": 960,
+    "height": 724,
+    "protected": false
+  },
+  {
+    "id": "meal-17.webp",
+    "src": "/assets/meal-17.webp",
+    "category": "Suất ăn",
+    "width": 960,
+    "height": 720,
+    "protected": false
+  },
+  {
+    "id": "meal-18.webp",
+    "src": "/assets/meal-18.webp",
+    "category": "Suất ăn",
+    "width": 960,
+    "height": 762,
+    "protected": false
+  },
+  {
+    "id": "meal-19.webp",
+    "src": "/assets/meal-19.webp",
+    "category": "Suất ăn",
+    "width": 960,
+    "height": 720,
+    "protected": false
+  },
+  {
+    "id": "meal-20.webp",
+    "src": "/assets/meal-20.webp",
+    "category": "Suất ăn",
+    "width": 960,
+    "height": 720,
+    "protected": false
+  },
+  {
+    "id": "meal-21.webp",
+    "src": "/assets/meal-21.webp",
+    "category": "Suất ăn",
+    "width": 961,
+    "height": 720,
+    "protected": false
+  },
+  {
+    "id": "meal-22.webp",
+    "src": "/assets/meal-22.webp",
+    "category": "Suất ăn",
+    "width": 960,
+    "height": 723,
+    "protected": false
+  },
+  {
+    "id": "menu-photo-2026-01.webp",
+    "src": "/assets/menu-photo-2026-01.webp",
+    "category": "Suất ăn",
+    "width": 1280,
+    "height": 960,
+    "protected": false
+  },
+  {
+    "id": "menu-photo-2026-02.webp",
+    "src": "/assets/menu-photo-2026-02.webp",
+    "category": "Suất ăn",
+    "width": 1280,
+    "height": 960,
+    "protected": false
+  },
+  {
+    "id": "menu-photo-2026-03.webp",
+    "src": "/assets/menu-photo-2026-03.webp",
+    "category": "Suất ăn",
+    "width": 1280,
+    "height": 960,
+    "protected": false
+  },
+  {
+    "id": "menu-photo-2026-04.webp",
+    "src": "/assets/menu-photo-2026-04.webp",
+    "category": "Suất ăn",
+    "width": 1280,
+    "height": 960,
+    "protected": false
+  },
+  {
+    "id": "menu-photo-2026-05.webp",
+    "src": "/assets/menu-photo-2026-05.webp",
+    "category": "Suất ăn",
+    "width": 1280,
+    "height": 960,
+    "protected": false
+  },
+  {
+    "id": "menu-photo-2026-06.webp",
+    "src": "/assets/menu-photo-2026-06.webp",
+    "category": "Suất ăn",
+    "width": 1280,
+    "height": 1172,
+    "protected": false
+  },
+  {
+    "id": "menu-photo-2026-07.webp",
+    "src": "/assets/menu-photo-2026-07.webp",
+    "category": "Suất ăn",
+    "width": 1280,
+    "height": 960,
+    "protected": false
+  },
+  {
+    "id": "menu-photo-2026-08.webp",
+    "src": "/assets/menu-photo-2026-08.webp",
+    "category": "Suất ăn",
+    "width": 1280,
+    "height": 960,
+    "protected": false
+  },
+  {
+    "id": "menu-photo-2026-09.webp",
+    "src": "/assets/menu-photo-2026-09.webp",
+    "category": "Suất ăn",
+    "width": 1280,
+    "height": 960,
+    "protected": false
+  },
+  {
+    "id": "menu-photo-2026-10.webp",
+    "src": "/assets/menu-photo-2026-10.webp",
+    "category": "Suất ăn",
+    "width": 1280,
+    "height": 960,
+    "protected": false
+  },
+  {
+    "id": "menu-photo-2026-11.webp",
+    "src": "/assets/menu-photo-2026-11.webp",
+    "category": "Suất ăn",
+    "width": 1280,
+    "height": 960,
+    "protected": false
+  },
+  {
+    "id": "menu-photo-2026-12.webp",
+    "src": "/assets/menu-photo-2026-12.webp",
+    "category": "Suất ăn",
+    "width": 1280,
+    "height": 960,
+    "protected": false
+  },
+  {
+    "id": "menu-photo-2026-13.webp",
+    "src": "/assets/menu-photo-2026-13.webp",
+    "category": "Suất ăn",
+    "width": 1280,
+    "height": 960,
+    "protected": false
+  },
+  {
+    "id": "menu-photo-2026-14.webp",
+    "src": "/assets/menu-photo-2026-14.webp",
+    "category": "Suất ăn",
+    "width": 1280,
+    "height": 960,
+    "protected": false
+  },
+  {
+    "id": "menu-photo-2026-15.webp",
+    "src": "/assets/menu-photo-2026-15.webp",
+    "category": "Suất ăn",
+    "width": 1280,
+    "height": 960,
+    "protected": false
+  },
+  {
+    "id": "menu-photo-2026-16.webp",
+    "src": "/assets/menu-photo-2026-16.webp",
+    "category": "Suất ăn",
+    "width": 1102,
+    "height": 827,
+    "protected": false
+  },
+  {
+    "id": "menu-photo-2026-17.webp",
+    "src": "/assets/menu-photo-2026-17.webp",
+    "category": "Suất ăn",
+    "width": 1280,
+    "height": 960,
+    "protected": false
+  },
+  {
+    "id": "menu-photo-2026-18.webp",
+    "src": "/assets/menu-photo-2026-18.webp",
+    "category": "Suất ăn",
+    "width": 1280,
+    "height": 960,
+    "protected": false
+  },
+  {
+    "id": "news-nutrition.webp",
+    "src": "/assets/news-nutrition.webp",
+    "category": "Khác",
+    "width": 500,
+    "height": 480,
+    "protected": false
+  },
+  {
+    "id": "news-quality.webp",
+    "src": "/assets/news-quality.webp",
+    "category": "Khác",
+    "width": 500,
+    "height": 480,
+    "protected": false
+  },
+  {
+    "id": "news-storage.webp",
+    "src": "/assets/news-storage.webp",
+    "category": "Khác",
+    "width": 500,
+    "height": 480,
+    "protected": false
+  },
+  {
+    "id": "partner-catering-room.jpeg",
+    "src": "/assets/partner-catering-room.jpeg",
+    "category": "Khác",
+    "width": 767,
+    "height": 1024,
+    "protected": false
+  },
+  {
+    "id": "solution-contract-01.jpg",
+    "src": "/assets/solution-contract-01.jpg",
+    "category": "Giải pháp",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "solution-contract-02.jpg",
+    "src": "/assets/solution-contract-02.jpg",
+    "category": "Giải pháp",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "solution-contract-03.jpg",
+    "src": "/assets/solution-contract-03.jpg",
+    "category": "Giải pháp",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "solution-contract-04.jpg",
+    "src": "/assets/solution-contract-04.jpg",
+    "category": "Giải pháp",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "solution-contract-05.jpg",
+    "src": "/assets/solution-contract-05.jpg",
+    "category": "Giải pháp",
+    "width": 1276,
+    "height": 956,
+    "protected": false
+  },
+  {
+    "id": "solution-factory-01.jpg",
+    "src": "/assets/solution-factory-01.jpg",
+    "category": "Giải pháp",
+    "width": 1280,
+    "height": 576,
+    "protected": false
+  },
+  {
+    "id": "solution-factory-02.jpg",
+    "src": "/assets/solution-factory-02.jpg",
+    "category": "Giải pháp",
+    "width": 1280,
+    "height": 576,
+    "protected": false
+  },
+  {
+    "id": "solution-factory-03.jpg",
+    "src": "/assets/solution-factory-03.jpg",
+    "category": "Giải pháp",
+    "width": 1280,
+    "height": 576,
+    "protected": false
+  },
+  {
+    "id": "solution-factory-04.jpg",
+    "src": "/assets/solution-factory-04.jpg",
+    "category": "Giải pháp",
+    "width": 1280,
+    "height": 576,
+    "protected": false
+  },
+  {
+    "id": "solution-factory-05.jpg",
+    "src": "/assets/solution-factory-05.jpg",
+    "category": "Giải pháp",
+    "width": 1280,
+    "height": 576,
+    "protected": false
+  },
+  {
+    "id": "solution-office-01.jpg",
+    "src": "/assets/solution-office-01.jpg",
+    "category": "Giải pháp",
+    "width": 1280,
+    "height": 960,
+    "protected": false
+  },
+  {
+    "id": "solution-office-02.jpg",
+    "src": "/assets/solution-office-02.jpg",
+    "category": "Giải pháp",
+    "width": 1280,
+    "height": 960,
+    "protected": false
+  },
+  {
+    "id": "solution-office-03.jpg",
+    "src": "/assets/solution-office-03.jpg",
+    "category": "Giải pháp",
+    "width": 1280,
+    "height": 960,
+    "protected": false
+  },
+  {
+    "id": "solution-office-04.jpg",
+    "src": "/assets/solution-office-04.jpg",
+    "category": "Giải pháp",
+    "width": 1280,
+    "height": 1172,
+    "protected": false
+  },
+  {
+    "id": "solution-office-05.jpg",
+    "src": "/assets/solution-office-05.jpg",
+    "category": "Giải pháp",
+    "width": 1280,
+    "height": 960,
+    "protected": false
+  },
+  {
+    "id": "video-gioi-thieu-thuy-luan-poster.webp",
+    "src": "/assets/video-gioi-thieu-thuy-luan-poster.webp",
+    "category": "Khác",
+    "width": 854,
+    "height": 480,
+    "protected": false
+  },
+  {
+    "id": "zalo.png",
+    "src": "/assets/zalo.png",
+    "category": "Tài liệu và nhận diện",
+    "width": 300,
+    "height": 300,
+    "protected": true
+  }
+]
