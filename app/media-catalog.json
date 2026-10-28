@@ -389,7 +389,8 @@
     "category": "Phục vụ",
     "width": 1280,
     "height": 960,
-    "protected": false
+    "protected": false,
+    "title": "gallery-bua-an-01.webp"
   },
   {
     "id": "gallery-bua-an-02.webp",
@@ -397,7 +398,8 @@
     "category": "Phục vụ",
     "width": 1276,
     "height": 956,
-    "protected": false
+    "protected": false,
+    "title": "gallery-bua-an-02.webp"
   },
   {
     "id": "gallery-bua-an-03.webp",
@@ -405,7 +407,8 @@
     "category": "Phục vụ",
     "width": 1276,
     "height": 956,
-    "protected": false
+    "protected": false,
+    "title": "gallery-bua-an-03.webp"
   },
   {
     "id": "gallery-bua-an-04.webp",
@@ -413,7 +416,8 @@
     "category": "Phục vụ",
     "width": 1276,
     "height": 956,
-    "protected": false
+    "protected": false,
+    "title": "gallery-bua-an-04.webp"
   },
   {
     "id": "gallery-co-so-01.webp",
