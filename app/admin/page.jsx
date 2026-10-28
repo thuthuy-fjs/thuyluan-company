@@ -9,7 +9,14 @@ import { getEditableFields } from "../editor-content";
 const fields = getEditableFields();
 const galleryCategories = ["Không gian bếp", "Giao nhận", "Phục vụ", "Hoạt động tập thể"];
 const readJson = async (response) => {
-  const data = await response.json().catch(() => ({}));
+  const isJson = response.headers.get("content-type")?.includes("application/json");
+  const data = isJson ? await response.json().catch(() => ({})) : {};
+  if (response.status === 404 && !isJson) {
+    const local = ["localhost", "127.0.0.1"].includes(window.location.hostname);
+    throw new Error(local
+      ? "API quản trị không chạy với npm run dev. Hãy mở http://localhost:4173/admin/."
+      : "API quản trị chưa hoạt động trên máy chủ này.");
+  }
   if (!response.ok) throw new Error(data.error || "Yêu cầu không thành công.");
   return data;
 };
