@@ -1,9 +1,154 @@
 {
   "version": 1,
-  "text": {},
+  "text": {
+    "home.hero.line1": "Thực đơn hoàn chỉnh"
+  },
   "images": {},
   "sliderImages": {},
   "galleryAdditions": [],
   "theme": {},
-  "buttons": {}
+  "buttons": {
+    "home.hero.consult": {
+      "label": "Yêu cầu tư vấn"
+    },
+    "home.hero.services": {
+      "label": "Khám phá dịch vụ"
+    }
+  },
+  "certificates": [
+    {
+      "id": "business-registration-2026",
+      "title": "Giấy chứng nhận đăng ký doanh nghiệp",
+      "category": "Hồ sơ doanh nghiệp",
+      "pages": [
+        {
+          "title": "Trang 1",
+          "image": "/assets/business-registration-2026.webp"
+        }
+      ]
+    },
+    {
+      "id": "iso22000-head-office",
+      "title": "ISO 22000:2018 · trụ sở chính",
+      "category": "ISO 22000 · 3 trang",
+      "pages": [
+        {
+          "title": "Giấy chứng nhận (tiếng Việt)",
+          "image": "/assets/iso22000-head-office-vi.webp"
+        },
+        {
+          "title": "Giấy chứng nhận (tiếng Anh)",
+          "image": "/assets/iso22000-head-office-en.webp"
+        },
+        {
+          "title": "Quyết định chứng nhận",
+          "image": "/assets/iso22000-head-office-decision.webp"
+        }
+      ]
+    },
+    {
+      "id": "iso22000-dong-van",
+      "title": "ISO 22000:2018 · bếp Đồng Văn",
+      "category": "ISO 22000 · 3 trang",
+      "pages": [
+        {
+          "title": "Giấy chứng nhận (tiếng Việt)",
+          "image": "/assets/iso22000-dong-van-vi.webp"
+        },
+        {
+          "title": "Giấy chứng nhận (tiếng Anh)",
+          "image": "/assets/iso22000-dong-van-en.webp"
+        },
+        {
+          "title": "Quyết định chứng nhận",
+          "image": "/assets/iso22000-dong-van-decision.webp"
+        }
+      ]
+    },
+    {
+      "id": "iso22000-chau-son",
+      "title": "ISO 22000:2018 · các điểm Châu Sơn",
+      "category": "ISO 22000 · 3 trang",
+      "pages": [
+        {
+          "title": "Giấy chứng nhận (tiếng Việt)",
+          "image": "/assets/iso22000-chau-son-vi.webp"
+        },
+        {
+          "title": "Giấy chứng nhận (tiếng Anh)",
+          "image": "/assets/iso22000-chau-son-en.webp"
+        },
+        {
+          "title": "Quyết định chứng nhận",
+          "image": "/assets/iso22000-chau-son-decision.webp"
+        }
+      ]
+    },
+    {
+      "id": "food-safety-site-04-2026",
+      "title": "Giấy chứng nhận ATTP · địa điểm Phủ Lý (2026)",
+      "category": "An toàn thực phẩm",
+      "pages": [
+        {
+          "title": "Trang 1",
+          "image": "/assets/food-safety-site-04-2026.webp"
+        }
+      ]
+    },
+    {
+      "id": "certificate-02",
+      "title": "Giấy chứng nhận ATTP · địa điểm Phủ Lý (2023)",
+      "category": "Hồ sơ lưu trữ",
+      "pages": [
+        {
+          "title": "Trang 1",
+          "image": "/assets/certificate-02.webp"
+        }
+      ]
+    },
+    {
+      "id": "certificate-09",
+      "title": "Giấy chứng nhận ATTP · địa điểm Đồng Văn (2023)",
+      "category": "Hồ sơ lưu trữ",
+      "pages": [
+        {
+          "title": "Trang 1",
+          "image": "/assets/certificate-09.jpeg"
+        }
+      ]
+    },
+    {
+      "id": "certificate-03",
+      "title": "Xác nhận tập huấn kiến thức ATTP (2023)",
+      "category": "Đào tạo",
+      "pages": [
+        {
+          "title": "Trang 1",
+          "image": "/assets/certificate-03.webp"
+        }
+      ]
+    },
+    {
+      "id": "certificate-01",
+      "title": "Giấy chứng nhận ATTP · địa điểm Phủ Lý (2021)",
+      "category": "Hồ sơ lưu trữ",
+      "pages": [
+        {
+          "title": "Trang 1",
+          "image": "/assets/certificate-01.webp"
+        }
+      ]
+    },
+    {
+      "id": "certificate-04",
+      "title": "Đăng ký địa điểm kinh doanh số 01 (2021)",
+      "category": "Hồ sơ doanh nghiệp",
+      "pages": [
+        {
+          "title": "Trang 1",
+          "image": "/assets/certificate-04.webp"
+        }
+      ]
+    }
+  ]
 }
