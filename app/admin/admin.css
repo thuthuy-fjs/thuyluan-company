@@ -496,7 +496,19 @@ body:has(.admin-shell) {
   color: white;
   font-weight: 700;
 }
+.admin-image-select { display: grid; gap: 8px; }
+.admin-image-select-label { font-weight: 700; font-size: 13px; }
+.admin-image-select > button { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; text-align: left; background: white; color: #342719; border: 1px solid #d8c1a4; border-radius: 9px; padding: 12px; }
+.admin-image-select-menu { border: 1px solid #d8c1a4; border-radius: 9px; padding: 8px; background: white; }
+.admin-image-select-menu > input { width: 100%; margin-bottom: 8px; }
+.admin-image-select-menu [role="listbox"] { max-height: 210px; overflow-y: auto; overscroll-behavior: contain; }
+.admin-image-select-menu [role="option"] { display: grid; gap: 3px; width: 100%; text-align: left; padding: 9px; border: 0; border-radius: 5px; background: white; color: #342719; overflow-wrap: anywhere; }
+.admin-image-select-menu [role="option"]:hover,
+.admin-image-select-menu [role="option"].is-highlighted,
+.admin-image-select-menu [aria-selected="true"] { background: #f1e5d5; }
+.admin-image-select-menu [role="option"] small { color: #706252; }
 .admin-help {
+  margin-bottom: 24px;
   color: #706252;
   font-size: 14px;
   line-height: 1.5;
@@ -515,6 +527,18 @@ body:has(.admin-shell) {
 .admin-media-card.is-deleted {
   opacity: 0.65;
   border-color: #e59b94;
+}
+.admin-delete-usage {
+  padding: 12px;
+  border: 1px solid #d8c1a4;
+  border-radius: 9px;
+  background: #fff8ee;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.admin-delete-usage ul {
+  margin: 8px 0;
+  padding-left: 18px;
 }
 .admin-media-card > img {
   width: 100%;

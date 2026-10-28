@@ -70,6 +70,11 @@
   letter-spacing: -0.02em;
   line-height: 1.7;
 }
+.certificates-load-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
+}
 .certificates-footnote {
   display: flex;
   align-items: center;

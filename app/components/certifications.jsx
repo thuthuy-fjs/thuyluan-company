@@ -12,6 +12,8 @@ import { Modal, Eyebrow } from "./site";
 
 export default function Certifications() {
   const [active, setActive] = useState(null);
+  const [showAll, setShowAll] = useState(false);
+  const visibleCertificates = showAll ? certificates : certificates.slice(0, 10);
   useEffect(() => {
     if (active === null) return;
     const navigate = (e) => {
@@ -38,7 +40,7 @@ export default function Certifications() {
         <p>Hồ sơ doanh nghiệp, ISO 22000, an toàn thực phẩm và đào tạo.</p>
       </div>
       <div className="certificate-grid">
-        {certificates.map((certificate, index) => (
+        {visibleCertificates.map((certificate, index) => (
           <button
             className="certificate-card"
             key={certificate.id}
@@ -66,6 +68,13 @@ export default function Certifications() {
           </button>
         ))}
       </div>
+      {!showAll && certificates.length > 10 && (
+        <div className="certificates-load-more">
+          <button type="button" className="button outline" onClick={() => setShowAll(true)}>
+            Xem thêm
+          </button>
+        </div>
+      )}
       <div className="certificates-footnote">
         <span>Nhấn vào ảnh để xem rõ nội dung.</span>
         <a className="text-link" href="/contacts/">

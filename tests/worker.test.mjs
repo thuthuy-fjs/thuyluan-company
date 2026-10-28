@@ -1,7 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import worker, { handleQuote } from "../worker/index.js";
-import { handleAdmin, replacementFor } from "../worker/admin.js";
+import { handleAdmin } from "../worker/admin.js";
+import { imageUsage } from "../app/image-usage.js";
 import { readFile } from "node:fs/promises";
 import { galleryCategories, initialCategory } from "../app/media-groups.js";
 
@@ -145,11 +146,15 @@ test("admin PIN creates a protected session and rejects wrong codes", async () =
   assert.equal((await (await handleAdmin(adminRequest("session", undefined, `${cookie}x`), env)).json()).authenticated, false);
 });
 
-test("replacement selection stays within category and aspect ratio", () => {
-  const old = { category: "Phục vụ", width: 1200, height: 800 };
-  assert.equal(replacementFor(old, [{ id: "wrong", category: "Suất ăn", width: 1200, height: 800 }]), null);
-  assert.equal(replacementFor(old, [{ id: "tall", category: "Phục vụ", width: 600, height: 1200 }]), null);
-  assert.equal(replacementFor(old, [{ id: "good", category: "Phục vụ", width: 1100, height: 700 }]).id, "good");
+test("image usage follows replacements and current slots and certificate pages", () => {
+  const entries = [{ image: "/assets/old.webp", label: "Trang chủ" }, { image: "/assets/default.webp", label: "Trang chủ", slot: "home.solutions.factory.1" }];
+  const content = { images: { "old.webp": "/assets/new.webp" }, sliderImages: { "home.solutions.factory.1": "/assets/selected.webp" }, certificates: [{ title: "ISO", pages: [{ image: "/assets/document.webp" }] }] };
+  assert.deepEqual(imageUsage("old.webp", content, entries), []);
+  assert.deepEqual(imageUsage("new.webp", content, entries), ["Trang chủ"]);
+  assert.deepEqual(imageUsage("default.webp", content, entries), []);
+  assert.ok(imageUsage("selected.webp", content, entries).some((label) => label.includes("Suất ăn nhà máy")));
+  assert.deepEqual(imageUsage("document.webp", content, entries), ["Chứng nhận ISO · trang 1"]);
+  assert.deepEqual(imageUsage("unused.webp", content, entries), []);
 });
 
 test("saving a draft updates every mapped photo use without changing published", async () => {
@@ -178,7 +183,11 @@ test("saving a draft updates every mapped photo use without changing published",
     throw Error(`Unexpected GitHub path: ${path}`);
   };
   try {
-    const response = await handleAdmin(adminRequest("draft", { baseHead: "head", basePublishedHead: "head", text: {}, uploads: [], deletes: ["old.webp"], replacements: {} }, cookie), env);
+    const blocked = await handleAdmin(adminRequest("draft", { baseHead: "head", basePublishedHead: "head", text: {}, uploads: [], deletes: ["old.webp"], replacements: {} }, cookie), env);
+    assert.equal(blocked.status, 400);
+    assert.match((await blocked.json()).error, /Hãy chọn ảnh thay thế/);
+    assert.equal(tree, undefined);
+    const response = await handleAdmin(adminRequest("draft", { baseHead: "head", basePublishedHead: "head", text: {}, uploads: [], deletes: ["old.webp"], replacements: { "old.webp": "similar.webp" } }, cookie), env);
     assert.equal(response.status, 200, await response.text());
     const nextContent = JSON.parse(tree.find((item) => item.path === "app/editor-content.json").content);
     assert.equal(nextContent.images["old.webp"], "/assets/similar.webp");
@@ -186,6 +195,12 @@ test("saving a draft updates every mapped photo use without changing published",
     assert.equal(nextContent.sliderImages["home.gallery.service.1"], "/assets/similar.webp");
     assert.equal(nextContent.galleryAdditions.length, 0);
     assert.equal(tree.find((item) => item.path === "public/assets/old.webp").sha, null);
+    content.sliderImages = {};
+    const unused = await handleAdmin(adminRequest("draft", { baseHead: "head", basePublishedHead: "head", text: {}, uploads: [], deletes: ["old.webp"], replacements: {} }, cookie), env);
+    assert.equal(unused.status, 200, await unused.text());
+    const deletedContent = JSON.parse(tree.find((item) => item.path === "app/editor-content.json").content);
+    assert.deepEqual(deletedContent.images, {});
+    assert.deepEqual(deletedContent.galleryAdditions, []);
     const linkEdit = await handleAdmin(adminRequest("draft", {
       baseHead: "head", basePublishedHead: "head", text: {}, uploads: [], deletes: [], replacements: {},
       buttons: { "home.hero.consult": { label: "Tư vấn", href: "/wrong/" } },

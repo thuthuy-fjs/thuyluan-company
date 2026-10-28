@@ -1,4 +1,5 @@
 import { sliderSlotIds } from "../app/slider-slots.js";
+import { imageUsage, resolveImage } from "../app/image-usage.js";
 import { galleryCategories as galleryGroupNames, imageCategories, normalizedCategory } from "../app/media-groups.js";
 
 const json = (value, status = 200, headers = {}) => Response.json(value, {
@@ -169,18 +170,6 @@ function classify(file) {
   return null;
 }
 
-export function replacementFor(old, candidates) {
-  const sameCategory = candidates.filter((item) => item.category === old.category);
-  const ratio = old.width / old.height;
-  const suitable = sameCategory.filter((item) => {
-    const difference = (item.width / item.height) / ratio;
-    return difference >= 0.7 && difference <= 1.4;
-  });
-  if (!suitable.length) return null;
-  const random = crypto.getRandomValues(new Uint32Array(1))[0];
-  return suitable[random % suitable.length];
-}
-
 function validateText(text) {
   if (!text || typeof text !== "object" || Array.isArray(text) || Object.keys(text).length > 1500) throw new Error("Dữ liệu văn bản không hợp lệ.");
   for (const [key, value] of Object.entries(text))
@@ -202,7 +191,7 @@ function validateCertificates(certificates, media) {
   for (const certificate of certificates) {
     if (!certificate || typeof certificate !== "object" || !/^[a-z0-9-]{1,100}$/.test(certificate.id || "") || ids.has(certificate.id)) throw new Error("Mã chứng nhận không hợp lệ.");
     ids.add(certificate.id);
-    if (typeof certificate.title !== "string" || !certificate.title.trim() || certificate.title.length > 200 || typeof certificate.category !== "string" || !certificate.category.trim() || certificate.category.length > 120) throw new Error("Thông tin chứng nhận không hợp lệ.");
+    if (typeof certificate.title !== "string" || !certificate.title.trim() || certificate.title.length > 200) throw new Error("Thông tin chứng nhận không hợp lệ.");
     if (!Array.isArray(certificate.pages) || certificate.pages.length < 1 || certificate.pages.length > 12) throw new Error("Chứng nhận phải có từ 1 đến 12 trang.");
     for (const page of certificate.pages) {
       if (!page || typeof page.title !== "string" || !page.title.trim() || page.title.length > 120 || !available.has(page.image) || usedImages.has(page.image)) throw new Error("Trang chứng nhận không hợp lệ hoặc bị trùng.");
@@ -262,14 +251,16 @@ async function saveDraft(request, env) {
       content.images[oldId] = `/assets/${targetId}`;
     }
     for (const id of deleted) {
-      const old = media.find((item) => item.id === id);
       const requested = replacements[id] && remaining.find((item) => item.id === replacements[id]);
-      if ((old.protected || body.mediaUpdates?.[id]?.category === "Chứng chỉ – Chứng nhận") && !requested) throw new Error(`Ảnh ${id} cần chọn ảnh thay thế thủ công.`);
-      const chosen = requested || replacementFor(old, remaining.filter((item) => !item.protected));
-      if (!chosen) throw new Error(`Không có ảnh phù hợp để thay thế ${id}.`);
-      for (const [key, value] of Object.entries(content.images)) if (value === `/assets/${id}`) content.images[key] = chosen.src;
-      content.images[id] = chosen.src;
-      for (const [slot, value] of Object.entries(content.sliderImages)) if (value === `/assets/${id}`) content.sliderImages[slot] = chosen.src;
+      const uses = imageUsage(id, { ...content, certificates: body.certificates ?? content.certificates });
+      if (!requested && uses.length) throw new Error(`Ảnh đang được dùng tại: ${uses.join("; ")}. Hãy chọn ảnh thay thế trước khi xóa.`);
+      if (requested) {
+        for (const [key, value] of Object.entries(content.images)) if (value === `/assets/${id}` || resolveImage(value, content.images) === `/assets/${id}`) content.images[key] = requested.src;
+        content.images[id] = requested.src;
+        for (const [slot, value] of Object.entries(content.sliderImages)) if (value === `/assets/${id}`) content.sliderImages[slot] = requested.src;
+      } else {
+        for (const [key, value] of Object.entries(content.images)) if (resolveImage(value, content.images) === `/assets/${id}`) delete content.images[key];
+      }
       content.galleryAdditions = content.galleryAdditions.filter((item) => item.image !== `/assets/${id}`);
       tree.push({ path: `public/assets/${id}`, mode: "100644", type: "blob", sha: null });
     }
@@ -302,7 +293,7 @@ async function saveDraft(request, env) {
       content.certificates = body.certificates.map((certificate) => ({
         id: certificate.id,
         title: certificate.title.trim(),
-        category: certificate.category.trim(),
+        category: certificate.title.trim(),
         pages: certificate.pages.map((page) => ({ title: page.title.trim(), image: page.image })),
       }));
       const referenced = new Set(content.certificates.flatMap((certificate) => certificate.pages.map((page) => page.image)));

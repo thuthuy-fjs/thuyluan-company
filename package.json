@@ -8,7 +8,7 @@
     "start": "wrangler dev",
     "preview": "wrangler dev",
     "deploy": "wrangler deploy",
-    "test": "node --test tests/worker.test.mjs",
+    "test": "node --test tests/worker.test.mjs tests/gallery-order.test.mjs",
     "test:browser": "playwright test",
     "build:worker": "npm run build && wrangler deploy --dry-run --outdir /tmp/thuyluan-worker-build",
     "preview:static": "node scripts/preview.mjs"

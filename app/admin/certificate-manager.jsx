@@ -7,13 +7,12 @@ const fileSrc = (image, media) => {
   return item?.preview || (item?.id.startsWith("upload-") ? `/api/admin/asset/${item.id}` : item?.src) || image;
 };
 
-export default function CertificateManager({ certificates, media, search, onChange, onAdd, onReplacePage, onAddPages, onRemove, canRemove }) {
+export default function CertificateManager({ certificates, media, search, onChange, onAdd, onReplacePage, onAddPages, onRemove }) {
   const [creating, setCreating] = useState(false);
   const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("");
   const [files, setFiles] = useState([]);
   const [busy, setBusy] = useState(false);
-  const visible = certificates.filter((item) => `${item.title} ${item.category} ${item.pages.map((page) => page.title).join(" ")}`.toLocaleLowerCase("vi").includes(search.toLocaleLowerCase("vi")));
+  const visible = certificates.filter((item) => `${item.title} ${item.pages.map((page) => page.title).join(" ")}`.toLocaleLowerCase("vi").includes(search.toLocaleLowerCase("vi")));
   const update = (id, patch) => onChange(certificates.map((item) => item.id === id ? { ...item, ...patch } : item));
   const updatePage = (certificate, index, patch) => update(certificate.id, { pages: certificate.pages.map((page, position) => position === index ? { ...page, ...patch } : page) });
   const movePage = (certificate, index, direction) => {
@@ -27,13 +26,12 @@ export default function CertificateManager({ certificates, media, search, onChan
     {creating && <form className="admin-certificate-create" onSubmit={async (event) => {
       event.preventDefault();
       setBusy(true);
-      const added = await onAdd({ title: title.trim(), category: category.trim(), files });
+      const added = await onAdd({ title: title.trim(), files });
       setBusy(false);
-      if (added) { setCreating(false); setTitle(""); setCategory(""); setFiles([]); }
+      if (added) { setCreating(false); setTitle(""); setFiles([]); }
     }}>
       <h3>Chứng nhận mới</h3>
       <label>Tên chứng nhận<input value={title} maxLength={200} onChange={(event) => setTitle(event.target.value)} required /></label>
-      <label>Loại chứng nhận<input value={category} maxLength={120} placeholder="Ví dụ: ISO 22000" onChange={(event) => setCategory(event.target.value)} required /></label>
       <label>Các trang theo thứ tự hiển thị<input type="file" accept="image/png,image/jpeg,image/webp" multiple onChange={(event) => setFiles([...event.target.files])} required /></label>
       {files.length > 0 && <ol>{files.map((file, index) => <li key={`${file.name}-${index}`}>{file.name}</li>)}</ol>}
       <p>Chọn 1–4 ảnh trong lần đầu. Có thể thêm trang sau khi tạo.</p>
@@ -41,16 +39,15 @@ export default function CertificateManager({ certificates, media, search, onChan
     </form>}
     <div className="admin-certificate-list">
       {visible.map((certificate) => <details className="admin-certificate-item" key={certificate.id}>
-        <summary><img src={fileSrc(certificate.pages[0].image, media)} alt="" /><span><strong>{certificate.title}</strong><small>{certificate.category} · {certificate.pages.length} trang</small></span><span aria-hidden="true">⌄</span></summary>
+        <summary><img src={fileSrc(certificate.pages[0].image, media)} alt="" /><span><strong>{certificate.title}</strong><small>{certificate.pages.length} trang</small></span><span aria-hidden="true">⌄</span></summary>
         <div className="admin-certificate-fields">
           <label>Tên chứng nhận<input value={certificate.title} maxLength={200} onChange={(event) => update(certificate.id, { title: event.target.value })} /></label>
-          <label>Loại chứng nhận<input value={certificate.category} maxLength={120} onChange={(event) => update(certificate.id, { category: event.target.value })} /></label>
           <div className="admin-certificate-pages">{certificate.pages.map((page, index) => <div className="admin-certificate-page" key={`${certificate.id}-${index}`}>
             <img src={fileSrc(page.image, media)} alt={`${certificate.title} · trang ${index + 1}`} />
             <div><strong>Trang {index + 1}{index === 0 ? " · ảnh ngoài thẻ" : ""}</strong><label>Tên trang<input value={page.title} maxLength={120} onChange={(event) => updatePage(certificate, index, { title: event.target.value })} /></label><div className="admin-certificate-page-actions"><label className="admin-certificate-file">Thay ảnh trang này<input type="file" accept="image/png,image/jpeg,image/webp" onChange={(event) => { if (event.target.files?.[0]) onReplacePage(certificate.id, index, event.target.files[0]); event.target.value = ""; }} /></label><button type="button" disabled={index === 0} onClick={() => movePage(certificate, index, -1)}>↑ Lên</button><button type="button" disabled={index === certificate.pages.length - 1} onClick={() => movePage(certificate, index, 1)}>↓ Xuống</button></div></div>
           </div>)}</div>
           {certificate.pages.length < 12 && <label className="admin-certificate-file">+ Thêm trang<input type="file" accept="image/png,image/jpeg,image/webp" multiple onChange={(event) => { if (event.target.files?.length) onAddPages(certificate.id, [...event.target.files]); event.target.value = ""; }} /></label>}
-          {canRemove(certificate.id) && <button className="admin-certificate-remove" type="button" onClick={() => onRemove(certificate.id)}>Bỏ chứng nhận mới</button>}
+          <button className="admin-certificate-remove" type="button" onClick={() => onRemove(certificate.id)}>Xóa chứng nhận</button>
         </div>
       </details>)}
       {!visible.length && <p>Không tìm thấy chứng nhận.</p>}

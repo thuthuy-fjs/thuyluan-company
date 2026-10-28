@@ -23,7 +23,7 @@ import {
   Utensils,
   Truck,
 } from "lucide-react";
-import { company, meals, gallery, galleryCategories, galleryPreview, documents } from "../data";
+import { company, meals, galleryNewestFirst, galleryCategories, galleryPreview, documents } from "../data";
 import { editableImage } from "../editor-content";
 
 export function Eyebrow({ children, light = false }) {
@@ -295,7 +295,7 @@ export function PhotoGallery({ preview = false }) {
     const category = galleryCategories.find((item) => item.slug === slug);
     if (category) setFilter(category.label);
   }, [preview]);
-  const chosen = preview ? galleryPreview : gallery;
+  const chosen = preview ? galleryPreview : galleryNewestFirst;
   const filtered = chosen.filter(
     (x) => filter === "Tất cả" || x.category === filter,
   );

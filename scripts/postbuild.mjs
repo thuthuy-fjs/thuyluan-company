@@ -33,3 +33,4 @@ await writeFile(
 console.log(
   `Validated ${media.length} local image assets and generated legacy redirects.`,
 );
+await import("./image-usage.mjs");

@@ -1,0 +1,1284 @@
+[
+  {
+    "image": "/assets/logo.png",
+    "label": "404"
+  },
+  {
+    "image": "/assets/zalo.png",
+    "label": "404"
+  },
+  {
+    "image": "/assets/business-registration-2026.webp",
+    "label": "Về chúng tôi",
+    "certificate": true
+  },
+  {
+    "image": "/assets/iso22000-head-office-vi.webp",
+    "label": "Về chúng tôi",
+    "certificate": true
+  },
+  {
+    "image": "/assets/iso22000-dong-van-vi.webp",
+    "label": "Về chúng tôi",
+    "certificate": true
+  },
+  {
+    "image": "/assets/iso22000-chau-son-vi.webp",
+    "label": "Về chúng tôi",
+    "certificate": true
+  },
+  {
+    "image": "/assets/food-safety-site-04-2026.webp",
+    "label": "Về chúng tôi",
+    "certificate": true
+  },
+  {
+    "image": "/assets/certificate-02.webp",
+    "label": "Về chúng tôi",
+    "certificate": true
+  },
+  {
+    "image": "/assets/certificate-09.jpeg",
+    "label": "Về chúng tôi",
+    "certificate": true
+  },
+  {
+    "image": "/assets/certificate-03.webp",
+    "label": "Về chúng tôi",
+    "certificate": true
+  },
+  {
+    "image": "/assets/logo.png",
+    "label": "Về chúng tôi"
+  },
+  {
+    "image": "/assets/gallery-17.webp",
+    "label": "Về chúng tôi"
+  },
+  {
+    "image": "/assets/gallery-bep-07.webp",
+    "label": "Về chúng tôi"
+  },
+  {
+    "image": "/assets/gallery-bua-an-04.webp",
+    "label": "Về chúng tôi"
+  },
+  {
+    "image": "/assets/gallery-dao-tao-03.webp",
+    "label": "Về chúng tôi"
+  },
+  {
+    "image": "/assets/gallery-gala-08.webp",
+    "label": "Về chúng tôi"
+  },
+  {
+    "image": "/assets/document-organization.png",
+    "label": "Về chúng tôi"
+  },
+  {
+    "image": "/assets/gallery-07.webp",
+    "label": "Về chúng tôi"
+  },
+  {
+    "image": "/assets/gallery-co-so-19.webp",
+    "label": "Về chúng tôi"
+  },
+  {
+    "image": "/assets/gallery-so-che-02.webp",
+    "label": "Về chúng tôi"
+  },
+  {
+    "image": "/assets/gallery-bep-08.webp",
+    "label": "Về chúng tôi"
+  },
+  {
+    "image": "/assets/gallery-thuc-don-01.webp",
+    "label": "Về chúng tôi"
+  },
+  {
+    "image": "/assets/gallery-bua-an-01.webp",
+    "label": "Về chúng tôi",
+    "slot": "home.gallery.service.1"
+  },
+  {
+    "image": "/assets/gallery-phuc-vu-03.webp",
+    "label": "Về chúng tôi",
+    "slot": "home.gallery.service.2"
+  },
+  {
+    "image": "/assets/gallery-thuc-don-02.webp",
+    "label": "Về chúng tôi",
+    "slot": "home.gallery.service.3"
+  },
+  {
+    "image": "/assets/gallery-17.webp",
+    "label": "Về chúng tôi",
+    "slot": "home.gallery.service.4"
+  },
+  {
+    "image": "/assets/gallery-24.webp",
+    "label": "Về chúng tôi",
+    "slot": "home.gallery.service.5"
+  },
+  {
+    "image": "/assets/gallery-bep-01.webp",
+    "label": "Về chúng tôi",
+    "slot": "home.gallery.kitchen.1"
+  },
+  {
+    "image": "/assets/gallery-co-so-02.webp",
+    "label": "Về chúng tôi",
+    "slot": "home.gallery.kitchen.2"
+  },
+  {
+    "image": "/assets/gallery-co-so-13.webp",
+    "label": "Về chúng tôi",
+    "slot": "home.gallery.kitchen.3"
+  },
+  {
+    "image": "/assets/gallery-so-che-04.webp",
+    "label": "Về chúng tôi",
+    "slot": "home.gallery.kitchen.4"
+  },
+  {
+    "image": "/assets/gallery-22.webp",
+    "label": "Về chúng tôi",
+    "slot": "home.gallery.kitchen.5"
+  },
+  {
+    "image": "/assets/gallery-tap-the-01.webp",
+    "label": "Về chúng tôi",
+    "slot": "home.gallery.team-activities.1"
+  },
+  {
+    "image": "/assets/gallery-tap-the-02.webp",
+    "label": "Về chúng tôi",
+    "slot": "home.gallery.team-activities.2"
+  },
+  {
+    "image": "/assets/gallery-tap-the-03.webp",
+    "label": "Về chúng tôi",
+    "slot": "home.gallery.team-activities.3"
+  },
+  {
+    "image": "/assets/gallery-tap-the-09.webp",
+    "label": "Về chúng tôi",
+    "slot": "home.gallery.team-activities.4"
+  },
+  {
+    "image": "/assets/gallery-tap-the-18.webp",
+    "label": "Về chúng tôi",
+    "slot": "home.gallery.team-activities.5"
+  },
+  {
+    "image": "/assets/gallery-01.webp",
+    "label": "Về chúng tôi",
+    "slot": "home.gallery.delivery.1"
+  },
+  {
+    "image": "/assets/gallery-03.webp",
+    "label": "Về chúng tôi",
+    "slot": "home.gallery.delivery.2"
+  },
+  {
+    "image": "/assets/gallery-04.webp",
+    "label": "Về chúng tôi",
+    "slot": "home.gallery.delivery.3"
+  },
+  {
+    "image": "/assets/gallery-06.webp",
+    "label": "Về chúng tôi",
+    "slot": "home.gallery.delivery.4"
+  },
+  {
+    "image": "/assets/gallery-07.webp",
+    "label": "Về chúng tôi",
+    "slot": "home.gallery.delivery.5"
+  },
+  {
+    "image": "/assets/video-gioi-thieu-thuy-luan-poster.webp",
+    "label": "Về chúng tôi"
+  },
+  {
+    "image": "/assets/zalo.png",
+    "label": "Về chúng tôi"
+  },
+  {
+    "image": "/assets/logo.png",
+    "label": "Hồ sơ năng lực"
+  },
+  {
+    "image": "/assets/document-organization.png",
+    "label": "Hồ sơ năng lực"
+  },
+  {
+    "image": "/assets/logo.png",
+    "label": "Liên hệ"
+  },
+  {
+    "image": "/assets/zalo.png",
+    "label": "Liên hệ"
+  },
+  {
+    "image": "/assets/business-registration-2026.webp",
+    "label": "Trang chủ",
+    "certificate": true
+  },
+  {
+    "image": "/assets/iso22000-head-office-vi.webp",
+    "label": "Trang chủ",
+    "certificate": true
+  },
+  {
+    "image": "/assets/iso22000-dong-van-vi.webp",
+    "label": "Trang chủ",
+    "certificate": true
+  },
+  {
+    "image": "/assets/iso22000-chau-son-vi.webp",
+    "label": "Trang chủ",
+    "certificate": true
+  },
+  {
+    "image": "/assets/food-safety-site-04-2026.webp",
+    "label": "Trang chủ",
+    "certificate": true
+  },
+  {
+    "image": "/assets/certificate-02.webp",
+    "label": "Trang chủ",
+    "certificate": true
+  },
+  {
+    "image": "/assets/certificate-09.jpeg",
+    "label": "Trang chủ",
+    "certificate": true
+  },
+  {
+    "image": "/assets/certificate-03.webp",
+    "label": "Trang chủ",
+    "certificate": true
+  },
+  {
+    "image": "/assets/logo.png",
+    "label": "Trang chủ"
+  },
+  {
+    "image": "/assets/home-menu-30-days.jpg",
+    "label": "Trang chủ"
+  },
+  {
+    "image": "/assets/home-services-poster.jpg",
+    "label": "Trang chủ"
+  },
+  {
+    "image": "/assets/home-food-menu-poster.jpg",
+    "label": "Trang chủ"
+  },
+  {
+    "image": "/assets/solution-factory-01.jpg",
+    "label": "Trang chủ",
+    "slot": "home.solutions.factory.1"
+  },
+  {
+    "image": "/assets/solution-factory-02.jpg",
+    "label": "Trang chủ",
+    "slot": "home.solutions.factory.2"
+  },
+  {
+    "image": "/assets/solution-factory-03.jpg",
+    "label": "Trang chủ",
+    "slot": "home.solutions.factory.3"
+  },
+  {
+    "image": "/assets/solution-factory-04.jpg",
+    "label": "Trang chủ",
+    "slot": "home.solutions.factory.4"
+  },
+  {
+    "image": "/assets/solution-factory-05.jpg",
+    "label": "Trang chủ",
+    "slot": "home.solutions.factory.5"
+  },
+  {
+    "image": "/assets/solution-office-01.jpg",
+    "label": "Trang chủ",
+    "slot": "home.solutions.office.1"
+  },
+  {
+    "image": "/assets/solution-office-02.jpg",
+    "label": "Trang chủ",
+    "slot": "home.solutions.office.2"
+  },
+  {
+    "image": "/assets/solution-office-03.jpg",
+    "label": "Trang chủ",
+    "slot": "home.solutions.office.3"
+  },
+  {
+    "image": "/assets/solution-office-04.jpg",
+    "label": "Trang chủ",
+    "slot": "home.solutions.office.4"
+  },
+  {
+    "image": "/assets/solution-office-05.jpg",
+    "label": "Trang chủ",
+    "slot": "home.solutions.office.5"
+  },
+  {
+    "image": "/assets/solution-contract-01.jpg",
+    "label": "Trang chủ",
+    "slot": "home.solutions.contract.1"
+  },
+  {
+    "image": "/assets/solution-contract-02.jpg",
+    "label": "Trang chủ",
+    "slot": "home.solutions.contract.2"
+  },
+  {
+    "image": "/assets/solution-contract-03.jpg",
+    "label": "Trang chủ",
+    "slot": "home.solutions.contract.3"
+  },
+  {
+    "image": "/assets/solution-contract-04.jpg",
+    "label": "Trang chủ",
+    "slot": "home.solutions.contract.4"
+  },
+  {
+    "image": "/assets/solution-contract-05.jpg",
+    "label": "Trang chủ",
+    "slot": "home.solutions.contract.5"
+  },
+  {
+    "image": "/assets/kitchen-process-thuy-luan.png",
+    "label": "Trang chủ"
+  },
+  {
+    "image": "/assets/menu-photo-2026-01.webp",
+    "label": "Trang chủ"
+  },
+  {
+    "image": "/assets/menu-photo-2026-02.webp",
+    "label": "Trang chủ"
+  },
+  {
+    "image": "/assets/menu-photo-2026-03.webp",
+    "label": "Trang chủ"
+  },
+  {
+    "image": "/assets/menu-photo-2026-04.webp",
+    "label": "Trang chủ"
+  },
+  {
+    "image": "/assets/menu-photo-2026-05.webp",
+    "label": "Trang chủ"
+  },
+  {
+    "image": "/assets/menu-photo-2026-06.webp",
+    "label": "Trang chủ"
+  },
+  {
+    "image": "/assets/menu-photo-2026-07.webp",
+    "label": "Trang chủ"
+  },
+  {
+    "image": "/assets/menu-photo-2026-08.webp",
+    "label": "Trang chủ"
+  },
+  {
+    "image": "/assets/menu-photo-2026-09.webp",
+    "label": "Trang chủ"
+  },
+  {
+    "image": "/assets/menu-photo-2026-10.webp",
+    "label": "Trang chủ"
+  },
+  {
+    "image": "/assets/menu-photo-2026-11.webp",
+    "label": "Trang chủ"
+  },
+  {
+    "image": "/assets/menu-photo-2026-12.webp",
+    "label": "Trang chủ"
+  },
+  {
+    "image": "/assets/gallery-bua-an-01.webp",
+    "label": "Trang chủ",
+    "slot": "home.gallery.service.1"
+  },
+  {
+    "image": "/assets/gallery-phuc-vu-03.webp",
+    "label": "Trang chủ",
+    "slot": "home.gallery.service.2"
+  },
+  {
+    "image": "/assets/gallery-thuc-don-02.webp",
+    "label": "Trang chủ",
+    "slot": "home.gallery.service.3"
+  },
+  {
+    "image": "/assets/gallery-17.webp",
+    "label": "Trang chủ",
+    "slot": "home.gallery.service.4"
+  },
+  {
+    "image": "/assets/gallery-24.webp",
+    "label": "Trang chủ",
+    "slot": "home.gallery.service.5"
+  },
+  {
+    "image": "/assets/gallery-bep-01.webp",
+    "label": "Trang chủ",
+    "slot": "home.gallery.kitchen.1"
+  },
+  {
+    "image": "/assets/gallery-co-so-02.webp",
+    "label": "Trang chủ",
+    "slot": "home.gallery.kitchen.2"
+  },
+  {
+    "image": "/assets/gallery-co-so-13.webp",
+    "label": "Trang chủ",
+    "slot": "home.gallery.kitchen.3"
+  },
+  {
+    "image": "/assets/gallery-so-che-04.webp",
+    "label": "Trang chủ",
+    "slot": "home.gallery.kitchen.4"
+  },
+  {
+    "image": "/assets/gallery-22.webp",
+    "label": "Trang chủ",
+    "slot": "home.gallery.kitchen.5"
+  },
+  {
+    "image": "/assets/gallery-tap-the-01.webp",
+    "label": "Trang chủ",
+    "slot": "home.gallery.team-activities.1"
+  },
+  {
+    "image": "/assets/gallery-tap-the-02.webp",
+    "label": "Trang chủ",
+    "slot": "home.gallery.team-activities.2"
+  },
+  {
+    "image": "/assets/gallery-tap-the-03.webp",
+    "label": "Trang chủ",
+    "slot": "home.gallery.team-activities.3"
+  },
+  {
+    "image": "/assets/gallery-tap-the-09.webp",
+    "label": "Trang chủ",
+    "slot": "home.gallery.team-activities.4"
+  },
+  {
+    "image": "/assets/gallery-tap-the-18.webp",
+    "label": "Trang chủ",
+    "slot": "home.gallery.team-activities.5"
+  },
+  {
+    "image": "/assets/gallery-01.webp",
+    "label": "Trang chủ",
+    "slot": "home.gallery.delivery.1"
+  },
+  {
+    "image": "/assets/gallery-03.webp",
+    "label": "Trang chủ",
+    "slot": "home.gallery.delivery.2"
+  },
+  {
+    "image": "/assets/gallery-04.webp",
+    "label": "Trang chủ",
+    "slot": "home.gallery.delivery.3"
+  },
+  {
+    "image": "/assets/gallery-06.webp",
+    "label": "Trang chủ",
+    "slot": "home.gallery.delivery.4"
+  },
+  {
+    "image": "/assets/gallery-07.webp",
+    "label": "Trang chủ",
+    "slot": "home.gallery.delivery.5"
+  },
+  {
+    "image": "/assets/video-gioi-thieu-thuy-luan-poster.webp",
+    "label": "Trang chủ"
+  },
+  {
+    "image": "/assets/news-quality.webp",
+    "label": "Trang chủ"
+  },
+  {
+    "image": "/assets/news-storage.webp",
+    "label": "Trang chủ"
+  },
+  {
+    "image": "/assets/news-nutrition.webp",
+    "label": "Trang chủ"
+  },
+  {
+    "image": "/assets/zalo.png",
+    "label": "Trang chủ"
+  },
+  {
+    "image": "/assets/logo.png",
+    "label": "Thực đơn"
+  },
+  {
+    "image": "/assets/menu-photo-2026-01.webp",
+    "label": "Thực đơn"
+  },
+  {
+    "image": "/assets/menu-photo-2026-02.webp",
+    "label": "Thực đơn"
+  },
+  {
+    "image": "/assets/menu-photo-2026-03.webp",
+    "label": "Thực đơn"
+  },
+  {
+    "image": "/assets/menu-photo-2026-04.webp",
+    "label": "Thực đơn"
+  },
+  {
+    "image": "/assets/menu-photo-2026-05.webp",
+    "label": "Thực đơn"
+  },
+  {
+    "image": "/assets/menu-photo-2026-06.webp",
+    "label": "Thực đơn"
+  },
+  {
+    "image": "/assets/menu-photo-2026-07.webp",
+    "label": "Thực đơn"
+  },
+  {
+    "image": "/assets/menu-photo-2026-08.webp",
+    "label": "Thực đơn"
+  },
+  {
+    "image": "/assets/menu-photo-2026-09.webp",
+    "label": "Thực đơn"
+  },
+  {
+    "image": "/assets/zalo.png",
+    "label": "Thực đơn"
+  },
+  {
+    "image": "/assets/logo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 01"
+  },
+  {
+    "image": "/assets/menu-photo-2026-01.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 01"
+  },
+  {
+    "image": "/assets/menu-photo-2026-02.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 01"
+  },
+  {
+    "image": "/assets/menu-photo-2026-03.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 01"
+  },
+  {
+    "image": "/assets/menu-photo-2026-04.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 01"
+  },
+  {
+    "image": "/assets/zalo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 01"
+  },
+  {
+    "image": "/assets/logo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 02"
+  },
+  {
+    "image": "/assets/menu-photo-2026-02.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 02"
+  },
+  {
+    "image": "/assets/menu-photo-2026-01.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 02"
+  },
+  {
+    "image": "/assets/menu-photo-2026-03.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 02"
+  },
+  {
+    "image": "/assets/menu-photo-2026-04.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 02"
+  },
+  {
+    "image": "/assets/zalo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 02"
+  },
+  {
+    "image": "/assets/logo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 03"
+  },
+  {
+    "image": "/assets/menu-photo-2026-03.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 03"
+  },
+  {
+    "image": "/assets/menu-photo-2026-01.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 03"
+  },
+  {
+    "image": "/assets/menu-photo-2026-02.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 03"
+  },
+  {
+    "image": "/assets/menu-photo-2026-04.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 03"
+  },
+  {
+    "image": "/assets/zalo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 03"
+  },
+  {
+    "image": "/assets/logo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 04"
+  },
+  {
+    "image": "/assets/menu-photo-2026-04.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 04"
+  },
+  {
+    "image": "/assets/menu-photo-2026-01.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 04"
+  },
+  {
+    "image": "/assets/menu-photo-2026-02.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 04"
+  },
+  {
+    "image": "/assets/menu-photo-2026-03.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 04"
+  },
+  {
+    "image": "/assets/zalo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 04"
+  },
+  {
+    "image": "/assets/logo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 05"
+  },
+  {
+    "image": "/assets/menu-photo-2026-05.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 05"
+  },
+  {
+    "image": "/assets/menu-photo-2026-01.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 05"
+  },
+  {
+    "image": "/assets/menu-photo-2026-02.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 05"
+  },
+  {
+    "image": "/assets/menu-photo-2026-03.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 05"
+  },
+  {
+    "image": "/assets/zalo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 05"
+  },
+  {
+    "image": "/assets/logo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 06"
+  },
+  {
+    "image": "/assets/menu-photo-2026-06.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 06"
+  },
+  {
+    "image": "/assets/menu-photo-2026-01.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 06"
+  },
+  {
+    "image": "/assets/menu-photo-2026-02.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 06"
+  },
+  {
+    "image": "/assets/menu-photo-2026-03.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 06"
+  },
+  {
+    "image": "/assets/zalo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 06"
+  },
+  {
+    "image": "/assets/logo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 07"
+  },
+  {
+    "image": "/assets/menu-photo-2026-07.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 07"
+  },
+  {
+    "image": "/assets/menu-photo-2026-01.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 07"
+  },
+  {
+    "image": "/assets/menu-photo-2026-02.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 07"
+  },
+  {
+    "image": "/assets/menu-photo-2026-03.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 07"
+  },
+  {
+    "image": "/assets/zalo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 07"
+  },
+  {
+    "image": "/assets/logo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 08"
+  },
+  {
+    "image": "/assets/menu-photo-2026-08.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 08"
+  },
+  {
+    "image": "/assets/menu-photo-2026-01.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 08"
+  },
+  {
+    "image": "/assets/menu-photo-2026-02.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 08"
+  },
+  {
+    "image": "/assets/menu-photo-2026-03.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 08"
+  },
+  {
+    "image": "/assets/zalo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 08"
+  },
+  {
+    "image": "/assets/logo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 09"
+  },
+  {
+    "image": "/assets/menu-photo-2026-09.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 09"
+  },
+  {
+    "image": "/assets/menu-photo-2026-01.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 09"
+  },
+  {
+    "image": "/assets/menu-photo-2026-02.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 09"
+  },
+  {
+    "image": "/assets/menu-photo-2026-03.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 09"
+  },
+  {
+    "image": "/assets/zalo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 09"
+  },
+  {
+    "image": "/assets/logo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 10"
+  },
+  {
+    "image": "/assets/menu-photo-2026-10.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 10"
+  },
+  {
+    "image": "/assets/menu-photo-2026-01.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 10"
+  },
+  {
+    "image": "/assets/menu-photo-2026-02.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 10"
+  },
+  {
+    "image": "/assets/menu-photo-2026-03.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 10"
+  },
+  {
+    "image": "/assets/zalo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 10"
+  },
+  {
+    "image": "/assets/logo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 11"
+  },
+  {
+    "image": "/assets/menu-photo-2026-11.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 11"
+  },
+  {
+    "image": "/assets/menu-photo-2026-01.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 11"
+  },
+  {
+    "image": "/assets/menu-photo-2026-02.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 11"
+  },
+  {
+    "image": "/assets/menu-photo-2026-03.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 11"
+  },
+  {
+    "image": "/assets/zalo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 11"
+  },
+  {
+    "image": "/assets/logo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 12"
+  },
+  {
+    "image": "/assets/menu-photo-2026-12.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 12"
+  },
+  {
+    "image": "/assets/menu-photo-2026-01.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 12"
+  },
+  {
+    "image": "/assets/menu-photo-2026-02.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 12"
+  },
+  {
+    "image": "/assets/menu-photo-2026-03.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 12"
+  },
+  {
+    "image": "/assets/zalo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 12"
+  },
+  {
+    "image": "/assets/logo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 13"
+  },
+  {
+    "image": "/assets/menu-photo-2026-13.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 13"
+  },
+  {
+    "image": "/assets/menu-photo-2026-01.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 13"
+  },
+  {
+    "image": "/assets/menu-photo-2026-02.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 13"
+  },
+  {
+    "image": "/assets/menu-photo-2026-03.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 13"
+  },
+  {
+    "image": "/assets/zalo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 13"
+  },
+  {
+    "image": "/assets/logo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 14"
+  },
+  {
+    "image": "/assets/menu-photo-2026-14.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 14"
+  },
+  {
+    "image": "/assets/menu-photo-2026-01.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 14"
+  },
+  {
+    "image": "/assets/menu-photo-2026-02.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 14"
+  },
+  {
+    "image": "/assets/menu-photo-2026-03.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 14"
+  },
+  {
+    "image": "/assets/zalo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 14"
+  },
+  {
+    "image": "/assets/logo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 15"
+  },
+  {
+    "image": "/assets/menu-photo-2026-15.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 15"
+  },
+  {
+    "image": "/assets/menu-photo-2026-01.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 15"
+  },
+  {
+    "image": "/assets/menu-photo-2026-02.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 15"
+  },
+  {
+    "image": "/assets/menu-photo-2026-03.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 15"
+  },
+  {
+    "image": "/assets/zalo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 15"
+  },
+  {
+    "image": "/assets/logo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 16"
+  },
+  {
+    "image": "/assets/menu-photo-2026-16.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 16"
+  },
+  {
+    "image": "/assets/menu-photo-2026-01.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 16"
+  },
+  {
+    "image": "/assets/menu-photo-2026-02.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 16"
+  },
+  {
+    "image": "/assets/menu-photo-2026-03.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 16"
+  },
+  {
+    "image": "/assets/zalo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 16"
+  },
+  {
+    "image": "/assets/logo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 17"
+  },
+  {
+    "image": "/assets/menu-photo-2026-17.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 17"
+  },
+  {
+    "image": "/assets/menu-photo-2026-01.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 17"
+  },
+  {
+    "image": "/assets/menu-photo-2026-02.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 17"
+  },
+  {
+    "image": "/assets/menu-photo-2026-03.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 17"
+  },
+  {
+    "image": "/assets/zalo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 17"
+  },
+  {
+    "image": "/assets/logo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 18"
+  },
+  {
+    "image": "/assets/menu-photo-2026-18.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 18"
+  },
+  {
+    "image": "/assets/menu-photo-2026-01.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 18"
+  },
+  {
+    "image": "/assets/menu-photo-2026-02.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 18"
+  },
+  {
+    "image": "/assets/menu-photo-2026-03.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 18"
+  },
+  {
+    "image": "/assets/zalo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 18"
+  },
+  {
+    "image": "/assets/logo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 19"
+  },
+  {
+    "image": "/assets/meal-04.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 19"
+  },
+  {
+    "image": "/assets/menu-photo-2026-01.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 19"
+  },
+  {
+    "image": "/assets/menu-photo-2026-02.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 19"
+  },
+  {
+    "image": "/assets/menu-photo-2026-03.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 19"
+  },
+  {
+    "image": "/assets/zalo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 19"
+  },
+  {
+    "image": "/assets/logo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 20"
+  },
+  {
+    "image": "/assets/meal-03.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 20"
+  },
+  {
+    "image": "/assets/menu-photo-2026-01.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 20"
+  },
+  {
+    "image": "/assets/menu-photo-2026-02.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 20"
+  },
+  {
+    "image": "/assets/menu-photo-2026-03.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 20"
+  },
+  {
+    "image": "/assets/zalo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 20"
+  },
+  {
+    "image": "/assets/logo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 21"
+  },
+  {
+    "image": "/assets/meal-01.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 21"
+  },
+  {
+    "image": "/assets/menu-photo-2026-01.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 21"
+  },
+  {
+    "image": "/assets/menu-photo-2026-02.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 21"
+  },
+  {
+    "image": "/assets/menu-photo-2026-03.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 21"
+  },
+  {
+    "image": "/assets/zalo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 21"
+  },
+  {
+    "image": "/assets/logo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 22"
+  },
+  {
+    "image": "/assets/meal-02.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 22"
+  },
+  {
+    "image": "/assets/menu-photo-2026-01.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 22"
+  },
+  {
+    "image": "/assets/menu-photo-2026-02.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 22"
+  },
+  {
+    "image": "/assets/menu-photo-2026-03.webp",
+    "label": "Thực đơn · Suất ăn công nghiệp 22"
+  },
+  {
+    "image": "/assets/zalo.png",
+    "label": "Thực đơn · Suất ăn công nghiệp 22"
+  },
+  {
+    "image": "/assets/logo.png",
+    "label": "news/balanced-nutritious-and-tasty-meals"
+  },
+  {
+    "image": "/assets/news-nutrition.webp",
+    "label": "news/balanced-nutritious-and-tasty-meals"
+  },
+  {
+    "image": "/assets/zalo.png",
+    "label": "news/balanced-nutritious-and-tasty-meals"
+  },
+  {
+    "image": "/assets/logo.png",
+    "label": "Góc chia sẻ"
+  },
+  {
+    "image": "/assets/news-quality.webp",
+    "label": "Góc chia sẻ"
+  },
+  {
+    "image": "/assets/news-storage.webp",
+    "label": "Góc chia sẻ"
+  },
+  {
+    "image": "/assets/news-nutrition.webp",
+    "label": "Góc chia sẻ"
+  },
+  {
+    "image": "/assets/zalo.png",
+    "label": "Góc chia sẻ"
+  },
+  {
+    "image": "/assets/logo.png",
+    "label": "news/proper-food-selection-and-storage"
+  },
+  {
+    "image": "/assets/news-storage.webp",
+    "label": "news/proper-food-selection-and-storage"
+  },
+  {
+    "image": "/assets/zalo.png",
+    "label": "news/proper-food-selection-and-storage"
+  },
+  {
+    "image": "/assets/logo.png",
+    "label": "news/standard-industrial-meal-supply-criteria"
+  },
+  {
+    "image": "/assets/news-quality.webp",
+    "label": "news/standard-industrial-meal-supply-criteria"
+  },
+  {
+    "image": "/assets/zalo.png",
+    "label": "news/standard-industrial-meal-supply-criteria"
+  },
+  {
+    "image": "/assets/logo.png",
+    "label": "privacy-policies"
+  },
+  {
+    "image": "/assets/zalo.png",
+    "label": "privacy-policies"
+  },
+  {
+    "image": "/assets/logo.png",
+    "label": "Dịch vụ"
+  },
+  {
+    "image": "/assets/solution-factory-01.jpg",
+    "label": "Dịch vụ"
+  },
+  {
+    "image": "/assets/solution-factory-02.jpg",
+    "label": "Dịch vụ"
+  },
+  {
+    "image": "/assets/solution-factory-03.jpg",
+    "label": "Dịch vụ"
+  },
+  {
+    "image": "/assets/solution-factory-04.jpg",
+    "label": "Dịch vụ"
+  },
+  {
+    "image": "/assets/solution-factory-05.jpg",
+    "label": "Dịch vụ"
+  },
+  {
+    "image": "/assets/solution-office-01.jpg",
+    "label": "Dịch vụ"
+  },
+  {
+    "image": "/assets/solution-office-02.jpg",
+    "label": "Dịch vụ"
+  },
+  {
+    "image": "/assets/solution-office-03.jpg",
+    "label": "Dịch vụ"
+  },
+  {
+    "image": "/assets/solution-office-04.jpg",
+    "label": "Dịch vụ"
+  },
+  {
+    "image": "/assets/solution-office-05.jpg",
+    "label": "Dịch vụ"
+  },
+  {
+    "image": "/assets/solution-contract-01.jpg",
+    "label": "Dịch vụ"
+  },
+  {
+    "image": "/assets/solution-contract-02.jpg",
+    "label": "Dịch vụ"
+  },
+  {
+    "image": "/assets/solution-contract-03.jpg",
+    "label": "Dịch vụ"
+  },
+  {
+    "image": "/assets/solution-contract-04.jpg",
+    "label": "Dịch vụ"
+  },
+  {
+    "image": "/assets/solution-contract-05.jpg",
+    "label": "Dịch vụ"
+  },
+  {
+    "image": "/assets/zalo.png",
+    "label": "Dịch vụ"
+  },
+  {
+    "image": "/assets/food-safety-site-04-2026.webp",
+    "label": "Chứng chỉ – Chứng nhận",
+    "certificate": true
+  },
+  {
+    "image": "/assets/business-registration-2026.webp",
+    "label": "Chứng chỉ – Chứng nhận",
+    "certificate": true
+  },
+  {
+    "image": "/assets/iso22000-head-office-vi.webp",
+    "label": "Chứng chỉ – Chứng nhận",
+    "certificate": true
+  },
+  {
+    "image": "/assets/iso22000-head-office-en.webp",
+    "label": "Chứng chỉ – Chứng nhận",
+    "certificate": true
+  },
+  {
+    "image": "/assets/iso22000-head-office-decision.webp",
+    "label": "Chứng chỉ – Chứng nhận",
+    "certificate": true
+  },
+  {
+    "image": "/assets/iso22000-dong-van-vi.webp",
+    "label": "Chứng chỉ – Chứng nhận",
+    "certificate": true
+  },
+  {
+    "image": "/assets/iso22000-dong-van-en.webp",
+    "label": "Chứng chỉ – Chứng nhận",
+    "certificate": true
+  },
+  {
+    "image": "/assets/iso22000-dong-van-decision.webp",
+    "label": "Chứng chỉ – Chứng nhận",
+    "certificate": true
+  },
+  {
+    "image": "/assets/iso22000-chau-son-vi.webp",
+    "label": "Chứng chỉ – Chứng nhận",
+    "certificate": true
+  },
+  {
+    "image": "/assets/iso22000-chau-son-en.webp",
+    "label": "Chứng chỉ – Chứng nhận",
+    "certificate": true
+  },
+  {
+    "image": "/assets/iso22000-chau-son-decision.webp",
+    "label": "Chứng chỉ – Chứng nhận",
+    "certificate": true
+  }
+]

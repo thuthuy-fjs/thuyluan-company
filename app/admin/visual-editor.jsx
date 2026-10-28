@@ -3,13 +3,13 @@
 import { useEffect, useRef, useState } from "react";
 import { articles, meals } from "../data";
 import { sliderSlotLabel } from "../slider-slots";
+import ImageSelect from "./image-select";
 
 const pages = [
   { path: "/", label: "Trang chủ" },
   { path: "/about/", label: "Về chúng tôi" },
   { path: "/services/", label: "Dịch vụ" },
   { path: "/menus/", label: "Thực đơn" },
-  { path: "/galleries/", label: "Hình ảnh thực tế" },
   { path: "/contacts/", label: "Nhận báo giá" },
   { path: "/news/", label: "Góc chia sẻ" },
   ...meals.map((item) => ({ path: `/menus/${item.slug}/`, label: item.name })),
@@ -204,8 +204,7 @@ export default function VisualEditor({ fields, savedText, publishedText = {}, dr
   const currentSliderSlot = sliderSlots.find((item) => item.slot === selectedSlider);
   const sliderImageId = (entry) => replacements[sliderImages[entry.slot]?.slice(8) || entry.originalId] || sliderImages[entry.slot]?.slice(8) || replacements[entry.originalId] || entry.originalId;
   const sliderItem = currentSliderSlot && media.find((item) => item.id === sliderImageId(currentSliderSlot));
-  const sliderReference = currentSliderSlot && (media.find((item) => item.id === currentSliderSlot.originalId) || sliderItem);
-  const sliderCandidates = sliderReference ? media.filter((item) => !deletedIds.includes(item.id) && item.category === sliderReference.category && (item.width / item.height) / (sliderReference.width / sliderReference.height) >= 0.7 && (item.width / item.height) / (sliderReference.width / sliderReference.height) <= 1.4) : [];
+  const eligibleImages = media.filter((item) => !deletedIds.includes(item.id) && item.category !== "Logo" && item.category !== "Chứng chỉ – Chứng nhận");
   const focusSliderSlot = (slot) => {
     setSelectedSlider(slot);
     const doc = frameRef.current?.contentDocument;
@@ -261,12 +260,7 @@ export default function VisualEditor({ fields, savedText, publishedText = {}, dr
         <div className="admin-slider-slots" role="group" aria-label="Các ảnh trong slider">
           {sliderSlots.map((entry) => { const item = media.find((candidate) => candidate.id === sliderImageId(entry)); return <button type="button" key={entry.slot} className={entry.slot === selectedSlider ? "active" : ""} onClick={() => focusSliderSlot(entry.slot)} aria-label={sliderSlotLabel(entry.slot)}><img src={item?.preview || (item?.id.startsWith("upload-") ? `/api/admin/asset/${item.id}` : item?.src) || `/assets/${entry.originalId}`} alt="" /><span>{entry.slot.split(".").at(-1)}</span></button>; })}
         </div>
-        <label>Chọn ảnh có sẵn
-          <select value={sliderImages[selectedSlider]?.slice(8) || ""} onChange={(event) => onSliderChange(selectedSlider, event.target.value === currentSliderSlot.originalId ? "" : event.target.value)}>
-            <option value="">Ảnh gốc</option>
-            {sliderCandidates.map((item) => <option key={item.id} value={item.id}>{item.title || item.id} · {item.width} × {item.height}</option>)}
-          </select>
-        </label>
+        <ImageSelect key={selectedSlider} images={eligibleImages} value={sliderImages[selectedSlider]?.slice(8) || ""} onChange={(id) => onSliderChange(selectedSlider, id === currentSliderSlot.originalId ? "" : id)} />
         <label className="admin-image-picker">Tải ảnh mới cho slide này<input type="file" accept="image/png,image/jpeg,image/webp" onChange={(event) => { if (event.target.files?.length) onSliderUpload?.(selectedSlider, sliderItem?.id || currentSliderSlot.originalId, event.target.files); event.target.value = ""; }} /></label>
         <p>Ảnh sẽ được cắt vừa khung khi hiển thị. Thay đổi chỉ áp dụng cho vị trí này.</p>
       </aside>}

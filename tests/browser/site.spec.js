@@ -540,7 +540,9 @@ test("ISO certificates show one cover per document and all three pages when open
   await page.goto("/");
   const grid = page.locator(".certificate-grid");
   const cards = grid.locator(".certificate-card");
+  const showMore = page.locator("#certificates").getByRole("button", { name: "Xem thêm", exact: true });
   await expect(cards).toHaveCount(10);
+  await expect(showMore).toHaveCount(0);
   await expect(cards.first()).toContainText(
     "Giấy chứng nhận đăng ký doanh nghiệp",
   );

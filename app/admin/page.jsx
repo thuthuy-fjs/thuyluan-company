@@ -10,6 +10,8 @@ import bundledMedia from "../media-catalog.json";
 import { imageCategories, normalizedCategory } from "../media-groups";
 import VisualEditor from "./visual-editor";
 import CertificateManager from "./certificate-manager";
+import { prepareImage } from "./prepare-image";
+import { imageUsage } from "../image-usage";
 
 const fields = getEditableFields();
 const bundledMediaIds = new Set(bundledMedia.map((item) => item.id));
@@ -49,6 +51,8 @@ const asBase64 = (file) => new Promise((resolve, reject) => {
 
 export default function AdminPage() {
   const uploadButtonRef = useRef(null);
+  const uploadReturnRef = useRef(null);
+  const uploadScrollRef = useRef(null);
   const uploadFileRef = useRef(null);
   const uploadPickerRef = useRef(null);
   const [phase, setPhase] = useState("loading");
@@ -60,7 +64,7 @@ export default function AdminPage() {
   const [certificateDraft, setCertificateDraft] = useState(baseCertificates);
   const [mediaDraft, setMediaDraft] = useState({});
   const [replacements, setReplacements] = useState({});
-  const [autoReplacements, setAutoReplacements] = useState([]);
+  const [deleteUsage, setDeleteUsage] = useState({});
   const [deletes, setDeletes] = useState([]);
   const [uploads, setUploads] = useState([]);
   const [tab, setTab] = useState("text");
@@ -92,8 +96,14 @@ export default function AdminPage() {
   };
   useEffect(() => { load(); }, []);
   useEffect(() => {
+    if (uploadOpen) {
+      uploadReturnRef.current = document.activeElement;
+      uploadScrollRef.current = { left: window.scrollX, top: window.scrollY };
+    }
+  }, [uploadOpen]);
+  useEffect(() => {
     if (!uploadOpen) return;
-    uploadPickerRef.current?.focus();
+    uploadPickerRef.current?.focus({ preventScroll: true });
     const onKeyDown = (event) => { if (event.key === "Escape" && !uploading) closeUploadDialog(); };
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
@@ -104,7 +114,10 @@ export default function AdminPage() {
     setReplaceImageId("");
     setPendingFiles([]);
     setUploadError("");
-    uploadButtonRef.current?.focus();
+    const target = uploadReturnRef.current?.isConnected ? uploadReturnRef.current : uploadButtonRef.current;
+    target?.focus({ preventScroll: true });
+    const position = uploadScrollRef.current;
+    if (position) requestAnimationFrame(() => window.scrollTo({ ...position, behavior: "instant" }));
   };
 
   const login = async (event) => {
@@ -133,17 +146,9 @@ export default function AdminPage() {
       const previousUploadId = removeOriginal && uploads.some((item) => item.id === replacements[effectiveReplaceId]) ? replacements[effectiveReplaceId] : "";
       if (removeOriginal && (!replaced || fileList.length !== 1)) throw new Error("Hãy chọn một ảnh để thay tệp cũ.");
       if (uploads.length - Number(Boolean(previousUploadId)) + fileList.length > 4) throw new Error("Mỗi lần xuất bản tối đa 4 ảnh mới.");
-      for (const file of [...fileList]) {
-        if (!/^image\/(?:png|jpeg|webp)$/.test(file.type) || file.size > 4_000_000) throw new Error("Chỉ nhận PNG, JPG hoặc WebP tối đa 4 MB mỗi ảnh.");
-        const bitmap = await createImageBitmap(file);
-        const width = bitmap.width, height = bitmap.height;
-        bitmap.close();
-        if (removeOriginal && !isLogo && targetCategory !== "Chứng chỉ – Chứng nhận") {
-          const ratio = (width / height) / (replaced.width / replaced.height);
-          if (ratio < 0.7 || ratio > 1.4) throw new Error("Ảnh thay thế cần có tỷ lệ gần với ảnh cũ. Hãy chọn ảnh khác.");
-        }
-        const ext = file.type === "image/jpeg" ? "jpg" : file.type.split("/")[1];
-        next.push({ id: `upload-${crypto.randomUUID()}.${ext}`, file, preview: URL.createObjectURL(file), width, height, category: targetCategory, title: file.name.replace(/\.[^.]+$/, "") });
+      for (const originalFile of [...fileList]) {
+        const { file, width, height } = await prepareImage(originalFile, targetCategory);
+        next.push({ id: `upload-${crypto.randomUUID()}.webp`, file, preview: URL.createObjectURL(file), width, height, category: targetCategory, title: originalFile.name.replace(/\.[^.]+$/, "") });
       }
       setUploads((items) => [...items.filter((item) => {
         if (item.id === previousUploadId) URL.revokeObjectURL(item.preview);
@@ -154,9 +159,7 @@ export default function AdminPage() {
         setReplacements((items) => ({ ...items, [effectiveReplaceId]: next[0].id }));
         if (removeOriginal) {
           setDeletes((items) => items.includes(effectiveReplaceId) ? items : [...items, effectiveReplaceId]);
-          setAutoReplacements((items) => items.filter((id) => id !== effectiveReplaceId));
-          setFilterCategory(targetCategory);
-          setSearch("");
+          if (isLogo) { setFilterCategory(targetCategory); setSearch(""); }
         }
       }
       else { setFilterCategory(targetCategory); setSearch(""); setTab("media"); }
@@ -182,16 +185,15 @@ export default function AdminPage() {
   };
   const updateUpload = (id, patch) => {
     setUploads((items) => items.map((item) => item.id === id ? { ...item, ...patch } : item));
-    if (patch.category) setFilterCategory(patch.category);
   };
-  const addCertificate = async ({ title, category, files }) => {
-    if (!title || !category || !files.length) { setMessage("Điền tên, loại chứng nhận và chọn ít nhất một trang."); return false; }
+  const addCertificate = async ({ title, files }) => {
+    if (!title || !files.length) { setMessage("Điền tên chứng nhận và chọn ít nhất một trang."); return false; }
     const added = await addFiles(files, "", "", "Chứng chỉ – Chứng nhận");
     if (!added) return false;
-    setCertificateDraft((items) => [...items, {
-      id: `certificate-${crypto.randomUUID()}`, title, category,
+    setCertificateDraft((items) => [{
+      id: `certificate-${crypto.randomUUID()}`, title, category: title,
       pages: added.map((item, index) => ({ title: files[index].name.replace(/\.[^.]+$/, "").slice(0, 120) || `Trang ${index + 1}`, image: `/assets/${item.id}` })),
-    }]);
+    }, ...items]);
     return true;
   };
   const addCertificatePages = async (certificateId, files) => {
@@ -209,12 +211,9 @@ export default function AdminPage() {
     const pending = uploads.find((item) => item.id === oldId);
     if (pending) {
       try {
-        if (!/^image\/(?:png|jpeg|webp)$/.test(file.type) || file.size > 4_000_000) throw new Error("Chỉ nhận PNG, JPG hoặc WebP tối đa 4 MB mỗi ảnh.");
-        const bitmap = await createImageBitmap(file);
-        const width = bitmap.width, height = bitmap.height;
-        bitmap.close();
-        const preview = URL.createObjectURL(file);
-        setUploads((items) => items.map((item) => item.id === oldId ? { ...item, file, preview, width, height, title: file.name.replace(/\.[^.]+$/, "") } : item));
+        const prepared = await prepareImage(file, "Chứng chỉ – Chứng nhận");
+        const preview = URL.createObjectURL(prepared.file);
+        setUploads((items) => items.map((item) => item.id === oldId ? { ...item, ...prepared, preview, title: file.name.replace(/\.[^.]+$/, "") } : item));
         URL.revokeObjectURL(pending.preview);
         nextId = oldId;
       } catch (error) { setMessage(error.message); return; }
@@ -225,10 +224,11 @@ export default function AdminPage() {
     }
     setCertificateDraft((items) => items.map((item) => item.id === certificateId ? { ...item, pages: item.pages.map((page, index) => index === pageIndex ? { ...page, image: `/assets/${nextId}` } : page) } : item));
   };
-  const removeNewCertificate = (certificateId) => {
+  const removeCertificate = (certificateId) => {
     const certificate = certificateDraft.find((item) => item.id === certificateId);
-    if (!certificate || baseCertificates.some((item) => item.id === certificateId) || state?.content.certificates?.some((item) => item.id === certificateId)) return;
-    for (const page of certificate.pages) if (uploads.some((item) => item.id === page.image.slice(8))) removeUpload(page.image.slice(8));
+    if (!certificate) return;
+    const remainingImages = new Set(certificateDraft.filter((item) => item.id !== certificateId).flatMap((item) => item.pages.map((page) => page.image)));
+    for (const page of certificate.pages) if (!remainingImages.has(page.image) && uploads.some((item) => item.id === page.image.slice(8))) removeUpload(page.image.slice(8));
     setCertificateDraft((items) => items.filter((item) => item.id !== certificateId));
   };
   const updateText = (id, value) => setTextDraft((old) => {
@@ -253,27 +253,22 @@ export default function AdminPage() {
   const toggleDelete = (id) => {
     if (deletes.includes(id)) {
       setDeletes((items) => items.filter((item) => item !== id));
-      if (autoReplacements.includes(id)) {
-        setReplacements((old) => { const next = { ...old }; delete next[id]; return next; });
-        setAutoReplacements((items) => items.filter((item) => item !== id));
-      }
+      setReplacements((old) => { const next = { ...old }; delete next[id]; return next; });
       return;
     }
     if (Object.values(replacements).includes(id)) { setMessage("Ảnh này đang được chọn làm ảnh thay thế. Hãy đổi lựa chọn đó trước khi xóa."); return; }
-    const old = media.find((item) => item.id === id);
     if (!replacements[id]) {
-      const category = mediaDraft[id]?.category ?? old.category;
-      if (old.protected || category === "Logo" || category === "Chứng chỉ – Chứng nhận") { setMessage("Logo và ảnh chứng nhận cần chọn ảnh thay thế thủ công trước khi xóa."); return; }
-      const candidates = media.filter((item) => item.id !== id && !item.protected && !deletes.includes(item.id) && (mediaDraft[item.id]?.category ?? item.category) === category && (item.width / item.height) / (old.width / old.height) >= 0.7 && (item.width / item.height) / (old.width / old.height) <= 1.4);
-      if (!candidates.length) { setMessage("Không có ảnh cùng loại và tỷ lệ phù hợp. Hãy chọn ảnh thay thế thủ công."); return; }
-      const index = crypto.getRandomValues(new Uint32Array(1))[0] % candidates.length;
-      setReplacements((items) => ({ ...items, [id]: candidates[index].id }));
-      setAutoReplacements((items) => [...items, id]);
+      const uses = imageUsage(id, {
+        ...state.content,
+        images: { ...state.content.images, ...Object.fromEntries(Object.entries(replacements).map(([key, value]) => [key, `/assets/${value}`])) },
+        sliderImages: sliderDraft, certificates: certificateDraft,
+      });
+      if (uses.length) { setDeleteUsage((items) => ({ ...items, [id]: uses })); return; }
     }
     setDeletes((items) => [...items, id]);
     setMessage("");
   };
-  const mediaMatches = media.filter((item) => item.category !== "Chứng chỉ – Chứng nhận" && !(item.category === "Logo" && deletes.includes(item.id) && replacements[item.id]) && (filterCategory === "Tất cả" || (mediaDraft[item.id]?.category ?? item.category) === filterCategory) && `${item.id} ${item.title || ""} ${item.category}`.toLocaleLowerCase("vi").includes(search.toLocaleLowerCase("vi")));
+  const mediaMatches = media.filter((item) => !(uploads.some((upload) => upload.id === item.id) && Object.values(replacements).includes(item.id)) && item.category !== "Chứng chỉ – Chứng nhận" && (filterCategory === "Tất cả" || (mediaDraft[item.id]?.category ?? item.category) === filterCategory) && `${item.id} ${item.title || ""} ${item.category}`.toLocaleLowerCase("vi").includes(search.toLocaleLowerCase("vi")));
   const changedText = fields.filter((field) => (textDraft[field.id] ?? field.defaultValue) !== (state?.content.text?.[field.id] ?? field.defaultValue));
   const changedButtons = Object.keys(defaultButtons).filter((id) => JSON.stringify(buttonsDraft[id]) !== JSON.stringify(withButtons(state?.content.buttons)[id]));
   const changedSlides = [...new Set([...Object.keys(sliderDraft), ...Object.keys(state?.content.sliderImages || {})])].filter((slot) => sliderDraft[slot] !== state?.content.sliderImages?.[slot]);
@@ -294,10 +289,10 @@ export default function AdminPage() {
     })));
     const result = await api("draft", {
       method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ baseHead: state.head, basePublishedHead: state.publishedHead, text: textDraft, buttons: buttonsDraft, sliderImages: sliderDraft, certificates: certificateDraft, mediaUpdates: mediaDraft, replacements, deletes, uploads: fileData }),
+      body: JSON.stringify({ baseHead: state.head, basePublishedHead: state.publishedHead, text: textDraft, buttons: buttonsDraft, sliderImages: sliderDraft, certificates: certificateDraft.map((item) => ({ ...item, category: item.title })), mediaUpdates: mediaDraft, replacements, deletes, uploads: fileData }),
     });
     uploads.forEach((item) => URL.revokeObjectURL(item.preview));
-    setUploads([]); setDeletes([]); setReplacements({}); setAutoReplacements([]); setMediaDraft({});
+    setUploads([]); setDeletes([]); setReplacements({}); setDeleteUsage({}); setMediaDraft({});
     const next = await api("state");
     setState(availableState(next)); setTextDraft(next.content.text || {}); setButtonsDraft(withButtons(next.content.buttons)); setSliderDraft(next.content.sliderImages || {}); setCertificateDraft(next.content.certificates || baseCertificates);
     return { result, next };
@@ -315,13 +310,13 @@ export default function AdminPage() {
     try {
       // Unsaved edits are saved to the draft branch first, then published together.
       const heads = changes ? (await writeDraft()).next : state;
-      const result = await api("publish", {
+      await api("publish", {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ draftHead: heads.draftHead, publishedHead: heads.publishedHead }),
       });
       const next = await api("state");
       setState(availableState(next)); setTextDraft(next.content.text || {}); setButtonsDraft(withButtons(next.content.buttons)); setSliderDraft(next.content.sliderImages || {}); setCertificateDraft(next.content.certificates || baseCertificates);
-      setMessage(`Đã xuất bản ${result.commit.slice(0, 8)}. Website sẽ cập nhật sau khi build và triển khai xong.${result.draftReset ? "" : " Cần đồng bộ lại nhánh nháp."}`);
+      setMessage("Website sẽ cập nhật sau khi build và triển khai xong.");
     } catch (error) { setMessage(error.message); }
     finally { setBusy(false); }
   };
@@ -356,27 +351,51 @@ export default function AdminPage() {
         </nav>
         {tab === "media" && <input type="search" placeholder="Tìm nội dung hoặc ảnh…" value={search} onChange={(event) => setSearch(event.target.value)} />}
       </div>
-      {message && <div className={message.startsWith("Đã lưu") || message.startsWith("Đã xuất bản") ? "admin-notice" : "admin-error"} role="status">{message}</div>}
+      {message && <div className={message.startsWith("Đã lưu") || message === "Website sẽ cập nhật sau khi build và triển khai xong." ? "admin-notice" : "admin-error"} role="status">{message}</div>}
       {tab === "text" && <VisualEditor fields={fields} savedText={state.content.text || {}} publishedText={state.publishedContent?.text || {}} draftText={textDraft} onChange={updateText} buttons={buttonsDraft} onButtonChange={(id, patch) => setButtonsDraft((old) => ({ ...old, [id]: { ...old[id], ...patch } }))} onImageUpload={(id, files) => addFiles(files, id, "", "Khác", false, true)} onSliderUpload={(slot, id, files) => addFiles(files, id, slot, "Khác", false, true)} onSliderChange={(slot, id) => setSliderDraft((old) => { const next = { ...old }; if (id) next[slot] = `/assets/${id}`; else delete next[slot]; return next; })} sliderImages={sliderDraft} replacements={previewReplacements} media={media} deletedIds={deletes} />}
       {tab === "media" && <div className="admin-media-panel">
         <div className="admin-media-toolbar">
           {filterCategory !== "Chứng chỉ – Chứng nhận" && <button ref={uploadButtonRef} className="admin-upload" type="button" onClick={() => { setReplaceImageId(""); setUploadCategory("Suất ăn"); setPendingFiles([]); setUploadError(""); setMessage(""); setUploadOpen(true); }}>+ Thêm ảnh</button>}
           <label>Lọc nhóm ảnh<select value={filterCategory} onChange={(event) => setFilterCategory(event.target.value)}><option>Tất cả</option>{imageCategories.map((category) => <option key={category}>{category}</option>)}</select></label>
         </div>
-        <p className="admin-help">Ảnh trong bốn nhóm thư viện sẽ xuất hiện ở trang Hình ảnh thực tế sau khi xuất bản. Logo luôn có một ảnh; tải logo mới sẽ thay và xóa tệp cũ.</p>
-        {(filterCategory === "Chứng chỉ – Chứng nhận" || filterCategory === "Tất cả") && <CertificateManager certificates={certificateDraft} media={media} search={search} onChange={setCertificateDraft} onAdd={addCertificate} onReplacePage={replaceCertificatePage} onAddPages={addCertificatePages} onRemove={removeNewCertificate} canRemove={(id) => !baseCertificates.some((item) => item.id === id) && !state?.content.certificates?.some((item) => item.id === id)} />}
+        <p className="admin-help">
+          Logo luôn có một ảnh, tải logo mới sẽ thay và xóa tệp cũ.
+          <br />
+          Ảnh trong nhóm Không gian bếp, Giao nhận, Phục vụ, Hoạt động tập thể sẽ xuất hiện ở trang Hình ảnh thực tế sau khi xuất bản.
+        </p>
+        {(filterCategory === "Chứng chỉ – Chứng nhận" || filterCategory === "Tất cả") && <CertificateManager certificates={certificateDraft} media={media} search={search} onChange={setCertificateDraft} onAdd={addCertificate} onReplacePage={replaceCertificatePage} onAddPages={addCertificatePages} onRemove={removeCertificate} />}
         <div className="admin-media-grid">{mediaMatches.map((item) => {
           const uploaded = uploads.some((entry) => entry.id === item.id);
           const draft = mediaDraft[item.id] || {};
-          return <article className={`admin-media-card${deletes.includes(item.id) ? " is-deleted" : ""}`} key={item.id}>
-            <img src={mediaSrc(item)} alt={item.title || item.id} loading="lazy" />
+          const replacement = media.find((entry) => entry.id === replacements[item.id]);
+          const preview = replacement || item;
+          return <article data-media-id={item.id} className={`admin-media-card${deletes.includes(item.id) && !replacement ? " is-deleted" : ""}`} key={item.id}>
+            <img src={mediaSrc(preview)} alt={item.title || item.id} loading="lazy" />
             <div className="admin-media-fields">
-              <small>{item.width} × {item.height}</small>
-              <label>Tên ảnh<input value={uploaded ? item.title : draft.title ?? item.title ?? item.id} onChange={(event) => uploaded ? updateUpload(item.id, { title: event.target.value }) : setMediaDraft((old) => ({ ...old, [item.id]: { ...old[item.id], title: event.target.value } }))} /></label>
-              <label>Nhóm ảnh<select value={uploaded ? item.category : draft.category ?? item.category} disabled={item.category === "Logo"} onChange={(event) => { if (uploaded) updateUpload(item.id, { category: event.target.value }); else { setMediaDraft((old) => ({ ...old, [item.id]: { ...old[item.id], category: event.target.value } })); setFilterCategory(event.target.value); } }}>
+              <small>{preview.width} × {preview.height}</small>
+              <label>Tên ảnh<input value={replacement ? mediaDraft[replacement.id]?.title ?? replacement.title ?? replacement.id : uploaded ? item.title : draft.title ?? item.title ?? item.id} onChange={(event) => {
+                const target = replacement || item;
+                if (uploads.some((entry) => entry.id === target.id)) updateUpload(target.id, { title: event.target.value });
+                else setMediaDraft((old) => ({ ...old, [target.id]: { ...old[target.id], title: event.target.value } }));
+              }} /></label>
+              <label>Nhóm ảnh<select value={uploaded ? item.category : draft.category ?? item.category} disabled={item.category === "Logo"} onChange={(event) => { if (uploaded) updateUpload(item.id, { category: event.target.value }); else setMediaDraft((old) => ({ ...old, [item.id]: { ...old[item.id], category: event.target.value } })); }}>
                 {imageCategories.filter((value) => value !== "Chứng chỉ – Chứng nhận" && (value !== "Logo" || item.category === "Logo")).map((value) => <option key={value}>{value}</option>)}
               </select></label>
               {uploaded ? <button type="button" onClick={() => removeUpload(item.id)}>Bỏ ảnh mới</button> : <>
+                {deleteUsage[item.id] && !replacements[item.id] && <div className="admin-delete-usage">
+                  <p>Ảnh đang được dùng tại:</p>
+                  <ul>{deleteUsage[item.id].map((location) => <li key={location}>{location}</li>)}</ul>
+                  <p>Chọn ảnh thay thế bên dưới hoặc bấm “Thay tệp ảnh” để tải ảnh khác.</p>
+                  <label>Ảnh thay thế<select aria-label="Ảnh thay thế" value="" onChange={(event) => {
+                    if (!event.target.value) return;
+                    setReplacements((old) => ({ ...old, [item.id]: event.target.value }));
+                    setDeletes((old) => old.includes(item.id) ? old : [...old, item.id]);
+                    setDeleteUsage((old) => { const next = { ...old }; delete next[item.id]; return next; });
+                  }}>
+                    <option value="">Chọn ảnh thay thế</option>
+                    {media.filter((candidate) => candidate.id !== item.id && !deletes.includes(candidate.id) && !candidate.protected).map((candidate) => <option key={candidate.id} value={candidate.id}>{candidate.title || candidate.id}</option>)}
+                  </select></label>
+                </div>}
                 {replacements[item.id]?.startsWith("upload-") && deletes.includes(item.id) && <p className="admin-replacement-note">Đang thay bằng ảnh mới trong bản nháp.</p>}
                 <button type="button" onClick={() => { setReplaceImageId(item.id); setUploadCategory(draft.category || item.category); setPendingFiles([]); setUploadError(""); setMessage(""); setUploadOpen(true); }}>Thay tệp ảnh</button>
                 {replacements[item.id]?.startsWith("upload-") && deletes.includes(item.id) ? <button type="button" onClick={() => removeUpload(replacements[item.id])}>Hoàn tác thay ảnh</button> : item.category !== "Logo" && <label className="admin-check"><input type="checkbox" checked={deletes.includes(item.id)} onChange={() => toggleDelete(item.id)} /> Xóa ảnh này trong bản nháp</label>}
@@ -390,7 +409,7 @@ export default function AdminPage() {
         <section className="admin-upload-dialog" role="dialog" aria-modal="true" aria-labelledby="admin-upload-title">
           <button className="admin-upload-close" type="button" onClick={closeUploadDialog} disabled={uploading} aria-label="Đóng popup ảnh">×</button>
           <h2 id="admin-upload-title">{replaceImageId ? "Thay tệp ảnh" : "Thêm ảnh"}</h2>
-          {replaceImageId ? <p>{uploadCategory === "Logo" ? "Logo mới sẽ thay logo hiện tại; tệp cũ được xóa khi xuất bản." : "Chọn ảnh có tỷ lệ gần với ảnh cũ. Mọi vị trí dùng ảnh này sẽ chuyển sang tệp mới khi lưu nháp; tệp cũ được xóa khi xuất bản."}</p> : <p>{uploadCategory === "Logo" ? "Chọn một ảnh để thay logo hiện tại." : `Chọn tối đa ${Math.max(0, 4 - uploads.length)} ảnh PNG, JPG hoặc WebP, mỗi ảnh tối đa 4 MB.`}</p>}
+          {replaceImageId ? <p>{uploadCategory === "Logo" ? "Logo mới sẽ thay logo hiện tại; tệp cũ được xóa khi xuất bản." : "Mọi vị trí dùng ảnh này sẽ chuyển sang tệp mới khi lưu nháp; tệp cũ được xóa khi xuất bản."}</p> : <p>{uploadCategory === "Logo" ? "Chọn một ảnh để thay logo hiện tại." : `Chọn tối đa ${Math.max(0, 4 - uploads.length)} ảnh PNG, JPG hoặc WebP, mỗi ảnh tối đa 4 MB.`}</p>}
           {replaceImageId && <div className="admin-upload-current"><img src={mediaSrc(media.find((item) => item.id === replaceImageId))} alt="Ảnh hiện tại" /><span>Ảnh hiện tại<br /><strong>{mediaDraft[replaceImageId]?.title || media.find((item) => item.id === replaceImageId)?.title || replaceImageId}</strong></span></div>}
           <button ref={uploadPickerRef} className="admin-upload-picker" type="button" onClick={() => uploadFileRef.current?.click()}>Chọn ảnh để tải lên</button>
           <input ref={uploadFileRef} className="admin-upload-file-input" type="file" accept="image/png,image/jpeg,image/webp" multiple={!replaceImageId && uploadCategory !== "Logo"} onChange={(event) => { setPendingFiles([...event.target.files]); setUploadError(""); }} />
@@ -411,7 +430,7 @@ export default function AdminPage() {
         <h3>Ảnh trong slider ({previewSlides.length})</h3>
         {previewSlides.map((slot) => { const item = media.find((entry) => entry.id === sliderDraft[slot]?.slice(8)); return <div className="admin-preview-row" key={slot}><small>{sliderSlotLabel(slot)}</small><p>{item?.title || "Ảnh gốc"}</p>{item && <div className="admin-preview-images"><img src={mediaSrc(item)} alt={item.title || "Ảnh trong slider"} /></div>}</div>; })}
         <h3>Chứng chỉ – Chứng nhận {changedCertificates ? "(đã chỉnh sửa)" : "(không đổi)"}</h3>
-        {changedCertificates && certificateDraft.map((certificate) => <div className="admin-preview-row" key={certificate.id}><small>{certificate.category}</small><p>{certificate.title} · {certificate.pages.length} trang</p></div>)}
+        {changedCertificates && certificateDraft.map((certificate) => <div className="admin-preview-row" key={certificate.id}><p>{certificate.title} · {certificate.pages.length} trang</p></div>)}
         <h3>Ảnh mới ({savedNewImages.length + uploads.length})</h3>
         <div className="admin-preview-images">{[...savedNewImages, ...uploads].map((item) => <figure key={item.id}><img src={mediaSrc(item)} alt={item.title} /><figcaption>{item.title}</figcaption></figure>)}</div>
         <h3>Thay hoặc xóa ảnh ({previewImageIds.length})</h3>

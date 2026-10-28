@@ -45,15 +45,15 @@ export default function AboutPage() {
           </p>
           <div className="about-facts">
             <div>
-              <strong>2021</strong>
+              <strong data-editor-id="about.facts.foundedYear">{pageText["about.facts.foundedYear"]}</strong>
               <small>Năm thành lập</small>
             </div>
             <div>
-              <strong>22</strong>
+              <strong data-editor-id="about.facts.menuCount">{pageText["about.facts.menuCount"]}</strong>
               <small>Mẫu suất ăn</small>
             </div>
             <div>
-              <strong>Miền Bắc</strong>
+              <strong data-editor-id="about.facts.serviceArea">{pageText["about.facts.serviceArea"]}</strong>
               <small>Khu vực hoạt động</small>
             </div>
           </div>

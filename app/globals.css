@@ -610,7 +610,7 @@ p {
   line-height: 1.4;
   white-space: nowrap;
 }
-.intro-facts strong > span {
+.intro-facts strong > .fact-suffix {
   font-size: 17px;
   vertical-align: top;
   margin-left: 5px;

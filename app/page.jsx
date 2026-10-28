@@ -60,18 +60,16 @@ export default function Home() {
         <div className="intro-facts">
           <div>
             <strong>
-              2021<span>↗</span>
+              <span data-editor-id="home.facts.foundedYear">{pageText["home.facts.foundedYear"]}</span><span className="fact-suffix">↗</span>
             </strong>
             <small>NĂM THÀNH LẬP</small>
           </div>
           <div>
-            <strong>
-              22<span>+</span>
-            </strong>
+            <strong data-editor-id="home.facts.menuCount">{pageText["home.facts.menuCount"]}</strong>
             <small>THỰC ĐƠN THAM KHẢO</small>
           </div>
           <div>
-            <strong>Miền Bắc</strong>
+            <strong data-editor-id="home.facts.serviceArea">{pageText["home.facts.serviceArea"]}</strong>
             <small>KHU VỰC PHỤC VỤ</small>
           </div>
         </div>

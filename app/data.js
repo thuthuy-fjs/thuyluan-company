@@ -1,5 +1,6 @@
 import uploadedGallery from "./gallery-uploaded.json";
 import mediaCatalog from "./media-catalog.json";
+import { newestGalleryFirst } from "./gallery-order";
 import { galleryCategories as galleryGroupNames } from "./media-groups";
 import { editableData, editableImage, editorContent } from "./editor-content";
 
@@ -58,6 +59,8 @@ export const gallery = editableData("Thư viện ảnh", galleryImages
     width: item.width,
     height: item.height,
   })), "gallery");
+export const galleryNewestFirst = newestGalleryFirst(gallery, mediaCatalog);
+
 export const galleryCategories = [
   { label: "Không gian bếp", slug: "kitchen" },
   { label: "Giao nhận", slug: "delivery" },
@@ -240,7 +243,7 @@ export const baseCertificates = [
 
 export const certificates = (editorContent.certificates || baseCertificates).map((certificate) => {
   const pages = certificate.pages.map((page) => ({ ...page, image: editableImage(page.image) }));
-  return { ...certificate, pages, image: pages[0].image, thumbnail: pages[0].image };
+  return { ...certificate, category: certificate.title, pages, image: pages[0].image, thumbnail: pages[0].image };
 });
 
 export const documents = editableData("Tài liệu", [
