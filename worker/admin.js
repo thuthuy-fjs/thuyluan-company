@@ -174,7 +174,7 @@ async function publish(request, env) {
       if (upload.addToGallery && !galleryCategories.has(upload.galleryCategory)) throw new Error("Nhóm thư viện ảnh không hợp lệ.");
       const blob = await github(env, "/git/blobs", { method: "POST", body: JSON.stringify({ content: upload.base64, encoding: "base64" }) });
       tree.push({ path: `public/assets/${upload.id}`, mode: "100644", type: "blob", sha: blob.sha });
-      media.push({ id: upload.id, src: `/assets/${upload.id}`, category, title, width: upload.width, height: upload.height, protected: false });
+      media.push({ id: upload.id, src: `/assets/${upload.id}`, category, title, width: upload.width, height: upload.height, protected: category === "Tài liệu và nhận diện" });
       const bytes = Uint8Array.from(binary, (c) => c.charCodeAt(0));
       const hash = [...new Uint8Array(await crypto.subtle.digest("SHA-256", bytes))].map((b) => b.toString(16).padStart(2, "0")).join("");
       source.push({ id: upload.id.replace(/\.[^.]+$/, ""), src: `/assets/${upload.id}`, source: "admin-upload", width: upload.width, height: upload.height, sha256: hash });
@@ -189,7 +189,7 @@ async function publish(request, env) {
     for (const id of deleted) {
       const old = media.find((item) => item.id === id);
       const requested = replacements[id] && remaining.find((item) => item.id === replacements[id]);
-      if (old.protected && !requested) throw new Error(`Ảnh ${id} cần chọn ảnh thay thế thủ công.`);
+      if ((old.protected || body.mediaUpdates?.[id]?.category === "Tài liệu và nhận diện") && !requested) throw new Error(`Ảnh ${id} cần chọn ảnh thay thế thủ công.`);
       const chosen = requested || replacementFor(old, remaining.filter((item) => !item.protected));
       if (!chosen) throw new Error(`Không có ảnh phù hợp để thay thế ${id}.`);
       for (const [key, value] of Object.entries(content.images)) if (value === `/assets/${id}`) content.images[key] = chosen.src;
@@ -209,7 +209,9 @@ async function publish(request, env) {
     }
     const nextMedia = remaining.map((item) => {
       const update = body.mediaUpdates?.[item.id];
-      return update && typeof update === "object" ? { ...item, title: String(update.title || item.title || item.id).slice(0, 200), category: String(update.category || item.category).slice(0, 80) } : item;
+      if (!update || typeof update !== "object") return item;
+      const category = String(update.category || item.category).slice(0, 80);
+      return { ...item, title: String(update.title || item.title || item.id).slice(0, 200), category, protected: item.protected || category === "Tài liệu và nhận diện" };
     });
     const nextSource = source.filter((item) => !deleted.has(item.src?.slice(8)));
     for (const [path, data] of [

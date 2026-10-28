@@ -102,8 +102,9 @@ export default function AdminPage() {
     if (Object.values(replacements).includes(id)) { setMessage("Ảnh này đang được chọn làm ảnh thay thế. Hãy đổi lựa chọn đó trước khi xóa."); return; }
     const old = media.find((item) => item.id === id);
     if (!replacements[id]) {
-      if (old.protected) { setMessage("Ảnh tài liệu hoặc nhận diện cần chọn ảnh thay thế thủ công trước khi xóa."); return; }
-      const candidates = media.filter((item) => item.id !== id && !item.protected && !deletes.includes(item.id) && item.category === old.category && (item.width / item.height) / (old.width / old.height) >= 0.7 && (item.width / item.height) / (old.width / old.height) <= 1.4);
+      const category = mediaDraft[id]?.category ?? old.category;
+      if (old.protected || category === "Tài liệu và nhận diện") { setMessage("Ảnh tài liệu hoặc nhận diện cần chọn ảnh thay thế thủ công trước khi xóa."); return; }
+      const candidates = media.filter((item) => item.id !== id && !item.protected && !deletes.includes(item.id) && (mediaDraft[item.id]?.category ?? item.category) === category && (item.width / item.height) / (old.width / old.height) >= 0.7 && (item.width / item.height) / (old.width / old.height) <= 1.4);
       if (!candidates.length) { setMessage("Không có ảnh cùng loại và tỷ lệ phù hợp. Hãy chọn ảnh thay thế thủ công."); return; }
       const index = crypto.getRandomValues(new Uint32Array(1))[0] % candidates.length;
       setReplacements((items) => ({ ...items, [id]: candidates[index].id }));

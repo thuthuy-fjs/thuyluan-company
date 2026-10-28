@@ -171,6 +171,7 @@ test("publishing an uploaded image adds the binary and gallery entry to one Git 
   const content = { version: 1, text: {}, images: {}, galleryAdditions: [] };
   const encoded = (value) => Buffer.from(JSON.stringify(value)).toString("base64");
   const id = "upload-00000000-0000-4000-8000-000000000000.png";
+  const documentId = "upload-00000000-0000-4000-8000-000000000001.png";
   const png = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Y9HMV4AAAAASUVORK5CYII=";
   let tree;
   const originalFetch = globalThis.fetch;
@@ -189,7 +190,10 @@ test("publishing an uploaded image adds the binary and gallery entry to one Git 
   };
   try {
     const response = await handleAdmin(adminRequest("publish", {
-      baseHead: "head", text: {}, deletes: [], replacements: {}, uploads: [{ id, base64: png, width: 1, height: 1, category: "Suất ăn", title: "Ảnh mới", addToGallery: true, galleryCategory: "Phục vụ" }],
+      baseHead: "head", text: {}, deletes: [], replacements: {}, uploads: [
+        { id, base64: png, width: 1, height: 1, category: "Suất ăn", title: "Ảnh mới", addToGallery: true, galleryCategory: "Phục vụ" },
+        { id: documentId, base64: png, width: 1, height: 1, category: "Tài liệu và nhận diện", title: "Ảnh tài liệu", addToGallery: false },
+      ],
     }, cookie), env);
     assert.equal(response.status, 200, await response.text());
     assert.equal(tree.find((item) => item.path === `public/assets/${id}`).sha, "image-blob");
@@ -197,5 +201,6 @@ test("publishing an uploaded image adds the binary and gallery entry to one Git 
     assert.equal(nextContent.galleryAdditions[0].image, `/assets/${id}`);
     const nextMedia = JSON.parse(tree.find((item) => item.path === "app/media-catalog.json").content);
     assert.equal(nextMedia[0].width, 1);
+    assert.equal(nextMedia.find((item) => item.id === documentId).protected, true);
   } finally { globalThis.fetch = originalFetch; }
 });
