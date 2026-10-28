@@ -105,6 +105,12 @@ test("highlighted headings and descriptions across public pages can be edited an
     ["/menus/", ["menus.hero.line1", "menus.hero.line2", "menus.intro.description"]],
     ["/contacts/", ["contact.hero.line1", "contact.hero.line2", "contact.intro.description"]],
     ["/news/", ["news.hero.line1", "news.hero.line2", "news.intro.description"]],
+    ["/about/", [
+      "about.organization.eyebrow", "about.organization.heading1", "about.organization.heading2", "about.organization.description",
+      "about.values.heading", "about.values.description",
+      "about.kitchen.eyebrow", "about.kitchen.heading1", "about.kitchen.heading2", "about.kitchen.description",
+      ...[1, 2, 3, 4, 5].flatMap((step) => ["number", "title", "description"].map((key) => `about.kitchen.step${step}.${key}`)),
+    ]],
   ];
   await page.goto("/admin/");
   const frame = page.frameLocator('iframe[title^="Bản xem trực tiếp"]');

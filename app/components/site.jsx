@@ -34,9 +34,9 @@ import {
 import { editableImage, editorContent } from "../editor-content";
 import { pageText } from "../editor-fields";
 
-export function Eyebrow({ children, light = false }) {
+export function Eyebrow({ children, light = false, editorId }) {
   return (
-    <p className={`eyebrow${light ? " light" : ""}`}>
+    <p className={`eyebrow${light ? " light" : ""}`} data-editor-id={editorId}>
       <span />
       {children}
     </p>

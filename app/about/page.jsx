@@ -61,13 +61,13 @@ export default function AboutPage() {
       </section>
       <section className="org-chart wrap" aria-labelledby="org-chart-title">
         <div className="core-values-heading">
-          <Eyebrow>SƠ ĐỒ TỔ CHỨC</Eyebrow>
+          <Eyebrow editorId="about.organization.eyebrow">{pageText["about.organization.eyebrow"]}</Eyebrow>
           <h2 id="org-chart-title">
-            Bộ máy rõ ràng.
+            <span data-editor-id="about.organization.heading1">{pageText["about.organization.heading1"]}</span>
             <br />
-            Phối hợp nhịp nhàng.
+            <span data-editor-id="about.organization.heading2">{pageText["about.organization.heading2"]}</span>
           </h2>
-          <p>
+          <p data-editor-id="about.organization.description">
             {pageText["about.organization.description"]}
           </p>
         </div>
@@ -116,10 +116,9 @@ export default function AboutPage() {
       <section className="core-values wrap" aria-labelledby="core-values-title">
         <div className="core-values-heading">
           <Eyebrow>GIÁ TRỊ CỐT LÕI</Eyebrow>
-          <h2 id="core-values-title">Bốn giá trị dẫn dắt Thúy Luân.</h2>
-          <p>
-            Những nguyên tắc chúng tôi giữ trong từng bữa ăn, từng giao dịch và
-            từng mối quan hệ hợp tác.
+          <h2 id="core-values-title" data-editor-id="about.values.heading">{pageText["about.values.heading"]}</h2>
+          <p data-editor-id="about.values.description">
+            {pageText["about.values.description"]}
           </p>
         </div>
         <CoreValuesBoard />
@@ -130,53 +129,26 @@ export default function AboutPage() {
         aria-labelledby="kitchen-layout-title"
       >
         <div className="core-values-heading">
-          <Eyebrow>QUY TRÌNH THIẾT LẬP BẾP</Eyebrow>
+          <Eyebrow editorId="about.kitchen.eyebrow">{pageText["about.kitchen.eyebrow"]}</Eyebrow>
           <h2 id="kitchen-layout-title">
-            Phương án tổ chức
+            <span data-editor-id="about.kitchen.heading1">{pageText["about.kitchen.heading1"]}</span>
             <br />
-            không gian bếp.
+            <span data-editor-id="about.kitchen.heading2">{pageText["about.kitchen.heading2"]}</span>
           </h2>
-          <p>
-            Năm bước triển khai gồm khảo sát, thiết kế bản vẽ 2D, dựng phối cảnh
-            3D, lắp đặt hệ thống bếp và vận hành thử trước khi bàn giao.
+          <p data-editor-id="about.kitchen.description">
+            {pageText["about.kitchen.description"]}
           </p>
         </div>
         <ol className="kitchen-layout-steps" aria-label="Năm bước thiết lập bếp">
-          <li>
-            <span className="kitchen-layout-step-number" aria-hidden="true">01</span>
-            <div>
-              <h3>Khảo sát mặt bằng</h3>
-              <p>Khảo sát thực tế tại địa điểm triển khai.</p>
-            </div>
-          </li>
-          <li>
-            <span className="kitchen-layout-step-number" aria-hidden="true">02</span>
-            <div>
-              <h3>Thiết kế bản vẽ 2D</h3>
-              <p>Lên phương án bố trí mặt bằng bếp.</p>
-            </div>
-          </li>
-          <li>
-            <span className="kitchen-layout-step-number" aria-hidden="true">03</span>
-            <div>
-              <h3>Duyệt 2D &amp; thiết kế 3D</h3>
-              <p>Chốt bản vẽ 2D, lên phối cảnh 3D.</p>
-            </div>
-          </li>
-          <li>
-            <span className="kitchen-layout-step-number" aria-hidden="true">04</span>
-            <div>
-              <h3>Lắp đặt hệ thống bếp</h3>
-              <p>Triển khai lắp đặt bếp theo thiết kế.</p>
-            </div>
-          </li>
-          <li>
-            <span className="kitchen-layout-step-number" aria-hidden="true">05</span>
-            <div>
-              <h3>Vận hành thử &amp; bàn giao</h3>
-              <p>Vận hành thử, đưa bếp vào hoạt động.</p>
-            </div>
-          </li>
+          {[1, 2, 3, 4, 5].map((step) => (
+            <li key={step}>
+              <span className="kitchen-layout-step-number" aria-hidden="true" data-editor-id={`about.kitchen.step${step}.number`}>{pageText[`about.kitchen.step${step}.number`]}</span>
+              <div>
+                <h3 data-editor-id={`about.kitchen.step${step}.title`}>{pageText[`about.kitchen.step${step}.title`]}</h3>
+                <p data-editor-id={`about.kitchen.step${step}.description`}>{pageText[`about.kitchen.step${step}.description`]}</p>
+              </div>
+            </li>
+          ))}
         </ol>
       </section>
       <ProcessingSteps />
