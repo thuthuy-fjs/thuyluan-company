@@ -4206,13 +4206,25 @@ p {
 
 /* Match the About card composition, with more inset space on desktop. */
 @media (min-width: 1101px) {
+  .promise-section .promise-copy {
+    padding: 24px 36px 12px;
+  }
+  .promise-section .promise-copy h2 {
+    margin-bottom: 16px;
+  }
+  .promise-section .promise-direction article {
+    padding: 12px 14px;
+  }
+  .promise-section .promise-values {
+    padding-top: 24px;
+  }
   .core-value:nth-child(4) p {
     max-width: 100%;
     text-wrap: balance;
   }
   .promise-values .core-value:nth-child(n) {
-    min-height: clamp(210px, 16vw, 250px);
-    padding: 28px 30px;
+    min-height: clamp(174px, 12vw, 200px);
+    padding: 22px 28px;
   }
   .promise-values .core-value .core-value-number {
     margin-bottom: 12px;
