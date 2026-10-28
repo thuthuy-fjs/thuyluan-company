@@ -2,23 +2,23 @@
 
 import { useEffect, useState } from "react";
 import { ShieldCheck } from "lucide-react";
-import { editableImage } from "../editor-content";
+import { editableSliderImage } from "../editor-content";
 import { pageText } from "../editor-fields";
 
 const slides = [
   {
-    src: editableImage("/assets/home-menu-30-days.jpg"),
+    src: "/assets/home-menu-30-days.jpg",
     alt: pageText["home.hero.slide1.alt"],
   },
   {
-    src: editableImage("/assets/home-services-poster.jpg"),
+    src: "/assets/home-services-poster.jpg",
     alt: pageText["home.hero.slide2.alt"],
   },
   {
-    src: editableImage("/assets/home-food-menu-poster.jpg"),
+    src: "/assets/home-food-menu-poster.jpg",
     alt: pageText["home.hero.slide3.alt"],
   },
-];
+].map((slide, index) => ({ ...slide, defaultSrc: slide.src, src: editableSliderImage(`home.hero.banner.${index + 1}`, slide.src) }));
 
 export default function HeroSlider() {
   const [active, setActive] = useState(0);
@@ -27,7 +27,7 @@ export default function HeroSlider() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const interval = window.setInterval(() => {
-      if (document.visibilityState === "visible") {
+      if (document.visibilityState === "visible" && document.documentElement.dataset.adminPreview !== "true") {
         setActive((index) => (index + 1) % slides.length);
       }
     }, 3000);
@@ -46,6 +46,8 @@ export default function HeroSlider() {
           >
             <img
               className="hero-image"
+              data-editor-slider-slot={`home.hero.banner.${index + 1}`}
+              data-editor-slider-default={slide.defaultSrc}
               src={slide.src}
               alt={slide.alt}
               width="1280"

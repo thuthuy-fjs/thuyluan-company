@@ -23,8 +23,16 @@ import {
   Utensils,
   Truck,
 } from "lucide-react";
-import { company, meals, galleryNewestFirst, galleryCategories, galleryPreview, documents } from "../data";
-import { editableImage } from "../editor-content";
+import {
+  company,
+  meals,
+  galleryNewestFirst,
+  galleryCategories,
+  galleryPreview,
+  documents,
+} from "../data";
+import { editableImage, editorContent } from "../editor-content";
+import { pageText } from "../editor-fields";
 
 export function Eyebrow({ children, light = false }) {
   return (
@@ -157,9 +165,13 @@ export function Footer() {
         <div>
           <Eyebrow light>CÙNG NHAU TẠO NÊN GIÁ TRỊ</Eyebrow>
           <h2>
-            Bữa ăn tốt hơn.
+            <span data-editor-id="footer.heading1">
+              {pageText["footer.heading1"]}
+            </span>
             <br />
-            Hợp tác bền lâu hơn.
+            <span data-editor-id="footer.heading2">
+              {pageText["footer.heading2"]}
+            </span>
           </h2>
         </div>
         <ButtonLink href="/contacts/" className="gold">
@@ -172,9 +184,13 @@ export function Footer() {
             THÚY LUÂN<span>®</span>
           </a>
           <p>
-            Chăm chút từng bữa ăn.
+            <span data-editor-id="footer.tagline1">
+              {pageText["footer.tagline1"]}
+            </span>
             <br />
-            Đồng hành cùng doanh nghiệp.
+            <span data-editor-id="footer.tagline2">
+              {pageText["footer.tagline2"]}
+            </span>
           </p>
           <span className="footer-location">
             <span />
@@ -183,30 +199,45 @@ export function Footer() {
         </div>
         <div>
           <p className="footer-label">KHÁM PHÁ</p>
-          <a href="/services/">Giải pháp cung ứng</a>
-          <a href="/menus/">Thực đơn tham khảo</a>
+          <a href="/about/">Về Thúy Luân</a>
+          <a href="/services/">Dịch vụ</a>
+          <a href="/menus/">Thực đơn</a>
           <a href="/galleries/">Hình ảnh thực tế</a>
           <a href="/#certificates">Chứng chỉ – Chứng nhận</a>
-          <a href="/about/">Về Thúy Luân</a>
         </div>
         <div>
           <p className="footer-label">KẾT NỐI</p>
-          <a href={`tel:${company.phone}`}>
-            {company.phoneDisplay}
+          <a href={`tel:${company.phoneDisplay.replace(/[^\d+]/g, "")}`}>
+            <span data-editor-id="company.phoneDisplay">
+              {company.phoneDisplay}
+            </span>
             <ArrowUpRight size={14} />
           </a>
-          <a href={`mailto:${company.email}`}>{company.email}</a>
-          <a href={company.zalo} target="_blank" rel="noopener noreferrer">
-            Trao đổi qua Zalo
+          <a data-editor-id="company.email" href={`mailto:${company.email}`}>
+            {company.email}
+          </a>
+          <a
+            data-editor-button="footer.zalo"
+            href={editorContent.buttons?.["footer.zalo"]?.href || company.zalo}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {editorContent.buttons?.["footer.zalo"]?.label ||
+              "Trao đổi qua Zalo"}
             <ArrowUpRight size={14} />
           </a>
           <a href="/news/">Góc chia sẻ</a>
         </div>
         <div>
           <p className="footer-label">THÔNG TIN DOANH NGHIỆP</p>
-          <p>{company.legalName}</p>
-          <p>{company.address}</p>
-          <p>Mã số thuế: {company.taxId}</p>
+          <p data-editor-id="company.legalName">{company.legalName}</p>
+          <p data-editor-id="company.address">{company.address}</p>
+          <p>
+            Mã số thuế:{" "}
+            <span data-editor-id="footer.taxId">
+              {pageText["footer.taxId"]}
+            </span>
+          </p>
         </div>
       </div>
       <div className="footer-bottom">
@@ -223,7 +254,13 @@ export function Footer() {
   );
 }
 
-export function PageIntro({ eyebrow, title, children, compact = false, descriptionEditorId }) {
+export function PageIntro({
+  eyebrow,
+  title,
+  children,
+  compact = false,
+  descriptionEditorId,
+}) {
   return (
     <section
       id="main"
@@ -236,7 +273,11 @@ export function PageIntro({ eyebrow, title, children, compact = false, descripti
       </div>
       <Eyebrow>{eyebrow}</Eyebrow>
       <h1>{title}</h1>
-      {children && <p className="intro-description" data-editor-id={descriptionEditorId}>{children}</p>}
+      {children && (
+        <p className="intro-description" data-editor-id={descriptionEditorId}>
+          {children}
+        </p>
+      )}
     </section>
   );
 }
@@ -314,20 +355,22 @@ export function PhotoGallery({ preview = false }) {
     <>
       {!preview && (
         <div className="filter-tabs">
-          {["Tất cả", ...galleryCategories.map((item) => item.label)].map((x) => (
-            <button
-              key={x}
-              className={filter === x ? "active" : ""}
-              aria-pressed={filter === x}
-              onClick={() => {
-                setFilter(x);
-                setActive(null);
-                setVisibleCount(GALLERY_PAGE_SIZE);
-              }}
-            >
-              {x}
-            </button>
-          ))}
+          {["Tất cả", ...galleryCategories.map((item) => item.label)].map(
+            (x) => (
+              <button
+                key={x}
+                className={filter === x ? "active" : ""}
+                aria-pressed={filter === x}
+                onClick={() => {
+                  setFilter(x);
+                  setActive(null);
+                  setVisibleCount(GALLERY_PAGE_SIZE);
+                }}
+              >
+                {x}
+              </button>
+            ),
+          )}
         </div>
       )}
       <div className={`photo-grid ${preview ? "preview" : ""}`}>
@@ -415,7 +458,12 @@ export function DocumentLibrary() {
     <>
       <div className="document-list">
         {documents.map((d, i) => (
-          <DocumentItem key={d.href || d.image} document={d} number={i + 1} onOpen={() => setActive(i)} />
+          <DocumentItem
+            key={d.href || d.image}
+            document={d}
+            number={i + 1}
+            onOpen={() => setActive(i)}
+          />
         ))}
       </div>
       <Modal

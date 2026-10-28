@@ -4,18 +4,22 @@ import { process } from "../data";
 import { pageText } from "../editor-fields";
 import ServiceDetailSlider from "../components/service-detail-slider";
 import { services } from "../services-data";
-export const metadata = { title: "Giải pháp cung ứng suất ăn doanh nghiệp" };
+export const metadata = { title: "Dịch vụ cung ứng suất ăn doanh nghiệp" };
 export default function ServicesPage() {
   return (
     <main id="top">
       <PageIntro
-        eyebrow="GIẢI PHÁP CUNG ỨNG"
+        eyebrow="DỊCH VỤ CUNG ỨNG"
         descriptionEditorId="solutions.intro.description"
         title={
           <>
-            <span data-editor-id="solutions.hero.line1">{pageText["solutions.hero.line1"]}</span>
+            <span data-editor-id="solutions.hero.line1">
+              {pageText["solutions.hero.line1"]}
+            </span>
             <br />
-            <span data-editor-id="solutions.hero.line2">{pageText["solutions.hero.line2"]}</span>
+            <span data-editor-id="solutions.hero.line2">
+              {pageText["solutions.hero.line2"]}
+            </span>
           </>
         }
       >
@@ -26,12 +30,17 @@ export default function ServicesPage() {
           <section id={s.id} key={s.id} className="service-detail">
             <ServiceDetailSlider group={s.group} title={s.title} />
             <div>
-              <Eyebrow>GIẢI PHÁP {s.n}</Eyebrow>
+              <Eyebrow>DỊCH VỤ {s.n}</Eyebrow>
               <h2 data-editor-id={`services.${s.id}.title`}>{s.title}</h2>
-              <p data-editor-id={`services.${s.id}.description`}>{s.description}</p>
+              <p data-editor-id={`services.${s.id}.description`}>
+                {s.description}
+              </p>
               <ul>
                 {s.items.map((x, index) => (
-                  <li key={index} data-editor-id={`services.${s.id}.items.${index}`}>
+                  <li
+                    key={index}
+                    data-editor-id={`services.${s.id}.items.${index}`}
+                  >
                     <Check size={17} />
                     {x}
                   </li>

@@ -11,6 +11,80 @@ const content = JSON.parse(await readFile(new URL("../../app/editor-content.json
 const media = JSON.parse(await readFile(new URL("../../app/media-catalog.json", import.meta.url)));
 const missingMedia = { id: "missing-demo.webp", src: "/assets/missing-demo.webp", category: "Suất ăn", width: 960, height: 720 };
 
+test("footer content and Zalo link can be edited and restored", async ({ page }) => {
+  let saved;
+  let currentContent = structuredClone(content);
+  await page.route("**/api/admin/session", (route) => route.fulfill({ json: { authenticated: true } }));
+  await page.route("**/api/admin/state", (route) => route.fulfill({ json: { head: "head123", publishedHead: "head123", content: currentContent, publishedContent: content, media, publishedMedia: media } }));
+  await page.route("**/api/admin/draft", (route) => {
+    saved = route.request().postDataJSON();
+    currentContent = { ...currentContent, text: saved.text, buttons: saved.buttons };
+    return route.fulfill({ json: { draftCommit: "draft123456" } });
+  });
+  await page.goto("/admin/");
+  const frame = page.frameLocator('iframe[title^="Bản xem trực tiếp"]');
+  const ids = ["footer.heading1", "footer.heading2", "footer.tagline1", "footer.tagline2", "company.phoneDisplay", "company.email", "company.legalName", "company.address", "footer.taxId"];
+  for (const id of ids) {
+    const field = frame.locator(`footer [data-editor-id="${id}"]`);
+    await field.click();
+    await page.locator(".admin-inline-editor textarea").fill(`Nội dung ${id}`);
+    await expect(field).toHaveText(`Nội dung ${id}`);
+    await page.getByRole("button", { name: "Đóng ô sửa", exact: true }).click();
+  }
+  const zalo = frame.locator('[data-editor-button="footer.zalo"]');
+  await zalo.click();
+  await page.getByLabel("Liên kết Zalo").fill("https://zalo.me/0912345678");
+  await expect(zalo).toHaveAttribute("href", "https://zalo.me/0912345678");
+  await page.getByRole("button", { name: "Lưu nháp", exact: true }).click();
+  await expect(page.getByRole("status")).toContainText("Đã lưu bản nháp");
+  expect(saved.buttons["footer.zalo"].href).toBe("https://zalo.me/0912345678");
+  await page.reload();
+  await expect(zalo).toHaveAttribute("href", "https://zalo.me/0912345678");
+  for (const id of ids) await expect(frame.locator(`footer [data-editor-id="${id}"]`)).toHaveText(`Nội dung ${id}`);
+  await page.getByLabel("Trang đang xem").selectOption("/contacts/");
+  await frame.locator('.contact-details [data-editor-id="company.phoneDisplay"]').click();
+  await page.locator(".admin-inline-editor textarea").fill("0901 234 567");
+  await page.getByRole("button", { name: "Đóng ô sửa", exact: true }).click();
+  const contactZalo = frame.locator('[data-editor-button="contact.zalo"]');
+  await contactZalo.click();
+  await page.getByLabel("Liên kết Zalo").fill("https://zalo.me/0901234567");
+  await expect(contactZalo).toHaveAttribute("href", "https://zalo.me/0901234567");
+  await page.getByRole("button", { name: "Lưu nháp", exact: true }).click();
+  await expect.poll(() => saved.buttons["contact.zalo"].href).toBe("https://zalo.me/0901234567");
+  await page.reload();
+  await page.getByLabel("Trang đang xem").selectOption("/contacts/");
+  await expect(contactZalo).toHaveAttribute("href", "https://zalo.me/0901234567");
+  await expect(frame.locator('.contact-details [data-editor-id="company.phoneDisplay"]')).toHaveText("0901 234 567");
+});
+
+test("regular image editor offers searchable existing images above upload", async ({ page }) => {
+  let saved;
+  await page.route("**/api/admin/session", (route) => route.fulfill({ json: { authenticated: true } }));
+  await page.route("**/api/admin/state", (route) => route.fulfill({ json: { head: "head123", publishedHead: "head123", content, publishedContent: content, media, publishedMedia: media } }));
+  await page.route("**/api/admin/draft", (route) => {
+    saved = route.request().postDataJSON();
+    return route.fulfill({ json: { draftCommit: "draft123456" } });
+  });
+  await page.goto("/admin/");
+  await page.getByLabel("Trang đang xem").selectOption("/menus/industrial-meal-03/");
+  const image = page.frameLocator('iframe[title^="Bản xem trực tiếp"]').locator(".meal-detail-photo img");
+  const original = await image.getAttribute("src");
+  await image.click();
+  const picker = page.getByRole("combobox", { name: "Chọn ảnh có sẵn", exact: true });
+  await expect(picker).toBeVisible();
+  const upload = page.locator(".admin-image-picker");
+  expect((await picker.boundingBox()).y).toBeLessThan((await upload.boundingBox()).y);
+  await selectSliderImage(page, "meal-01.webp");
+  await expect(image).toHaveAttribute("src", "/assets/meal-01.webp");
+  await image.click();
+  await selectSliderImage(page, "");
+  await expect(image).toHaveAttribute("src", original);
+  await selectSliderImage(page, "meal-01.webp");
+  await page.getByRole("button", { name: "Lưu nháp", exact: true }).click();
+  await expect(page.getByRole("status")).toContainText("Đã lưu bản nháp");
+  expect(saved.replacements[original.slice(8)]).toBe("meal-01.webp");
+});
+
 test("highlighted headings and descriptions across public pages can be edited and restored", async ({ page }) => {
   test.setTimeout(60000);
   let currentContent = structuredClone(content);
@@ -245,6 +319,13 @@ test("admin edits the live page, saves a draft, then publishes", async ({ page }
   await expect(consult).toHaveAttribute("href", "/contacts/");
   const heroImage = page.frameLocator('iframe[title^="Bản xem trực tiếp"]').locator(".hero-slide.is-active img");
   await heroImage.click();
+  await expect(page.locator(".admin-slider-slots button")).toHaveCount(3);
+  await page.getByRole("button", { name: "Ảnh đầu trang · ảnh 2", exact: true }).click();
+  await selectSliderImage(page, "meal-01.webp");
+  await expect(page.frameLocator('iframe[title^="Bản xem trực tiếp"]').locator('[data-editor-slider-slot="home.hero.banner.2"]')).toHaveAttribute("src", "/assets/meal-01.webp");
+  await expect(page.frameLocator('iframe[title^="Bản xem trực tiếp"]').locator('[data-editor-slider-slot="home.hero.banner.1"]')).toHaveAttribute("src", "/assets/home-menu-30-days.jpg");
+  await selectSliderImage(page, "");
+  await page.getByRole("button", { name: "Ảnh đầu trang · ảnh 1", exact: true }).click();
   await page.locator(".admin-image-picker input[type=file]").setInputFiles({
     name: "replacement.png", mimeType: "image/png",
     buffer: await readFile(new URL("../../public/assets/zalo.png", import.meta.url)),
@@ -319,7 +400,7 @@ test("admin edits the live page, saves a draft, then publishes", async ({ page }
   await expect(page.frameLocator('iframe[title^="Bản xem trực tiếp"]').locator('[data-editor-slider-slot="home.solutions.factory.2"]')).toHaveAttribute("src", /^blob:/);
   await expect(page.frameLocator('iframe[title^="Bản xem trực tiếp"]').locator('[data-editor-slider-slot="home.gallery.service.1"]')).toHaveAttribute("src", `/assets/${galleryReplacement}`);
   await expect(page.getByText("Ảnh mới (4)")).toBeVisible();
-  await expect(page.getByText("Ảnh trong slider (2)")).toBeVisible();
+  await expect(page.getByText("Ảnh trong slider (3)")).toBeVisible();
   await expect(page.getByText(/Thay hoặc xóa ảnh/)).toBeVisible();
   await page.getByRole("button", { name: "Lưu nháp" }).click();
   await expect(page.getByText(/Đã lưu bản nháp draft123/)).toBeVisible();
@@ -339,6 +420,8 @@ test("admin edits the live page, saves a draft, then publishes", async ({ page }
   expect(saved.uploads[1].category).toBe("Khác");
   expect(saved.uploads.find((item) => item.title === "new-photo").category).toBe("Không gian bếp");
   expect(saved.sliderImages["home.solutions.factory.2"]).toMatch(/^\/assets\/upload-.*\.webp$/);
+  expect(saved.sliderImages["home.hero.banner.1"]).toMatch(/^\/assets\/upload-.*\.webp$/);
+  expect(saved.replacements).not.toHaveProperty("home-menu-30-days.jpg");
   expect(saved.sliderImages["home.gallery.service.1"]).toBe(`/assets/${galleryReplacement}`);
   expect(saved.uploads[0].id).toMatch(/^upload-.*\.webp$/);
   for (const upload of saved.uploads) {

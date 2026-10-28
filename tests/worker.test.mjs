@@ -206,6 +206,16 @@ test("saving a draft updates every mapped photo use without changing published",
       buttons: { "home.hero.consult": { label: "Tư vấn", href: "/wrong/" } },
     }, cookie), env);
     assert.equal(linkEdit.status, 400);
+    const zaloEdit = await handleAdmin(adminRequest("draft", {
+      baseHead: "head", basePublishedHead: "head", text: {}, uploads: [], deletes: [], replacements: {},
+      buttons: { "footer.zalo": { label: "Trao đổi qua Zalo", href: "https://zalo.me/0912345678" } },
+    }, cookie), env);
+    assert.equal(zaloEdit.status, 200, await zaloEdit.text());
+    const invalidZalo = await handleAdmin(adminRequest("draft", {
+      baseHead: "head", basePublishedHead: "head", text: {}, uploads: [], deletes: [], replacements: {},
+      buttons: { "footer.zalo": { label: "Zalo", href: "javascript:alert(1)" } },
+    }, cookie), env);
+    assert.equal(invalidZalo.status, 400);
     const colorEdit = await handleAdmin(adminRequest("draft", {
       baseHead: "head", basePublishedHead: "head", text: {}, uploads: [], deletes: [], replacements: {},
       theme: { accent: "#a15323" },

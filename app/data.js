@@ -2,7 +2,7 @@ import uploadedGallery from "./gallery-uploaded.json";
 import mediaCatalog from "./media-catalog.json";
 import { newestGalleryFirst } from "./gallery-order";
 import { galleryCategories as galleryGroupNames } from "./media-groups";
-import { editableData, editableImage, editorContent } from "./editor-content";
+import { editableData, editableImage, editableText, editorContent } from "./editor-content";
 
 export const company = editableData("Công ty", {
   name: "Thúy Luân",
@@ -14,6 +14,7 @@ export const company = editableData("Công ty", {
   taxId: "0700854039",
   zalo: "https://zalo.me/0965600481",
 }, "company");
+company.phoneDisplay = editableText("company.phoneDisplay", "0965 600 481", "Công ty");
 
 // Preserve the existing menu names and use supplied photos where available.
 const originalNumbers = Array.from({ length: 22 }, (_, i) => i + 1);

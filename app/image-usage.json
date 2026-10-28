@@ -285,15 +285,18 @@
   },
   {
     "image": "/assets/home-menu-30-days.jpg",
-    "label": "Trang chủ"
+    "label": "Trang chủ",
+    "slot": "home.hero.banner.1"
   },
   {
     "image": "/assets/home-services-poster.jpg",
-    "label": "Trang chủ"
+    "label": "Trang chủ",
+    "slot": "home.hero.banner.2"
   },
   {
     "image": "/assets/home-food-menu-poster.jpg",
-    "label": "Trang chủ"
+    "label": "Trang chủ",
+    "slot": "home.hero.banner.3"
   },
   {
     "image": "/assets/solution-factory-01.jpg",

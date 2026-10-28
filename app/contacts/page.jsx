@@ -2,6 +2,7 @@ import { Phone, Mail, MapPin, ArrowUpRight } from "lucide-react";
 import { PageIntro, Eyebrow, QuoteForm } from "../components/site";
 import { company } from "../data";
 import { pageText } from "../editor-fields";
+import { editorContent } from "../editor-content";
 export const metadata = { title: "Kết nối hợp tác & nhận báo giá" };
 export default function ContactPage() {
   return (
@@ -31,35 +32,36 @@ export default function ContactPage() {
             {pageText["contact.sidebar.description"]}
           </p>
           <div className="contact-details">
-            <a href={`tel:${company.phone}`}>
+            <a href={`tel:${company.phoneDisplay.replace(/[^\d+]/g, "")}`}>
               <Phone size={20} />
               <span>
                 <small>HOTLINE TƯ VẤN</small>
-                <strong>{company.phoneDisplay}</strong>
+                <strong data-editor-id="company.phoneDisplay">{company.phoneDisplay}</strong>
               </span>
             </a>
             <a className="email-detail" href={`mailto:${company.email}`}>
               <Mail size={20} />
               <span>
                 <small>EMAIL HỢP TÁC</small>
-                {company.email}
+                <span data-editor-id="company.email">{company.email}</span>
               </span>
             </a>
             <div>
               <MapPin size={20} />
               <span>
                 <small>ĐỊA CHỈ LIÊN HỆ</small>
-                <address>{company.address}</address>
+                <address data-editor-id="company.address">{company.address}</address>
               </span>
             </div>
           </div>
           <a
-            href={company.zalo}
+            data-editor-button="contact.zalo"
+            href={editorContent.buttons?.["contact.zalo"]?.href || company.zalo}
             target="_blank"
             rel="noopener noreferrer"
             className="contact-zalo"
           >
-            <span>Zalo</span>Trao đổi trực tiếp qua Zalo
+            <span>Zalo</span>{editorContent.buttons?.["contact.zalo"]?.label || "Trao đổi trực tiếp qua Zalo"}
             <ArrowUpRight size={16} />
           </a>
           <a

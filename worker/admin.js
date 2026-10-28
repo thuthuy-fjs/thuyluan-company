@@ -177,9 +177,14 @@ function validateText(text) {
 }
 
 function validateButtons(buttons) {
-  if (!buttons || typeof buttons !== "object" || Array.isArray(buttons) || Object.keys(buttons).some((key) => !["home.hero.consult", "home.hero.services"].includes(key))) throw new Error("Thuộc tính nút không hợp lệ.");
-  for (const button of Object.values(buttons)) {
-    if (!button || typeof button !== "object" || Object.keys(button).some((key) => key !== "label") || typeof button.label !== "string" || !button.label.trim() || button.label.length > 120) throw new Error("Nội dung nút không hợp lệ.");
+  if (!buttons || typeof buttons !== "object" || Array.isArray(buttons) || Object.keys(buttons).some((key) => !["home.hero.consult", "home.hero.services", "footer.zalo", "contact.zalo"].includes(key))) throw new Error("Thuộc tính nút không hợp lệ.");
+  for (const [id, button] of Object.entries(buttons)) {
+    if (!button || typeof button !== "object" || Object.keys(button).some((key) => key !== "label" && !(["footer.zalo", "contact.zalo"].includes(id) && key === "href")) || typeof button.label !== "string" || !button.label.trim() || button.label.length > 120) throw new Error("Nội dung nút không hợp lệ.");
+    if (["footer.zalo", "contact.zalo"].includes(id)) {
+      let link;
+      try { link = new URL(button.href); } catch { throw new Error("Liên kết Zalo không hợp lệ."); }
+      if (typeof button.href !== "string" || button.href.length > 2048 || link.protocol !== "https:" || link.username || link.password) throw new Error("Liên kết Zalo phải bắt đầu bằng https://.");
+    }
   }
 }
 

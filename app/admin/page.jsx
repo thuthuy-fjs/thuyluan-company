@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { baseCertificates } from "../data";
+import { baseCertificates, company } from "../data";
 import "../editor-fields";
 import "../services-data";
 import "../processing-data";
@@ -21,8 +21,8 @@ const availableState = (next) => {
   const available = (items) => (items || []).filter((item) => bundledMediaIds.has(item.id) || item.id.startsWith("upload-"));
   return { ...next, media: available(next.media).map((item) => ({ ...item, category: normalizedCategory(item) })), publishedMedia: available(next.publishedMedia).map((item) => ({ ...item, category: normalizedCategory(item) })) };
 };
-const defaultButtons = { "home.hero.consult": { label: "Yêu cầu tư vấn" }, "home.hero.services": { label: "Khám phá dịch vụ" } };
-const withButtons = (saved = {}) => Object.fromEntries(Object.entries(defaultButtons).map(([id, value]) => [id, { label: saved[id]?.label || value.label }]));
+const defaultButtons = { "home.hero.consult": { label: "Yêu cầu tư vấn" }, "home.hero.services": { label: "Khám phá dịch vụ" }, "footer.zalo": { label: "Trao đổi qua Zalo", href: company.zalo }, "contact.zalo": { label: "Trao đổi trực tiếp qua Zalo", href: company.zalo } };
+const withButtons = (saved = {}) => Object.fromEntries(Object.entries(defaultButtons).map(([id, value]) => [id, { label: saved[id]?.label || value.label, ...(["footer.zalo", "contact.zalo"].includes(id) ? { href: saved[id]?.href || value.href } : {}) }]));
 const imageTarget = (mapping, id) => {
   const seen = new Set();
   let current = id;
@@ -353,7 +353,7 @@ export default function AdminPage() {
         {tab === "media" && <input type="search" placeholder="Tìm nội dung hoặc ảnh…" value={search} onChange={(event) => setSearch(event.target.value)} />}
       </div>
       {message && <div className={message.startsWith("Đã lưu") || message === "Website sẽ cập nhật sau khi build và triển khai xong." ? "admin-notice" : "admin-error"} role="status">{message}</div>}
-      {tab === "text" && <VisualEditor fields={fields} savedText={state.content.text || {}} publishedText={state.publishedContent?.text || {}} draftText={textDraft} onChange={updateText} buttons={buttonsDraft} onButtonChange={(id, patch) => setButtonsDraft((old) => ({ ...old, [id]: { ...old[id], ...patch } }))} onImageUpload={(id, files) => addFiles(files, id, "", "Khác", false, true)} onSliderUpload={(slot, id, files) => addFiles(files, id, slot, "Khác", false, true)} onSliderChange={(slot, id) => setSliderDraft((old) => { const next = { ...old }; if (id) next[slot] = `/assets/${id}`; else delete next[slot]; return next; })} sliderImages={sliderDraft} replacements={previewReplacements} media={media} deletedIds={deletes} />}
+      {tab === "text" && <VisualEditor fields={fields} savedText={state.content.text || {}} publishedText={state.publishedContent?.text || {}} draftText={textDraft} onChange={updateText} buttons={buttonsDraft} onButtonChange={(id, patch) => setButtonsDraft((old) => ({ ...old, [id]: { ...old[id], ...patch } }))} onImageChange={(id, target) => setReplacements((old) => { const next = { ...old }; if (target && target !== id) next[id] = target; else delete next[id]; return next; })} onImageUpload={(id, files) => addFiles(files, id, "", "Khác", false, true)} onSliderUpload={(slot, id, files) => addFiles(files, id, slot, "Khác", false, true)} onSliderChange={(slot, id) => setSliderDraft((old) => { const next = { ...old }; if (id) next[slot] = `/assets/${id}`; else delete next[slot]; return next; })} sliderImages={sliderDraft} replacements={previewReplacements} media={media} deletedIds={deletes} />}
       {tab === "media" && <div className="admin-media-panel">
         <div className="admin-media-toolbar">
           {filterCategory !== "Chứng chỉ – Chứng nhận" && <button ref={uploadButtonRef} className="admin-upload" type="button" onClick={() => { setReplaceImageId(""); setUploadCategory("Suất ăn"); setPendingFiles([]); setUploadError(""); setMessage(""); setUploadOpen(true); }}>+ Thêm ảnh</button>}
@@ -425,7 +425,7 @@ export default function AdminPage() {
         <p>Thay đổi đang sửa chỉ nằm trên trình duyệt. Bấm Lưu nháp để giữ lại, hoặc Xuất bản để lưu và đưa lên website ngay.</p>
         <VisualEditor fields={fields} savedText={state.content.text || {}} publishedText={state.publishedContent?.text || {}} draftText={textDraft} onChange={updateText} buttons={buttonsDraft} sliderImages={sliderDraft} replacements={previewReplacements} media={media} readOnly />
         <h3>Nút ({previewButtons.length})</h3>
-        {previewButtons.map((id) => <div className="admin-preview-row" key={id}><small>Nút {id === "home.hero.consult" ? "Yêu cầu tư vấn" : "Khám phá dịch vụ"}</small><p>{buttonsDraft[id].label}</p></div>)}
+        {previewButtons.map((id) => <div className="admin-preview-row" key={id}><small>Nút {id === "contact.zalo" ? "Zalo tại Liên hệ" : id === "footer.zalo" ? "Trao đổi qua Zalo" : id === "home.hero.consult" ? "Yêu cầu tư vấn" : "Khám phá dịch vụ"}</small><p>{buttonsDraft[id].label}</p></div>)}
         <h3>Văn bản ({previewText.length})</h3>
         {previewText.map((field) => <div className="admin-preview-row" key={field.id}><small>{field.section}</small><p>{textDraft[field.id] ?? field.defaultValue}</p></div>)}
         <h3>Ảnh trong slider ({previewSlides.length})</h3>

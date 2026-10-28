@@ -18,7 +18,7 @@ const pages = [
 
 const normalize = (value) => String(value || "").replace(/\s+/g, " ").trim();
 
-export default function VisualEditor({ fields, savedText, publishedText = {}, draftText, onChange, buttons, onButtonChange, onImageUpload, onSliderUpload, onSliderChange, sliderImages = {}, replacements, media, deletedIds = [], readOnly = false }) {
+export default function VisualEditor({ fields, savedText, publishedText = {}, draftText, onChange, buttons, onButtonChange, onImageChange, onImageUpload, onSliderUpload, onSliderChange, sliderImages = {}, replacements, media, deletedIds = [], readOnly = false }) {
   const frameRef = useRef(null);
   const nodesRef = useRef(new Map());
   const annotateRef = useRef(null);
@@ -121,12 +121,12 @@ export default function VisualEditor({ fields, savedText, publishedText = {}, dr
         const currentId = replacements[originalId] || originalId;
         if (image.dataset.editorSliderSlot) {
           event.preventDefault(); event.stopPropagation();
-          const card = image.closest(".solution-card, .photo-tile");
+          const card = image.closest(".solution-card, .photo-tile, .hero-visual");
           setSliderSlots([...(card?.querySelectorAll("[data-editor-slider-slot]") || [])].map((item) => ({ slot: item.dataset.editorSliderSlot, originalId: (item.dataset.editorSliderDefault || item.dataset.adminOriginalSrc || item.getAttribute("src"))?.slice(8) })));
           setSelectedSlider(image.dataset.editorSliderSlot); setSelectedId(""); setSelectedButton(""); setSelectedImageId("");
         } else if (media.some((item) => item.id === currentId)) {
           event.preventDefault(); event.stopPropagation();
-          setSelectedImageId(currentId); setSelectedId(""); setSelectedButton(""); setSelectedSlider("");
+          setSelectedImageId(originalId); setSelectedId(""); setSelectedButton(""); setSelectedSlider("");
         }
       } else if (element?.closest("a, button")) {
         event.preventDefault();
@@ -179,6 +179,7 @@ export default function VisualEditor({ fields, savedText, publishedText = {}, dr
       if (!button) continue;
       const node = [...element.childNodes].find((item) => item.nodeType === Node.TEXT_NODE);
       if (node && node.nodeValue !== button.label) node.nodeValue = button.label;
+      if (["footer.zalo", "contact.zalo"].includes(element.dataset.editorButton) && button.href) element.setAttribute("href", button.href);
     }
   }, [buttons, frameReady]);
 
@@ -209,14 +210,15 @@ export default function VisualEditor({ fields, savedText, publishedText = {}, dr
     setSelectedSlider(slot);
     const doc = frameRef.current?.contentDocument;
     const selected = [...(doc?.querySelectorAll("[data-editor-slider-slot]") || [])].find((item) => item.dataset.editorSliderSlot === slot);
-    const card = selected?.closest(".solution-card, .photo-tile");
+    const card = selected?.closest(".solution-card, .photo-tile, .hero-visual");
     if (!card) return;
     for (const image of card.querySelectorAll("[data-editor-slider-slot]")) {
-      const slide = image.closest(".solution-slide") || image;
+      const slide = image.closest(".solution-slide, .hero-slide") || image;
       slide.classList.toggle("is-active", image.dataset.editorSliderSlot === slot);
       slide.setAttribute("aria-hidden", image.dataset.editorSliderSlot === slot ? "false" : "true");
     }
     const index = sliderSlots.findIndex((item) => item.slot === slot);
+    card.querySelectorAll(".hero-slide-dots button").forEach((dot, dotIndex) => { dot.classList.toggle("is-active", dotIndex === index); dot.setAttribute("aria-pressed", String(dotIndex === index)); });
     card.querySelectorAll(".solution-slide-progress i").forEach((dot, dotIndex) => dot.classList.toggle("is-active", dotIndex === index));
   };
 
@@ -248,10 +250,12 @@ export default function VisualEditor({ fields, savedText, publishedText = {}, dr
         <button type="button" className="admin-inline-close" onClick={() => setSelectedButton("")} aria-label="Đóng ô sửa">×</button>
         <small>Chỉnh chữ trên nút</small>
         <label>Chữ trên nút<input value={buttons[selectedButton]?.label || ""} onChange={(event) => onButtonChange(selectedButton, { label: event.target.value })} /></label>
+        {["footer.zalo", "contact.zalo"].includes(selectedButton) && <label>Liên kết Zalo<input type="url" value={buttons[selectedButton]?.href || ""} placeholder="https://zalo.me/..." onChange={(event) => onButtonChange(selectedButton, { href: event.target.value })} /></label>}
       </aside>}
       {!readOnly && selectedImageId && <aside className="admin-inline-editor" aria-label="Thay ảnh trên trang">
         <button type="button" className="admin-inline-close" onClick={() => setSelectedImageId("")} aria-label="Đóng ô sửa">×</button>
         <small>{media.find((item) => item.id === selectedImageId)?.title || "Ảnh đang chọn"}</small>
+        <ImageSelect key={selectedImageId} images={eligibleImages.filter((item) => item.id !== selectedImageId)} value={replacements[selectedImageId] || ""} onChange={(id) => onImageChange?.(selectedImageId, id)} />
         <label className="admin-image-picker">Chọn ảnh thay thế<input type="file" accept="image/png,image/jpeg,image/webp" onChange={(event) => { if (event.target.files?.length) onImageUpload?.(selectedImageId, event.target.files); event.target.value = ""; }} /></label>
       </aside>}
       {!readOnly && selectedSlider && currentSliderSlot && <aside className="admin-inline-editor admin-slider-editor" aria-label="Thay ảnh trong slider">

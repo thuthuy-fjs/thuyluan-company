@@ -1,6 +1,13 @@
 import { editableText } from "./editor-content";
 
 const defaults = {
+  "Footer": {
+    "footer.heading1": "Bữa ăn tốt hơn.",
+    "footer.heading2": "Hợp tác bền lâu hơn.",
+    "footer.tagline1": "Chăm chút từng bữa ăn.",
+    "footer.tagline2": "Đồng hành cùng doanh nghiệp.",
+    "footer.taxId": "0700854039",
+  },
   "Trang chủ": {
     "home.meals.description": "Khám phá hình ảnh suất ăn thực tế. Thực đơn và phương án phục vụ được trao đổi theo nhu cầu từng doanh nghiệp.",
     "home.process.heading1": "Rõ ràng từ bước đầu.",
