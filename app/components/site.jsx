@@ -223,7 +223,7 @@ export function Footer() {
   );
 }
 
-export function PageIntro({ eyebrow, title, children, compact = false }) {
+export function PageIntro({ eyebrow, title, children, compact = false, descriptionEditorId }) {
   return (
     <section
       id="main"
@@ -236,7 +236,7 @@ export function PageIntro({ eyebrow, title, children, compact = false }) {
       </div>
       <Eyebrow>{eyebrow}</Eyebrow>
       <h1>{title}</h1>
-      {children && <p className="intro-description">{children}</p>}
+      {children && <p className="intro-description" data-editor-id={descriptionEditorId}>{children}</p>}
     </section>
   );
 }

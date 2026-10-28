@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { baseCertificates } from "../data";
 import "../editor-fields";
 import "../services-data";
+import "../processing-data";
 import { getEditableFields } from "../editor-content";
 import { sliderSlotLabel } from "../slider-slots";
 import bundledMedia from "../media-catalog.json";

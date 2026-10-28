@@ -48,6 +48,16 @@
     "certificate": true
   },
   {
+    "image": "/assets/certificate-01.webp",
+    "label": "Về chúng tôi",
+    "certificate": true
+  },
+  {
+    "image": "/assets/certificate-04.webp",
+    "label": "Về chúng tôi",
+    "certificate": true
+  },
+  {
     "image": "/assets/logo.png",
     "label": "Về chúng tôi"
   },
@@ -256,6 +266,16 @@
   },
   {
     "image": "/assets/certificate-03.webp",
+    "label": "Trang chủ",
+    "certificate": true
+  },
+  {
+    "image": "/assets/certificate-01.webp",
+    "label": "Trang chủ",
+    "certificate": true
+  },
+  {
+    "image": "/assets/certificate-04.webp",
     "label": "Trang chủ",
     "certificate": true
   },

@@ -11,6 +11,51 @@ const content = JSON.parse(await readFile(new URL("../../app/editor-content.json
 const media = JSON.parse(await readFile(new URL("../../app/media-catalog.json", import.meta.url)));
 const missingMedia = { id: "missing-demo.webp", src: "/assets/missing-demo.webp", category: "Suất ăn", width: 960, height: 720 };
 
+test("highlighted headings and descriptions across public pages can be edited and restored", async ({ page }) => {
+  test.setTimeout(60000);
+  let currentContent = structuredClone(content);
+  let saved;
+  await page.route("**/api/admin/session", (route) => route.fulfill({ json: { authenticated: true } }));
+  await page.route("**/api/admin/state", (route) => route.fulfill({ json: {
+    head: saved ? "draft123456" : "head123", publishedHead: "head123", draftHead: saved ? "draft123456" : null,
+    content: currentContent, publishedContent: content, media, publishedMedia: media,
+  } }));
+  await page.route("**/api/admin/draft", (route) => {
+    saved = route.request().postDataJSON();
+    currentContent = { ...currentContent, text: saved.text };
+    return route.fulfill({ json: { draftCommit: "draft123456" } });
+  });
+  const cases = [
+    ["/", ["home.process.heading1", "home.process.heading2", "home.gallery.heading1", "home.gallery.heading2", "home.meals.description", "home.documents.heading1", "home.documents.heading2", "home.documents.description"]],
+    ["/services/", ["solutions.hero.line1", "solutions.hero.line2"]],
+    ["/menus/", ["menus.hero.line1", "menus.hero.line2", "menus.intro.description"]],
+    ["/contacts/", ["contact.hero.line1", "contact.hero.line2", "contact.intro.description"]],
+    ["/news/", ["news.hero.line1", "news.hero.line2", "news.intro.description"]],
+  ];
+  await page.goto("/admin/");
+  const frame = page.frameLocator('iframe[title^="Bản xem trực tiếp"]');
+  for (const [path, ids] of cases) {
+    await page.getByLabel("Trang đang xem").selectOption(path);
+    for (const id of ids) {
+      const field = frame.locator(`[data-editor-id="${id}"]`);
+      await field.click();
+      await page.locator(".admin-inline-editor textarea").fill(`Nội dung mới ${id}`);
+      await expect(field).toHaveText(`Nội dung mới ${id}`);
+      await page.getByRole("button", { name: "Đóng ô sửa", exact: true }).click();
+    }
+  }
+  await page.getByRole("button", { name: "Lưu nháp", exact: true }).click();
+  await expect(page.getByRole("status")).toContainText("Đã lưu bản nháp");
+  await page.reload();
+  for (const [path, ids] of cases) {
+    await page.getByLabel("Trang đang xem").selectOption(path);
+    for (const id of ids) {
+      expect(saved.text[id]).toBe(`Nội dung mới ${id}`);
+      await expect(frame.locator(`[data-editor-id="${id}"]`)).toHaveText(`Nội dung mới ${id}`);
+    }
+  }
+});
+
 test("deletion only requires a manual replacement for images used outside the gallery", async ({ page }) => {
   let saved;
   await page.route("**/api/admin/session", (route) => route.fulfill({ json: { authenticated: true } }));
@@ -113,6 +158,23 @@ test("admin edits statistics on home and about and restores the saved draft", as
   await expect(frame.locator('[data-editor-id="about.facts.foundedYear"]')).toHaveText("2018");
   await expect(frame.locator('[data-editor-id="about.facts.menuCount"]')).toHaveText("40");
   await expect(frame.locator('[data-editor-id="about.facts.serviceArea"]')).toHaveText("Miền Trung");
+  await frame.locator(".processing-step summary").first().press("Enter");
+  for (const id of ["about.mission", "about.vision", "about.hero.line1", "about.hero.line2", "about.processing.text.heading1", "about.processing.groups.zone-1.title", "about.processing.groups.zone-1.steps.01.title", "about.processing.groups.zone-1.steps.01.highlights.0", "about.processing.groups.zone-1.steps.01.actions.0"]) {
+    const field = frame.locator(`[data-editor-id="${id}"]`);
+    await field.click();
+    await expect(page.locator(".admin-inline-editor small")).toHaveText(id.startsWith("about.processing") ? "Quy trình chế biến" : "Giới thiệu");
+    await page.locator(".admin-inline-editor textarea").fill(`Nội dung mới ${id}`);
+    await expect(field).toHaveText(`Nội dung mới ${id}`);
+  }
+  await page.getByRole("button", { name: "Lưu nháp", exact: true }).click();
+  await expect.poll(() => saved.text["about.mission"]).toBe("Nội dung mới about.mission");
+  await page.reload();
+  await page.getByLabel("Trang đang xem").selectOption("/about/");
+  await expect(frame.locator('[data-editor-id="about.mission"]')).toHaveText("Nội dung mới about.mission");
+  await expect(frame.locator('[data-editor-id="about.vision"]')).toHaveText("Nội dung mới about.vision");
+  await expect(frame.locator('[data-editor-id="about.hero.line1"]')).toHaveText("Nội dung mới about.hero.line1");
+  await expect(frame.locator('[data-editor-id="about.processing.groups.zone-1.steps.01.title"]')).toHaveText("Nội dung mới about.processing.groups.zone-1.steps.01.title");
+  expect(saved.text["about.processing.groups.zone-1.steps.01.actions.0"]).toBe("Nội dung mới about.processing.groups.zone-1.steps.01.actions.0");
 });
 
 test("admin edits the live page, saves a draft, then publishes", async ({ page }) => {

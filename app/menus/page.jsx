@@ -1,21 +1,22 @@
 import { PageIntro } from "../components/site";
 import Catalog from "./catalog";
+import { pageText } from "../editor-fields";
 export const metadata = { title: "Thực đơn suất ăn công nghiệp" };
 export default function MenuPage() {
   return (
     <main id="top">
       <PageIntro
         eyebrow="THỰC ĐƠN THAM KHẢO"
+        descriptionEditorId="menus.intro.description"
         title={
           <>
-            Đa dạng từng bữa ăn.
+            <span data-editor-id="menus.hero.line1">{pageText["menus.hero.line1"]}</span>
             <br />
-            Phù hợp từng doanh nghiệp.
+            <span data-editor-id="menus.hero.line2">{pageText["menus.hero.line2"]}</span>
           </>
         }
       >
-        22 hình ảnh suất ăn từ Thúy Luân. Lưu những mẫu bạn quan tâm để cùng
-        trao đổi phương án thực đơn và ngân sách.
+        {pageText["menus.intro.description"]}
       </PageIntro>
       <Catalog />
     </main>

@@ -1,22 +1,23 @@
 import { ArrowUpRight } from "lucide-react";
 import { PageIntro } from "../components/site";
 import { articles } from "../data";
+import { pageText } from "../editor-fields";
 export const metadata = { title: "Góc chia sẻ về suất ăn doanh nghiệp" };
 export default function NewsPage() {
   return (
     <main id="top">
       <PageIntro
         eyebrow="GÓC CHIA SẺ"
+        descriptionEditorId="news.intro.description"
         title={
           <>
-            Hiểu hơn về bữa ăn.
+            <span data-editor-id="news.hero.line1">{pageText["news.hero.line1"]}</span>
             <br />
-            Chọn đúng đối tác.
+            <span data-editor-id="news.hero.line2">{pageText["news.hero.line2"]}</span>
           </>
         }
       >
-        Những góc nhìn giúp doanh nghiệp trao đổi rõ nhu cầu và đánh giá phương
-        án cung ứng suất ăn.
+        {pageText["news.intro.description"]}
       </PageIntro>
       <section className="wrap news-page">
         <div className="news-grid">

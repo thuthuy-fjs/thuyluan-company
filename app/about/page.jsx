@@ -16,9 +16,9 @@ export default function AboutPage() {
         eyebrow="VỀ THÚY LUÂN"
         title={
           <>
-            Tận tâm với bữa ăn.
+            <span data-editor-id="about.hero.line1">{pageText["about.hero.line1"]}</span>
             <br />
-            Trân trọng từng hợp tác.
+            <span data-editor-id="about.hero.line2">{pageText["about.hero.line2"]}</span>
           </>
         }
       >
@@ -96,9 +96,8 @@ export default function AboutPage() {
               </span>
               <h3>Sứ mệnh</h3>
             </div>
-            <p>
-              Mang đến những bữa ăn Sạch – Ngon – An toàn – Chất lượng, trao tận
-              tay từng khách hàng.
+            <p data-editor-id="about.mission">
+              {pageText["about.mission"]}
             </p>
           </article>
           <article className="mission-vision-card">
@@ -108,9 +107,8 @@ export default function AboutPage() {
               </span>
               <h3>Tầm nhìn</h3>
             </div>
-            <p>
-              Trở thành đơn vị cung ứng suất ăn công nghiệp uy tín, đối tác tin
-              cậy đồng hành lâu dài cùng doanh nghiệp.
+            <p data-editor-id="about.vision">
+              {pageText["about.vision"]}
             </p>
           </article>
         </div>

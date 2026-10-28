@@ -10,11 +10,12 @@ export default function ServicesPage() {
     <main id="top">
       <PageIntro
         eyebrow="GIẢI PHÁP CUNG ỨNG"
+        descriptionEditorId="solutions.intro.description"
         title={
           <>
-            Phù hợp với con người.
+            <span data-editor-id="solutions.hero.line1">{pageText["solutions.hero.line1"]}</span>
             <br />
-            Đồng điệu cùng vận hành.
+            <span data-editor-id="solutions.hero.line2">{pageText["solutions.hero.line2"]}</span>
           </>
         }
       >

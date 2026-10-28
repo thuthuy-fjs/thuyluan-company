@@ -8,11 +8,12 @@ export default function ContactPage() {
     <main id="top">
       <PageIntro
         eyebrow="KẾT NỐI HỢP TÁC"
+        descriptionEditorId="contact.intro.description"
         title={
           <>
-            Một cuộc trao đổi.
+            <span data-editor-id="contact.hero.line1">{pageText["contact.hero.line1"]}</span>
             <br />
-            Khởi đầu của sự đồng hành.
+            <span data-editor-id="contact.hero.line2">{pageText["contact.hero.line2"]}</span>
           </>
         }
       >

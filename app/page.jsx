@@ -146,9 +146,8 @@ export default function Home() {
             </h2>
           </div>
           <div>
-            <p>
-              Khám phá hình ảnh suất ăn thực tế. Thực đơn và phương án phục vụ
-              được trao đổi theo nhu cầu từng doanh nghiệp.
+            <p data-editor-id="home.meals.description">
+              {pageText["home.meals.description"]}
             </p>
             <a className="text-link" href="/menus/">
               Xem toàn bộ thực đơn
@@ -176,9 +175,9 @@ export default function Home() {
             <div>
               <Eyebrow>CÁCH CHÚNG TÔI PHỐI HỢP</Eyebrow>
               <h2>
-                Rõ ràng từ bước đầu.
+                <span data-editor-id="home.process.heading1">{pageText["home.process.heading1"]}</span>
                 <br />
-                Gắn kết trong dài hạn.
+                <span data-editor-id="home.process.heading2">{pageText["home.process.heading2"]}</span>
               </h2>
             </div>
             <ButtonLink className="outline" href="/contacts/">
@@ -209,9 +208,9 @@ export default function Home() {
           <div>
             <Eyebrow>TỪ NHỮNG ĐIỀU THỰC TẾ</Eyebrow>
             <h2>
-              Nhìn gần hơn.
+              <span data-editor-id="home.gallery.heading1">{pageText["home.gallery.heading1"]}</span>
               <br />
-              Tin tưởng nhiều hơn.
+              <span data-editor-id="home.gallery.heading2">{pageText["home.gallery.heading2"]}</span>
             </h2>
           </div>
           <a href="/galleries/" className="text-link">
@@ -228,13 +227,12 @@ export default function Home() {
         <div>
           <Eyebrow>HIỂU CÁCH CHÚNG TÔI LÀM VIỆC</Eyebrow>
           <h2>
-            Minh bạch quy trình.
+            <span data-editor-id="home.documents.heading1">{pageText["home.documents.heading1"]}</span>
             <br />
-            Thuận lợi thẩm định.
+            <span data-editor-id="home.documents.heading2">{pageText["home.documents.heading2"]}</span>
           </h2>
-          <p>
-            Khám phá tài liệu giới thiệu và quy trình từ Thúy Luân. Liên hệ để
-            trao đổi hồ sơ và yêu cầu đánh giá cụ thể của doanh nghiệp.
+          <p data-editor-id="home.documents.description">
+            {pageText["home.documents.description"]}
           </p>
           <a
             className="text-link"
