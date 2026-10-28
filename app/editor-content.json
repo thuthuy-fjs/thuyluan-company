@@ -2,5 +2,14 @@
   "version": 1,
   "text": {},
   "images": {},
-  "galleryAdditions": []
+  "galleryAdditions": [],
+  "buttons": {
+    "home.hero.consult": {
+      "label": "Yêu cầu tư vấn"
+    },
+    "home.hero.services": {
+      "label": "Khám phá dịch vụ"
+    }
+  },
+  "sliderImages": {}
 }
